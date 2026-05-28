@@ -18,6 +18,11 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
+// Redirect root to the main app
+app.get("/", (req, res) => {
+  res.redirect("/calculator.html");
+});
+
 // ---------------------------------------------------------------------------
 // Name mappings from Community Dragon (loaded at startup)
 // ---------------------------------------------------------------------------
