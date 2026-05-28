@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TFT Coach</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070e1a;
+      --bg2: #0c1828;
+      --bg3: #111f35;
+      --border: #1a2e4a;
+      --border2: #243d5e;
+      --gold: #c89b3c;
+      --gold2: #e8b84b;
+      --gold-dim: #7a5e22;
+      --text: #cdd3da;
+      --text-dim: #a8b0bc;
+      --text-bright: #e8e0d0;
+      --blue: #3a7bd5;
+      --green: #4a9a6a;
+      --red: #9a3a3a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; font-size: 14px; }
+
+    /* ── NAV ── */
+    nav {
+      background: linear-gradient(180deg, #0a1525 0%, #070e1a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      display: flex; align-items: center; height: 56px;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .logo-text { font-size: 1.05rem; font-weight: 800; color: var(--gold); letter-spacing: 0.05em; }
+    .logo-sub { font-size: 0.7rem; color: var(--text-dim); margin-top: 1px; }
+
+    .search-wrap { margin-left: auto; display: flex; gap: 8px; }
+    .search-input {
+      background: var(--bg2); border: 1px solid var(--border2);
+      border-radius: 8px; color: var(--text-bright);
+      padding: 8px 16px; font-size: 0.88rem; width: 240px;
+      outline: none; font-family: 'Inter', sans-serif;
+      transition: border-color 0.15s;
+    }
+    .search-input:focus { border-color: var(--gold); }
+    .search-input::placeholder { color: var(--text-dim); }
+    .search-btn {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      color: #070e1a; border: none; border-radius: 8px;
+      padding: 8px 20px; font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: opacity 0.15s;
+    }
+    .search-btn:hover { opacity: 0.85; }
+    .search-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── PAGE ── */
+    .page { max-width: 1180px; margin: 0 auto; padding: 24px 20px; }
+
+    /* ── ERROR ── */
+    .error-box {
+      background: #1a0a0a; border: 1px solid #5a1a1a; border-radius: 8px;
+      padding: 12px 16px; color: #e07070; margin-bottom: 20px; display: none;
+    }
+
+    /* ── LOADING ── */
+    .loading-screen { text-align: center; padding: 80px 0; color: var(--text-dim); display: none; }
+    .spinner {
+      width: 36px; height: 36px; border: 3px solid var(--border2);
+      border-top-color: var(--gold); border-radius: 50%;
+      animation: spin 0.8s linear infinite; margin: 0 auto 16px;
+    }
+    .spinner-sm {
+      display: inline-block; width: 14px; height: 14px;
+      border: 2px solid var(--border2); border-top-color: var(--gold);
+      border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 6px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── LAYOUT ── */
+    .dashboard { display: grid; grid-template-columns: 260px 1fr; gap: 16px; align-items: start; }
+
+    /* ── LEFT SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 12px; }
+
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .card-header {
+      padding: 12px 16px; border-bottom: 1px solid var(--border);
+      font-size: 0.72rem; font-weight: 700; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .card-body { padding: 16px; }
+
+    /* Player card */
+    .player-hero {
+      padding: 20px 16px;
+      background: linear-gradient(135deg, var(--bg3) 0%, var(--bg2) 100%);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .player-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dim), #0c1828);
+      border: 3px solid var(--gold); margin: 0 auto 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+    }
+    .player-name { font-size: 1rem; font-weight: 800; color: var(--text-bright); margin-bottom: 4px; }
+    .player-rank { font-size: 0.82rem; color: var(--gold); font-weight: 600; }
+    .player-lp { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .stat-box { background: var(--bg2); padding: 12px 8px; text-align: center; }
+    .stat-box-val { font-size: 1.1rem; font-weight: 800; color: var(--text-bright); }
+    .stat-box-lbl { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 3px; }
+
+    /* Synergy list */
+    .synergy-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 9px 16px; border-bottom: 1px solid var(--border);
+    }
+    .synergy-item:last-child { border-bottom: none; }
+    .syn-name { font-weight: 600; color: var(--text-bright); font-size: 0.85rem; }
+    .syn-right { text-align: right; }
+    .syn-avg { font-size: 0.85rem; font-weight: 700; color: var(--gold); }
+    .syn-games { font-size: 0.7rem; color: var(--text-dim); margin-top: 1px; }
+
+    /* ── GAMES LIST ── */
+    .games-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .game-row {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+      display: grid; grid-template-columns: 56px 1fr 120px;
+      gap: 0; overflow: hidden; cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .game-row:hover { border-color: var(--border2); background: var(--bg3); }
+    .game-row.active { border-color: var(--gold); }
+
+    .place-col {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 14px 0; border-right: 1px solid var(--border);
+    }
+    .place-num { font-size: 1.6rem; font-weight: 900; line-height: 1; }
+    .place-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+    .rank-1 .place-num { color: var(--gold); }
+    .rank-2 .place-num { color: #a0b090; }
+    .rank-3 .place-num { color: #c07860; }
+    .rank-4 .place-num { color: #5a8aaa; }
+    .rank-5 .place-num, .rank-6 .place-num, .rank-7 .place-num, .rank-8 .place-num { color: var(--text-dim); }
+    .rank-1 { border-left: 3px solid var(--gold); }
+    .rank-2 { border-left: 3px solid #a0b090; }
+    .rank-3 { border-left: 3px solid #c07860; }
+    .rank-4 { border-left: 3px solid #5a8aaa; }
+    .rank-5, .rank-6, .rank-7, .rank-8 { border-left: 3px solid var(--border2); }
+
+    .game-main { padding: 12px 16px; min-width: 0; }
+
+    .trait-row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+    .trait-pill {
+      display: flex; align-items: center; gap: 4px;
+      padding: 3px 9px; border-radius: 20px; font-size: 0.72rem; font-weight: 600;
+    }
+    .trait-gold { background: #2a1e08; color: var(--gold); border: 1px solid var(--gold-dim); }
+    .trait-silver { background: #1a1e28; color: #8a9ab0; border: 1px solid #2a3a50; }
+    .trait-bronze { background: #151a25; color: #5a6a7a; border: 1px solid var(--border); }
+
+    .unit-row { display: flex; flex-wrap: wrap; gap: 4px; }
+    .unit-pill {
+      padding: 2px 7px; border-radius: 4px; font-size: 0.7rem;
+      background: var(--bg3); border: 1px solid var(--border); color: var(--text-dim);
+    }
+    .unit-3star { border-color: var(--gold); color: var(--gold); background: #1a1408; }
+    .unit-2star { border-color: #7a9a7a; color: #9aba9a; background: #0e180e; }
+
+    .game-side { padding: 12px 14px; text-align: right; border-left: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; }
+    .game-time { font-size: 0.72rem; color: var(--text-dim); }
+    .coach-btn {
+      background: transparent; border: 1px solid var(--gold-dim); color: var(--gold);
+      border-radius: 6px; padding: 5px 10px; font-size: 0.72rem; font-weight: 600;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .coach-btn:hover { background: var(--gold); color: #070e1a; }
+
+    /* ── COACHING PANEL ── */
+    .coaching-panel {
+      margin-top: 12px;
+      background: var(--bg2); border: 1px solid var(--gold-dim);
+      border-radius: 12px; overflow: hidden; display: none;
+    }
+    .coaching-hero {
+      background: linear-gradient(135deg, #1a1408, #0c1828);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .coaching-hero-left h2 { font-size: 0.95rem; font-weight: 800; color: var(--gold); }
+    .coaching-hero-left p { font-size: 0.75rem; color: var(--text-dim); margin-top: 3px; }
+
+    .mini-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+    .mini-stat { background: var(--bg2); padding: 14px; text-align: center; }
+    .mini-val { font-size: 1.15rem; font-weight: 800; color: var(--text-bright); }
+    .mini-lbl { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 3px; }
+    .mini-cmp { font-size: 0.68rem; margin-top: 3px; }
+    .cmp-better { color: var(--green); }
+    .cmp-worse { color: #c07070; }
+
+    .coaching-body { padding: 20px; }
+
+    .section-label {
+      font-size: 0.68rem; font-weight: 700; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;
+    }
+
+    .issue-cards { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+    .issue-card {
+      background: var(--bg3); border-radius: 8px; padding: 11px 14px;
+      font-size: 0.83rem; line-height: 1.55; color: var(--text);
+      border-left: 3px solid var(--gold-dim);
+    }
+
+    .ai-block {
+      background: linear-gradient(135deg, #111f35, #0c1828);
+      border: 1px solid var(--border2); border-radius: 10px;
+      padding: 18px;
+    }
+    .ai-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 700; color: var(--gold);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;
+    }
+    .ai-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--gold); animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .ai-text { font-size: 0.88rem; line-height: 1.8; color: var(--text); white-space: pre-wrap; }
+
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-dim); }
+    .empty-state .big { font-size: 2rem; margin-bottom: 12px; }
+    .empty-state p { font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-icon">♟</div>
+    <div>
+      <div class="logo-text">TFT COACH</div>
+      <div class="logo-sub">Challenger AI Analysis</div>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="handle" placeholder="Summoner#NA1" />
+    <select class="search-input" id="rankSelect" style="width:160px;">
+      <option value="">Rank (optional)</option>
+      <option value="IRON IV">Iron IV</option><option value="IRON III">Iron III</option><option value="IRON II">Iron II</option><option value="IRON I">Iron I</option>
+      <option value="BRONZE IV">Bronze IV</option><option value="BRONZE III">Bronze III</option><option value="BRONZE II">Bronze II</option><option value="BRONZE I">Bronze I</option>
+      <option value="SILVER IV">Silver IV</option><option value="SILVER III">Silver III</option><option value="SILVER II">Silver II</option><option value="SILVER I">Silver I</option>
+      <option value="GOLD IV">Gold IV</option><option value="GOLD III">Gold III</option><option value="GOLD II">Gold II</option><option value="GOLD I">Gold I</option>
+      <option value="PLATINUM IV" selected>Platinum IV</option><option value="PLATINUM III">Platinum III</option><option value="PLATINUM II">Platinum II</option><option value="PLATINUM I">Platinum I</option>
+      <option value="EMERALD IV">Emerald IV</option><option value="EMERALD III">Emerald III</option><option value="EMERALD II">Emerald II</option><option value="EMERALD I">Emerald I</option>
+      <option value="DIAMOND IV">Diamond IV</option><option value="DIAMOND III">Diamond III</option><option value="DIAMOND II">Diamond II</option><option value="DIAMOND I">Diamond I</option>
+      <option value="MASTER">Master</option><option value="GRANDMASTER">Grandmaster</option><option value="CHALLENGER">Challenger</option>
+    </select>
+    <button class="search-btn" onclick="loadProfile()" id="searchBtn">Search</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="error-box" id="error"></div>
+
+  <div class="loading-screen" id="loadingScreen">
+    <div class="spinner"></div>
+    <div>Loading profile...</div>
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <div class="dashboard">
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="card">
+          <div class="player-hero">
+            <div class="player-avatar" id="rankIcon">🏆</div>
+            <div class="player-name" id="playerName">—</div>
+            <div class="player-rank" id="rankName">—</div>
+            <div class="player-lp" id="rankLp">—</div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-box-val" id="statTotal">—</div>
+              <div class="stat-box-lbl">Games</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-val" id="statAvg">—</div>
+              <div class="stat-box-lbl">Avg Place</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-val" id="statTop4">—</div>
+              <div class="stat-box-lbl">Top 4%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Coaching Panel (left) -->
+        <div class="card" id="coachingPanel" style="display:none;">
+          <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;">
+            <span>AI Coaching</span>
+            <span id="coachLoader" style="display:none;"><span class="spinner-sm"></span></span>
+          </div>
+          <div class="mini-stats" id="coachStats" style="border-bottom:1px solid var(--border);"></div>
+          <div style="padding:14px;">
+            <div id="itemSection" style="display:none; margin-bottom:14px;">
+              <div class="section-label">Item Suggestions</div>
+              <div class="issue-cards" id="itemList"></div>
+            </div>
+            <div class="ai-block">
+              <div class="ai-label"><div class="ai-dot"></div>Gemini AI · <span id="coachMatchLabel">select a game</span></div>
+              <div class="ai-text" id="coachingText">Click "Coach →" on any game to get personalized feedback.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Best Synergies · Recent 20</div>
+          <div id="synergyList"></div>
+        </div>
+      </div>
+
+      <!-- Main -->
+      <div>
+        <div class="games-list" id="gamesList"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <div class="big">♟</div>
+    <p>Enter your Riot ID above to load your match history and get AI coaching.</p>
+  </div>
+</div>
+
+<script>
+  let resolvedPuuid = "";
+
+  function showError(msg) { const e = document.getElementById("error"); e.textContent = msg; e.style.display = "block"; }
+  function hideError() { document.getElementById("error").style.display = "none"; }
+
+  function timeAgo(ms) {
+    const diff = Date.now() - ms, m = Math.floor(diff/60000);
+    if (m < 60) return m + "m ago";
+    const h = Math.floor(m/60);
+    if (h < 24) return h + "h ago";
+    return Math.floor(h/24) + "d ago";
+  }
+
+  function fmtDur(s) { return Math.floor(s/60) + "m " + (s%60) + "s"; }
+
+  function roundStr(r) {
+    if (!r) return "—";
+    return "Stage " + Math.max(1, Math.ceil(r/4)) + "-" + ((r-1)%4+1);
+  }
+
+  function rankEmoji(tier) {
+    return { IRON:"🪨",BRONZE:"🥉",SILVER:"🥈",GOLD:"🥇",PLATINUM:"💎",EMERALD:"💚",DIAMOND:"💠",MASTER:"🔮",GRANDMASTER:"👑",CHALLENGER:"🏆" }[tier] || "🎮";
+  }
+
+  function traitClass(style) {
+    if (style >= 3) return "trait-gold";
+    if (style === 2) return "trait-silver";
+    return "trait-bronze";
+  }
+
+  async function loadProfile() {
+    const handle = document.getElementById("handle").value.trim();
+    if (!handle) return showError("Enter a Riot ID like toofxd#NA1");
+    hideError();
+    document.getElementById("searchBtn").disabled = true;
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("emptyState").style.display = "none";
+    document.getElementById("loadingScreen").style.display = "block";
+    document.getElementById("coachingPanel").style.display = "none";
+
+    try {
+      const res = await fetch(`/api/profile?handle=${encodeURIComponent(handle)}`);
+      const data = await res.json();
+      if (data.error) return showError(data.error);
+      resolvedPuuid = data.puuid;
+      const manualRank = document.getElementById("rankSelect").value;
+      renderDashboard(data, handle.split("#")[0], manualRank);
+    } catch (e) { showError("Failed: " + e.message); }
+    finally {
+      document.getElementById("searchBtn").disabled = false;
+      document.getElementById("loadingScreen").style.display = "none";
+    }
+  }
+
+  function renderDashboard(data, name, manualRank) {
+    const tier = manualRank ? manualRank.split(" ")[0].toUpperCase() : null;
+    document.getElementById("rankIcon").textContent = tier ? rankEmoji(tier) : "🎮";
+    document.getElementById("playerName").textContent = name;
+    document.getElementById("rankName").textContent = manualRank || "Rank unavailable";
+    document.getElementById("rankLp").textContent = data.total + " games tracked";
+    document.getElementById("statTotal").textContent = data.total;
+    document.getElementById("statAvg").textContent = data.avgPlacement || "—";
+    document.getElementById("statTop4").textContent = data.total ? Math.round(data.top4Count/data.total*100) + "%" : "—";
+
+    document.getElementById("synergyList").innerHTML = data.synergies.map(s => `
+      <div class="synergy-item">
+        <span class="syn-name">${s.name}</span>
+        <div class="syn-right">
+          <div class="syn-avg">#${s.avgPlacement}</div>
+          <div class="syn-games">${s.games} games · ${s.top4Rate} top4</div>
+        </div>
+      </div>
+    `).join("") || "<div style='padding:16px;color:var(--text-dim);font-size:0.82rem;'>No synergy data</div>";
+
+    document.getElementById("gamesList").innerHTML = data.games.map(g => `
+      <div class="game-row rank-${g.placement}" id="row-${g.matchId}" onclick="selectGame('${g.matchId}', ${g.placement})">
+        <div class="place-col">
+          <div class="place-num">${g.placement}</div>
+          <div class="place-label">${g.placement === 1 ? "WIN" : "#" + g.placement}</div>
+        </div>
+        <div class="game-main">
+          <div class="trait-row">
+            ${g.traits.map(t => `<span class="trait-pill ${traitClass(t.style)}">${t.name}</span>`).join("")}
+          </div>
+          <div class="unit-row">
+            ${g.units.slice(0,9).map(u => `<span class="unit-pill ${u.tier===3?"unit-3star":u.tier===2?"unit-2star":""}">${u.tier===3?"✦ ":u.tier===2?"· ":""}${u.id}</span>`).join("")}
+          </div>
+        </div>
+        <div class="game-side">
+          <div class="game-time">
+            <div>${timeAgo(g.datetime)}</div>
+            <div>${roundStr(g.lastRound)}</div>
+            <div>${fmtDur(g.gameLength)}</div>
+          </div>
+          <button class="coach-btn" onclick="event.stopPropagation(); selectGame('${g.matchId}', ${g.placement})">Coach →</button>
+        </div>
+      </div>
+    `).join("");
+
+    document.getElementById("dashboard").style.display = "block";
+    document.getElementById("coachingPanel").style.display = "block";
+  }
+
+  async function selectGame(matchId, placement) {
+    document.querySelectorAll(".game-row").forEach(el => el.classList.remove("active"));
+    const row = document.getElementById("row-" + matchId);
+    if (row) { row.classList.add("active"); row.scrollIntoView({behavior:"smooth", block:"nearest"}); }
+
+    const panel = document.getElementById("coachingPanel");
+    panel.style.display = "block";
+    panel.scrollIntoView({behavior:"smooth", block:"start"});
+    document.getElementById("coachMatchLabel").textContent = "#" + placement;
+    document.getElementById("coachLoader").style.display = "inline";
+    document.getElementById("coachingText").textContent = "Analyzing...";
+    document.getElementById("coachStats").innerHTML = "";
+    document.getElementById("itemSection").style.display = "none";
+
+    try {
+      const res = await fetch("/api/coach", {
+        method: "POST", headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({matchId, puuid: resolvedPuuid}),
+      });
+      const d = await res.json();
+      if (d.error) { document.getElementById("coachingText").textContent = "Error: " + d.error; return; }
+      renderCoaching(d, placement);
+    } catch(e) {
+      document.getElementById("coachingText").textContent = "Error: " + e.message;
+    } finally {
+      document.getElementById("coachLoader").style.display = "none";
+    }
+  }
+
+  function renderCoaching(d, placement) {
+    document.getElementById("coachMatchLabel").textContent = "#" + placement + " · " + d.topTrait.replace(/TFT\d+_/,"");
+
+    document.getElementById("coachStats").innerHTML = [
+      {val: "Lvl " + d.level, lbl: "Final Level", cmp: null},
+      {val: d.goldLeft + "g", lbl: "Gold Left", cmp: null},
+      {val: "R" + d.lastRound, lbl: "Eliminated", cmp: null},
+      {
+        val: d.levelEfficiency, lbl: "Level Eff.",
+        cmp: d.proLevelEfficiency ? {
+          text: "Pro " + d.proLevelEfficiency,
+          better: parseFloat(d.levelEfficiency) >= parseFloat(d.proLevelEfficiency)
+        } : null
+      },
+    ].map(s => `
+      <div class="mini-stat">
+        <div class="mini-val">${s.val}</div>
+        <div class="mini-lbl">${s.lbl}</div>
+        ${s.cmp ? `<div class="mini-cmp ${s.cmp.better ? "cmp-better" : "cmp-worse"}">${s.cmp.text}</div>` : ""}
+      </div>
+    `).join("");
+
+    if (d.itemIssues?.length) {
+      document.getElementById("itemSection").style.display = "block";
+      document.getElementById("itemList").innerHTML = d.itemIssues.map(i => `<div class="issue-card">${i}</div>`).join("");
+    }
+
+    document.getElementById("coachingText").textContent = d.coaching;
+  }
+
+  document.getElementById("handle").addEventListener("keydown", e => { if (e.key === "Enter") loadProfile(); });
+</script>
+</body>
+</html>

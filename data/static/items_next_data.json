@@ -1,0 +1,29 @@
+{
+  "props": {
+    "pageProps": {
+      "itemId": null
+    },
+    "__N_SSG": true
+  },
+  "page": "/info/items/[[...slug]]",
+  "query": {},
+  "buildId": "0HPOZksCAPxI5WyWsSc3B",
+  "isFallback": false,
+  "gsp": true,
+  "locale": "en",
+  "locales": [
+    "en",
+    "de",
+    "ko",
+    "pt",
+    "ja",
+    "fr",
+    "es",
+    "zh",
+    "tc",
+    "vie",
+    "ar"
+  ],
+  "defaultLocale": "en",
+  "scriptLoader": []
+}

@@ -1,0 +1,131 @@
+{
+  "TFT17_Mecha": {
+    "name": "Mecha"
+  },
+  "TFT17_Stargazer_Fountain": {
+    "name": "Stargazer - Fountain"
+  },
+  "TFT17_BlitzcrankUniqueTrait": {
+    "name": "Party Animal"
+  },
+  "TFT17_MeleeTrait": {
+    "name": "Marauder"
+  },
+  "TFT17_ShenUniqueTrait": {
+    "name": "Bulwark"
+  },
+  "TFT17_TahmKenchUniqueTrait": {
+    "name": "Oracle"
+  },
+  "TFT17_ResistTank": {
+    "name": "Bastion"
+  },
+  "TFT17_ASTrait": {
+    "name": "Challenger"
+  },
+  "TFT17_RhaastUniqueTrait": {
+    "name": "Redeemer"
+  },
+  "TFT17_Stargazer": {
+    "name": "Stargazer"
+  },
+  "TFT17_SonaUniqueTrait": {
+    "name": "Commander"
+  },
+  "TFT17_RangedTrait": {
+    "name": "Sniper"
+  },
+  "TFT17_Stargazer_Serpent": {
+    "name": "Stargazer - Serpent"
+  },
+  "TFT17_MissFortuneUniqueTrait": {
+    "name": "Gun Goddess"
+  },
+  "TFT17_GravesTrait": {
+    "name": "Factory New"
+  },
+  "TFT17_ZedUniqueTrait": {
+    "name": "Galaxy Hunter"
+  },
+  "TFT17_DarkStar": {
+    "name": "Dark Star"
+  },
+  "TFT17_SummonTrait": {
+    "name": "Shepherd"
+  },
+  "TFT17_Fateweaver": {
+    "name": "Fateweaver"
+  },
+  "TFT17_AnimaSquad": {
+    "name": "Anima"
+  },
+  "TFT17_APTrait": {
+    "name": "Replicator"
+  },
+  "TFT17_HPTank": {
+    "name": "Brawler"
+  },
+  "TFT17_MissFortuneUndeterminedTrait": {
+    "name": "Choose Trait"
+  },
+  "TFT17_Primordian": {
+    "name": "Primordian"
+  },
+  "TFT17_JhinUniqueTrait": {
+    "name": "Eradicator"
+  },
+  "TFT17_Stargazer_Shield": {
+    "name": "Stargazer - Altar"
+  },
+  "TFT17_Stargazer_Mountain": {
+    "name": "Stargazer - Mountain"
+  },
+  "TFT17_AssassinTrait": {
+    "name": "Rogue"
+  },
+  "TFT17_SpaceGroove": {
+    "name": "Space Groove"
+  },
+  "TFT17_ManaTrait": {
+    "name": "Conduit"
+  },
+  "TFT17_MorganaUniqueTrait": {
+    "name": "Dark Lady"
+  },
+  "TFT17_VexUniqueTrait": {
+    "name": "Doomer"
+  },
+  "TFT17_FlexTrait": {
+    "name": "Voyager"
+  },
+  "TFT17_Stargazer_Huntress": {
+    "name": "Stargazer - Huntress"
+  },
+  "TFT17_ShieldTank": {
+    "name": "Vanguard"
+  },
+  "TFT17_Timebreaker": {
+    "name": "Timebreaker"
+  },
+  "TFT17_DRX": {
+    "name": "N.O.V.A."
+  },
+  "TFT17_Stargazer_Wolf": {
+    "name": "Stargazer - Boar"
+  },
+  "TFT17_Astronaut": {
+    "name": "Meeple"
+  },
+  "TFT17_Stargazer_Medallion": {
+    "name": "Stargazer - Medallion"
+  },
+  "TFT17_ADMIN": {
+    "name": "Arbiter"
+  },
+  "TFT17_FioraUniqueTrait": {
+    "name": "Divine Duelist"
+  },
+  "TFT17_PsyOps": {
+    "name": "Psionic"
+  }
+}

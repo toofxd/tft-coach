@@ -1,0 +1,9008 @@
+{
+  "units": {
+    "TFT17_Vex": {
+      "name": "Vex",
+      "stats": {
+        "hp": 900,
+        "mana": 60,
+        "initialMana": 0,
+        "damage": 15,
+        "armor": 40,
+        "magicResist": 40,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 4
+      },
+      "itemization": "{9eb7b8a6}",
+      "ability": {
+        "details": [
+          [
+            "30",
+            "45",
+            "250"
+          ],
+          [
+            "130",
+            "195",
+            "1000"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Belveth": {
+      "name": "Bel'Veth",
+      "stats": {
+        "hp": 750,
+        "mana": 50,
+        "initialMana": 0,
+        "damage": 47,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.75,
+        "range": 2
+      },
+      "itemization": "{53d104ac}",
+      "ability": {
+        "details": [
+          null,
+          [
+            "3",
+            "5",
+            "7"
+          ],
+          [
+            "18",
+            "27",
+            "41"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Chogath": {
+      "name": "Cho'Gath",
+      "stats": {
+        "hp": 700,
+        "mana": 70,
+        "initialMana": 30,
+        "damage": 45,
+        "armor": 40,
+        "magicResist": 40,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.6,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "12",
+            "18",
+            "33"
+          ],
+          [
+            "30",
+            "40",
+            "70"
+          ],
+          [
+            "210",
+            "290",
+            "420"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_MasterYi": {
+      "name": "Master Yi",
+      "stats": {
+        "hp": 1100,
+        "mana": 70,
+        "initialMana": 30,
+        "damage": 60,
+        "armor": 65,
+        "magicResist": 65,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.85,
+        "range": 1
+      },
+      "itemization": "{53d104ac}",
+      "ability": {
+        "details": [
+          [
+            "70",
+            "105",
+            "550"
+          ],
+          [
+            "20",
+            "30",
+            "200"
+          ],
+          [
+            "50",
+            "75",
+            "600"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Veigar": {
+      "name": "Veigar",
+      "stats": {
+        "hp": 500,
+        "mana": 50,
+        "initialMana": 10,
+        "damage": 30,
+        "armor": 15,
+        "magicResist": 15,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.7,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "310",
+            "465",
+            "700"
+          ],
+          null,
+          [
+            "31",
+            "47",
+            "70"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Ezreal": {
+      "name": "Ezreal",
+      "stats": {
+        "hp": 450,
+        "mana": 30,
+        "initialMana": 0,
+        "damage": 40,
+        "armor": 15,
+        "magicResist": 15,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.7,
+        "range": 4
+      },
+      "itemization": "{2ae695df}",
+      "ability": {
+        "details": [
+          [
+            "14",
+            "21",
+            "32"
+          ],
+          [
+            "160",
+            "240",
+            "365"
+          ],
+          [
+            "8",
+            "12",
+            "18"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Summon": {
+      "name": "Bia & Bayin",
+      "stats": {
+        "hp": 320,
+        "mana": 50,
+        "initialMana": 0,
+        "damage": 20,
+        "armor": 0,
+        "magicResist": 0,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.6,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "50",
+            "80",
+            "140"
+          ],
+          [
+            "125",
+            "300",
+            "300"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Pyke": {
+      "name": "Pyke",
+      "stats": {
+        "hp": 700,
+        "mana": 40,
+        "initialMana": 0,
+        "damage": 45,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 1
+      },
+      "itemization": "{14a36a9c}",
+      "ability": {
+        "details": [
+          [
+            "60",
+            "90",
+            "135"
+          ],
+          [
+            "210",
+            "315",
+            "720"
+          ],
+          [
+            "120",
+            "180",
+            "360"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Poppy": {
+      "name": "Poppy",
+      "stats": {
+        "hp": 700,
+        "mana": 100,
+        "initialMana": 30,
+        "damage": 60,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.65,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "400",
+            "475",
+            "575"
+          ],
+          [
+            "15",
+            "25",
+            "60"
+          ],
+          [
+            "125",
+            "160",
+            "210"
+          ],
+          null
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Ornn": {
+      "name": "Ornn",
+      "stats": {
+        "hp": 850,
+        "mana": 100,
+        "initialMana": 40,
+        "damage": 50,
+        "armor": 40,
+        "magicResist": 40,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.65,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "125",
+            "200",
+            "500"
+          ],
+          [
+            "180",
+            "270",
+            "430"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Jax": {
+      "name": "Jax",
+      "stats": {
+        "hp": 950,
+        "mana": 80,
+        "initialMana": 20,
+        "damage": 50,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.65,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "15",
+            "20",
+            "25"
+          ],
+          [
+            "400",
+            "450",
+            "500"
+          ],
+          [
+            "75",
+            "115",
+            "170"
+          ],
+          [
+            "1",
+            "1.25",
+            "1.5"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_AurelionSol": {
+      "name": "Aurelion Sol",
+      "stats": {
+        "hp": 850,
+        "mana": 75,
+        "initialMana": 15,
+        "damage": 30,
+        "armor": 30,
+        "magicResist": 30,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.75,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "320",
+            "480",
+            "2000"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Milio": {
+      "name": "Milio",
+      "stats": {
+        "hp": 550,
+        "mana": 30,
+        "initialMana": 0,
+        "damage": 30,
+        "armor": 20,
+        "magicResist": 20,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.7,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "255",
+            "380",
+            "575"
+          ],
+          [
+            "85",
+            "130",
+            "190"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Corki": {
+      "name": "Corki",
+      "stats": {
+        "hp": 850,
+        "mana": 60,
+        "initialMana": 0,
+        "damage": 45,
+        "armor": 30,
+        "magicResist": 30,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 4
+      },
+      "itemization": "{2ae695df}",
+      "ability": {
+        "details": [
+          [
+            "5",
+            "7",
+            "24"
+          ],
+          [
+            "30",
+            "44",
+            "280"
+          ],
+          null,
+          null,
+          [
+            "120",
+            "180",
+            "900"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Fizz": {
+      "name": "Fizz",
+      "stats": {
+        "hp": 850,
+        "mana": 20,
+        "initialMana": 0,
+        "damage": 30,
+        "armor": 55,
+        "magicResist": 55,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.85,
+        "range": 1
+      },
+      "itemization": "{402a9680}",
+      "ability": {
+        "details": [
+          [
+            "120",
+            "180",
+            "290"
+          ],
+          [
+            "185",
+            "280",
+            "445"
+          ],
+          [
+            "75",
+            "115",
+            "180"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_IvernMinion": {
+      "name": "Meepsie",
+      "stats": {
+        "hp": 950,
+        "mana": 100,
+        "initialMana": 50,
+        "damage": 65,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.55,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "380",
+            "430",
+            "600"
+          ],
+          [
+            "160",
+            "240",
+            "360"
+          ],
+          [
+            "1.5",
+            "1.75",
+            "2"
+          ],
+          null
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_PVE_ElderDragon": {
+      "name": "Cosmic Elder Dragon",
+      "stats": {
+        "hp": 10000,
+        "mana": 0,
+        "initialMana": 0,
+        "damage": 900,
+        "armor": 50,
+        "magicResist": 50,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 2
+      },
+      "itemization": "{d5823aeb}",
+      "ability": {
+        "details": []
+      },
+      "tags": []
+    },
+    "TFT17_Zed": {
+      "name": "Zed",
+      "stats": {
+        "hp": 1300,
+        "mana": 100,
+        "initialMana": 50,
+        "damage": 85,
+        "armor": 60,
+        "magicResist": 60,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.85,
+        "range": 1
+      },
+      "itemization": "{53d104ac}",
+      "ability": {
+        "details": [
+          [
+            "33",
+            "40",
+            "40"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Graves": {
+      "name": "Graves",
+      "stats": {
+        "hp": 900,
+        "mana": 60,
+        "initialMana": 0,
+        "damage": 60,
+        "armor": 40,
+        "magicResist": 40,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.7,
+        "range": 4
+      },
+      "itemization": "{34ed6daa}",
+      "ability": {
+        "details": [
+          null,
+          [
+            "390",
+            "585",
+            "5555"
+          ],
+          [
+            "30",
+            "45",
+            "777"
+          ],
+          [
+            "135",
+            "200",
+            "3333"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Sona": {
+      "name": "Sona",
+      "stats": {
+        "hp": 900,
+        "mana": 25,
+        "initialMana": 0,
+        "damage": 35,
+        "armor": 40,
+        "magicResist": 40,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.9,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "300",
+            "450",
+            "999"
+          ],
+          [
+            "120",
+            "180",
+            "999"
+          ],
+          [
+            "720",
+            "1100",
+            "9999"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_RekSai": {
+      "name": "Rek'Sai",
+      "stats": {
+        "hp": 700,
+        "mana": 100,
+        "initialMana": 40,
+        "damage": 50,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.6,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "80",
+            "120",
+            "180"
+          ],
+          [
+            "200",
+            "220",
+            "260"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Mordekaiser": {
+      "name": "Mordekaiser",
+      "stats": {
+        "hp": 950,
+        "mana": 100,
+        "initialMana": 40,
+        "damage": 40,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.6,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "300",
+            "375",
+            "500"
+          ],
+          [
+            "75",
+            "90",
+            "105"
+          ],
+          [
+            "45",
+            "70",
+            "100"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Shen": {
+      "name": "Shen",
+      "stats": {
+        "hp": 1300,
+        "mana": 70,
+        "initialMana": 10,
+        "damage": 50,
+        "armor": 65,
+        "magicResist": 65,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.9,
+        "range": 1
+      },
+      "itemization": "{44de5928}",
+      "ability": {
+        "details": [
+          [
+            "20",
+            "30",
+            "777"
+          ],
+          [
+            "200",
+            "250",
+            "3456"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Illaoi": {
+      "name": "Illaoi",
+      "stats": {
+        "hp": 1100,
+        "mana": 100,
+        "initialMana": 40,
+        "damage": 50,
+        "armor": 50,
+        "magicResist": 50,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.65,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "450",
+            "525",
+            "650"
+          ],
+          [
+            "55",
+            "85",
+            "130"
+          ],
+          [
+            "80",
+            "120",
+            "180"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Nasus": {
+      "name": "Nasus",
+      "stats": {
+        "hp": 700,
+        "mana": 120,
+        "initialMana": 60,
+        "damage": 40,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.65,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "250",
+            "350",
+            "550"
+          ],
+          [
+            "30",
+            "45",
+            "70"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Zoe": {
+      "name": "Zoe",
+      "stats": {
+        "hp": 550,
+        "mana": 50,
+        "initialMana": 0,
+        "damage": 30,
+        "armor": 20,
+        "magicResist": 20,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.7,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "68",
+            "102",
+            "153"
+          ],
+          [
+            "34",
+            "51",
+            "77"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Gnar": {
+      "name": "Gnar",
+      "stats": {
+        "hp": 550,
+        "mana": 5,
+        "initialMana": 0,
+        "damage": 50,
+        "armor": 20,
+        "magicResist": 20,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.7,
+        "range": 4
+      },
+      "itemization": "{a35256da}",
+      "ability": {
+        "details": [
+          [
+            "20",
+            "30",
+            "45"
+          ],
+          [
+            "225",
+            "340",
+            "560"
+          ],
+          null,
+          null
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Karma": {
+      "name": "Karma",
+      "stats": {
+        "hp": 850,
+        "mana": 55,
+        "initialMana": 10,
+        "damage": 40,
+        "armor": 30,
+        "magicResist": 30,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "570",
+            "855",
+            "5000"
+          ],
+          [
+            "2",
+            "2",
+            "4"
+          ],
+          [
+            "180",
+            "270",
+            "1000"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Rammus": {
+      "name": "Rammus",
+      "stats": {
+        "hp": 1300,
+        "mana": 90,
+        "initialMana": 20,
+        "damage": 60,
+        "armor": 60,
+        "magicResist": 60,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.65,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "675",
+            "825",
+            "2000"
+          ],
+          [
+            "50",
+            "75",
+            "700"
+          ],
+          [
+            "50",
+            "75",
+            "1100"
+          ],
+          null,
+          [
+            "20",
+            "30",
+            "500"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Kindred": {
+      "name": "Kindred",
+      "stats": {
+        "hp": 850,
+        "mana": 40,
+        "initialMana": 0,
+        "damage": 55,
+        "armor": 30,
+        "magicResist": 30,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 4
+      },
+      "itemization": "{34ed6daa}",
+      "ability": {
+        "details": [
+          [
+            "10",
+            "15",
+            "100"
+          ],
+          [
+            "115",
+            "175",
+            "900"
+          ],
+          [
+            "3",
+            "3",
+            "5"
+          ],
+          [
+            "75",
+            "115",
+            "600"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Lissandra": {
+      "name": "Lissandra",
+      "stats": {
+        "hp": 450,
+        "mana": 30,
+        "initialMana": 0,
+        "damage": 30,
+        "armor": 15,
+        "magicResist": 15,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.7,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "250",
+            "375",
+            "600"
+          ],
+          [
+            "50",
+            "75",
+            "115"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Rhaast": {
+      "name": "Rhaast",
+      "stats": {
+        "hp": 1200,
+        "mana": 90,
+        "initialMana": 30,
+        "damage": 60,
+        "armor": 60,
+        "magicResist": 60,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.65,
+        "range": 1
+      },
+      "itemization": "{d5823aeb}",
+      "ability": {
+        "details": [
+          [
+            "500",
+            "550",
+            "650"
+          ],
+          [
+            "120",
+            "180",
+            "300"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Jhin": {
+      "name": "Jhin",
+      "stats": {
+        "hp": 900,
+        "mana": 44,
+        "initialMana": 0,
+        "damage": 80,
+        "armor": 40,
+        "magicResist": 40,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.9,
+        "range": 4
+      },
+      "itemization": "{34ed6daa}",
+      "ability": {
+        "details": [
+          [
+            "0.9",
+            "0.9",
+            "1.4"
+          ],
+          [
+            "4",
+            "6",
+            "44"
+          ],
+          [
+            "41",
+            "62",
+            "644"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Kaisa": {
+      "name": "Kai'Sa",
+      "stats": {
+        "hp": 650,
+        "mana": 50,
+        "initialMana": 0,
+        "damage": 45,
+        "armor": 25,
+        "magicResist": 25,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 4
+      },
+      "itemization": "{2ae695df}",
+      "ability": {
+        "details": [
+          [
+            "30",
+            "45",
+            "72"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Maokai": {
+      "name": "Maokai",
+      "stats": {
+        "hp": 1100,
+        "mana": 100,
+        "initialMana": 30,
+        "damage": 60,
+        "armor": 40,
+        "magicResist": 40,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.6,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "100",
+            "150",
+            "225"
+          ],
+          [
+            "1.5",
+            "1.5",
+            "1.75"
+          ],
+          [
+            "1.5",
+            "1.5",
+            "1.75"
+          ],
+          null
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Aurora": {
+      "name": "Aurora",
+      "stats": {
+        "hp": 700,
+        "mana": 80,
+        "initialMana": 20,
+        "damage": 30,
+        "armor": 25,
+        "magicResist": 25,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "80",
+            "120",
+            "190"
+          ],
+          [
+            "370",
+            "555",
+            "890"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Xayah": {
+      "name": "Xayah",
+      "stats": {
+        "hp": 850,
+        "mana": 50,
+        "initialMana": 0,
+        "damage": 50,
+        "armor": 30,
+        "magicResist": 30,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.75,
+        "range": 4
+      },
+      "itemization": "{34ed6daa}",
+      "ability": {
+        "details": [
+          [
+            "3",
+            "3",
+            "5"
+          ],
+          [
+            "60",
+            "60",
+            "30"
+          ],
+          [
+            "6",
+            "9",
+            "60"
+          ],
+          [
+            "45",
+            "68",
+            "900"
+          ],
+          [
+            "10",
+            "15",
+            "200"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Gragas": {
+      "name": "Gragas",
+      "stats": {
+        "hp": 950,
+        "mana": 80,
+        "initialMana": 30,
+        "damage": 50,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.6,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "415",
+            "470",
+            "630"
+          ],
+          [
+            "200",
+            "300",
+            "450"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Galio": {
+      "name": "The Mighty Mech",
+      "stats": {
+        "hp": 1300,
+        "mana": 100,
+        "initialMana": 40,
+        "damage": 70,
+        "armor": 60,
+        "magicResist": 60,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.65,
+        "range": 1
+      },
+      "itemization": "{d5823aeb}",
+      "ability": {
+        "details": [
+          [
+            "900",
+            "1300",
+            "3000"
+          ],
+          [
+            "80",
+            "120",
+            "3000"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Gwen": {
+      "name": "Gwen",
+      "stats": {
+        "hp": 750,
+        "mana": 30,
+        "initialMana": 0,
+        "damage": 50,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.85,
+        "range": 2
+      },
+      "itemization": "{402a9680}",
+      "ability": {
+        "details": [
+          [
+            "145",
+            "220",
+            "380"
+          ],
+          [
+            "75",
+            "110",
+            "190"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Akali": {
+      "name": "Akali",
+      "stats": {
+        "hp": 750,
+        "mana": 30,
+        "initialMana": 0,
+        "damage": 45,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 1
+      },
+      "itemization": "{53d104ac}",
+      "ability": {
+        "details": [
+          [
+            "4",
+            "6",
+            "9"
+          ],
+          [
+            "37",
+            "56",
+            "84"
+          ],
+          null,
+          [
+            "10",
+            "14",
+            "18"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Fiora": {
+      "name": "Fiora",
+      "stats": {
+        "hp": 1200,
+        "mana": 70,
+        "initialMana": 0,
+        "damage": 80,
+        "armor": 65,
+        "magicResist": 65,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.9,
+        "range": 1
+      },
+      "itemization": "{53d104ac}",
+      "ability": {
+        "details": [
+          [
+            "40",
+            "60",
+            "777"
+          ],
+          [
+            "200",
+            "250",
+            "999"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Blitzcrank": {
+      "name": "Blitzcrank",
+      "stats": {
+        "hp": 1000,
+        "mana": 100,
+        "initialMana": 20,
+        "damage": 50,
+        "armor": 50,
+        "magicResist": 50,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.9,
+        "range": 1
+      },
+      "itemization": "{44de5928}",
+      "ability": {
+        "details": [
+          [
+            "60",
+            "90",
+            "150"
+          ],
+          [
+            "150",
+            "225",
+            "999"
+          ],
+          [
+            "175",
+            "265",
+            "5000"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_MissFortune": {
+      "name": "Miss Fortune",
+      "stats": {
+        "hp": 650,
+        "mana": 100,
+        "initialMana": 0,
+        "damage": 50,
+        "armor": 30,
+        "magicResist": 30,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.75,
+        "range": 4
+      },
+      "ability": {
+        "details": []
+      },
+      "tags": []
+    },
+    "TFT17_Aatrox": {
+      "name": "Aatrox",
+      "stats": {
+        "hp": 700,
+        "mana": 90,
+        "initialMana": 30,
+        "damage": 50,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.6,
+        "range": 1
+      },
+      "itemization": "{d5823aeb}",
+      "ability": {
+        "details": [
+          [
+            "300",
+            "375",
+            "575"
+          ],
+          [
+            "180",
+            "270",
+            "405"
+          ],
+          [
+            "80",
+            "120",
+            "180"
+          ],
+          null
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Urgot": {
+      "name": "Urgot",
+      "stats": {
+        "hp": 600,
+        "mana": 50,
+        "initialMana": 0,
+        "damage": 60,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 2
+      },
+      "itemization": "{53d104ac}",
+      "ability": {
+        "details": [
+          [
+            "85",
+            "125",
+            "200"
+          ],
+          [
+            "150",
+            "175",
+            "200"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Lulu": {
+      "name": "Lulu",
+      "stats": {
+        "hp": 650,
+        "mana": 55,
+        "initialMana": 0,
+        "damage": 30,
+        "armor": 25,
+        "magicResist": 25,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.75,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "150",
+            "225",
+            "360"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Samira": {
+      "name": "Samira",
+      "stats": {
+        "hp": 650,
+        "mana": 60,
+        "initialMana": 0,
+        "damage": 50,
+        "armor": 25,
+        "magicResist": 25,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.75,
+        "range": 4
+      },
+      "itemization": "{2ae695df}",
+      "ability": {
+        "details": [
+          [
+            "10",
+            "15",
+            "25"
+          ],
+          [
+            "55",
+            "80",
+            "130"
+          ],
+          [
+            "375",
+            "560",
+            "900"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Pantheon": {
+      "name": "Pantheon",
+      "stats": {
+        "hp": 900,
+        "mana": 80,
+        "initialMana": 20,
+        "damage": 50,
+        "armor": 45,
+        "magicResist": 45,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.6,
+        "range": 1
+      },
+      "itemization": "{d5823aeb}",
+      "ability": {
+        "details": [
+          [
+            "275",
+            "300",
+            "500"
+          ],
+          [
+            "30",
+            "45",
+            "70"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Talon": {
+      "name": "Talon",
+      "stats": {
+        "hp": 650,
+        "mana": 30,
+        "initialMana": 0,
+        "damage": 35,
+        "armor": 35,
+        "magicResist": 35,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.75,
+        "range": 1
+      },
+      "itemization": "{14a36a9c}",
+      "ability": {
+        "details": [
+          [
+            "60",
+            "90",
+            "135"
+          ],
+          [
+            "430",
+            "645",
+            "1000"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Bard": {
+      "name": "Bard",
+      "stats": {
+        "hp": 900,
+        "mana": 65,
+        "initialMana": 0,
+        "damage": 30,
+        "armor": 40,
+        "magicResist": 40,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.85,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "220",
+            "330",
+            "3000"
+          ],
+          [
+            "135",
+            "205",
+            "1500"
+          ],
+          [
+            "15",
+            "20",
+            "100"
+          ],
+          null
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Nunu": {
+      "name": "Nunu & Willump",
+      "stats": {
+        "hp": 1300,
+        "mana": 145,
+        "initialMana": 40,
+        "damage": 60,
+        "armor": 60,
+        "magicResist": 60,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.65,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "475",
+            "575",
+            "2000"
+          ],
+          [
+            "1.5",
+            "1.75",
+            "8"
+          ],
+          [
+            "120",
+            "180",
+            "2000"
+          ],
+          [
+            "100",
+            "150",
+            "2000"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_TwistedFate": {
+      "name": "Twisted Fate",
+      "stats": {
+        "hp": 500,
+        "mana": 50,
+        "initialMana": 0,
+        "damage": 30,
+        "armor": 15,
+        "magicResist": 15,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.7,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "180",
+            "270",
+            "405"
+          ],
+          [
+            "360",
+            "540",
+            "810"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Teemo": {
+      "name": "Teemo",
+      "stats": {
+        "hp": 450,
+        "mana": 50,
+        "initialMana": 0,
+        "damage": 15,
+        "armor": 15,
+        "magicResist": 15,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.7,
+        "range": 4
+      },
+      "itemization": "{9eb7b8a6}",
+      "ability": {
+        "details": [
+          [
+            "30",
+            "45",
+            "100"
+          ],
+          [
+            "65",
+            "95",
+            "170"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Briar": {
+      "name": "Briar",
+      "stats": {
+        "hp": 650,
+        "mana": 40,
+        "initialMana": 0,
+        "damage": 35,
+        "armor": 35,
+        "magicResist": 35,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.75,
+        "range": 1
+      },
+      "itemization": "{53d104ac}",
+      "ability": {
+        "details": [
+          [
+            "2",
+            "2",
+            "2.5"
+          ],
+          [
+            "120",
+            "180",
+            "285"
+          ],
+          null
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Viktor": {
+      "name": "Viktor",
+      "stats": {
+        "hp": 650,
+        "mana": 80,
+        "initialMana": 20,
+        "damage": 30,
+        "armor": 25,
+        "magicResist": 25,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "185",
+            "275",
+            "475"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Riven": {
+      "name": "Riven",
+      "stats": {
+        "hp": 1100,
+        "mana": 20,
+        "initialMana": 0,
+        "damage": 0,
+        "armor": 60,
+        "magicResist": 60,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.85,
+        "range": 1
+      },
+      "itemization": "{1194180f}",
+      "ability": {
+        "details": [
+          [
+            "75",
+            "115",
+            "300"
+          ],
+          [
+            "100",
+            "150",
+            "1200"
+          ],
+          [
+            "90",
+            "135",
+            "1000"
+          ],
+          [
+            "160",
+            "240",
+            "2000"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Morgana": {
+      "name": "Morgana",
+      "stats": {
+        "hp": 1300,
+        "mana": 90,
+        "initialMana": 30,
+        "damage": 60,
+        "armor": 70,
+        "magicResist": 70,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.65,
+        "range": 2
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "525",
+            "625",
+            "2500"
+          ],
+          [
+            "100",
+            "150",
+            "3000"
+          ],
+          [
+            "100",
+            "150",
+            "3000"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_TahmKench": {
+      "name": "Tahm Kench",
+      "stats": {
+        "hp": 1300,
+        "mana": 110,
+        "initialMana": 50,
+        "damage": 75,
+        "armor": 60,
+        "magicResist": 60,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.5,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "300",
+            "360",
+            "1500"
+          ],
+          [
+            "45",
+            "60",
+            "1500"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Leona": {
+      "name": "Leona",
+      "stats": {
+        "hp": 700,
+        "mana": 110,
+        "initialMana": 50,
+        "damage": 50,
+        "armor": 40,
+        "magicResist": 40,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.6,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "420",
+            "480",
+            "620"
+          ],
+          [
+            "100",
+            "150",
+            "225"
+          ],
+          [
+            "120",
+            "180",
+            "270"
+          ],
+          [
+            "1.75",
+            "1.75",
+            "2"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Leblanc": {
+      "name": "LeBlanc",
+      "stats": {
+        "hp": 850,
+        "mana": 40,
+        "initialMana": 0,
+        "damage": 0,
+        "armor": 30,
+        "magicResist": 30,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 4
+      },
+      "itemization": "{9eb7b8a6}",
+      "ability": {
+        "details": [
+          [
+            "62",
+            "93",
+            "250"
+          ],
+          [
+            "25",
+            "25",
+            "150"
+          ],
+          [
+            "80",
+            "120",
+            "750"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Caitlyn": {
+      "name": "Caitlyn",
+      "stats": {
+        "hp": 500,
+        "mana": 0,
+        "initialMana": 0,
+        "damage": 65,
+        "armor": 15,
+        "magicResist": 15,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.55,
+        "range": 4
+      },
+      "itemization": "{a35256da}",
+      "ability": {
+        "details": [
+          [
+            "20",
+            "30",
+            "45"
+          ],
+          [
+            "170",
+            "255",
+            "510"
+          ],
+          null
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Nami": {
+      "name": "Nami",
+      "stats": {
+        "hp": 850,
+        "mana": 70,
+        "initialMana": 25,
+        "damage": 40,
+        "armor": 30,
+        "magicResist": 30,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 4
+      },
+      "itemization": "{32cdc033}",
+      "ability": {
+        "details": [
+          [
+            "440",
+            "660",
+            "5000"
+          ],
+          [
+            "110",
+            "165",
+            "1000"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Jinx": {
+      "name": "Jinx",
+      "stats": {
+        "hp": 550,
+        "mana": 80,
+        "initialMana": 20,
+        "damage": 55,
+        "armor": 20,
+        "magicResist": 20,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.75,
+        "range": 4
+      },
+      "itemization": "{34ed6daa}",
+      "ability": {
+        "details": [
+          null,
+          [
+            "3",
+            "5",
+            "7"
+          ],
+          [
+            "29",
+            "44",
+            "70"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT17_Diana": {
+      "name": "Diana",
+      "stats": {
+        "hp": 850,
+        "mana": 50,
+        "initialMana": 0,
+        "damage": null,
+        "armor": 50,
+        "magicResist": 50,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.8,
+        "range": 1
+      },
+      "itemization": "{44de5928}",
+      "ability": {
+        "details": [
+          [
+            "52",
+            "78",
+            "135"
+          ],
+          [
+            "275",
+            "325",
+            "475"
+          ],
+          [
+            "60",
+            "90",
+            "145"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT_BlueGolem": {
+      "name": "Golem",
+      "stats": {
+        "hp": 600,
+        "mana": 100,
+        "initialMana": 30,
+        "damage": 55,
+        "armor": 40,
+        "magicResist": 40,
+        "critMultiplier": 1.4,
+        "critChance": 0.25,
+        "attackSpeed": 0.55,
+        "range": 1
+      },
+      "itemization": "{2ccf900f}",
+      "ability": {
+        "details": [
+          [
+            "300",
+            "480",
+            "750"
+          ]
+        ]
+      },
+      "tags": []
+    },
+    "TFT_TrainingDummy": {
+      "name": "Training Dummy",
+      "stats": {
+        "hp": 550,
+        "mana": 0,
+        "initialMana": 0,
+        "damage": 50,
+        "armor": 40,
+        "magicResist": 40,
+        "critMultiplier": 0,
+        "critChance": null,
+        "attackSpeed": 0.5,
+        "range": 1
+      },
+      "itemization": "{d5823aeb}",
+      "ability": {
+        "details": []
+      },
+      "tags": []
+    }
+  },
+  "traits": {
+    "TFT17_Mecha": {
+      "name": "Mecha"
+    },
+    "TFT17_Stargazer_Fountain": {
+      "name": "Stargazer - Fountain"
+    },
+    "TFT17_BlitzcrankUniqueTrait": {
+      "name": "Party Animal"
+    },
+    "TFT17_MeleeTrait": {
+      "name": "Marauder"
+    },
+    "TFT17_ShenUniqueTrait": {
+      "name": "Bulwark"
+    },
+    "TFT17_TahmKenchUniqueTrait": {
+      "name": "Oracle"
+    },
+    "TFT17_ResistTank": {
+      "name": "Bastion"
+    },
+    "TFT17_ASTrait": {
+      "name": "Challenger"
+    },
+    "TFT17_RhaastUniqueTrait": {
+      "name": "Redeemer"
+    },
+    "TFT17_Stargazer": {
+      "name": "Stargazer"
+    },
+    "TFT17_SonaUniqueTrait": {
+      "name": "Commander"
+    },
+    "TFT17_RangedTrait": {
+      "name": "Sniper"
+    },
+    "TFT17_Stargazer_Serpent": {
+      "name": "Stargazer - Serpent"
+    },
+    "TFT17_MissFortuneUniqueTrait": {
+      "name": "Gun Goddess"
+    },
+    "TFT17_GravesTrait": {
+      "name": "Factory New"
+    },
+    "TFT17_ZedUniqueTrait": {
+      "name": "Galaxy Hunter"
+    },
+    "TFT17_DarkStar": {
+      "name": "Dark Star"
+    },
+    "TFT17_SummonTrait": {
+      "name": "Shepherd"
+    },
+    "TFT17_Fateweaver": {
+      "name": "Fateweaver"
+    },
+    "TFT17_AnimaSquad": {
+      "name": "Anima"
+    },
+    "TFT17_APTrait": {
+      "name": "Replicator"
+    },
+    "TFT17_HPTank": {
+      "name": "Brawler"
+    },
+    "TFT17_MissFortuneUndeterminedTrait": {
+      "name": "Choose Trait"
+    },
+    "TFT17_Primordian": {
+      "name": "Primordian"
+    },
+    "TFT17_JhinUniqueTrait": {
+      "name": "Eradicator"
+    },
+    "TFT17_Stargazer_Shield": {
+      "name": "Stargazer - Altar"
+    },
+    "TFT17_Stargazer_Mountain": {
+      "name": "Stargazer - Mountain"
+    },
+    "TFT17_AssassinTrait": {
+      "name": "Rogue"
+    },
+    "TFT17_SpaceGroove": {
+      "name": "Space Groove"
+    },
+    "TFT17_ManaTrait": {
+      "name": "Conduit"
+    },
+    "TFT17_MorganaUniqueTrait": {
+      "name": "Dark Lady"
+    },
+    "TFT17_VexUniqueTrait": {
+      "name": "Doomer"
+    },
+    "TFT17_FlexTrait": {
+      "name": "Voyager"
+    },
+    "TFT17_Stargazer_Huntress": {
+      "name": "Stargazer - Huntress"
+    },
+    "TFT17_ShieldTank": {
+      "name": "Vanguard"
+    },
+    "TFT17_Timebreaker": {
+      "name": "Timebreaker"
+    },
+    "TFT17_DRX": {
+      "name": "N.O.V.A."
+    },
+    "TFT17_Stargazer_Wolf": {
+      "name": "Stargazer - Boar"
+    },
+    "TFT17_Astronaut": {
+      "name": "Meeple"
+    },
+    "TFT17_Stargazer_Medallion": {
+      "name": "Stargazer - Medallion"
+    },
+    "TFT17_ADMIN": {
+      "name": "Arbiter"
+    },
+    "TFT17_FioraUniqueTrait": {
+      "name": "Divine Duelist"
+    },
+    "TFT17_PsyOps": {
+      "name": "Psionic"
+    }
+  },
+  "items": {
+    "RabadonsDeathcap": {
+      "id": 25,
+      "name": "Rabadon's Deathcap",
+      "effects": {
+        "AP": 55,
+        "BonusDamage": 0.15,
+        "{1543aa48}": 0.15
+      },
+      "from": [
+        3,
+        3
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "TFT17_MarketOffering_EmpoweredHex_Wind": {
+      "id": 258,
+      "name": "Acceleration Hex",
+      "effects": {
+        "AttackSpeed": 0.3
+      },
+      "from": [],
+      "tags": [
+        "Other",
+        "Mod"
+      ]
+    },
+    "TFT17_MarketOffering_EmpoweredHex_Socialite": {
+      "id": 259,
+      "name": "Starlight Hex",
+      "effects": {
+        "ManaRegen": 3
+      },
+      "from": [],
+      "tags": [
+        "Other",
+        "Mod"
+      ]
+    },
+    "TFT17_MarketOffering_EmpoweredHex_Electric": {
+      "id": 260,
+      "name": "Storm Hex",
+      "effects": {
+        "StunDuration": 1.75
+      },
+      "from": [],
+      "tags": [
+        "Other",
+        "Mod"
+      ]
+    },
+    "TFT17_MarketOffering_EmpoweredHex_Wood": {
+      "id": 261,
+      "name": "Cosmic Hex",
+      "effects": {
+        "BonusHealth": 35,
+        "PercentHealth": 0.1
+      },
+      "from": [],
+      "tags": [
+        "Other",
+        "Mod"
+      ]
+    },
+    "TFT17_MarketOffering_EmpoweredHex_Ice": {
+      "id": 262,
+      "name": "Cryogenic Hex",
+      "effects": {
+        "HealthThreshold": 40,
+        "HealPercent": 0.3,
+        "BlockDuration": 1
+      },
+      "from": [],
+      "tags": [
+        "Other",
+        "Mod"
+      ]
+    },
+    "TFT17_MarketOffering_EmpoweredHex_Fire": {
+      "id": 263,
+      "name": "Solar Hex",
+      "effects": {
+        "FireDamagePercent": 0.15,
+        "Duration": 5
+      },
+      "from": [],
+      "tags": [
+        "Other",
+        "Mod"
+      ]
+    },
+    "17PsyOps_ChemicalCapacitorMod_Radiant": {
+      "id": 218,
+      "name": "Malware Matrix",
+      "effects": {
+        "ResistReduce": 2,
+        "AD": 0.15,
+        "AS": 15,
+        "StatOmnivamp": 0.1,
+        "CleaveDamage": 75,
+        "NumAttacks": 3,
+        "Cooldown": 0.75
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "17PsyOps_DroneMod_Radiant": {
+      "id": 217,
+      "name": "Drone Uplink",
+      "effects": {
+        "DamageRepeat": 25,
+        "Interval": 3,
+        "AP": 30,
+        "SecondDroneDamageRepeat": 0.2
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "17PsyOps_ChemicalCapacitorMod": {
+      "id": 212,
+      "name": "Malware Matrix",
+      "effects": {
+        "ResistReduce": 2,
+        "AD": 0.15,
+        "AS": 15,
+        "StatOmnivamp": 0.1,
+        "Cooldown": 0.75
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "17PsyOps_TargetlockMod": {
+      "id": 214,
+      "name": "Target-Lock Optics",
+      "effects": {
+        "AttackPct": 150,
+        "AS": 35,
+        "AD": 0.15
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "17PsyOps_TargetlockMod_Radiant": {
+      "id": 220,
+      "name": "Target-Lock Optics",
+      "effects": {
+        "AttackPct": 150,
+        "HealPct": 0.2,
+        "AS": 35,
+        "AD": 0.25
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "17PsyOps_GrenadeMod_Radiant": {
+      "id": 216,
+      "name": "Biomatter Preserver",
+      "effects": {
+        "NumGrenades": 3,
+        "Interval": 8,
+        "HealPct": 0.18,
+        "Health": 550,
+        "PctMaxHP": 0.05,
+        "IncreasedHealing": 0.22
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "17PsyOps_DroneMod": {
+      "id": 211,
+      "name": "Drone Uplink",
+      "effects": {
+        "DamageRepeat": 20,
+        "Interval": 3,
+        "AP": 25
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "17PsyOps_SympatheticImplantMod": {
+      "id": 213,
+      "name": "Sympathetic Implant",
+      "effects": {
+        "Interval": 5,
+        "ManaRegenOverTime": 1,
+        "ManaRegen": 2,
+        "AP": 20
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "17PsyOps_SympatheticImplantMod_Radiant": {
+      "id": 219,
+      "name": "Sympathetic Implant",
+      "effects": {
+        "Interval": 5,
+        "TrueDamageConversion": 0.25,
+        "ManaRegenOverTime": 1,
+        "ManaRegen": 4,
+        "AP": 20
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "17PsyOps_GrenadeMod": {
+      "id": 210,
+      "name": "Biomatter Preserver",
+      "effects": {
+        "NumGrenades": 3,
+        "Interval": 8,
+        "HealPct": 0.18,
+        "Health": 250,
+        "PctMaxHP": 0.05
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier2_LionessLament": {
+      "id": 242,
+      "name": "Lioness's Lament",
+      "effects": {
+        "Armor": 30,
+        "MagicResist": 30,
+        "ResistPercent": 0.5,
+        "ResistSteal": 4,
+        "HealthPerMissile": 0.15,
+        "Health": 200
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier1_SavageSlicer": {
+      "id": 236,
+      "name": "Savage Slicer",
+      "effects": {
+        "AD": 0.1,
+        "StatOmnivamp": 0.1,
+        "SplashDamage": 0.3,
+        "OmnivampEffectiveness": 1.5,
+        "HexRange": 1,
+        "BriarHitsOnCast": 10
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier2_UwuBlaster": {
+      "id": 245,
+      "name": "UwU Blaster",
+      "effects": {
+        "ADDamage": 0.4,
+        "AD": 0.25,
+        "AS": 45,
+        "NumAttacks": 1,
+        "NumUwUBlasts": 3
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier2_SearingShortbow": {
+      "id": 243,
+      "name": "Searing Shortbow",
+      "effects": {
+        "AP": 40,
+        "AD": 0.1,
+        "ManaRegen": 4,
+        "ManaPerProjectile": 20,
+        "GrievousWoundsPercent": 33,
+        "BurnDuration": 3,
+        "APScalar": 0.75,
+        "BurnPercent": 1
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier3_IceblastArmor": {
+      "id": 250,
+      "name": "Deep Freeze",
+      "effects": {
+        "HexRange": 2,
+        "Armor": 30,
+        "MagicResist": 30,
+        "Health": 550,
+        "ShieldPercent": 0.2,
+        "HealthThreshold1": 0.9,
+        "StunDuration": 2,
+        "ShieldDuration": 4,
+        "HealthThreshold2": 0.6,
+        "HealthThreshold3": 0.4,
+        "HealthThreshold4": 0.2,
+        "HexRangeIncreasePerProc": 1,
+        "MaxHealthDamage": 0.15
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier3_Annihilator": {
+      "id": 246,
+      "name": "Animapocalypse",
+      "effects": {
+        "AP": 30,
+        "AD": 0.3,
+        "ManaRegen": 5,
+        "DamageStore": 0.2,
+        "Delay": 6,
+        "HexFalloff": 0.05
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier1_GuidingHex": {
+      "id": 233,
+      "name": "Guiding Hex",
+      "effects": {
+        "AP": 15,
+        "{1543aa48}": 0.1,
+        "Frequency": 3,
+        "AuroraAPOnHit": 9
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier3_RadiantField": {
+      "id": 252,
+      "name": "Solar Eclipse",
+      "effects": {
+        "Health": 800,
+        "HealthPercent": 0.18,
+        "HealthRatio": 0.05,
+        "HexRadiusBase": 2,
+        "Period": 6,
+        "{52d3e690}": 1,
+        "DamageToHealthConversion": 0.2
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier2_RadiantField": {
+      "id": 244,
+      "name": "Radiant Field",
+      "effects": {
+        "Health": 400,
+        "HealthPercent": 0.2,
+        "HealthRatio": 0.03,
+        "HexRadiusBase": 1,
+        "Period": 6,
+        "{52d3e690}": 1
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier1_RocketSwarm": {
+      "id": 235,
+      "name": "Rocket Swarm",
+      "effects": {
+        "ManaRegen": 3,
+        "AD": 0.1,
+        "NumRockets": 4,
+        "RocketDamagePercent": 0.3,
+        "JinxPercentIncrease": 0.35,
+        "ManaThreshold": 30
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier2_EchoingBatblades": {
+      "id": 234,
+      "name": "Echoing Batblades",
+      "effects": {
+        "AS": 20,
+        "AD": 0.3,
+        "ArrowDamagePercent": 0.5,
+        "NumArrows": 10,
+        "NumAttacks": 3
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier3_EchoingBatblades": {
+      "id": 249,
+      "name": "Vayne's Chromablades",
+      "effects": {
+        "AS": 50,
+        "AD": 0.3,
+        "ArrowDamagePercent": 0.5,
+        "NumArrows": 30,
+        "NumAttacks": 5
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier2_BattleBunnyCrossbow": {
+      "id": 239,
+      "name": "Battle Bunny Crossbow",
+      "effects": {
+        "AS": 25,
+        "CritChance": 35,
+        "ArrowDamagePercent": 0.8,
+        "NumCritsNeeded": 4,
+        "NumArrows": 5,
+        "MaxPerSpell": 3,
+        "AD": 0.2
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier2_IceblastArmor": {
+      "id": 241,
+      "name": "Iceblast Armor",
+      "effects": {
+        "HexRange": 3,
+        "Armor": 30,
+        "MagicResist": 30,
+        "Health": 250,
+        "ShieldPercent": 0.25,
+        "HealthThreshold1": 0.7,
+        "StunDuration": 2,
+        "ShieldDuration": 4,
+        "HealthThreshold2": 0.35
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier0_ClunkyPrototype": {
+      "id": 230,
+      "name": "Broken Prototype",
+      "effects": {
+        "Health": 100,
+        "Shield": 0.15
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier0_LeakyPrototype": {
+      "id": 231,
+      "name": "Leaky Prototype",
+      "effects": {
+        "AP": 15,
+        "APLoss": 3,
+        "ManaRegenPerLoss": 1,
+        "Interval": 5
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier3_BattleBunnyCrossbow": {
+      "id": 247,
+      "name": "Bunny Prime Ballista",
+      "effects": {
+        "AS": 50,
+        "CritChance": 50,
+        "ArrowDamagePercent": 1,
+        "NumCritsNeeded": 3,
+        "NumArrows": 6,
+        "MaxPerSpell": 3,
+        "AD": 0.3,
+        "ArrowsOnTakedown": 12
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier0_SparkingPrototype": {
+      "id": 232,
+      "name": "Sparking Prototype",
+      "effects": {
+        "AD": 0.1,
+        "AttackSpeed": 0.3,
+        "Interval": 4,
+        "Duration": 4
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier3_CyclonicSlicers": {
+      "id": 248,
+      "name": "Unceasing Cyclone",
+      "effects": {
+        "Armor": 40,
+        "MagicResist": 40,
+        "DamageIncrease": 0.3,
+        "AD": 0.3,
+        "AP": 30,
+        "ShredDuration": 60
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier1_TentacleSlam": {
+      "id": 237,
+      "name": "Tentacle Slam",
+      "effects": {
+        "Health": 150,
+        "Durability": 0.1,
+        "Frequency": 5,
+        "Heal": 0.12,
+        "IllaoiEffectiveness": 0.35
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier2_Annihilator": {
+      "id": 238,
+      "name": "The Annihilator",
+      "effects": {
+        "AP": 30,
+        "AD": 0.2,
+        "ManaRegen": 3,
+        "DamageStore": 0.2,
+        "Delay": 16,
+        "HexFalloff": 0.15
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier4_Omniweapon": {
+      "id": 255,
+      "name": "Omniweapon",
+      "effects": {
+        "ADDamage": 0.35,
+        "NumAttacks": 1,
+        "NumUwUBlasts": 15,
+        "DamageStore": 0.4,
+        "Delay": 5,
+        "HexFalloff": 0.05,
+        "ArrowDamagePercent": 1,
+        "NumCritsNeeded": 1,
+        "NumArrows": 40,
+        "DamageIncrease": 0.3,
+        "ShredDuration": 60,
+        "HexRange": 6,
+        "ShieldPercent": 1,
+        "HealthThreshold1": 0.9,
+        "StunDuration": 8,
+        "ShieldDuration": 60,
+        "ResistPercent": 1,
+        "ResistSteal": 15,
+        "HealthPerMissile": 0.2,
+        "HealthPercent": 0.12,
+        "HealthRatio": 0.03,
+        "HexRadiusBase": 2,
+        "Period": 6,
+        "{52d3e690}": 1,
+        "ManaPerProjectile": 10,
+        "AD": 1,
+        "AS": 100,
+        "AP": 100,
+        "Health": 10000,
+        "Armor": 100,
+        "MagicResist": 100,
+        "{cd951938}": 0.5,
+        "{1543aa48}": 1,
+        "StatOmnivamp": 1,
+        "DamageToHealthConversion": 1,
+        "ArrowsOnTakedown": 24,
+        "HealthThreshold2": 0.6,
+        "HealthThreshold3": 0.4,
+        "HealthThreshold4": 0.2,
+        "HexRangeIncreasePerProc": 1,
+        "MaxHealthDamage": 0.25,
+        "APScalar": 0.5,
+        "BurnDuration": 3,
+        "CritChance": 75,
+        "ManaRegen": 10
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier2_CyclonicSlicers": {
+      "id": 240,
+      "name": "Cyclonic Slicers",
+      "effects": {
+        "Armor": 15,
+        "MagicResist": 15,
+        "DamageIncrease": 0.1,
+        "AD": 0.2,
+        "AP": 20,
+        "ShredDuration": 4
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier3_SearingShortbow": {
+      "id": 253,
+      "name": "Evolved Embershot",
+      "effects": {
+        "AP": 40,
+        "AD": 0.4,
+        "ManaRegen": 5,
+        "ManaPerProjectile": 15,
+        "GrievousWoundsPercent": 33,
+        "BurnDuration": 10,
+        "APScalar": 0.5,
+        "BurnPercent": 1
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier3_UwuBlaster": {
+      "id": 254,
+      "name": "OwO Blaster",
+      "effects": {
+        "ADDamage": 0.4,
+        "AD": 0.35,
+        "AS": 75,
+        "NumAttacks": 1,
+        "NumUwUBlasts": 9
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_AnimaSquadItem_Tier3_LionessLament": {
+      "id": 251,
+      "name": "Leonine Lamentation",
+      "effects": {
+        "Armor": 40,
+        "MagicResist": 40,
+        "ResistPercent": 0.5,
+        "ResistSteal": 10,
+        "HealthPerMissile": 0.15,
+        "PrismaticNumTargets": 3,
+        "Health": 400
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "InfinityEdge": {
+      "id": 17,
+      "name": "Infinity Edge",
+      "effects": {
+        "AD": 0.35,
+        "CritChance": 35
+      },
+      "from": [
+        1,
+        8
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "5DragonsClawRadiant": {
+      "id": 79,
+      "name": "Radiant Dragon's Claw",
+      "effects": {
+        "MagicResist": 120,
+        "MaxHealthRegen": 2,
+        "HealthRegenInterval": 2,
+        "ICD": 0.5,
+        "PercentHealthDamage": 5,
+        "PercentMaxHP": 0.22
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5TrapClawRadiant": {
+      "id": 83,
+      "name": "Radiant Striker's Flail",
+      "effects": {
+        "Health": 300,
+        "AS": 20,
+        "CritChance": 40,
+        "Duration": 5,
+        "{1543aa48}": 0.2,
+        "BuffDamageAmp": 0.1,
+        "MaxStacks": 4
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5IonicSparkRadiant": {
+      "id": 67,
+      "name": "Radiant Ionic Spark",
+      "effects": {
+        "Health": 500,
+        "AP": 30,
+        "HexRange": 2,
+        "ManaRatio": 300,
+        "MRShred": 30,
+        "MagicResist": 70
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5QuicksilverRadiant": {
+      "id": 81,
+      "name": "Radiant Quicksilver",
+      "effects": {
+        "MagicResist": 40,
+        "SpellShieldDuration": 45,
+        "AS": 30,
+        "CritChance": 40,
+        "ProcAttackSpeed": 0.06
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5HextechGunbladeRadiant": {
+      "id": 51,
+      "name": "Radiant Hextech Gunblade",
+      "effects": {
+        "StatOmnivamp": 0.3,
+        "AD": 0.4,
+        "AP": 40,
+        "AllyHealing": 0.4,
+        "Omnivamp": 35,
+        "ManaRegen": 2
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5StatikkShivRadiant": {
+      "id": 59,
+      "name": "Radiant Void Staff",
+      "effects": {
+        "ManaRegen": 2,
+        "MRShred": 30,
+        "MRShredDuration": 90,
+        "AP": 75,
+        "AS": 30
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5FrozenHeartRadiant": {
+      "id": 71,
+      "name": "Radiant Protector's Vow",
+      "effects": {
+        "ManaRegen": 2,
+        "Armor": 50,
+        "MagicResist": 50,
+        "HealthThreshold": 40,
+        "ShieldHealthPercent": 40,
+        "CombatStartMana": 40,
+        "TriggerMana": 30,
+        "ShieldDuration": 60
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5BlueBuffRadiant": {
+      "id": 70,
+      "name": "Radiant Blue Buff",
+      "effects": {
+        "ManaRegen": 10,
+        "AD": 0.3,
+        "AP": 30,
+        "ModifiedADAP": 0.2
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5ArchangelsStaffRadiant": {
+      "id": 65,
+      "name": "Radiant Archangel's Staff",
+      "effects": {
+        "ManaRegen": 2,
+        "IntervalSeconds": 5,
+        "APPerInterval": 40,
+        "AP": 60
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5MorellonomiconRadiant": {
+      "id": 68,
+      "name": "Radiant Morellonomicon",
+      "effects": {
+        "BurnPercent": 2,
+        "TicksPerSecond": 1,
+        "MonsterCap": 150,
+        "BurnDuration": 10,
+        "Health": 300,
+        "AP": 40,
+        "GrievousWoundsPercent": 33,
+        "ManaRegen": 2
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5BrambleVestRadiant": {
+      "id": 75,
+      "name": "Radiant Bramble Vest",
+      "effects": {
+        "Armor": 100,
+        "1StarAoEDamage": 200,
+        "2StarAoEDamage": 200,
+        "3StarAoEDamage": 200,
+        "4StarAoEDamage": 200,
+        "ICD": 2,
+        "AutoDamageReduction": 0.1,
+        "PercentMaxHP": 0.12
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5RunaansHurricaneRadiant": {
+      "id": 61,
+      "name": "Radiant Kraken's Fury",
+      "effects": {
+        "ADOnAttack": 0.07,
+        "AD": 0.2,
+        "MagicResist": 40,
+        "AS": 20,
+        "ASCapstone": 0.3,
+        "MaxStacks": 15
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5GuinsoosRagebladeRadiant": {
+      "id": 58,
+      "name": "Radiant Guinsoo's Rageblade",
+      "effects": {
+        "AttackSpeedPerStack": 14,
+        "AP": 20,
+        "AS": 20
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5HandOfJusticeRadiant": {
+      "id": 74,
+      "name": "Radiant Hand of Justice",
+      "effects": {
+        "AD_NotStatBar": 0.3,
+        "AP_NotStatBar": 30,
+        "StatOmnivamp_NotStatBar": 0.24,
+        "CritChance": 40,
+        "ManaRegen": 2,
+        "{f23e83fc}": 2,
+        "HealthThreshold": 0.5
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5SunfireCapeRadiant": {
+      "id": 77,
+      "name": "Radiant Sunfire Cape",
+      "effects": {
+        "Health": 300,
+        "Armor": 40,
+        "BurnPercent": 2,
+        "BurnDuration": 10,
+        "MonsterCap": 150,
+        "GrievousWoundsPercent": 33,
+        "ICD": 2,
+        "HexRange": 2,
+        "BonusPercentHP": 0.16
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5LastWhisperRadiant": {
+      "id": 63,
+      "name": "Radiant Last Whisper",
+      "effects": {
+        "ArmorReductionPercent": 30,
+        "ArmorBreakDuration": 50,
+        "AD": 0.45,
+        "AS": 40,
+        "CritChance": 40
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5ThiefsGlovesRadiant": {
+      "id": 84,
+      "name": "Radiant Thief's Gloves",
+      "effects": {
+        "Health": 150,
+        "CritChance": 20
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5WarmogsArmorRadiant": {
+      "id": 82,
+      "name": "Radiant Warmog's Armor",
+      "effects": {
+        "Health": 1200,
+        "BonusPercentHP": 0.36
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5SteraksGageRadiant": {
+      "id": 55,
+      "name": "Radiant Sterak's Gage",
+      "effects": {
+        "Health": 600,
+        "AD": 0.9,
+        "HealthThreshold": 60,
+        "PercentHealthShield": 0.8,
+        "ShieldDuration": 6
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5RedemptionRadiant": {
+      "id": 73,
+      "name": "Radiant Spirit Visage",
+      "effects": {
+        "Health": 700,
+        "ManaRegen": 4,
+        "{cd951938}": 0.15,
+        "MissingHealthHeal": 0.04,
+        "HealTickRate": 1,
+        "MaxHeal": 2000
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5GuardianAngelRadiant": {
+      "id": 53,
+      "name": "Radiant Edge of Night",
+      "effects": {
+        "HealthThreshold": 60,
+        "AP": 30,
+        "AD": 0.3,
+        "AS": 30,
+        "StealthDuration": 1,
+        "DamageReduction": 100,
+        "Armor": 40,
+        "MissingHealthRestore": 1
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5RapidFirecannonRadiant": {
+      "id": 57,
+      "name": "Radiant Red Buff",
+      "effects": {
+        "AS": 90,
+        "HexRangeIncrease": 2,
+        "BonusDamage": 0.06,
+        "BurnPercent": 2,
+        "HealingReductionPct": 33,
+        "Duration": 5,
+        "{1543aa48}": 0.06
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5NightHarvesterRadiant": {
+      "id": 78,
+      "name": "Radiant Steadfast Heart",
+      "effects": {
+        "Health": 600,
+        "Armor": 40,
+        "CritChance": 40,
+        "BaseDamageReduction": 20,
+        "ThresholdForEmpower": 0.5,
+        "EmpowerDamageReduction": 36,
+        "BaseDurability": 0.1,
+        "EmpoweredDurability": 0.3
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5TitansResolveRadiant": {
+      "id": 60,
+      "name": "Radiant Titan's Resolve",
+      "effects": {
+        "Armor": 40,
+        "StackCap": 25,
+        "StackingAD": 0.04,
+        "StackingSP": 4,
+        "AS": 20,
+        "StackedAmp": 0.2
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5GiantSlayerRadiant": {
+      "id": 50,
+      "name": "Radiant Giant Slayer",
+      "effects": {
+        "AD": 0.3,
+        "AP": 30,
+        "AS": 30,
+        "{1543aa48}": 0.3,
+        "DamageAmp": 0.3,
+        "{abb9f4ce}": 25
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5CrownguardRadiant": {
+      "id": 66,
+      "name": "Radiant Crownguard",
+      "effects": {
+        "ShieldDuration": 8,
+        "Health": 200,
+        "AP": 40,
+        "Armor": 40,
+        "ShieldSize": 50,
+        "ShieldBonusAP": 50
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5BloodthirsterRadiant": {
+      "id": 54,
+      "name": "Radiant Bloodthirster",
+      "effects": {
+        "AD": 0.3,
+        "AP": 30,
+        "HealthThreshold": 40,
+        "ShieldHealthPercent": 50,
+        "ShieldDuration": 5,
+        "MagicResist": 40,
+        "StatOmnivamp": 0.4,
+        "LifeSteal": 40
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5RabadonsDeathcapRadiant": {
+      "id": 64,
+      "name": "Radiant Rabadon's Deathcap",
+      "effects": {
+        "AP": 110,
+        "BonusDamage": 0.5,
+        "{1543aa48}": 0.3
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5JeweledGauntletRadiant": {
+      "id": 69,
+      "name": "Radiant Jeweled Gauntlet",
+      "effects": {
+        "AP": 75,
+        "CritChance": 75
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5GargoyleStoneplateRadiant": {
+      "id": 76,
+      "name": "Radiant Gargoyle Stoneplate",
+      "effects": {
+        "Health": 300,
+        "Armor": 50,
+        "ArmorPerEnemy": 25,
+        "MRPerEnemy": 25,
+        "MagicResist": 50,
+        "SizeIncrease": 0.075,
+        "{4dc0582f}": 20
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5LeviathanRadiant": {
+      "id": 62,
+      "name": "Radiant Nashor's Tooth",
+      "effects": {
+        "Health": 300,
+        "AP": 30,
+        "AS": 20,
+        "ManaOnCrit": 8,
+        "CritChance": 40,
+        "BaseManaOnHit": 4
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5SpearOfShojinRadiant": {
+      "id": 52,
+      "name": "Radiant Spear of Shojin",
+      "effects": {
+        "ManaRegen": 2,
+        "FlatManaRestore": 10,
+        "AD": 0.3,
+        "AP": 30
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5SpectralGauntletRadiant": {
+      "id": 80,
+      "name": "Radiant Evenshroud",
+      "effects": {
+        "Health": 500,
+        "BonusResists": 50,
+        "BonusResistDuration": 20,
+        "HexRange": 3,
+        "ARReductionAmount": 30,
+        "MagicResist": 40
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5InfinityEdgeRadiant": {
+      "id": 56,
+      "name": "Radiant Infinity Edge",
+      "effects": {
+        "AD": 0.75,
+        "CritChance": 75
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5DeathbladeRadiant": {
+      "id": 49,
+      "name": "Radiant Deathblade",
+      "effects": {
+        "AD": 1.1,
+        "BonusDamage": 0.2,
+        "{1543aa48}": 0.2
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "5AdaptiveHelmRadiant": {
+      "id": 72,
+      "name": "Radiant Adaptive Helm",
+      "effects": {
+        "ManaRegen": 6,
+        "FrontlineResists": 80,
+        "BacklineADAP": 25,
+        "MagicResist": 40,
+        "ManaPercIncrease": 0.3
+      },
+      "from": [],
+      "tags": [
+        "Radiant"
+      ]
+    },
+    "FrozenHeart": {
+      "id": 32,
+      "name": "Protector's Vow",
+      "effects": {
+        "ManaRegen": 1,
+        "Armor": 25,
+        "MagicResist": 25,
+        "HealthThreshold": 40,
+        "ShieldHealthPercent": 20,
+        "CombatStartMana": 20,
+        "TriggerMana": 15,
+        "ShieldDuration": 60
+      },
+      "from": [
+        4,
+        5
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "17_SonaUniqueGoldOnKill": {
+      "id": 201,
+      "name": "Command Mod: Transmute",
+      "effects": {
+        "{a61b4a72}": 2
+      },
+      "from": [],
+      "tags": [
+        "Consumable",
+        "Mod"
+      ]
+    },
+    "17_SonaUniqueExperience": {
+      "id": 194,
+      "name": "Command Mod: Analyze",
+      "effects": {
+        "Interval": 3,
+        "Experience": 1
+      },
+      "from": [],
+      "tags": [
+        "Consumable",
+        "Mod"
+      ]
+    },
+    "17_SonaUniqueDoublestrike": {
+      "id": 197,
+      "name": "Command Mod: Doublestrike",
+      "effects": {
+        "DoublestrikeChance": 25
+      },
+      "from": [],
+      "tags": [
+        "Consumable",
+        "Mod"
+      ]
+    },
+    "17_SonaUniqueDebuff": {
+      "id": 198,
+      "name": "Command Mod: Exhaust",
+      "effects": {
+        "Duration": 4,
+        "ASGain": 0.08
+      },
+      "from": [],
+      "tags": [
+        "Consumable",
+        "Mod"
+      ]
+    },
+    "17_SonaUniqueReduceMana": {
+      "id": 200,
+      "name": "Command Mod: Optimize",
+      "effects": {
+        "ManaReducePct": 15
+      },
+      "from": [],
+      "tags": [
+        "Consumable",
+        "Mod"
+      ]
+    },
+    "17_SonaUniqueFreeze": {
+      "id": 195,
+      "name": "Command Mod: Brace",
+      "effects": {
+        "FreezeDuration": 8,
+        "PctHealth": 0.2
+      },
+      "from": [],
+      "tags": [
+        "Consumable",
+        "Mod"
+      ]
+    },
+    "17_SonaUniqueTempItem": {
+      "id": 199,
+      "name": "Command Mod: Fabricate",
+      "effects": {},
+      "from": [],
+      "tags": [
+        "Consumable",
+        "Mod"
+      ]
+    },
+    "17_SonaUniqueIncreaseThreat": {
+      "id": 196,
+      "name": "Command Mod: Disrupt",
+      "effects": {
+        "StunDuration": 1
+      },
+      "from": [],
+      "tags": [
+        "Consumable",
+        "Mod"
+      ]
+    },
+    "Artifact_TheIndomitable": {
+      "id": 174,
+      "name": "The Indomitable",
+      "effects": {
+        "Health": 500,
+        "Armor": 20,
+        "MagicResist": 20,
+        "HealthPercBonus": 0.15
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "9OrnnHullbreaker": {
+      "id": 146,
+      "name": "Hullcrusher",
+      "effects": {
+        "Armor": 60,
+        "MagicResist": 60,
+        "ExtraHealth": 400,
+        "ExtraADandAP": 10
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "Redemption": {
+      "id": 34,
+      "name": "Spirit Visage",
+      "effects": {
+        "Health": 300,
+        "ManaRegen": 2,
+        "{cd951938}": 0.08,
+        "MissingHealthHeal": 0.02,
+        "HealTickRate": 1,
+        "MaxHeal": 250
+      },
+      "from": [
+        4,
+        7
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Artifact_ShadowPuppet": {
+      "id": 158,
+      "name": "Shadow Puppet",
+      "effects": {
+        "AS": 10,
+        "Armor": 10,
+        "MagicResist": 10,
+        "ClonePercentHealth": 0.6,
+        "ClonePercentDamage": 0.4
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "17Artifact_EkkoArtifact": {
+      "id": 185,
+      "name": "Ekko's Patience",
+      "effects": {
+        "AP": 25,
+        "AD": 0.25,
+        "AbilityDA": 0.4,
+        "Duration": 2
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "7ShimmerscaleMogulsMail": {
+      "id": 151,
+      "name": "Mogul's Mail",
+      "effects": {
+        "Health": 300,
+        "StackCap": 35,
+        "GoldAtFullStacks": 1,
+        "BaseResistsPerStack": 1,
+        "BaseHealthPerStack": 8,
+        "GoldInterval": 11
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "7ShimmerscaleGamblersBlade": {
+      "id": 153,
+      "name": "Gambler's Blade",
+      "effects": {
+        "AS": 55,
+        "AttackSpeedPerGold": 0.01,
+        "AttackSpeedGoldLimit": 30,
+        "ChanceToProc": 0.06,
+        "GoldPerProc": 1,
+        "{b38e1643}": 20,
+        "{46736b3f}": 4
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "TacticiansRing": {
+      "id": 47,
+      "name": "Tactician's Cape",
+      "effects": {
+        "MaxArmySizeIncrease": 1,
+        "PercentGoldChance": 10,
+        "Timer": 10
+      },
+      "from": [
+        10,
+        9
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Artifact_EternalPact": {
+      "id": 141,
+      "name": "Eternal Pact",
+      "effects": {
+        "ManaRegen": 1,
+        "AP": 40,
+        "ManaRegenToGrant": 10,
+        "APToGrant": 40,
+        "PercentAPShield": 2,
+        "ShieldDuration": 10,
+        "ShieldCadence": 6,
+        "ManaToGrant": 15
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "ItemReroller": {
+      "id": 266,
+      "name": "Reforger",
+      "effects": {
+        "{27d80030}": 1
+      },
+      "from": [],
+      "tags": [
+        "Consumable"
+      ]
+    },
+    "ThiefsGloves": {
+      "id": 45,
+      "name": "Thief's Gloves",
+      "effects": {
+        "Health": 150,
+        "CritChance": 20
+      },
+      "from": [
+        8,
+        8
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "GuinsoosRageblade": {
+      "id": 19,
+      "name": "Guinsoo's Rageblade",
+      "effects": {
+        "AttackSpeedPerStack": 7,
+        "AP": 10,
+        "AS": 10
+      },
+      "from": [
+        2,
+        3
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "IonicSpark": {
+      "id": 28,
+      "name": "Ionic Spark",
+      "effects": {
+        "Damage": 250,
+        "Health": 250,
+        "AP": 15,
+        "HexRange": 2,
+        "ManaRatio": 150,
+        "MRShred": 30,
+        "MagicResist": 35
+      },
+      "from": [
+        3,
+        6
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Artifact_HellfireHatchet": {
+      "id": 150,
+      "name": "Hellfire Hatchet",
+      "effects": {
+        "AD": 0.2,
+        "StatOmnivamp": 0.2,
+        "MaxHealthPercentDamage": 0.03,
+        "MissingHealthPercent": 0.01,
+        "ASPerMissingHealthPercent": 0.01,
+        "Health": 150
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "SteraksGage": {
+      "id": 16,
+      "name": "Sterak's Gage",
+      "effects": {
+        "Health": 300,
+        "AD": 0.45,
+        "HealthThreshold": 60,
+        "PercentHealthShield": 0.4,
+        "ShieldDuration": 4
+      },
+      "from": [
+        1,
+        7
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "DragonsClaw": {
+      "id": 40,
+      "name": "Dragon's Claw",
+      "effects": {
+        "MagicResist": 60,
+        "ICD": 0.5,
+        "PercentHealthDamage": 2.5,
+        "HealthRegenInterval": 2,
+        "PercentMaxHP": 0.06
+      },
+      "from": [
+        6,
+        6
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "ItemRemover": {
+      "id": 267,
+      "name": "Magnetic Remover",
+      "effects": {
+        "{27d80030}": 1
+      },
+      "from": [],
+      "tags": [
+        "Consumable"
+      ]
+    },
+    "RecommendedArmoryRadiant": {
+      "id": 271,
+      "name": "Radiant Lucky Item Chest",
+      "effects": {
+        "NumChoices": 4
+      },
+      "from": [],
+      "tags": [
+        "Consumable"
+      ]
+    },
+    "Artifact_LichBane": {
+      "id": 161,
+      "name": "Lich Bane",
+      "effects": {
+        "{a46d51dd}": 250,
+        "{a16d4d24}": 250,
+        "{a26d4eb7}": 350,
+        "{9f6d49fe}": 500,
+        "{a06d4b91}": 600,
+        "{9d6d46d8}": 700,
+        "{9e6d486b}": 700,
+        "{9b6d43b2}": 700,
+        "AP": 55,
+        "AS": 10
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "PowerGauntlet": {
+      "id": 44,
+      "name": "Striker's Flail",
+      "effects": {
+        "Health": 150,
+        "AS": 10,
+        "CritChance": 20,
+        "{1543aa48}": 0.1,
+        "Duration": 5,
+        "BuffDamageAmp": 0.05,
+        "MaxStacks": 4
+      },
+      "from": [
+        7,
+        8
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "17FavoredEmblemItem": {
+      "id": 90,
+      "name": "Arbiter Emblem",
+      "effects": {
+        "MagicResist": 20,
+        "Armor": 20,
+        "AS": 20
+      },
+      "from": [
+        6,
+        9
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17RangedTraitEmblemItem": {
+      "id": 103,
+      "name": "Sniper Emblem",
+      "effects": {
+        "AS": 20,
+        "HexRangeIncrease": 1
+      },
+      "from": [],
+      "tags": [
+        "ElusiveEmblem"
+      ]
+    },
+    "17ShieldTankEmblemItem": {
+      "id": 98,
+      "name": "Vanguard Emblem",
+      "effects": {
+        "MagicResist": 20,
+        "Armor": 20,
+        "APGain": 2
+      },
+      "from": [
+        10,
+        6
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17AnimaSquadEmblemItem": {
+      "id": 101,
+      "name": "Anima Emblem",
+      "effects": {
+        "Health": 250
+      },
+      "from": [],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17PulsefireEmblemItem": {
+      "id": 86,
+      "name": "Timebreaker Emblem",
+      "effects": {
+        "AS": 15,
+        "Health": 200
+      },
+      "from": [
+        2,
+        9
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17DRXEmblemItem": {
+      "id": 92,
+      "name": "N.O.V.A. Emblem",
+      "effects": {
+        "CritChance": 20,
+        "Health": 200,
+        "ASStriker": 0.25,
+        "ASTeam": 0.1,
+        "ArmorStriker": 10,
+        "ArmorTeam": 10
+      },
+      "from": [
+        8,
+        9
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17AstronautEmblemItem": {
+      "id": 89,
+      "name": "Meeple Emblem",
+      "effects": {
+        "Armor": 20,
+        "MagicResist": 20,
+        "ManaRegen": 2,
+        "ManaRegenPerMeep": 1
+      },
+      "from": [
+        5,
+        9
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17SummonTraitEmblemItem": {
+      "id": 96,
+      "name": "Shepherd Emblem",
+      "effects": {
+        "ManaRegen": 2,
+        "ManaSharePercent": 0.08
+      },
+      "from": [
+        10,
+        4
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17PsyOpsEmblemItem": {
+      "id": 102,
+      "name": "Psionic Emblem",
+      "effects": {
+        "Health": 300,
+        "AD": 0.2,
+        "AP": 20,
+        "AS": 20
+      },
+      "from": [],
+      "tags": [
+        "ElusiveEmblem"
+      ]
+    },
+    "17HPTankEmblemItem": {
+      "id": 99,
+      "name": "Brawler Emblem",
+      "effects": {
+        "Health": 250,
+        "PercentHPAttack": 0.03
+      },
+      "from": [
+        10,
+        7
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17AssassinTraitEmblemItem": {
+      "id": 100,
+      "name": "Rogue Emblem",
+      "effects": {
+        "CritChance": 20,
+        "{1543aa48}": 0.1,
+        "BuffDuration": 5,
+        "Omnivamp": 0.4,
+        "HealthThreshold": 0.5
+      },
+      "from": [
+        10,
+        8
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17ASTraitEmblemItem": {
+      "id": 94,
+      "name": "Challenger Emblem",
+      "effects": {
+        "AS": 30,
+        "PercentHealthHeal": 0.05,
+        "NumAttacks": 3
+      },
+      "from": [
+        10,
+        2
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17DarkStarEmblemItem": {
+      "id": 85,
+      "name": "Dark Star Emblem",
+      "effects": {
+        "AD": 0.18,
+        "AP": 18
+      },
+      "from": [
+        1,
+        9
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17StargazerEmblemItem": {
+      "id": 87,
+      "name": "Stargazer Emblem",
+      "effects": {
+        "AP": 15,
+        "AD": 0.15
+      },
+      "from": [
+        3,
+        9
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17MeleeTraitEmblemItem": {
+      "id": 93,
+      "name": "Marauder Emblem",
+      "effects": {
+        "AD": 0.2,
+        "StatOmnivamp": 0.1,
+        "GoldDropChance": 33,
+        "GoldAmount": 1
+      },
+      "from": [
+        1,
+        10
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17SpaceGrooveEmblemItem": {
+      "id": 88,
+      "name": "Space Groove Emblem",
+      "effects": {
+        "Health": 200,
+        "GrooveDuration": 2.5,
+        "ICD": 4
+      },
+      "from": [
+        4,
+        9
+      ],
+      "tags": [
+        "ElusiveEmblem"
+      ]
+    },
+    "17ResistTankEmblemItem": {
+      "id": 97,
+      "name": "Bastion Emblem",
+      "effects": {
+        "Armor": 30,
+        "MagicResist": 30,
+        "Delay": 10,
+        "AttackSpeed": 0.7
+      },
+      "from": [
+        10,
+        5
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17FlexTraitEmblemItem": {
+      "id": 95,
+      "name": "Voyager Emblem",
+      "effects": {
+        "AP": 20,
+        "AD": 0.2,
+        "BonusArmorMR": 10,
+        "BonusOmnivamp": 0.1,
+        "BonusAttackSpeed": 0.1
+      },
+      "from": [
+        10,
+        3
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "17PrimordianEmblemItem": {
+      "id": 91,
+      "name": "Primordian Emblem",
+      "effects": {
+        "Health": 450
+      },
+      "from": [
+        7,
+        9
+      ],
+      "tags": [
+        "CraftableEmblem"
+      ]
+    },
+    "NeekosHelp": {
+      "id": 264,
+      "name": "Champion Duplicator",
+      "effects": {},
+      "from": [],
+      "tags": [
+        "Consumable"
+      ]
+    },
+    "Artifact_Fishbones": {
+      "id": 157,
+      "name": "Fishbones",
+      "effects": {
+        "AD": 0.5,
+        "AS": 50
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "GargoyleStoneplate": {
+      "id": 37,
+      "name": "Gargoyle Stoneplate",
+      "effects": {
+        "Health": 100,
+        "Armor": 25,
+        "ArmorPerEnemy": 10,
+        "MRPerEnemy": 10,
+        "MagicResist": 25,
+        "SizeIncrease": 0.075,
+        "{4dc0582f}": 20
+      },
+      "from": [
+        5,
+        6
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Artifact_TitanicHydra": {
+      "id": 177,
+      "name": "Titanic Hydra",
+      "effects": {
+        "Health": 300,
+        "AD": 0.2,
+        "AS": 20,
+        "PercentMaxHealthSplash": 4,
+        "PercentAttackDamageSplash": 6
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "BrambleVest": {
+      "id": 36,
+      "name": "Bramble Vest",
+      "effects": {
+        "{6688a0d5}": 100,
+        "1StarAoEDamage": 100,
+        "ICD": 2,
+        "Armor": 50,
+        "2StarAoEDamage": 100,
+        "3StarAoEDamage": 100,
+        "4StarAoEDamage": 100,
+        "AutoDamageReduction": 0.05,
+        "PercentMaxHP": 0.06
+      },
+      "from": [
+        5,
+        5
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "ChainVest": {
+      "id": 4,
+      "name": "Chain Vest",
+      "effects": {
+        "Armor": 20
+      },
+      "from": [],
+      "tags": [
+        "Component"
+      ]
+    },
+    "Artifact_AegisOfDusk": {
+      "id": 156,
+      "name": "Aegis of Dusk",
+      "effects": {
+        "TickRate": 2.5,
+        "MRStealPerTick": 3,
+        "TickRateWithAegisOfDawn": 1.25,
+        "MagicResist": 70,
+        "Health": 400,
+        "{422c89f8}": 0.15,
+        "{452c8eb1}": 0.2,
+        "{442c8d1e}": 0.25,
+        "{472c91d7}": 0.3,
+        "{462c9044}": 0.35,
+        "{492c94fd}": 0.4,
+        "{482c936a}": 0.45,
+        "{3b2c7ef3}": 0.5
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "17Artifact_YasuoArtifact": {
+      "id": 191,
+      "name": "Yasuo's Bladework",
+      "effects": {
+        "AD": 0.3,
+        "AS": 10,
+        "Interval": 3,
+        "NumBonusAttacks": 1,
+        "{cc2194bf}": 2,
+        "Threshold": 0.7
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "17MissFortuneUniqueFlexTraitStance": {
+      "id": 206,
+      "name": "Replicator Mode",
+      "effects": {},
+      "from": [],
+      "tags": [
+        "Other",
+        "Mod"
+      ]
+    },
+    "17MissFortuneUniqueManaTraitStance": {
+      "id": 207,
+      "name": "Conduit Mode",
+      "effects": {},
+      "from": [],
+      "tags": [
+        "Other",
+        "Mod"
+      ]
+    },
+    "17MissFortuneUniqueASTraitStance": {
+      "id": 208,
+      "name": "Challenger Mode",
+      "effects": {},
+      "from": [],
+      "tags": [
+        "Other",
+        "Mod"
+      ]
+    },
+    "RecurveBow": {
+      "id": 1,
+      "name": "Recurve Bow",
+      "effects": {
+        "AS": 10
+      },
+      "from": [],
+      "tags": [
+        "Component"
+      ]
+    },
+    "MadredsBloodrazor": {
+      "id": 11,
+      "name": "Giant Slayer",
+      "effects": {
+        "AD": 0.15,
+        "AP": 15,
+        "AS": 15,
+        "{1543aa48}": 0.15,
+        "DamageAmp": 0.15,
+        "{abb9f4ce}": 25
+      },
+      "from": [
+        1,
+        2
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "RedBuff": {
+      "id": 38,
+      "name": "Sunfire Cape",
+      "effects": {
+        "Health": 150,
+        "Armor": 20,
+        "BurnPercent": 1,
+        "BurnDuration": 10,
+        "MonsterCap": 100,
+        "GrievousWoundsPercent": 33,
+        "ICD": 2,
+        "HexRange": 2,
+        "BonusPercentHP": 0.08
+      },
+      "from": [
+        5,
+        7
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "17Artifact_ThreshLantern": {
+      "id": 189,
+      "name": "Thresh's Lantern",
+      "effects": {
+        "Armor": 35,
+        "Health": 400,
+        "Delay": 6,
+        "MagicResist": 35,
+        "DamageShare": 0.2
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "17Artifact_KayleArtifact_Radiant": {
+      "id": 193,
+      "name": "Kayle's Radiant Exaltation",
+      "effects": {
+        "AS": 30,
+        "AP": 50,
+        "AD": 0.5,
+        "Delay": 20
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "UnstableConcoction": {
+      "id": 35,
+      "name": "Hand Of Justice",
+      "effects": {
+        "AD_NotStatBar": 0.15,
+        "AP_NotStatBar": 15,
+        "StatOmnivamp_NotStatBar": 0.12,
+        "CritChance": 20,
+        "ManaRegen": 1,
+        "{f23e83fc}": 2,
+        "HealthThreshold": 0.5
+      },
+      "from": [
+        4,
+        8
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "GuardianAngel": {
+      "id": 14,
+      "name": "Edge of Night",
+      "effects": {
+        "HealthThreshold": 60,
+        "AP": 10,
+        "AD": 0.1,
+        "AS": 15,
+        "StealthDuration": 1,
+        "DamageReduction": 100,
+        "Armor": 20,
+        "MissingHealthRestore": 0.2
+      },
+      "from": [
+        1,
+        5
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "17Artifact_KayleArtifact": {
+      "id": 187,
+      "name": "Kayle's Exaltation",
+      "effects": {
+        "AS": 15,
+        "AP": 25,
+        "AD": 0.25,
+        "Delay": 18
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TearOfTheGoddess": {
+      "id": 3,
+      "name": "Tear of the Goddess",
+      "effects": {
+        "ManaRegen": 1
+      },
+      "from": [],
+      "tags": [
+        "Component"
+      ]
+    },
+    "4OrnnZhonyasParadox": {
+      "id": 145,
+      "name": "Zhonya's Paradox",
+      "effects": {
+        "AP": 25,
+        "Armor": 25,
+        "MagicResist": 25,
+        "PercentHealthThreshold": 40,
+        "InvulnDuration": 3
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "NegatronCloak": {
+      "id": 5,
+      "name": "Negatron Cloak",
+      "effects": {
+        "MagicResist": 20
+      },
+      "from": [],
+      "tags": [
+        "Component"
+      ]
+    },
+    "TitansResolve": {
+      "id": 21,
+      "name": "Titan's Resolve",
+      "effects": {
+        "Armor": 20,
+        "StackCap": 25,
+        "StackingAD": 0.02,
+        "StackingSP": 2,
+        "AS": 10,
+        "StackedAmp": 0.1
+      },
+      "from": [
+        2,
+        5
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "MasterworkUpgrade": {
+      "id": 268,
+      "name": "Masterwork Upgrade",
+      "effects": {},
+      "from": [],
+      "tags": [
+        "Consumable"
+      ]
+    },
+    "Artifact_LudensTempest": {
+      "id": 163,
+      "name": "Luden's Tempest",
+      "effects": {
+        "PercentOfOverkill": 100,
+        "BaseDamage": 100,
+        "AD": 0.55,
+        "AP": 55
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "RunaansHurricane": {
+      "id": 22,
+      "name": "Kraken's Fury",
+      "effects": {
+        "AD": 0.1,
+        "AS": 10,
+        "MagicResist": 20,
+        "ADOnAttack": 0.035,
+        "ASCapstone": 0.15,
+        "MaxStacks": 15
+      },
+      "from": [
+        2,
+        6
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "SparringGloves": {
+      "id": 7,
+      "name": "Sparring Gloves",
+      "effects": {
+        "CritChance": 20
+      },
+      "from": [],
+      "tags": [
+        "Component"
+      ]
+    },
+    "Artifact_RapidFirecannon": {
+      "id": 166,
+      "name": "Rapid Firecannon",
+      "effects": {
+        "AS": 65,
+        "{1543aa48}": 0.05
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "9GoldenItemRemover": {
+      "id": 269,
+      "name": "Golden Item Remover",
+      "effects": {},
+      "from": [],
+      "tags": [
+        "Consumable"
+      ]
+    },
+    "Bloodthirster": {
+      "id": 15,
+      "name": "Bloodthirster",
+      "effects": {
+        "AD": 0.15,
+        "AP": 15,
+        "StatOmnivamp": 0.2,
+        "HealthThreshold": 40,
+        "ShieldHealthPercent": 25,
+        "ShieldDuration": 5,
+        "MagicResist": 20,
+        "LifeSteal": 20
+      },
+      "from": [
+        1,
+        6
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Artifact_StatikkShiv": {
+      "id": 176,
+      "name": "Statikk Shiv",
+      "effects": {
+        "Damage": 30,
+        "AP": 15,
+        "AS": 50,
+        "APScalar": 0.5,
+        "NumTargets": 4
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "9OrnnHorizonFocus": {
+      "id": 148,
+      "name": "Sniper's Focus",
+      "effects": {
+        "AD": 0.2,
+        "AP": 20,
+        "HexRequirement": 4,
+        "AS": 20,
+        "DamageAmpPerHex": 0.4,
+        "ManaRegen": 3
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "ArchangelsStaff": {
+      "id": 26,
+      "name": "Archangel's Staff",
+      "effects": {
+        "ManaRegen": 1,
+        "IntervalSeconds": 5,
+        "APPerInterval": 20,
+        "AP": 30
+      },
+      "from": [
+        3,
+        4
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Artifact_AegisOfDawn": {
+      "id": 155,
+      "name": "Aegis of Dawn",
+      "effects": {
+        "TickRate": 2.5,
+        "Armor": 50,
+        "Health": 400,
+        "TickRateWithAegisOfDusk": 1.25,
+        "ArmorStealPerTick": 3,
+        "{422c89f8}": 0.15,
+        "{452c8eb1}": 0.2,
+        "{442c8d1e}": 0.25,
+        "{472c91d7}": 0.3,
+        "{462c9044}": 0.35,
+        "{492c94fd}": 0.4,
+        "{482c936a}": 0.45,
+        "{3b2c7ef3}": 0.5
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "17Artifact_EvelynnArtifact": {
+      "id": 186,
+      "name": "Evelynn's Instinct",
+      "effects": {
+        "AS": 40,
+        "StatOmnivamp": 0.15,
+        "ExecuteThresholdForTarget": 0.12,
+        "DecayingAS": 0.5,
+        "Duration": 3,
+        "AP": 10,
+        "AD": 0.1
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "17Artifact_SorakaArtifact": {
+      "id": 188,
+      "name": "Soraka's Miracle",
+      "effects": {
+        "{cd951938}": 0.1,
+        "NumMiracles": 2,
+        "TotalHealRatio": 20,
+        "PlayerHealth": 1,
+        "HPThreshold": 0.5,
+        "Health": 100
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "17Artifact_VarusArtifact": {
+      "id": 190,
+      "name": "Varus's Obsession",
+      "effects": {
+        "{1543aa48}": 0.15,
+        "StackingStats": 3,
+        "HealPct": 0.2,
+        "Interval": 1
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "ChampionDuplicator_III": {
+      "id": 272,
+      "name": "Lesser Champion Duplicator",
+      "effects": {},
+      "from": [],
+      "tags": [
+        "Consumable"
+      ]
+    },
+    "Artifact_Dawncore": {
+      "id": 178,
+      "name": "Dawncore",
+      "effects": {
+        "AP": 15,
+        "AD": 0.15,
+        "FlatManaReduction": 10,
+        "MinimumTotalMana": 10,
+        "ReductionPerCast": 0.1,
+        "ManaRegen": 2
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "17Artifact_AhriArtifact": {
+      "id": 184,
+      "name": "Ahri's Aura",
+      "effects": {
+        "ManaRegen": 4,
+        "AP": 20,
+        "ManaSpent": 20,
+        "PercentSpeedIncrease": 0.05,
+        "FlatMagicDamage": 50
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "9CrownOfDemacia": {
+      "id": 229,
+      "name": "Crown of Demacia",
+      "effects": {
+        "HealingPercentPerTickPerStage": 3,
+        "Health": 300,
+        "AS": 30,
+        "HealTickRate": 2,
+        "ADandAPPerTick": 10
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "TFT17_EkkoOffering_AnomalyItem": {
+      "id": 227,
+      "name": "Anomaly",
+      "effects": {
+        "TankHP_TOOLTIPONLY": 1100,
+        "MarksmanKnockbackRange_TOOLTIPONLY": 3,
+        "MarksmanBonusAS_TOOLTIPONLY": 0.75,
+        "FighterAD_TOOLTIPONLY": 35,
+        "FighterAP_TOOLTIPONLY": 35,
+        "FighterHealthThreshold_TOOLTIPONLY": 85,
+        "{d8328e60}": 3,
+        "SpecialistNumStars_TOOLTIPONLY": 6,
+        "SpecialistMissileDamage_TOOLTIPONLY": 85,
+        "CasterManaSpent_TOOLTIPONLY": 50,
+        "CasterHexRadius_TOOLTIPONLY": 2,
+        "CasterHPRatio_TOOLTIPONLY": 0.05,
+        "CasterDuration_TOOLTIPONLY": 5
+      },
+      "from": [],
+      "tags": [
+        "Other",
+        "Mod"
+      ]
+    },
+    "Artifact_LightshieldCrest": {
+      "id": 162,
+      "name": "Lightshield Crest",
+      "effects": {
+        "TriggerRate": 3,
+        "PercentOfResists": 70,
+        "Armor": 55,
+        "MagicResist": 55,
+        "ShieldDuration": 5
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "17MechaTransformer": {
+      "id": 226,
+      "name": "Mecha-Former",
+      "effects": {},
+      "from": [],
+      "tags": [
+        "Consumable",
+        "Mod"
+      ]
+    },
+    "4OrnnDeathsDefiance": {
+      "id": 140,
+      "name": "Death's Defiance",
+      "effects": {
+        "AD": 0.25,
+        "Armor": 40,
+        "IgnorePainPercent": 50,
+        "BleedDuration": 4,
+        "AS": 15,
+        "StatOmnivamp": 0.25,
+        "BaseHeal": 25
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "SpearOfShojin": {
+      "id": 13,
+      "name": "Spear of Shojin",
+      "effects": {
+        "ManaRegen": 1,
+        "FlatManaRestore": 5,
+        "AD": 0.15,
+        "AP": 15
+      },
+      "from": [
+        1,
+        4
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "SpectralGauntlet": {
+      "id": 41,
+      "name": "Evenshroud",
+      "effects": {
+        "Health": 250,
+        "BonusResists": 15,
+        "BonusResistDuration": 15,
+        "HexRange": 2,
+        "ARReductionAmount": 30,
+        "MagicResist": 20
+      },
+      "from": [
+        6,
+        7
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Spatula": {
+      "id": 8,
+      "name": "Spatula",
+      "effects": {
+        "{fe9818ef}": 5
+      },
+      "from": [],
+      "tags": [
+        "Component"
+      ]
+    },
+    "9OrnnPrototypeForge": {
+      "id": 138,
+      "name": "Blacksmith's Gloves",
+      "effects": {
+        "Health": 200,
+        "CritChance": 30
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "Artifact_BlightingJewel": {
+      "id": 154,
+      "name": "Blighting Jewel",
+      "effects": {
+        "MRReduction": 4,
+        "ManaGain": 2,
+        "AP": 60,
+        "ManaRegen": 2,
+        "ICD": 0.5
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "Artifact_TalismanOfAscension": {
+      "id": 171,
+      "name": "Talisman Of Ascension",
+      "effects": {
+        "Seconds": 22,
+        "MaxHealthPercent": 100,
+        "DamageIncreasePercent": 120,
+        "Health": 450,
+        "AD": 0.2,
+        "AP": 20,
+        "DamageAmp": 1.2
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "4OrnnInfinityForce": {
+      "id": 142,
+      "name": "Infinity Force",
+      "effects": {
+        "Health": 300,
+        "AD": 0.3,
+        "AP": 30,
+        "Armor": 30,
+        "MagicResist": 30,
+        "AS": 30
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "Leviathan": {
+      "id": 23,
+      "name": "Nashor's Tooth",
+      "effects": {
+        "Health": 150,
+        "AP": 15,
+        "AS": 10,
+        "ManaOnCrit": 4,
+        "CritChance": 20,
+        "BaseManaOnHit": 2
+      },
+      "from": [
+        2,
+        7
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Artifact_SuspiciousTrenchCoat": {
+      "id": 170,
+      "name": "Suspicious Trench Coat",
+      "effects": {
+        "PercentHealthTrigger": 60,
+        "PercentHealthOfCopies": 33,
+        "Health": 100,
+        "AS": 15
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "Morellonomicon": {
+      "id": 29,
+      "name": "Morellonomicon",
+      "effects": {
+        "BurnPercent": 1,
+        "TicksPerSecond": 1,
+        "MonsterCap": 100,
+        "BurnDuration": 10,
+        "Health": 150,
+        "AP": 20,
+        "GrievousWoundsPercent": 33,
+        "ManaRegen": 1
+      },
+      "from": [
+        3,
+        7
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "RapidFireCannon": {
+      "id": 18,
+      "name": "Red Buff",
+      "effects": {
+        "AS": 45,
+        "{9f5117db}": 100,
+        "HexRangeIncrease": 1,
+        "BonusDamage": 0.06,
+        "BurnPercent": 1,
+        "HealingReductionPct": 33,
+        "Duration": 5,
+        "{1543aa48}": 0.03
+      },
+      "from": [
+        2,
+        2
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Crownguard": {
+      "id": 27,
+      "name": "Crownguard",
+      "effects": {
+        "ShieldDuration": 8,
+        "Health": 100,
+        "AP": 20,
+        "Armor": 20,
+        "ShieldSize": 25,
+        "ShieldBonusAP": 25
+      },
+      "from": [
+        3,
+        5
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "BFSword": {
+      "id": 0,
+      "name": "B.F. Sword",
+      "effects": {
+        "AD": 0.1
+      },
+      "from": [],
+      "tags": [
+        "Component"
+      ]
+    },
+    "Artifact_Mittens": {
+      "id": 164,
+      "name": "Mittens",
+      "effects": {
+        "PercentDR": 25,
+        "AS": 65,
+        "{1543aa48}": 0.15
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "AdaptiveHelm": {
+      "id": 33,
+      "name": "Adaptive Helm",
+      "effects": {
+        "ManaRegen": 3,
+        "FrontlineResists": 30,
+        "BacklineADAP": 10,
+        "MagicResist": 20,
+        "ManaPercIncrease": 0.15
+      },
+      "from": [
+        4,
+        6
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "ShopReroller": {
+      "id": 265,
+      "name": "Loaded Dice",
+      "effects": {},
+      "from": [],
+      "tags": [
+        "Consumable"
+      ]
+    },
+    "Artifact_NavoriFlickerblades": {
+      "id": 175,
+      "name": "Flickerblades",
+      "effects": {
+        "AS": 20,
+        "AP": 10,
+        "ASPerStack": 0.05,
+        "StacksPerBonus": 3,
+        "ADPerBonus": 0.02,
+        "APPerBonus": 2
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "BlueBuff": {
+      "id": 31,
+      "name": "Blue Buff",
+      "effects": {
+        "ManaRegen": 5,
+        "AD": 0.15,
+        "AP": 15,
+        "ModifiedADAP": 0.1
+      },
+      "from": [
+        4,
+        4
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "LastWhisper": {
+      "id": 24,
+      "name": "Last Whisper",
+      "effects": {
+        "ArmorReductionPercent": 30,
+        "ArmorBreakDuration": 3,
+        "AD": 0.15,
+        "AS": 20,
+        "CritChance": 20
+      },
+      "from": [
+        2,
+        8
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "JeweledGauntlet": {
+      "id": 30,
+      "name": "Jeweled Gauntlet",
+      "effects": {
+        "AP": 35,
+        "CritChance": 35
+      },
+      "from": [
+        3,
+        8
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "GiantsBelt": {
+      "id": 6,
+      "name": "Giant's Belt",
+      "effects": {
+        "Health": 150
+      },
+      "from": [],
+      "tags": [
+        "Component"
+      ]
+    },
+    "Artifact_WitsEnd": {
+      "id": 173,
+      "name": "Wit's End",
+      "effects": {
+        "{58f90eac}": 30,
+        "{5bf91365}": 30,
+        "{5af911d2}": 45,
+        "{55f909f3}": 65,
+        "{54f90860}": 85,
+        "{57f90d19}": 100,
+        "{56f90b86}": 100,
+        "{61f91cd7}": 100,
+        "PercentHealing": 30,
+        "Health": 400,
+        "MagicResist": 20,
+        "Armor": 20,
+        "AS": 25
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "NeedlesslyLargeRod": {
+      "id": 2,
+      "name": "Needlessly Large Rod",
+      "effects": {
+        "AP": 10
+      },
+      "from": [],
+      "tags": [
+        "Component"
+      ]
+    },
+    "Artifact_HorizonFocus": {
+      "id": 159,
+      "name": "Horizon Focus",
+      "effects": {
+        "PercentHealthDamage": 30,
+        "Health": 250,
+        "ManaRegen": 2,
+        "Armor": 20,
+        "MagicResist": 20
+      },
+      "from": [],
+      "tags": [
+        "Other"
+      ]
+    },
+    "NightHarvester": {
+      "id": 39,
+      "name": "Steadfast Heart",
+      "effects": {
+        "Health": 250,
+        "Armor": 20,
+        "CritChance": 20,
+        "ThresholdForEmpower": 0.5,
+        "BaseDurability": 0.05,
+        "EmpoweredDurability": 0.15
+      },
+      "from": [
+        5,
+        8
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Artifact_ProwlersClaw": {
+      "id": 165,
+      "name": "Prowler's Claw",
+      "effects": {
+        "HexRange": 4,
+        "CritDamageBonusPercent": 50,
+        "Health": 300,
+        "AD": 0.35,
+        "CritChance": 45
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "FryingPan": {
+      "id": 9,
+      "name": "Frying Pan",
+      "effects": {},
+      "from": [],
+      "tags": [
+        "Component"
+      ]
+    },
+    "ForceOfNature": {
+      "id": 46,
+      "name": "Tactician's Crown",
+      "effects": {
+        "MaxArmySizeIncrease": 1,
+        "PercentGoldChance": 10
+      },
+      "from": [
+        9,
+        9
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Quicksilver": {
+      "id": 42,
+      "name": "Quicksilver",
+      "effects": {
+        "MagicResist": 20,
+        "SpellShieldDuration": 18,
+        "AS": 15,
+        "CritChance": 20,
+        "ProcAttackSpeed": 0.03
+      },
+      "from": [
+        6,
+        8
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Deathblade": {
+      "id": 10,
+      "name": "Deathblade",
+      "effects": {
+        "AD": 0.55,
+        "BonusDamage": 0.1,
+        "{1543aa48}": 0.1
+      },
+      "from": [
+        1,
+        1
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Artifact_VoidGauntlet": {
+      "id": 139,
+      "name": "Void Gauntlet",
+      "effects": {
+        "Health": 300,
+        "{cd951938}": 0.1,
+        "InitialPercentHealthStore": 0.3,
+        "PercentHealthStore": 0.025,
+        "HexRadius": 4
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "Artifact_SilvermereDawn": {
+      "id": 168,
+      "name": "Silvermere Dawn",
+      "effects": {
+        "AttackSpeedCap": 0.5,
+        "StunDuration": 0.8,
+        "AD": 1.4,
+        "Armor": 80,
+        "MagicResist": 80
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "TacticiansScepter": {
+      "id": 48,
+      "name": "Tactician's Shield",
+      "effects": {
+        "MaxArmySizeIncrease": 1,
+        "PercentGoldChance": 10
+      },
+      "from": [
+        10,
+        10
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "RecommendedArmory": {
+      "id": 270,
+      "name": "Lucky Item Chest",
+      "effects": {
+        "NumChoices": 4
+      },
+      "from": [],
+      "tags": [
+        "Consumable"
+      ]
+    },
+    "WarmogsArmor": {
+      "id": 43,
+      "name": "Warmog's Armor",
+      "effects": {
+        "Health": 500,
+        "BonusPercentHP": 0.18
+      },
+      "from": [
+        7,
+        7
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "Artifact_SeekersArmguard": {
+      "id": 167,
+      "name": "Seeker's Armguard",
+      "effects": {
+        "StatsPerTakedown": 20,
+        "AP": 25,
+        "Armor": 10,
+        "MagicResist": 10,
+        "StatOmnivamp": 0.2
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "StatikkShiv": {
+      "id": 20,
+      "name": "Void Staff",
+      "effects": {
+        "ManaRegen": 1,
+        "MRShred": 30,
+        "MRShredDuration": 5,
+        "AP": 35,
+        "AS": 15
+      },
+      "from": [
+        2,
+        4
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    },
+    "4OrnnTheCollector": {
+      "id": 144,
+      "name": "Gold Collector",
+      "effects": {
+        "AD": 0.4,
+        "CritChance": 20,
+        "ExecutePercent": 12,
+        "GoldChance": 33
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "Artifact_CappaJuice": {
+      "id": 152,
+      "name": "Cappa Juice",
+      "effects": {
+        "AD": 0.25,
+        "AP": 25,
+        "ADAPPerTakedown": 1,
+        "PercentHatLoss": 0.2,
+        "AS": 25
+      },
+      "from": [],
+      "tags": [
+        "Artifact"
+      ]
+    },
+    "HextechGunblade": {
+      "id": 12,
+      "name": "Hextech Gunblade",
+      "effects": {
+        "AD": 0.2,
+        "AP": 20,
+        "StatOmnivamp": 0.15,
+        "AllyHealing": 0.2,
+        "Omnivamp": 18,
+        "ManaRegen": 1
+      },
+      "from": [
+        1,
+        3
+      ],
+      "tags": [
+        "Craftable"
+      ]
+    }
+  },
+  "augments": {
+    "10CrashTestDummies": {
+      "id": 202,
+      "name": "Crash Test Dummies",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "10GoingLong": {
+      "id": 52,
+      "name": "Going Long",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "10GoodForSomethingSilver": {
+      "id": 53,
+      "name": "Good For Something I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "10HeroicGrabBag": {
+      "id": 49,
+      "name": "Heroic Grab Bag",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "10LittleBuddies": {
+      "id": 59,
+      "name": "Little Buddies",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "11AtWhatCost": {
+      "id": 254,
+      "name": "At What Cost",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "11BloodBank": {
+      "id": 68,
+      "name": "Lunch Money",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "11Buildabud": {
+      "id": 220,
+      "name": "Build a Bud",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "11Calltochaos": {
+      "id": 65,
+      "name": "Call to Chaos",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "11Epoch": {
+      "id": 69,
+      "name": "Epoch",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "11EpochPlus": {
+      "id": 70,
+      "name": "Epoch+",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "11Prizefighter": {
+      "id": 64,
+      "name": "Prizefighter",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "11Reinfourcement": {
+      "id": 71,
+      "name": "ReinFOURcement",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "11Slammin": {
+      "id": 66,
+      "name": "Slammin'",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "11Slammin_Plus": {
+      "id": 67,
+      "name": "Slammin'+",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "11TinyButDeadly": {
+      "id": 142,
+      "name": "Tiny, but Deadly",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "16UltraRapidFire": {
+      "id": 263,
+      "name": "U.R.F",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17AatroxCarry": {
+      "id": 18,
+      "name": "Stellar Combo",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17AhriGodAugment": {
+      "id": 2,
+      "name": "Ahri's Boon",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17AnimaSquad_Commander": {
+      "id": 272,
+      "name": "Anima Commander",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17ApotheoticForge": {
+      "id": 23,
+      "name": "Apotheotic Forge",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17Arbiter_DivineAmendment": {
+      "id": 274,
+      "name": "Divine Amendment",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "17AurelionSolGodAugment": {
+      "id": 4,
+      "name": "Aurelion Sol's Boon",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17AurelionSolGodAugment_BoonOfResurrection": {
+      "id": 12,
+      "name": "Boon of Resurrection",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17Concentration": {
+      "id": 277,
+      "name": "Concentration",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17DarkStar_WhiteHole": {
+      "id": 276,
+      "name": "Loot Singularity",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17EkkoGodAugment": {
+      "id": 16,
+      "name": "Ekko's Boon",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17EvelynnGodAugment": {
+      "id": 19,
+      "name": "Evelynn's Boon",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17EvelynnGodAugment_BloodPrice": {
+      "id": 13,
+      "name": "Blood Price",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17GragasCarry": {
+      "id": 8,
+      "name": "Self Destruct",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17InvaderZed": {
+      "id": 6,
+      "name": "Invader Zed",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "17IvernMinionCarry": {
+      "id": 24,
+      "name": "The Big Bang",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17JaxCarry": {
+      "id": 22,
+      "name": "Reach for the Stars",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17KayleGodAugment": {
+      "id": 1,
+      "name": "Kayle's Boon",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17KayleGodAugment_Scrapper": {
+      "id": 9,
+      "name": "Boon of the Scrapper",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17LeonaCarry": {
+      "id": 273,
+      "name": "Shieldmaiden",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17MordekaiserCarry": {
+      "id": 21,
+      "name": "Heat Death",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17NasusCarry": {
+      "id": 3,
+      "name": "Bonk!",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17PoppyCarry": {
+      "id": 20,
+      "name": "Termeepnal Velocity",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17PrimordianPrismaticAugment": {
+      "id": 275,
+      "name": "Heart of the Swarm",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17PykeCarry": {
+      "id": 0,
+      "name": "Contract Killer",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17SorakaGodAugment": {
+      "id": 5,
+      "name": "Soraka's Boon",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17ThreshGodAugment": {
+      "id": 17,
+      "name": "Thresh's Boon",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17Timebreaker_Timestream": {
+      "id": 279,
+      "name": "Timestream",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "17TourOfTheGalaxy": {
+      "id": 278,
+      "name": "Tour of the Galaxy",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "17VarusGodAugment_BoonOfStars": {
+      "id": 14,
+      "name": "Varus's Boon",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17YasuoGodAugment_GoldenHex": {
+      "id": 15,
+      "name": "Yasuo's Golden Hex",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17YasuoGodAugment_MoreHexes": {
+      "id": 11,
+      "name": "Yasuo's Share The Spotlight",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "17YasuoGodAugment_PaintedPower": {
+      "id": 10,
+      "name": "Yasuo's Boon",
+      "rank": 0,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "6BandOfThieves2": {
+      "id": 203,
+      "name": "Band of Thieves II",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "6BandOfThieves2Plus": {
+      "id": 210,
+      "name": "Band of Thieves II+",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "6BandOfThieves2PlusPlus": {
+      "id": 211,
+      "name": "Band of Thieves II++",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "6CalculatedLoss": {
+      "id": 119,
+      "name": "Calculated Loss",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "6ClearMind": {
+      "id": 50,
+      "name": "Clear Mind",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "6CyberneticImplants2": {
+      "id": 101,
+      "name": "Cybernetic Implants",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "6CyberneticUplink2": {
+      "id": 102,
+      "name": "Cybernetic Uplink",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "6Distancing": {
+      "id": 187,
+      "name": "Exiles I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "6Distancing2": {
+      "id": 188,
+      "name": "Exiles II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "6Diversify1": {
+      "id": 117,
+      "name": "Stand United",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "6Electrocharge1": {
+      "id": 244,
+      "name": "Electrocharge I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "6Electrocharge2": {
+      "id": 245,
+      "name": "Electrocharge II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "6ForceOfNature": {
+      "id": 91,
+      "name": "New Recruit",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "6ForceOfNaturePlus": {
+      "id": 280,
+      "name": "New Recruit",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "6GachaAddict": {
+      "id": 28,
+      "name": "Prismatic Ticket",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "6HyperRoll": {
+      "id": 118,
+      "name": "Hustler",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "6ItemGrabBag1": {
+      "id": 46,
+      "name": "Item Grab Bag",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "6MakeshiftArmor1": {
+      "id": 205,
+      "name": "Makeshift Armor I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "6MakeshiftArmor2": {
+      "id": 206,
+      "name": "Makeshift Armor II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "6MaxLevel10": {
+      "id": 44,
+      "name": "Level Up!",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "6OneTwoFive": {
+      "id": 42,
+      "name": "One, Two, Five!",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "6PandorasItems": {
+      "id": 37,
+      "name": "Pandora's Items",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "6PortableForge": {
+      "id": 25,
+      "name": "Portable Forge",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "6Recombobulator": {
+      "id": 26,
+      "name": "Recombobulator",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "6SalvageBin": {
+      "id": 113,
+      "name": "Salvage Bin",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "6SecondWind1": {
+      "id": 134,
+      "name": "Second Wind",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "6SecondWind2": {
+      "id": 174,
+      "name": "Second Wind II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "6SunfireBoard": {
+      "id": 270,
+      "name": "Sunfire Board",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "6TheGoldenEgg": {
+      "id": 138,
+      "name": "The Golden Egg",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "6ThriftShop": {
+      "id": 256,
+      "name": "Wise Spending",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "6TinyTitans": {
+      "id": 29,
+      "name": "Tiny Titans",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "6TradeSector": {
+      "id": 213,
+      "name": "Trade Sector",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "6TradeSector2": {
+      "id": 43,
+      "name": "Commerce Core",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "7AFK": {
+      "id": 255,
+      "name": "AFK",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "7BandOfThieves1": {
+      "id": 60,
+      "name": "Band of Thieves",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "7BestFriends1": {
+      "id": 135,
+      "name": "Best Friends I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "7BestFriends2": {
+      "id": 136,
+      "name": "Best Friends II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "7BirthdayPresents": {
+      "id": 224,
+      "name": "Birthday Present",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "7ClutteredMind": {
+      "id": 51,
+      "name": "Cluttered Mind",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "7CursedCrown": {
+      "id": 196,
+      "name": "Cursed Crown",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "7LategameSpecialist": {
+      "id": 47,
+      "name": "Late Game Specialist",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "7LivingForge": {
+      "id": 27,
+      "name": "Living Forge",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "7LuckyGloves": {
+      "id": 54,
+      "name": "Lucky Gloves",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "7LuckyGlovesPlus": {
+      "id": 55,
+      "name": "Lucky Gloves+",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "7PandorasBench": {
+      "id": 84,
+      "name": "Pandora's Bench",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ],
+      "disabled": true
+    },
+    "7UrfsGrabBag2": {
+      "id": 269,
+      "name": "Urf's Grab Bag",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "8SalvageBinPlus": {
+      "id": 114,
+      "name": "Salvage Bin+",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9ArmyBuilding": {
+      "id": 40,
+      "name": "Team Building",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "9BardPlaybook1": {
+      "id": 48,
+      "name": "Caretaker's Ally",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "9BigGrabBag": {
+      "id": 58,
+      "name": "Big Grab Bag",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9BuildingACollectionPlusPlus": {
+      "id": 36,
+      "name": "Buried Treasures",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "9Commander_Ascension": {
+      "id": 120,
+      "name": "Ascension",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9Commander_PartialAscension": {
+      "id": 262,
+      "name": "Partial Ascension",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9Commander_RollingForDays": {
+      "id": 112,
+      "name": "Rolling For Days I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9Commander_TeamingUp1": {
+      "id": 57,
+      "name": "Teaming Up",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9GreaterJeweledLotus": {
+      "id": 177,
+      "name": "Jeweled Lotus II",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9HealingOrbsI": {
+      "id": 121,
+      "name": "Healing Orbs I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9HealingOrbsII": {
+      "id": 122,
+      "name": "Healing Orbs II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9HedgeFund": {
+      "id": 85,
+      "name": "Hedge Fund",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "9HedgeFundPlus": {
+      "id": 219,
+      "name": "Hedge Fund+",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "9IronAssets": {
+      "id": 32,
+      "name": "Iron Assets",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "9JeweledLotus": {
+      "id": 176,
+      "name": "Jeweled Lotus I",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9KnowYourEnemy": {
+      "id": 124,
+      "name": "Know Your Enemy",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ],
+      "disabled": true
+    },
+    "9LearningFromExperience2": {
+      "id": 45,
+      "name": "Patient Study",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "9Legend_HighEndSector": {
+      "id": 214,
+      "name": "Shopping Spree",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "9LongTimeCrafting": {
+      "id": 30,
+      "name": "Latent Forge",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "9MissedConnections": {
+      "id": 34,
+      "name": "Missed Connections",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9OneTwosThree": {
+      "id": 33,
+      "name": "One Two Three",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "9PandorasItems2": {
+      "id": 39,
+      "name": "Pandora's Items II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "9PandorasRadiantBox": {
+      "id": 38,
+      "name": "Pandora's Items III",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "9RiskyMoves": {
+      "id": 41,
+      "name": "Risky Moves",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "9RollTheDice": {
+      "id": 35,
+      "name": "Radiant Rascal",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9SilverSpoon": {
+      "id": 31,
+      "name": "Silver Spoon",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "9TiniestTitanPlus": {
+      "id": 56,
+      "name": "Tiniest Titan",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "9TonsOfStats": {
+      "id": 125,
+      "name": "Tons of Stats!",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "9YouHaveMyBow": {
+      "id": 271,
+      "name": "You Have My Bow",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "AdvancedLoan": {
+      "id": 239,
+      "name": "Advanced Loan",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "AdvancedLoanPlus": {
+      "id": 240,
+      "name": "Advanced Loan+",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "AnExaltedAdventure": {
+      "id": 253,
+      "name": "An Exalted Adventure",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "ArcaneViktory": {
+      "id": 156,
+      "name": "Arcane Viktor-y",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "AuraFarming": {
+      "id": 171,
+      "name": "Aura Farming",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "AwakenedSoul": {
+      "id": 195,
+      "name": "Soul Awakening",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "BacklineBlueprint": {
+      "id": 234,
+      "name": "Backline Blueprint",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "BeltOverflow": {
+      "id": 98,
+      "name": "Belt Overflow",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "BirthdayReunion": {
+      "id": 150,
+      "name": "Birthday Reunion",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "BodyguardTraining": {
+      "id": 152,
+      "name": "Bodyguard Training",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "BoosterPack": {
+      "id": 237,
+      "name": "Booster Pack",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "BoosterPackPlus": {
+      "id": 242,
+      "name": "Booster Pack+",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "BoxingLessons": {
+      "id": 130,
+      "name": "Boxing Lessons",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "BranchingOut": {
+      "id": 61,
+      "name": "Branching Out",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "BranchingOutPlus": {
+      "id": 178,
+      "name": "Branching Out+",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "BronzeForLife2": {
+      "id": 94,
+      "name": "Bronze For Life II",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "BronzeForLifeI": {
+      "id": 93,
+      "name": "Bronze For Life I",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "ChargeTransfer1": {
+      "id": 232,
+      "name": "Charge Transfer I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "ChargeTransfer2": {
+      "id": 233,
+      "name": "Charge Transfer II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "ClimbTheLadder1": {
+      "id": 264,
+      "name": "Climb The Ladder I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "ClimbTheLadder2": {
+      "id": 265,
+      "name": "Climb The Ladder II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "ClockworkAccelerator": {
+      "id": 250,
+      "name": "Clockwork Accelerator",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "CognitiveOverload": {
+      "id": 246,
+      "name": "Cognitive Overload",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "CognitiveTax": {
+      "id": 221,
+      "name": "Cognitive Tax",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "CognitiveTaxPlus": {
+      "id": 247,
+      "name": "Cognitive Tax+",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "ComebackStory": {
+      "id": 209,
+      "name": "Comeback Story",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "ComponentQuestBelt": {
+      "id": 154,
+      "name": "Extra Buckles",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ],
+      "disabled": true
+    },
+    "ComponentQuestBow": {
+      "id": 157,
+      "name": "Backup Bows",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "ComponentQuestGlove": {
+      "id": 166,
+      "name": "Critical Success",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "ComponentQuestRod": {
+      "id": 161,
+      "name": "Continuous Conjuration",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "ComponentQuestSword": {
+      "id": 159,
+      "name": "Carve a Path",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "ComponentQuestTear": {
+      "id": 163,
+      "name": "Flowing Tears",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "ConstructACompanion": {
+      "id": 129,
+      "name": "Construct a Companion",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "Corrosion": {
+      "id": 107,
+      "name": "Corrosion",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "CosmicRestart": {
+      "id": 258,
+      "name": "Cosmic Restart",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "CraftedCrafting": {
+      "id": 89,
+      "name": "Crafted Crafting",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "CryMeARiver": {
+      "id": 179,
+      "name": "Cry Me A River",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "DeadlierCaps": {
+      "id": 180,
+      "name": "Deadlier Caps",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "Dhampyr1": {
+      "id": 251,
+      "name": "Vampiric Vitality I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "Dhampyr2": {
+      "id": 252,
+      "name": "Vampiric Vitality II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ],
+      "disabled": true
+    },
+    "Dummify": {
+      "id": 86,
+      "name": "Dummify",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "DuoQueue": {
+      "id": 82,
+      "name": "Duo Queue",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "EarlyLearning": {
+      "id": 145,
+      "name": "Early Learnings",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "EpicRolldown": {
+      "id": 153,
+      "name": "Epic Rolldown",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "ExclusiveCustomization": {
+      "id": 123,
+      "name": "Exclusive Customization",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "ExclusiveCustomization2": {
+      "id": 261,
+      "name": "Exclusive Customization II",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "ExpectedUnexpectedness": {
+      "id": 106,
+      "name": "Expected Unexpectedness",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "Expedition": {
+      "id": 229,
+      "name": "Expedition",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "ExplosiveGrowth": {
+      "id": 126,
+      "name": "Explosive Growth",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "ExplosiveGrowthPlus": {
+      "id": 127,
+      "name": "Explosive Growth+",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "FeedTheFlames": {
+      "id": 131,
+      "name": "Feed the Flames",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "FeelingLucky": {
+      "id": 227,
+      "name": "Feeling Lucky",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "FindYourCenter": {
+      "id": 83,
+      "name": "Find Your Center",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "FiresalePlus": {
+      "id": 108,
+      "name": "Firesale",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        false
+      ]
+    },
+    "Flexible": {
+      "id": 72,
+      "name": "Flexible",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "ForgeAFriend": {
+      "id": 222,
+      "name": "Forge a Friend",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "ForgedInStrength": {
+      "id": 144,
+      "name": "Forged in Strength",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "ForgeRod": {
+      "id": 198,
+      "name": "Staffsmith",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "ForgeSword": {
+      "id": 199,
+      "name": "Swordsmith",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "ForwardThinking": {
+      "id": 140,
+      "name": "Forward Thinking",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "FrontlineFoundation": {
+      "id": 235,
+      "name": "Frontline Foundation",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "FuriousBlows": {
+      "id": 155,
+      "name": "Kahunahuna",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "GainGold": {
+      "id": 215,
+      "name": "Gain 21 Gold",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "GiantAndMighty": {
+      "id": 141,
+      "name": "Giant and Mighty",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "GildedSteel": {
+      "id": 241,
+      "name": "Gilded Steel",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "GlassCannonI": {
+      "id": 109,
+      "name": "Glass Cannon I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "GlassCannonII": {
+      "id": 110,
+      "name": "Glass Cannon II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "GoldenGamble": {
+      "id": 257,
+      "name": "Golden Gamble",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "GoldenGamblePlus": {
+      "id": 259,
+      "name": "Golden Gamble+",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "GoldenGamblePlusPlus": {
+      "id": 260,
+      "name": "Golden Gamble++",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "GroupHug1": {
+      "id": 230,
+      "name": "Group Hug I",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "GroupHug2": {
+      "id": 231,
+      "name": "Group Hug II",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "GuardbreakerSpirit": {
+      "id": 104,
+      "name": "Mace's Will",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "HardCommit": {
+      "id": 78,
+      "name": "Hard Commit",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "HeavyIsTheCrown": {
+      "id": 175,
+      "name": "Heavy Is the Crown",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "HeroicGrabBagPlus": {
+      "id": 115,
+      "name": "Heroic Grab Bag+",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "HeroicGrabBagPlusPlus": {
+      "id": 116,
+      "name": "Heroic Grab Bag++",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "HighVoltage": {
+      "id": 74,
+      "name": "High Voltage",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "HoldTheLine": {
+      "id": 181,
+      "name": "Hold the Line",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "HomeCooking": {
+      "id": 173,
+      "name": "Care Package",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "InfinityProtection": {
+      "id": 158,
+      "name": "Infinity Protection",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "InvestedPlus": {
+      "id": 79,
+      "name": "Invested+",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "InvestedPlusPlus": {
+      "id": 80,
+      "name": "Invested++",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "ItemGargoyleStoneplate": {
+      "id": 160,
+      "name": "Solo Plate",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "ItemSpiritVisage": {
+      "id": 164,
+      "name": "Spirit of Redemption",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "JustHit": {
+      "id": 193,
+      "name": "Just Hit",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        false
+      ],
+      "disabled": true
+    },
+    "JustSlayer": {
+      "id": 266,
+      "name": "Indiscriminate Killer",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "KickStart": {
+      "id": 223,
+      "name": "Kick Start",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "LateGameScaling": {
+      "id": 146,
+      "name": "Late Game Scaling",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "LegionOfThrees": {
+      "id": 143,
+      "name": "Legion of Threes",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "Lineup": {
+      "id": 97,
+      "name": "Lineup",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "LuxurySubscription": {
+      "id": 208,
+      "name": "Luxury Subscription",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "MagicRoll": {
+      "id": 103,
+      "name": "A Magic Roll",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "MagicRollMinus": {
+      "id": 169,
+      "name": "Slightly Magic Roll",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "MarksMan": {
+      "id": 132,
+      "name": "Focused Fire",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "MaxBuild": {
+      "id": 151,
+      "name": "Max Build",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ],
+      "disabled": true
+    },
+    "MayTheFoursBeWithYou": {
+      "id": 7,
+      "name": "May the Fours Be With You",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "MinMaxer": {
+      "id": 204,
+      "name": "Min-Max",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "MirroredMonetization": {
+      "id": 90,
+      "name": "Malicious Monetization",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "Misfits": {
+      "id": 248,
+      "name": "Misfits",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "MoneyHungry": {
+      "id": 225,
+      "name": "Money Hungry",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "MoneyMonsoon": {
+      "id": 207,
+      "name": "Money Monsoon",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "MuseumHeist": {
+      "id": 192,
+      "name": "Component Heist",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        true
+      ]
+    },
+    "NineLives": {
+      "id": 182,
+      "name": "Nine Lives",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ],
+      "disabled": true
+    },
+    "NoScoutNoPivot": {
+      "id": 183,
+      "name": "NO SCOUT NO PIVOT",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "OneBuffTwoBuff": {
+      "id": 92,
+      "name": "One Buff, Two Buff",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "PatienceIsAVirtue": {
+      "id": 76,
+      "name": "Patience is a Virtue",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "Pilfer": {
+      "id": 212,
+      "name": "Pilfer",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "PlotArmor": {
+      "id": 172,
+      "name": "Plot Armor",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "PowerUp": {
+      "id": 238,
+      "name": "Augmented Power",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "Replication": {
+      "id": 81,
+      "name": "Replication",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "RestartMission": {
+      "id": 73,
+      "name": "Restart Mission",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "Retribution": {
+      "id": 194,
+      "name": "Retribution",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "SavingsAccount": {
+      "id": 168,
+      "name": "Savings Account",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "SeraphimsStaff": {
+      "id": 216,
+      "name": "Seraphim's Staff",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "ShimmerscaleEssence": {
+      "id": 77,
+      "name": "Shimmerscale Essence",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "SideEffects": {
+      "id": 249,
+      "name": "Side Effects",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "SizeMatters": {
+      "id": 226,
+      "name": "Size Matters",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "SliceOfLife": {
+      "id": 139,
+      "name": "Slice of Life",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "SmallGrabBag": {
+      "id": 197,
+      "name": "Small Grab Bag",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "SoloLeveling": {
+      "id": 170,
+      "name": "Solo Leveling",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "SpeedyDoubleKill": {
+      "id": 148,
+      "name": "Speedy Double Kill",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "SpreadingRoots": {
+      "id": 165,
+      "name": "Spreading Roots",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "SpreadingRootsPlus": {
+      "id": 218,
+      "name": "Spreading Roots+",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "SubscriptionService": {
+      "id": 137,
+      "name": "Subscription Service",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "Survivor": {
+      "id": 87,
+      "name": "Survivor",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "SweetTreats": {
+      "id": 147,
+      "name": "Sweet Treats",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "SwordOverflow": {
+      "id": 100,
+      "name": "Sword Overflow",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "TacticiansKitchen": {
+      "id": 88,
+      "name": "Tactician's Kitchen",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "TheBaronsLair": {
+      "id": 236,
+      "name": "Baron's Lair",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "TheDarkinBlade": {
+      "id": 128,
+      "name": "Blood Offering",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "TheGoldenDragon": {
+      "id": 149,
+      "name": "The Golden Dragon",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        false
+      ]
+    },
+    "TheTower": {
+      "id": 228,
+      "name": "The Tower",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "TheVidalion": {
+      "id": 186,
+      "name": "Woven Magic",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "TragicalBlade": {
+      "id": 184,
+      "name": "Deadlier Blades",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "TraitTree": {
+      "id": 162,
+      "name": "The Trait Tree",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "TraitTreePlus": {
+      "id": 217,
+      "name": "The Trait Tree+",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "TreasureHunt": {
+      "id": 185,
+      "name": "Treasure Hunt",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "Trifecta1": {
+      "id": 95,
+      "name": "Trifecta I",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "Trifecta2": {
+      "id": 96,
+      "name": "Trifecta II",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "TwinGuardians": {
+      "id": 200,
+      "name": "Twin Guardians",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "TwoMuchValue": {
+      "id": 105,
+      "name": "Two Much Value",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        false,
+        false
+      ]
+    },
+    "TwoTanky": {
+      "id": 268,
+      "name": "Two Tanky",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "Unforgotten": {
+      "id": 190,
+      "name": "Warlord's Honor",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        false
+      ]
+    },
+    "UpwardMobility": {
+      "id": 75,
+      "name": "Upward Mobility",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        true,
+        true
+      ]
+    },
+    "UrfsGambit": {
+      "id": 201,
+      "name": "Urf's Gambit",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "WandOverflow": {
+      "id": 99,
+      "name": "Wand Overflow",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        true
+      ]
+    },
+    "WarmogsBuckle": {
+      "id": 267,
+      "name": "Heart of Steel",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "Warpath": {
+      "id": 111,
+      "name": "Warpath",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "Waverider": {
+      "id": 133,
+      "name": "On a Roll",
+      "rank": 1,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "WeStickTogether": {
+      "id": 167,
+      "name": "We Stick Together",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "WinOut": {
+      "id": 191,
+      "name": "Win Out",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        false,
+        true,
+        false
+      ]
+    },
+    "WorthTheWaitGold": {
+      "id": 63,
+      "name": "Worth the Wait",
+      "rank": 2,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    },
+    "WorthTheWaitPrismatic": {
+      "id": 62,
+      "name": "Worth the Wait II",
+      "rank": 3,
+      "tags": [],
+      "picks": [
+        true,
+        false,
+        false
+      ]
+    }
+  },
+  "itemization": {
+    "{109d6820}": [
+      "SpearOfShojin",
+      "InfinityEdge",
+      "Deathblade",
+      "BlueBuff",
+      "MadredsBloodrazor",
+      "RapidFireCannon",
+      "PowerGauntlet",
+      "LastWhisper"
+    ],
+    "{1194180f}": [
+      "Bloodthirster",
+      "TitansResolve",
+      "UnstableConcoction",
+      "GuardianAngel",
+      "Quicksilver",
+      "MadredsBloodrazor",
+      "PowerGauntlet",
+      "HextechGunblade"
+    ],
+    "{14a36a9c}": [
+      "InfinityEdge",
+      "UnstableConcoction",
+      "MadredsBloodrazor",
+      "GuardianAngel",
+      "SteraksGage",
+      "LastWhisper",
+      "PowerGauntlet",
+      "Bloodthirster"
+    ],
+    "{1e655906}": [
+      "RabadonsDeathcap",
+      "ArchangelsStaff",
+      "JeweledGauntlet",
+      "MadredsBloodrazor",
+      "BlueBuff",
+      "HextechGunblade",
+      "PowerGauntlet",
+      "GuinsoosRageblade"
+    ],
+    "{2ae695df}": [
+      "BlueBuff",
+      "SpearOfShojin",
+      "InfinityEdge",
+      "Deathblade",
+      "UnstableConcoction",
+      "RapidFireCannon",
+      "MadredsBloodrazor",
+      "PowerGauntlet"
+    ],
+    "{2ccf900f}": [
+      "WarmogsArmor",
+      "GargoyleStoneplate",
+      "Redemption",
+      "IonicSpark",
+      "DragonsClaw",
+      "BrambleVest",
+      "RedBuff",
+      "FrozenHeart"
+    ],
+    "{32cdc033}": [
+      "BlueBuff",
+      "AdaptiveHelm",
+      "JeweledGauntlet",
+      "HextechGunblade",
+      "Morellonomicon",
+      "RabadonsDeathcap",
+      "StatikkShiv",
+      "Leviathan"
+    ],
+    "{34ed6daa}": [
+      "GuinsoosRageblade",
+      "RunaansHurricane",
+      "Deathblade",
+      "LastWhisper",
+      "MadredsBloodrazor",
+      "InfinityEdge",
+      "PowerGauntlet",
+      "RapidFireCannon"
+    ],
+    "{402a9680}": [
+      "UnstableConcoction",
+      "JeweledGauntlet",
+      "IonicSpark",
+      "GuardianAngel",
+      "HextechGunblade",
+      "MadredsBloodrazor",
+      "RabadonsDeathcap",
+      "Bloodthirster"
+    ],
+    "{4334cab4}": [],
+    "{44de5928}": [
+      "UnstableConcoction",
+      "JeweledGauntlet",
+      "IonicSpark",
+      "GuardianAngel",
+      "MadredsBloodrazor",
+      "TitansResolve",
+      "RabadonsDeathcap",
+      "Bloodthirster"
+    ],
+    "{47bfb556}": [
+      "WarmogsArmor",
+      "GargoyleStoneplate",
+      "Redemption",
+      "DragonsClaw",
+      "BrambleVest",
+      "RedBuff",
+      "FrozenHeart",
+      "TitansResolve"
+    ],
+    "{53d104ac}": [
+      "Bloodthirster",
+      "SteraksGage",
+      "TitansResolve",
+      "Quicksilver",
+      "MadredsBloodrazor",
+      "UnstableConcoction",
+      "GuardianAngel",
+      "LastWhisper"
+    ],
+    "{55e1736d}": [
+      "BlueBuff",
+      "SpearOfShojin",
+      "InfinityEdge",
+      "Deathblade",
+      "UnstableConcoction",
+      "RapidFireCannon",
+      "MadredsBloodrazor",
+      "PowerGauntlet"
+    ],
+    "{58700b1e}": [
+      "GuinsoosRageblade",
+      "JeweledGauntlet",
+      "ArchangelsStaff",
+      "RabadonsDeathcap",
+      "MadredsBloodrazor",
+      "StatikkShiv",
+      "PowerGauntlet",
+      "HextechGunblade"
+    ],
+    "{5ca028b5}": [
+      "ArchangelsStaff",
+      "SpearOfShojin",
+      "RabadonsDeathcap",
+      "AdaptiveHelm",
+      "Leviathan",
+      "BlueBuff",
+      "GuinsoosRageblade",
+      "Quicksilver"
+    ],
+    "{63e60816}": [
+      "BlueBuff",
+      "SpearOfShojin",
+      "AdaptiveHelm",
+      "HextechGunblade",
+      "Morellonomicon",
+      "MadredsBloodrazor",
+      "PowerGauntlet",
+      "JeweledGauntlet"
+    ],
+    "{7009cb66}": [
+      "InfinityEdge",
+      "LastWhisper",
+      "PowerGauntlet",
+      "MadredsBloodrazor",
+      "GuinsoosRageblade",
+      "Deathblade",
+      "Quicksilver",
+      "UnstableConcoction"
+    ],
+    "{70ebff95}": [
+      "JeweledGauntlet",
+      "RabadonsDeathcap",
+      "InfinityEdge",
+      "Deathblade",
+      "MadredsBloodrazor",
+      "UnstableConcoction",
+      "Morellonomicon",
+      "ArchangelsStaff"
+    ],
+    "{8377a680}": [
+      "SpearOfShojin",
+      "ArchangelsStaff",
+      "RabadonsDeathcap",
+      "JeweledGauntlet",
+      "MadredsBloodrazor",
+      "Leviathan",
+      "PowerGauntlet",
+      "AdaptiveHelm"
+    ],
+    "{9eb7b8a6}": [
+      "GuinsoosRageblade",
+      "Leviathan",
+      "StatikkShiv",
+      "ArchangelsStaff",
+      "RabadonsDeathcap",
+      "HextechGunblade",
+      "JeweledGauntlet",
+      "MadredsBloodrazor"
+    ],
+    "{a35256da}": [
+      "InfinityEdge",
+      "LastWhisper",
+      "MadredsBloodrazor",
+      "Deathblade",
+      "RunaansHurricane",
+      "PowerGauntlet",
+      "RapidFireCannon",
+      "GuinsoosRageblade"
+    ],
+    "{b8f51cf1}": [
+      "GuinsoosRageblade",
+      "JeweledGauntlet",
+      "ArchangelsStaff",
+      "RabadonsDeathcap",
+      "MadredsBloodrazor",
+      "SpearOfShojin",
+      "PowerGauntlet",
+      "AdaptiveHelm"
+    ],
+    "{c3dd73e5}": [
+      "Bloodthirster",
+      "TitansResolve",
+      "UnstableConcoction",
+      "GuardianAngel",
+      "Quicksilver",
+      "MadredsBloodrazor",
+      "PowerGauntlet",
+      "InfinityEdge"
+    ],
+    "{c537957d}": [
+      "GuinsoosRageblade",
+      "MadredsBloodrazor",
+      "RapidFireCannon",
+      "PowerGauntlet",
+      "HextechGunblade",
+      "UnstableConcoction",
+      "InfinityEdge",
+      "SpearOfShojin"
+    ],
+    "{cfdf75ab}": [
+      "Bloodthirster",
+      "TitansResolve",
+      "UnstableConcoction",
+      "GuardianAngel",
+      "Quicksilver",
+      "MadredsBloodrazor",
+      "PowerGauntlet",
+      "HextechGunblade"
+    ],
+    "{d5823aeb}": [
+      "WarmogsArmor",
+      "GargoyleStoneplate",
+      "Redemption",
+      "SpectralGauntlet",
+      "DragonsClaw",
+      "BrambleVest",
+      "RedBuff",
+      "FrozenHeart"
+    ]
+  }
+}

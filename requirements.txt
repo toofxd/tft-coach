@@ -1,0 +1,11 @@
+requests
+python-dotenv
+torch
+scikit-learn
+pandas
+numpy
+matplotlib
+seaborn
+jupyter
+ipykernel
+tqdm

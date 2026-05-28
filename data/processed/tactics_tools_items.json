@@ -1,0 +1,1105 @@
+{
+  "lastUpdated": 1779383187,
+  "totalEntries": 3321915,
+  "scrapedAt": 1779387402791,
+  "items": [
+    {
+      "itemId": "ForceOfNature",
+      "count": 19714,
+      "playRate": 0.59,
+      "avgPlacement": 3.11,
+      "top4": 75.05,
+      "winRate": 31.28,
+      "topUsers": []
+    },
+    {
+      "itemId": "BrambleVest",
+      "count": 540338,
+      "playRate": 16.27,
+      "avgPlacement": 3.95,
+      "top4": 60.91,
+      "winRate": 15.24,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Ornn",
+          "delta": -0.1459
+        },
+        {
+          "unitId": "TFT17_Rammus",
+          "delta": -0.1267
+        },
+        {
+          "unitId": "TFT17_Leona",
+          "delta": -0.1224
+        },
+        {
+          "unitId": "TFT17_Jax",
+          "delta": -0.0924
+        },
+        {
+          "unitId": "TFT17_Chogath",
+          "delta": -0.0872
+        }
+      ]
+    },
+    {
+      "itemId": "UnstableConcoction",
+      "count": 486197,
+      "playRate": 14.64,
+      "avgPlacement": 3.95,
+      "top4": 60.82,
+      "winRate": 15.78,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Gragas",
+          "delta": -0.2367
+        },
+        {
+          "unitId": "TFT17_Gwen",
+          "delta": -0.1583
+        },
+        {
+          "unitId": "TFT17_Pyke",
+          "delta": -0.1564
+        },
+        {
+          "unitId": "TFT17_Briar",
+          "delta": -0.1442
+        },
+        {
+          "unitId": "TFT17_Talon",
+          "delta": -0.1141
+        }
+      ]
+    },
+    {
+      "itemId": "NightHarvester",
+      "count": 458813,
+      "playRate": 13.81,
+      "avgPlacement": 3.95,
+      "top4": 60.67,
+      "winRate": 15.54,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Ornn",
+          "delta": -0.1361
+        },
+        {
+          "unitId": "TFT17_Rammus",
+          "delta": -0.1066
+        },
+        {
+          "unitId": "TFT17_Pantheon",
+          "delta": -0.0994
+        },
+        {
+          "unitId": "TFT17_Leona",
+          "delta": -0.0922
+        },
+        {
+          "unitId": "TFT17_Jax",
+          "delta": -0.0866
+        }
+      ]
+    },
+    {
+      "itemId": "SteraksGage",
+      "count": 666668,
+      "playRate": 20.07,
+      "avgPlacement": 4.06,
+      "top4": 59.05,
+      "winRate": 14.77,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Briar",
+          "delta": -0.3464
+        },
+        {
+          "unitId": "TFT17_Pyke",
+          "delta": -0.199
+        },
+        {
+          "unitId": "TFT17_Leona",
+          "delta": -0.1616
+        },
+        {
+          "unitId": "TFT17_Riven",
+          "delta": -0.1282
+        },
+        {
+          "unitId": "TFT17_Fiora",
+          "delta": -0.1226
+        }
+      ]
+    },
+    {
+      "itemId": "Crownguard",
+      "count": 897411,
+      "playRate": 27.01,
+      "avgPlacement": 4.11,
+      "top4": 57.88,
+      "winRate": 14.33,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Rammus",
+          "delta": -0.157
+        },
+        {
+          "unitId": "TFT17_Jax",
+          "delta": -0.1445
+        },
+        {
+          "unitId": "TFT17_Ornn",
+          "delta": -0.1326
+        },
+        {
+          "unitId": "TFT17_Chogath",
+          "delta": -0.1024
+        },
+        {
+          "unitId": "TFT17_Nunu",
+          "delta": -0.0694
+        }
+      ]
+    },
+    {
+      "itemId": "HextechGunblade",
+      "count": 397198,
+      "playRate": 11.96,
+      "avgPlacement": 4.08,
+      "top4": 57.71,
+      "winRate": 16.58,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Teemo",
+          "delta": -0.2209
+        },
+        {
+          "unitId": "TFT17_Vex",
+          "delta": -0.156
+        },
+        {
+          "unitId": "TFT17_Fiora",
+          "delta": -0.0772
+        },
+        {
+          "unitId": "TFT17_Leblanc",
+          "delta": -0.0743
+        },
+        {
+          "unitId": "TFT17_Milio",
+          "delta": -0.0735
+        }
+      ]
+    },
+    {
+      "itemId": "ArchangelsStaff",
+      "count": 314361,
+      "playRate": 9.46,
+      "avgPlacement": 4.09,
+      "top4": 57.65,
+      "winRate": 15.33,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Zoe",
+          "delta": -0.1571
+        },
+        {
+          "unitId": "TFT17_Aurora",
+          "delta": -0.1551
+        },
+        {
+          "unitId": "TFT17_Viktor",
+          "delta": -0.1309
+        },
+        {
+          "unitId": "TFT17_AurelionSol",
+          "delta": -0.107
+        },
+        {
+          "unitId": "TFT17_Leblanc",
+          "delta": -0.0819
+        }
+      ]
+    },
+    {
+      "itemId": "AdaptiveHelm",
+      "count": 882432,
+      "playRate": 26.56,
+      "avgPlacement": 4.1,
+      "top4": 57.65,
+      "winRate": 15.46,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Zed",
+          "delta": -0.3554
+        },
+        {
+          "unitId": "TFT17_Rammus",
+          "delta": -0.1126
+        },
+        {
+          "unitId": "TFT17_Nunu",
+          "delta": -0.0857
+        },
+        {
+          "unitId": "TFT17_Sona",
+          "delta": -0.0825
+        },
+        {
+          "unitId": "TFT17_Blitzcrank",
+          "delta": -0.0553
+        }
+      ]
+    },
+    {
+      "itemId": "GuardianAngel",
+      "count": 673428,
+      "playRate": 20.27,
+      "avgPlacement": 4.12,
+      "top4": 57.4,
+      "winRate": 15.25,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Zed",
+          "delta": -0.3643
+        },
+        {
+          "unitId": "TFT17_Pyke",
+          "delta": -0.2155
+        },
+        {
+          "unitId": "TFT17_Diana",
+          "delta": -0.1924
+        },
+        {
+          "unitId": "TFT17_MasterYi",
+          "delta": -0.1915
+        },
+        {
+          "unitId": "TFT17_Fiora",
+          "delta": -0.1329
+        }
+      ]
+    },
+    {
+      "itemId": "RapidFireCannon",
+      "count": 573113,
+      "playRate": 17.25,
+      "avgPlacement": 4.1,
+      "top4": 57.37,
+      "winRate": 16.08,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Vex",
+          "delta": -0.1672
+        },
+        {
+          "unitId": "TFT17_Kindred",
+          "delta": -0.1659
+        },
+        {
+          "unitId": "TFT17_Xayah",
+          "delta": -0.1625
+        },
+        {
+          "unitId": "TFT17_Jhin",
+          "delta": -0.1035
+        },
+        {
+          "unitId": "TFT17_Milio",
+          "delta": -0.0968
+        }
+      ]
+    },
+    {
+      "itemId": "IonicSpark",
+      "count": 360240,
+      "playRate": 10.84,
+      "avgPlacement": 4.11,
+      "top4": 56.95,
+      "winRate": 15.87,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Blitzcrank",
+          "delta": -0.0998
+        },
+        {
+          "unitId": "TFT17_TahmKench",
+          "delta": -0.0958
+        },
+        {
+          "unitId": "TFT17_Illaoi",
+          "delta": -0.0891
+        },
+        {
+          "unitId": "TFT17_Leona",
+          "delta": -0.0844
+        },
+        {
+          "unitId": "TFT17_Pantheon",
+          "delta": -0.0761
+        }
+      ]
+    },
+    {
+      "itemId": "ThiefsGloves",
+      "count": 882881,
+      "playRate": 26.58,
+      "avgPlacement": 4.12,
+      "top4": 56.89,
+      "winRate": 16.19,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Riven",
+          "delta": -0.1643
+        },
+        {
+          "unitId": "TFT17_Fiora",
+          "delta": -0.1576
+        },
+        {
+          "unitId": "TFT17_Blitzcrank",
+          "delta": -0.1393
+        },
+        {
+          "unitId": "TFT17_Fizz",
+          "delta": -0.1348
+        },
+        {
+          "unitId": "TFT17_Shen",
+          "delta": -0.112
+        }
+      ]
+    },
+    {
+      "itemId": "Deathblade",
+      "count": 857426,
+      "playRate": 25.81,
+      "avgPlacement": 4.21,
+      "top4": 56.32,
+      "winRate": 12.62,
+      "topUsers": [
+        {
+          "unitId": "TFT17_MissFortune",
+          "delta": -0.2774
+        },
+        {
+          "unitId": "TFT17_Samira",
+          "delta": -0.2541
+        },
+        {
+          "unitId": "TFT17_Corki",
+          "delta": -0.2151
+        },
+        {
+          "unitId": "TFT17_Ezreal",
+          "delta": -0.1454
+        },
+        {
+          "unitId": "TFT17_Graves",
+          "delta": -0.132
+        }
+      ]
+    },
+    {
+      "itemId": "DragonsClaw",
+      "count": 590892,
+      "playRate": 17.79,
+      "avgPlacement": 4.18,
+      "top4": 56.26,
+      "winRate": 13.65,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Ornn",
+          "delta": -0.157
+        },
+        {
+          "unitId": "TFT17_Rammus",
+          "delta": -0.1093
+        },
+        {
+          "unitId": "TFT17_Jax",
+          "delta": -0.084
+        },
+        {
+          "unitId": "TFT17_Pantheon",
+          "delta": -0.082
+        },
+        {
+          "unitId": "TFT17_Leona",
+          "delta": -0.0695
+        }
+      ]
+    },
+    {
+      "itemId": "Bloodthirster",
+      "count": 713222,
+      "playRate": 21.47,
+      "avgPlacement": 4.2,
+      "top4": 56.16,
+      "winRate": 14.03,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Briar",
+          "delta": -0.3278
+        },
+        {
+          "unitId": "TFT17_Diana",
+          "delta": -0.2424
+        },
+        {
+          "unitId": "TFT17_Leona",
+          "delta": -0.1745
+        },
+        {
+          "unitId": "TFT17_Pyke",
+          "delta": -0.1614
+        },
+        {
+          "unitId": "TFT17_Jax",
+          "delta": -0.1268
+        }
+      ]
+    },
+    {
+      "itemId": "BlueBuff",
+      "count": 472505,
+      "playRate": 14.22,
+      "avgPlacement": 4.18,
+      "top4": 56.07,
+      "winRate": 14.27,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Aurora",
+          "delta": -0.2025
+        },
+        {
+          "unitId": "TFT17_Corki",
+          "delta": -0.1451
+        },
+        {
+          "unitId": "TFT17_Lissandra",
+          "delta": -0.127
+        },
+        {
+          "unitId": "TFT17_Kaisa",
+          "delta": -0.1258
+        },
+        {
+          "unitId": "TFT17_Sona",
+          "delta": -0.0664
+        }
+      ]
+    },
+    {
+      "itemId": "RabadonsDeathcap",
+      "count": 725951,
+      "playRate": 21.85,
+      "avgPlacement": 4.17,
+      "top4": 56.05,
+      "winRate": 15.49,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Aurora",
+          "delta": -0.1774
+        },
+        {
+          "unitId": "TFT17_AurelionSol",
+          "delta": -0.1745
+        },
+        {
+          "unitId": "TFT17_Viktor",
+          "delta": -0.1564
+        },
+        {
+          "unitId": "TFT17_Vex",
+          "delta": -0.147
+        },
+        {
+          "unitId": "TFT17_Leblanc",
+          "delta": -0.1289
+        }
+      ]
+    },
+    {
+      "itemId": "WarmogsArmor",
+      "count": 1138957,
+      "playRate": 34.29,
+      "avgPlacement": 4.18,
+      "top4": 56.01,
+      "winRate": 14.78,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Ornn",
+          "delta": -0.1705
+        },
+        {
+          "unitId": "TFT17_Leona",
+          "delta": -0.1305
+        },
+        {
+          "unitId": "TFT17_Chogath",
+          "delta": -0.1105
+        },
+        {
+          "unitId": "TFT17_Rammus",
+          "delta": -0.1032
+        },
+        {
+          "unitId": "TFT17_Nunu",
+          "delta": -0.0844
+        }
+      ]
+    },
+    {
+      "itemId": "PowerGauntlet",
+      "count": 963503,
+      "playRate": 29,
+      "avgPlacement": 4.2,
+      "top4": 55.96,
+      "winRate": 13.75,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Corki",
+          "delta": -0.1673
+        },
+        {
+          "unitId": "TFT17_Vex",
+          "delta": -0.1361
+        },
+        {
+          "unitId": "TFT17_AurelionSol",
+          "delta": -0.1347
+        },
+        {
+          "unitId": "TFT17_Graves",
+          "delta": -0.1272
+        },
+        {
+          "unitId": "TFT17_Kaisa",
+          "delta": -0.1224
+        }
+      ]
+    },
+    {
+      "itemId": "Morellonomicon",
+      "count": 660685,
+      "playRate": 19.89,
+      "avgPlacement": 4.18,
+      "top4": 55.95,
+      "winRate": 14.48,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Aurora",
+          "delta": -0.1887
+        },
+        {
+          "unitId": "TFT17_Zoe",
+          "delta": -0.1793
+        },
+        {
+          "unitId": "TFT17_Milio",
+          "delta": -0.0998
+        },
+        {
+          "unitId": "TFT17_Blitzcrank",
+          "delta": -0.0923
+        },
+        {
+          "unitId": "TFT17_Vex",
+          "delta": -0.0838
+        }
+      ]
+    },
+    {
+      "itemId": "Quicksilver",
+      "count": 468019,
+      "playRate": 14.09,
+      "avgPlacement": 4.2,
+      "top4": 55.8,
+      "winRate": 15.01,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Graves",
+          "delta": -0.1332
+        },
+        {
+          "unitId": "TFT17_MasterYi",
+          "delta": -0.1314
+        },
+        {
+          "unitId": "TFT17_Belveth",
+          "delta": -0.0939
+        },
+        {
+          "unitId": "TFT17_Fiora",
+          "delta": -0.0846
+        },
+        {
+          "unitId": "TFT17_Riven",
+          "delta": -0.0786
+        }
+      ]
+    },
+    {
+      "itemId": "RunaansHurricane",
+      "count": 307022,
+      "playRate": 9.24,
+      "avgPlacement": 4.2,
+      "top4": 55.59,
+      "winRate": 14.79,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Gnar",
+          "delta": -0.2308
+        },
+        {
+          "unitId": "TFT17_Jinx",
+          "delta": -0.1994
+        },
+        {
+          "unitId": "TFT17_MissFortune",
+          "delta": -0.1786
+        },
+        {
+          "unitId": "TFT17_Caitlyn",
+          "delta": -0.1543
+        },
+        {
+          "unitId": "TFT17_Kindred",
+          "delta": -0.1407
+        }
+      ]
+    },
+    {
+      "itemId": "LastWhisper",
+      "count": 898333,
+      "playRate": 27.04,
+      "avgPlacement": 4.26,
+      "top4": 55.28,
+      "winRate": 12.07,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Corki",
+          "delta": -0.1954
+        },
+        {
+          "unitId": "TFT17_Kindred",
+          "delta": -0.1495
+        },
+        {
+          "unitId": "TFT17_MissFortune",
+          "delta": -0.1469
+        },
+        {
+          "unitId": "TFT17_Xayah",
+          "delta": -0.1035
+        },
+        {
+          "unitId": "TFT17_Kaisa",
+          "delta": -0.0747
+        }
+      ]
+    },
+    {
+      "itemId": "StatikkShiv",
+      "count": 838838,
+      "playRate": 25.25,
+      "avgPlacement": 4.2,
+      "top4": 55.19,
+      "winRate": 15.19,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Aurora",
+          "delta": -0.2299
+        },
+        {
+          "unitId": "TFT17_Zoe",
+          "delta": -0.2042
+        },
+        {
+          "unitId": "TFT17_Vex",
+          "delta": -0.1246
+        },
+        {
+          "unitId": "TFT17_Bard",
+          "delta": -0.1074
+        },
+        {
+          "unitId": "TFT17_Sona",
+          "delta": -0.0994
+        }
+      ]
+    },
+    {
+      "itemId": "Redemption",
+      "count": 949429,
+      "playRate": 28.58,
+      "avgPlacement": 4.23,
+      "top4": 55.12,
+      "winRate": 13.99,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Ornn",
+          "delta": -0.1408
+        },
+        {
+          "unitId": "TFT17_Chogath",
+          "delta": -0.1278
+        },
+        {
+          "unitId": "TFT17_Rammus",
+          "delta": -0.12
+        },
+        {
+          "unitId": "TFT17_TahmKench",
+          "delta": -0.0877
+        },
+        {
+          "unitId": "TFT17_Leona",
+          "delta": -0.0839
+        }
+      ]
+    },
+    {
+      "itemId": "FrozenHeart",
+      "count": 1358447,
+      "playRate": 40.89,
+      "avgPlacement": 4.24,
+      "top4": 54.91,
+      "winRate": 14.78,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Rammus",
+          "delta": -0.1391
+        },
+        {
+          "unitId": "TFT17_Chogath",
+          "delta": -0.1369
+        },
+        {
+          "unitId": "TFT17_Jax",
+          "delta": -0.1296
+        },
+        {
+          "unitId": "TFT17_Nunu",
+          "delta": -0.0883
+        },
+        {
+          "unitId": "TFT17_Pantheon",
+          "delta": -0.0672
+        }
+      ]
+    },
+    {
+      "itemId": "MadredsBloodrazor",
+      "count": 1656743,
+      "playRate": 49.87,
+      "avgPlacement": 4.25,
+      "top4": 54.77,
+      "winRate": 14.12,
+      "topUsers": [
+        {
+          "unitId": "TFT17_MasterYi",
+          "delta": -0.1612
+        },
+        {
+          "unitId": "TFT17_Vex",
+          "delta": -0.1589
+        },
+        {
+          "unitId": "TFT17_Corki",
+          "delta": -0.1586
+        },
+        {
+          "unitId": "TFT17_Kindred",
+          "delta": -0.1428
+        },
+        {
+          "unitId": "TFT17_Graves",
+          "delta": -0.1349
+        }
+      ]
+    },
+    {
+      "itemId": "SpectralGauntlet",
+      "count": 533798,
+      "playRate": 16.07,
+      "avgPlacement": 4.26,
+      "top4": 54.47,
+      "winRate": 13.82,
+      "topUsers": [
+        {
+          "unitId": "TFT17_RekSai",
+          "delta": -0.2052
+        },
+        {
+          "unitId": "TFT17_TahmKench",
+          "delta": -0.1237
+        },
+        {
+          "unitId": "TFT17_Rammus",
+          "delta": -0.09
+        },
+        {
+          "unitId": "TFT17_Galio",
+          "delta": -0.0032
+        },
+        {
+          "unitId": "TFT17_Morgana",
+          "delta": 0.0017
+        }
+      ]
+    },
+    {
+      "itemId": "TitansResolve",
+      "count": 429687,
+      "playRate": 12.93,
+      "avgPlacement": 4.31,
+      "top4": 53.85,
+      "winRate": 13.75,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Briar",
+          "delta": -0.362
+        },
+        {
+          "unitId": "TFT17_Diana",
+          "delta": -0.2803
+        },
+        {
+          "unitId": "TFT17_Jax",
+          "delta": -0.21
+        },
+        {
+          "unitId": "TFT17_Leona",
+          "delta": -0.1777
+        },
+        {
+          "unitId": "TFT17_Fiora",
+          "delta": -0.1072
+        }
+      ]
+    },
+    {
+      "itemId": "InfinityEdge",
+      "count": 789726,
+      "playRate": 23.77,
+      "avgPlacement": 4.3,
+      "top4": 53.51,
+      "winRate": 14.45,
+      "topUsers": [
+        {
+          "unitId": "TFT17_MissFortune",
+          "delta": -0.2781
+        },
+        {
+          "unitId": "TFT17_Samira",
+          "delta": -0.205
+        },
+        {
+          "unitId": "TFT17_Pyke",
+          "delta": -0.186
+        },
+        {
+          "unitId": "TFT17_Ezreal",
+          "delta": -0.1775
+        },
+        {
+          "unitId": "TFT17_Corki",
+          "delta": -0.1391
+        }
+      ]
+    },
+    {
+      "itemId": "SpearOfShojin",
+      "count": 945229,
+      "playRate": 28.45,
+      "avgPlacement": 4.3,
+      "top4": 53.43,
+      "winRate": 14.5,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Aurora",
+          "delta": -0.2323
+        },
+        {
+          "unitId": "TFT17_Zed",
+          "delta": -0.1889
+        },
+        {
+          "unitId": "TFT17_Ezreal",
+          "delta": -0.1843
+        },
+        {
+          "unitId": "TFT17_Lulu",
+          "delta": -0.1545
+        },
+        {
+          "unitId": "TFT17_Corki",
+          "delta": -0.1406
+        }
+      ]
+    },
+    {
+      "itemId": "TacticiansRing",
+      "count": 28096,
+      "playRate": 0.85,
+      "avgPlacement": 4.34,
+      "top4": 53.22,
+      "winRate": 13.42,
+      "topUsers": []
+    },
+    {
+      "itemId": "RedBuff",
+      "count": 1252140,
+      "playRate": 37.69,
+      "avgPlacement": 4.35,
+      "top4": 52.78,
+      "winRate": 13.4,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Rammus",
+          "delta": -0.1247
+        },
+        {
+          "unitId": "TFT17_Ornn",
+          "delta": -0.1003
+        },
+        {
+          "unitId": "TFT17_TahmKench",
+          "delta": -0.0986
+        },
+        {
+          "unitId": "TFT17_Nunu",
+          "delta": -0.0825
+        },
+        {
+          "unitId": "TFT17_Chogath",
+          "delta": -0.0539
+        }
+      ]
+    },
+    {
+      "itemId": "Leviathan",
+      "count": 570568,
+      "playRate": 17.18,
+      "avgPlacement": 4.34,
+      "top4": 52.48,
+      "winRate": 13.77,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Aurora",
+          "delta": -0.1864
+        },
+        {
+          "unitId": "TFT17_Lissandra",
+          "delta": -0.1608
+        },
+        {
+          "unitId": "TFT17_Lulu",
+          "delta": -0.1374
+        },
+        {
+          "unitId": "TFT17_Veigar",
+          "delta": -0.1103
+        },
+        {
+          "unitId": "TFT17_TwistedFate",
+          "delta": -0.0938
+        }
+      ]
+    },
+    {
+      "itemId": "GargoyleStoneplate",
+      "count": 1639604,
+      "playRate": 49.36,
+      "avgPlacement": 4.38,
+      "top4": 52.18,
+      "winRate": 12.91,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Leona",
+          "delta": -0.1795
+        },
+        {
+          "unitId": "TFT17_Rammus",
+          "delta": -0.1459
+        },
+        {
+          "unitId": "TFT17_Jax",
+          "delta": -0.1455
+        },
+        {
+          "unitId": "TFT17_Ornn",
+          "delta": -0.1353
+        },
+        {
+          "unitId": "TFT17_Nunu",
+          "delta": -0.0853
+        }
+      ]
+    },
+    {
+      "itemId": "JeweledGauntlet",
+      "count": 1442535,
+      "playRate": 43.42,
+      "avgPlacement": 4.39,
+      "top4": 51.55,
+      "winRate": 13.81,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Lulu",
+          "delta": -0.187
+        },
+        {
+          "unitId": "TFT17_Lissandra",
+          "delta": -0.1863
+        },
+        {
+          "unitId": "TFT17_AurelionSol",
+          "delta": -0.1654
+        },
+        {
+          "unitId": "TFT17_Vex",
+          "delta": -0.1465
+        },
+        {
+          "unitId": "TFT17_Aurora",
+          "delta": -0.1429
+        }
+      ]
+    },
+    {
+      "itemId": "GuinsoosRageblade",
+      "count": 1287733,
+      "playRate": 38.76,
+      "avgPlacement": 4.45,
+      "top4": 50.37,
+      "winRate": 14.82,
+      "topUsers": [
+        {
+          "unitId": "TFT17_Teemo",
+          "delta": -0.2733
+        },
+        {
+          "unitId": "TFT17_Diana",
+          "delta": -0.2537
+        },
+        {
+          "unitId": "TFT17_Vex",
+          "delta": -0.207
+        },
+        {
+          "unitId": "TFT17_Caitlyn",
+          "delta": -0.1385
+        },
+        {
+          "unitId": "TFT17_Leblanc",
+          "delta": -0.1122
+        }
+      ]
+    }
+  ]
+}

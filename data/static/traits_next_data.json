@@ -1,0 +1,27 @@
+{
+  "props": {
+    "pageProps": {}
+  },
+  "page": "/info/traits",
+  "query": {},
+  "buildId": "0HPOZksCAPxI5WyWsSc3B",
+  "nextExport": true,
+  "autoExport": true,
+  "isFallback": false,
+  "locale": "en",
+  "locales": [
+    "en",
+    "de",
+    "ko",
+    "pt",
+    "ja",
+    "fr",
+    "es",
+    "zh",
+    "tc",
+    "vie",
+    "ar"
+  ],
+  "defaultLocale": "en",
+  "scriptLoader": []
+}

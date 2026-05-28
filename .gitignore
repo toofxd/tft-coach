@@ -1,0 +1,20 @@
+.env
+data/raw/
+data/live/
+data/my_matches/
+models/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+node_modules/
+# data/processed/ is intentionally committed so Railway can load it
+# Full match_features.csv is too large for GitHub (116MB) — slim version is committed instead
+data/processed/match_features.csv
+# TFT Academy recordings are local-only
+tft-recordings/
+collect_log.txt
+collect_err.txt
+server.log
+server_err.log
+server.err
+logs/

@@ -1,0 +1,3078 @@
+{
+  "10CrashTestDummies": {
+    "id": 202,
+    "name": "Crash Test Dummies",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "10GoingLong": {
+    "id": 52,
+    "name": "Going Long",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "10GoodForSomethingSilver": {
+    "id": 53,
+    "name": "Good For Something I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "10HeroicGrabBag": {
+    "id": 49,
+    "name": "Heroic Grab Bag",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "10LittleBuddies": {
+    "id": 59,
+    "name": "Little Buddies",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "11AtWhatCost": {
+    "id": 254,
+    "name": "At What Cost",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "11BloodBank": {
+    "id": 68,
+    "name": "Lunch Money",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "11Buildabud": {
+    "id": 220,
+    "name": "Build a Bud",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "11Calltochaos": {
+    "id": 65,
+    "name": "Call to Chaos",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "11Epoch": {
+    "id": 69,
+    "name": "Epoch",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "11EpochPlus": {
+    "id": 70,
+    "name": "Epoch+",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "11Prizefighter": {
+    "id": 64,
+    "name": "Prizefighter",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "11Reinfourcement": {
+    "id": 71,
+    "name": "ReinFOURcement",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "11Slammin": {
+    "id": 66,
+    "name": "Slammin'",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "11Slammin_Plus": {
+    "id": 67,
+    "name": "Slammin'+",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "11TinyButDeadly": {
+    "id": 142,
+    "name": "Tiny, but Deadly",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "16UltraRapidFire": {
+    "id": 263,
+    "name": "U.R.F",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17AatroxCarry": {
+    "id": 18,
+    "name": "Stellar Combo",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17AhriGodAugment": {
+    "id": 2,
+    "name": "Ahri's Boon",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17AnimaSquad_Commander": {
+    "id": 272,
+    "name": "Anima Commander",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17ApotheoticForge": {
+    "id": 23,
+    "name": "Apotheotic Forge",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17Arbiter_DivineAmendment": {
+    "id": 274,
+    "name": "Divine Amendment",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "17AurelionSolGodAugment": {
+    "id": 4,
+    "name": "Aurelion Sol's Boon",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17AurelionSolGodAugment_BoonOfResurrection": {
+    "id": 12,
+    "name": "Boon of Resurrection",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17Concentration": {
+    "id": 277,
+    "name": "Concentration",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17DarkStar_WhiteHole": {
+    "id": 276,
+    "name": "Loot Singularity",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17EkkoGodAugment": {
+    "id": 16,
+    "name": "Ekko's Boon",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17EvelynnGodAugment": {
+    "id": 19,
+    "name": "Evelynn's Boon",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17EvelynnGodAugment_BloodPrice": {
+    "id": 13,
+    "name": "Blood Price",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17GragasCarry": {
+    "id": 8,
+    "name": "Self Destruct",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17InvaderZed": {
+    "id": 6,
+    "name": "Invader Zed",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "17IvernMinionCarry": {
+    "id": 24,
+    "name": "The Big Bang",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17JaxCarry": {
+    "id": 22,
+    "name": "Reach for the Stars",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17KayleGodAugment": {
+    "id": 1,
+    "name": "Kayle's Boon",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17KayleGodAugment_Scrapper": {
+    "id": 9,
+    "name": "Boon of the Scrapper",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17LeonaCarry": {
+    "id": 273,
+    "name": "Shieldmaiden",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17MordekaiserCarry": {
+    "id": 21,
+    "name": "Heat Death",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17NasusCarry": {
+    "id": 3,
+    "name": "Bonk!",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17PoppyCarry": {
+    "id": 20,
+    "name": "Termeepnal Velocity",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17PrimordianPrismaticAugment": {
+    "id": 275,
+    "name": "Heart of the Swarm",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17PykeCarry": {
+    "id": 0,
+    "name": "Contract Killer",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17SorakaGodAugment": {
+    "id": 5,
+    "name": "Soraka's Boon",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17ThreshGodAugment": {
+    "id": 17,
+    "name": "Thresh's Boon",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17Timebreaker_Timestream": {
+    "id": 279,
+    "name": "Timestream",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "17TourOfTheGalaxy": {
+    "id": 278,
+    "name": "Tour of the Galaxy",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "17VarusGodAugment_BoonOfStars": {
+    "id": 14,
+    "name": "Varus's Boon",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17YasuoGodAugment_GoldenHex": {
+    "id": 15,
+    "name": "Yasuo's Golden Hex",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17YasuoGodAugment_MoreHexes": {
+    "id": 11,
+    "name": "Yasuo's Share The Spotlight",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "17YasuoGodAugment_PaintedPower": {
+    "id": 10,
+    "name": "Yasuo's Boon",
+    "rank": 0,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "6BandOfThieves2": {
+    "id": 203,
+    "name": "Band of Thieves II",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "6BandOfThieves2Plus": {
+    "id": 210,
+    "name": "Band of Thieves II+",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "6BandOfThieves2PlusPlus": {
+    "id": 211,
+    "name": "Band of Thieves II++",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "6CalculatedLoss": {
+    "id": 119,
+    "name": "Calculated Loss",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "6ClearMind": {
+    "id": 50,
+    "name": "Clear Mind",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "6CyberneticImplants2": {
+    "id": 101,
+    "name": "Cybernetic Implants",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "6CyberneticUplink2": {
+    "id": 102,
+    "name": "Cybernetic Uplink",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "6Distancing": {
+    "id": 187,
+    "name": "Exiles I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "6Distancing2": {
+    "id": 188,
+    "name": "Exiles II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "6Diversify1": {
+    "id": 117,
+    "name": "Stand United",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "6Electrocharge1": {
+    "id": 244,
+    "name": "Electrocharge I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "6Electrocharge2": {
+    "id": 245,
+    "name": "Electrocharge II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "6ForceOfNature": {
+    "id": 91,
+    "name": "New Recruit",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "6ForceOfNaturePlus": {
+    "id": 280,
+    "name": "New Recruit",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "6GachaAddict": {
+    "id": 28,
+    "name": "Prismatic Ticket",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "6HyperRoll": {
+    "id": 118,
+    "name": "Hustler",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "6ItemGrabBag1": {
+    "id": 46,
+    "name": "Item Grab Bag",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "6MakeshiftArmor1": {
+    "id": 205,
+    "name": "Makeshift Armor I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "6MakeshiftArmor2": {
+    "id": 206,
+    "name": "Makeshift Armor II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "6MaxLevel10": {
+    "id": 44,
+    "name": "Level Up!",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "6OneTwoFive": {
+    "id": 42,
+    "name": "One, Two, Five!",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "6PandorasItems": {
+    "id": 37,
+    "name": "Pandora's Items",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "6PortableForge": {
+    "id": 25,
+    "name": "Portable Forge",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "6Recombobulator": {
+    "id": 26,
+    "name": "Recombobulator",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "6SalvageBin": {
+    "id": 113,
+    "name": "Salvage Bin",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "6SecondWind1": {
+    "id": 134,
+    "name": "Second Wind",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "6SecondWind2": {
+    "id": 174,
+    "name": "Second Wind II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "6SunfireBoard": {
+    "id": 270,
+    "name": "Sunfire Board",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "6TheGoldenEgg": {
+    "id": 138,
+    "name": "The Golden Egg",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "6ThriftShop": {
+    "id": 256,
+    "name": "Wise Spending",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "6TinyTitans": {
+    "id": 29,
+    "name": "Tiny Titans",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "6TradeSector": {
+    "id": 213,
+    "name": "Trade Sector",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "6TradeSector2": {
+    "id": 43,
+    "name": "Commerce Core",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "7AFK": {
+    "id": 255,
+    "name": "AFK",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "7BandOfThieves1": {
+    "id": 60,
+    "name": "Band of Thieves",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "7BestFriends1": {
+    "id": 135,
+    "name": "Best Friends I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "7BestFriends2": {
+    "id": 136,
+    "name": "Best Friends II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "7BirthdayPresents": {
+    "id": 224,
+    "name": "Birthday Present",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "7ClutteredMind": {
+    "id": 51,
+    "name": "Cluttered Mind",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "7CursedCrown": {
+    "id": 196,
+    "name": "Cursed Crown",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "7LategameSpecialist": {
+    "id": 47,
+    "name": "Late Game Specialist",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "7LivingForge": {
+    "id": 27,
+    "name": "Living Forge",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "7LuckyGloves": {
+    "id": 54,
+    "name": "Lucky Gloves",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "7LuckyGlovesPlus": {
+    "id": 55,
+    "name": "Lucky Gloves+",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "7PandorasBench": {
+    "id": 84,
+    "name": "Pandora's Bench",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ],
+    "disabled": true
+  },
+  "7UrfsGrabBag2": {
+    "id": 269,
+    "name": "Urf's Grab Bag",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "8SalvageBinPlus": {
+    "id": 114,
+    "name": "Salvage Bin+",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9ArmyBuilding": {
+    "id": 40,
+    "name": "Team Building",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "9BardPlaybook1": {
+    "id": 48,
+    "name": "Caretaker's Ally",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "9BigGrabBag": {
+    "id": 58,
+    "name": "Big Grab Bag",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9BuildingACollectionPlusPlus": {
+    "id": 36,
+    "name": "Buried Treasures",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "9Commander_Ascension": {
+    "id": 120,
+    "name": "Ascension",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9Commander_PartialAscension": {
+    "id": 262,
+    "name": "Partial Ascension",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9Commander_RollingForDays": {
+    "id": 112,
+    "name": "Rolling For Days I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9Commander_TeamingUp1": {
+    "id": 57,
+    "name": "Teaming Up",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9GreaterJeweledLotus": {
+    "id": 177,
+    "name": "Jeweled Lotus II",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9HealingOrbsI": {
+    "id": 121,
+    "name": "Healing Orbs I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9HealingOrbsII": {
+    "id": 122,
+    "name": "Healing Orbs II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9HedgeFund": {
+    "id": 85,
+    "name": "Hedge Fund",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "9HedgeFundPlus": {
+    "id": 219,
+    "name": "Hedge Fund+",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "9IronAssets": {
+    "id": 32,
+    "name": "Iron Assets",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "9JeweledLotus": {
+    "id": 176,
+    "name": "Jeweled Lotus I",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9KnowYourEnemy": {
+    "id": 124,
+    "name": "Know Your Enemy",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ],
+    "disabled": true
+  },
+  "9LearningFromExperience2": {
+    "id": 45,
+    "name": "Patient Study",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "9Legend_HighEndSector": {
+    "id": 214,
+    "name": "Shopping Spree",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "9LongTimeCrafting": {
+    "id": 30,
+    "name": "Latent Forge",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "9MissedConnections": {
+    "id": 34,
+    "name": "Missed Connections",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9OneTwosThree": {
+    "id": 33,
+    "name": "One Two Three",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "9PandorasItems2": {
+    "id": 39,
+    "name": "Pandora's Items II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "9PandorasRadiantBox": {
+    "id": 38,
+    "name": "Pandora's Items III",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "9RiskyMoves": {
+    "id": 41,
+    "name": "Risky Moves",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "9RollTheDice": {
+    "id": 35,
+    "name": "Radiant Rascal",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9SilverSpoon": {
+    "id": 31,
+    "name": "Silver Spoon",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "9TiniestTitanPlus": {
+    "id": 56,
+    "name": "Tiniest Titan",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "9TonsOfStats": {
+    "id": 125,
+    "name": "Tons of Stats!",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "9YouHaveMyBow": {
+    "id": 271,
+    "name": "You Have My Bow",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "AdvancedLoan": {
+    "id": 239,
+    "name": "Advanced Loan",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "AdvancedLoanPlus": {
+    "id": 240,
+    "name": "Advanced Loan+",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "AnExaltedAdventure": {
+    "id": 253,
+    "name": "An Exalted Adventure",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "ArcaneViktory": {
+    "id": 156,
+    "name": "Arcane Viktor-y",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "AuraFarming": {
+    "id": 171,
+    "name": "Aura Farming",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "AwakenedSoul": {
+    "id": 195,
+    "name": "Soul Awakening",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "BacklineBlueprint": {
+    "id": 234,
+    "name": "Backline Blueprint",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "BeltOverflow": {
+    "id": 98,
+    "name": "Belt Overflow",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "BirthdayReunion": {
+    "id": 150,
+    "name": "Birthday Reunion",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "BodyguardTraining": {
+    "id": 152,
+    "name": "Bodyguard Training",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "BoosterPack": {
+    "id": 237,
+    "name": "Booster Pack",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "BoosterPackPlus": {
+    "id": 242,
+    "name": "Booster Pack+",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "BoxingLessons": {
+    "id": 130,
+    "name": "Boxing Lessons",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "BranchingOut": {
+    "id": 61,
+    "name": "Branching Out",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "BranchingOutPlus": {
+    "id": 178,
+    "name": "Branching Out+",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "BronzeForLife2": {
+    "id": 94,
+    "name": "Bronze For Life II",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "BronzeForLifeI": {
+    "id": 93,
+    "name": "Bronze For Life I",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "ChargeTransfer1": {
+    "id": 232,
+    "name": "Charge Transfer I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "ChargeTransfer2": {
+    "id": 233,
+    "name": "Charge Transfer II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "ClimbTheLadder1": {
+    "id": 264,
+    "name": "Climb The Ladder I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "ClimbTheLadder2": {
+    "id": 265,
+    "name": "Climb The Ladder II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "ClockworkAccelerator": {
+    "id": 250,
+    "name": "Clockwork Accelerator",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "CognitiveOverload": {
+    "id": 246,
+    "name": "Cognitive Overload",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "CognitiveTax": {
+    "id": 221,
+    "name": "Cognitive Tax",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "CognitiveTaxPlus": {
+    "id": 247,
+    "name": "Cognitive Tax+",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "ComebackStory": {
+    "id": 209,
+    "name": "Comeback Story",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "ComponentQuestBelt": {
+    "id": 154,
+    "name": "Extra Buckles",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ],
+    "disabled": true
+  },
+  "ComponentQuestBow": {
+    "id": 157,
+    "name": "Backup Bows",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "ComponentQuestGlove": {
+    "id": 166,
+    "name": "Critical Success",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "ComponentQuestRod": {
+    "id": 161,
+    "name": "Continuous Conjuration",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "ComponentQuestSword": {
+    "id": 159,
+    "name": "Carve a Path",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "ComponentQuestTear": {
+    "id": 163,
+    "name": "Flowing Tears",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "ConstructACompanion": {
+    "id": 129,
+    "name": "Construct a Companion",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "Corrosion": {
+    "id": 107,
+    "name": "Corrosion",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "CosmicRestart": {
+    "id": 258,
+    "name": "Cosmic Restart",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "CraftedCrafting": {
+    "id": 89,
+    "name": "Crafted Crafting",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "CryMeARiver": {
+    "id": 179,
+    "name": "Cry Me A River",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "DeadlierCaps": {
+    "id": 180,
+    "name": "Deadlier Caps",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "Dhampyr1": {
+    "id": 251,
+    "name": "Vampiric Vitality I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "Dhampyr2": {
+    "id": 252,
+    "name": "Vampiric Vitality II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ],
+    "disabled": true
+  },
+  "Dummify": {
+    "id": 86,
+    "name": "Dummify",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "DuoQueue": {
+    "id": 82,
+    "name": "Duo Queue",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "EarlyLearning": {
+    "id": 145,
+    "name": "Early Learnings",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "EpicRolldown": {
+    "id": 153,
+    "name": "Epic Rolldown",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "ExclusiveCustomization": {
+    "id": 123,
+    "name": "Exclusive Customization",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "ExclusiveCustomization2": {
+    "id": 261,
+    "name": "Exclusive Customization II",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "ExpectedUnexpectedness": {
+    "id": 106,
+    "name": "Expected Unexpectedness",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "Expedition": {
+    "id": 229,
+    "name": "Expedition",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "ExplosiveGrowth": {
+    "id": 126,
+    "name": "Explosive Growth",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "ExplosiveGrowthPlus": {
+    "id": 127,
+    "name": "Explosive Growth+",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "FeedTheFlames": {
+    "id": 131,
+    "name": "Feed the Flames",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "FeelingLucky": {
+    "id": 227,
+    "name": "Feeling Lucky",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "FindYourCenter": {
+    "id": 83,
+    "name": "Find Your Center",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "FiresalePlus": {
+    "id": 108,
+    "name": "Firesale",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      false
+    ]
+  },
+  "Flexible": {
+    "id": 72,
+    "name": "Flexible",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "ForgeAFriend": {
+    "id": 222,
+    "name": "Forge a Friend",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "ForgedInStrength": {
+    "id": 144,
+    "name": "Forged in Strength",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "ForgeRod": {
+    "id": 198,
+    "name": "Staffsmith",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "ForgeSword": {
+    "id": 199,
+    "name": "Swordsmith",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "ForwardThinking": {
+    "id": 140,
+    "name": "Forward Thinking",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "FrontlineFoundation": {
+    "id": 235,
+    "name": "Frontline Foundation",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "FuriousBlows": {
+    "id": 155,
+    "name": "Kahunahuna",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "GainGold": {
+    "id": 215,
+    "name": "Gain 21 Gold",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "GiantAndMighty": {
+    "id": 141,
+    "name": "Giant and Mighty",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "GildedSteel": {
+    "id": 241,
+    "name": "Gilded Steel",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "GlassCannonI": {
+    "id": 109,
+    "name": "Glass Cannon I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "GlassCannonII": {
+    "id": 110,
+    "name": "Glass Cannon II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "GoldenGamble": {
+    "id": 257,
+    "name": "Golden Gamble",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "GoldenGamblePlus": {
+    "id": 259,
+    "name": "Golden Gamble+",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "GoldenGamblePlusPlus": {
+    "id": 260,
+    "name": "Golden Gamble++",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "GroupHug1": {
+    "id": 230,
+    "name": "Group Hug I",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "GroupHug2": {
+    "id": 231,
+    "name": "Group Hug II",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "GuardbreakerSpirit": {
+    "id": 104,
+    "name": "Mace's Will",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "HardCommit": {
+    "id": 78,
+    "name": "Hard Commit",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "HeavyIsTheCrown": {
+    "id": 175,
+    "name": "Heavy Is the Crown",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "HeroicGrabBagPlus": {
+    "id": 115,
+    "name": "Heroic Grab Bag+",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "HeroicGrabBagPlusPlus": {
+    "id": 116,
+    "name": "Heroic Grab Bag++",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "HighVoltage": {
+    "id": 74,
+    "name": "High Voltage",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "HoldTheLine": {
+    "id": 181,
+    "name": "Hold the Line",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "HomeCooking": {
+    "id": 173,
+    "name": "Care Package",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "InfinityProtection": {
+    "id": 158,
+    "name": "Infinity Protection",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "InvestedPlus": {
+    "id": 79,
+    "name": "Invested+",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "InvestedPlusPlus": {
+    "id": 80,
+    "name": "Invested++",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "ItemGargoyleStoneplate": {
+    "id": 160,
+    "name": "Solo Plate",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "ItemSpiritVisage": {
+    "id": 164,
+    "name": "Spirit of Redemption",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "JustHit": {
+    "id": 193,
+    "name": "Just Hit",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      false
+    ],
+    "disabled": true
+  },
+  "JustSlayer": {
+    "id": 266,
+    "name": "Indiscriminate Killer",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "KickStart": {
+    "id": 223,
+    "name": "Kick Start",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "LateGameScaling": {
+    "id": 146,
+    "name": "Late Game Scaling",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "LegionOfThrees": {
+    "id": 143,
+    "name": "Legion of Threes",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "Lineup": {
+    "id": 97,
+    "name": "Lineup",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "LuxurySubscription": {
+    "id": 208,
+    "name": "Luxury Subscription",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "MagicRoll": {
+    "id": 103,
+    "name": "A Magic Roll",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "MagicRollMinus": {
+    "id": 169,
+    "name": "Slightly Magic Roll",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "MarksMan": {
+    "id": 132,
+    "name": "Focused Fire",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "MaxBuild": {
+    "id": 151,
+    "name": "Max Build",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ],
+    "disabled": true
+  },
+  "MayTheFoursBeWithYou": {
+    "id": 7,
+    "name": "May the Fours Be With You",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "MinMaxer": {
+    "id": 204,
+    "name": "Min-Max",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "MirroredMonetization": {
+    "id": 90,
+    "name": "Malicious Monetization",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "Misfits": {
+    "id": 248,
+    "name": "Misfits",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "MoneyHungry": {
+    "id": 225,
+    "name": "Money Hungry",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "MoneyMonsoon": {
+    "id": 207,
+    "name": "Money Monsoon",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "MuseumHeist": {
+    "id": 192,
+    "name": "Component Heist",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      true
+    ]
+  },
+  "NineLives": {
+    "id": 182,
+    "name": "Nine Lives",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ],
+    "disabled": true
+  },
+  "NoScoutNoPivot": {
+    "id": 183,
+    "name": "NO SCOUT NO PIVOT",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "OneBuffTwoBuff": {
+    "id": 92,
+    "name": "One Buff, Two Buff",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "PatienceIsAVirtue": {
+    "id": 76,
+    "name": "Patience is a Virtue",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "Pilfer": {
+    "id": 212,
+    "name": "Pilfer",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "PlotArmor": {
+    "id": 172,
+    "name": "Plot Armor",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "PowerUp": {
+    "id": 238,
+    "name": "Augmented Power",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "Replication": {
+    "id": 81,
+    "name": "Replication",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "RestartMission": {
+    "id": 73,
+    "name": "Restart Mission",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "Retribution": {
+    "id": 194,
+    "name": "Retribution",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "SavingsAccount": {
+    "id": 168,
+    "name": "Savings Account",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "SeraphimsStaff": {
+    "id": 216,
+    "name": "Seraphim's Staff",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "ShimmerscaleEssence": {
+    "id": 77,
+    "name": "Shimmerscale Essence",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "SideEffects": {
+    "id": 249,
+    "name": "Side Effects",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "SizeMatters": {
+    "id": 226,
+    "name": "Size Matters",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "SliceOfLife": {
+    "id": 139,
+    "name": "Slice of Life",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "SmallGrabBag": {
+    "id": 197,
+    "name": "Small Grab Bag",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "SoloLeveling": {
+    "id": 170,
+    "name": "Solo Leveling",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "SpeedyDoubleKill": {
+    "id": 148,
+    "name": "Speedy Double Kill",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "SpreadingRoots": {
+    "id": 165,
+    "name": "Spreading Roots",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "SpreadingRootsPlus": {
+    "id": 218,
+    "name": "Spreading Roots+",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "SubscriptionService": {
+    "id": 137,
+    "name": "Subscription Service",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "Survivor": {
+    "id": 87,
+    "name": "Survivor",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "SweetTreats": {
+    "id": 147,
+    "name": "Sweet Treats",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "SwordOverflow": {
+    "id": 100,
+    "name": "Sword Overflow",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "TacticiansKitchen": {
+    "id": 88,
+    "name": "Tactician's Kitchen",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "TheBaronsLair": {
+    "id": 236,
+    "name": "Baron's Lair",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "TheDarkinBlade": {
+    "id": 128,
+    "name": "Blood Offering",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "TheGoldenDragon": {
+    "id": 149,
+    "name": "The Golden Dragon",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      false
+    ]
+  },
+  "TheTower": {
+    "id": 228,
+    "name": "The Tower",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "TheVidalion": {
+    "id": 186,
+    "name": "Woven Magic",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "TragicalBlade": {
+    "id": 184,
+    "name": "Deadlier Blades",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "TraitTree": {
+    "id": 162,
+    "name": "The Trait Tree",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "TraitTreePlus": {
+    "id": 217,
+    "name": "The Trait Tree+",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "TreasureHunt": {
+    "id": 185,
+    "name": "Treasure Hunt",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "Trifecta1": {
+    "id": 95,
+    "name": "Trifecta I",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "Trifecta2": {
+    "id": 96,
+    "name": "Trifecta II",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "TwinGuardians": {
+    "id": 200,
+    "name": "Twin Guardians",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "TwoMuchValue": {
+    "id": 105,
+    "name": "Two Much Value",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      false,
+      false
+    ]
+  },
+  "TwoTanky": {
+    "id": 268,
+    "name": "Two Tanky",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "Unforgotten": {
+    "id": 190,
+    "name": "Warlord's Honor",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      false
+    ]
+  },
+  "UpwardMobility": {
+    "id": 75,
+    "name": "Upward Mobility",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      true,
+      true
+    ]
+  },
+  "UrfsGambit": {
+    "id": 201,
+    "name": "Urf's Gambit",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "WandOverflow": {
+    "id": 99,
+    "name": "Wand Overflow",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      true
+    ]
+  },
+  "WarmogsBuckle": {
+    "id": 267,
+    "name": "Heart of Steel",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "Warpath": {
+    "id": 111,
+    "name": "Warpath",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "Waverider": {
+    "id": 133,
+    "name": "On a Roll",
+    "rank": 1,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "WeStickTogether": {
+    "id": 167,
+    "name": "We Stick Together",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "WinOut": {
+    "id": 191,
+    "name": "Win Out",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      false,
+      true,
+      false
+    ]
+  },
+  "WorthTheWaitGold": {
+    "id": 63,
+    "name": "Worth the Wait",
+    "rank": 2,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  },
+  "WorthTheWaitPrismatic": {
+    "id": 62,
+    "name": "Worth the Wait II",
+    "rank": 3,
+    "tags": [],
+    "picks": [
+      true,
+      false,
+      false
+    ]
+  }
+}

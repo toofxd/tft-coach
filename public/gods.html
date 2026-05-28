@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TFT Set 17 — Realm of Gods</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0d1520; color: #d4cfc7; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 14px; padding: 20px; min-height: 100vh; }
+a { color: inherit; }
+
+/* Card */
+.card { background: #111927; border: 1px solid #1e2d3e; border-radius: 6px; padding: 14px; }
+.sec-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #a8a6b4; font-weight: 600; margin-bottom: 8px; }
+
+/* Tab bar (matches calculator.html) */
+.tab-bar { display:flex; align-items:center; gap:0; margin-bottom:18px; border-bottom:1px solid #2e2e36; background:#0d1117; }
+.tab-bar-title { font-size:18px; font-weight:700; color:#e8e4de; margin-right:24px; padding-bottom:12px; }
+.tab-btn {
+  padding: 10px 18px 12px; font-size:13px; font-weight:600; cursor:pointer;
+  color:#5a5868; background:none; border:none; border-bottom:2px solid transparent;
+  font-family:inherit; letter-spacing:0.02em; transition:color 0.12s;
+  margin-bottom:-1px; text-decoration:none; display:inline-block;
+}
+.tab-btn:hover { color:#d4cfc7; }
+.tab-btn.active { color:#4a9fe0; border-bottom-color:#4a9fe0; }
+
+/* Page header */
+.page-header {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 16px;
+}
+.page-title { font-size: 18px; font-weight: 700; color: #e8e4de; letter-spacing: 0.01em; }
+.page-sub { font-size: 12px; color: #6a7888; }
+.page-source { margin-left: auto; font-size: 11px; color: #6a7888; text-decoration: none; }
+.page-source:hover { color: #a8b0bc; }
+
+/* God grid — each card takes its natural height. align-items:start prevents
+   short cards from stretching to match the tall (expanded) card in the same row.
+   Active card spans 5 rows to hold its stage details; other cards in the same
+   rows fill in normally, which is the "fill the blank space" behavior. */
+.gods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.god-card {
+  background: #111927; border: 1px solid #1e2d3e; border-radius: 8px;
+  padding: 14px; cursor: pointer; transition: border-color 0.12s, background 0.12s;
+  min-height: 175px;          /* fits a 2-line boon; 1-line boons get ~1 row of blank space */
+  display: flex; flex-direction: column;
+}
+.god-card:hover { border-color: #2e4060; }
+.god-card.active {
+  border-color: #4a9fe0; background: #131c2e;
+  grid-row: span 5;       /* tall enough to hold the stages section */
+  cursor: default;
+  min-height: 0;          /* don't enforce the inactive min-height */
+}
+/* Trials list (shown under Boon for Aurelion Sol when expanded) — plain bullets */
+.god-trials {
+  margin-top: 10px;
+  list-style: none; padding: 0; margin-left: 0;
+  font-size: 12px; color: #c8c4c0; line-height: 1.7;
+}
+.god-trials li { padding: 3px 0; padding-left: 12px; position: relative; }
+.god-trials li::before { content: '—'; position: absolute; left: 0; color: #4a5868; }
+
+.god-head { display: flex; align-items: center; gap: 12px; }
+.god-portrait {
+  width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
+  background: #1a2535; border: 1px solid #2a3a52;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: #6a7888;
+  overflow: hidden;
+}
+.god-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.god-info { flex: 1; min-width: 0; }
+.god-name { font-size: 16px; font-weight: 700; color: #e8e4de; margin-bottom: 1px; }
+.god-title { font-size: 11px; color: #6a7888; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.god-boon {
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid #1e2d3e;
+  font-size: 12px; color: #c8c4c0; line-height: 1.6;
+}
+.god-boon-label {
+  font-size: 10px; font-weight: 700; color: #c89b3c;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+/* Stage sections — only rendered inside the active card */
+.god-stages {
+  margin-top: 14px; padding-top: 14px;
+  border-top: 1px solid #1e2d3e;
+}
+.stage-block { margin-bottom: 14px; }
+.stage-block:last-child { margin-bottom: 0; }
+.stage-label {
+  font-size: 11px; font-weight: 700; color: #4a9fe0;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  margin-bottom: 6px;
+}
+.stage-list { list-style: none; padding: 0; margin: 0; font-size: 12px; color: #c8c4c0; line-height: 1.7; }
+.stage-list li { padding: 3px 0; padding-left: 12px; position: relative; }
+.stage-list li::before { content: '—'; position: absolute; left: 0; color: #4a5868; }
+
+/* Disclaimer */
+.disclaimer {
+  margin-top: 40px;
+  padding-top: 16px; border-top: 1px solid #2a3040;
+  text-align: center; font-size: 11px; color: #6a7a8a; line-height: 1.7;
+}
+.disclaimer a { color: #6a9fc0; text-decoration: none; }
+.disclaimer a:hover { color: #a8b0bc; }
+</style>
+</head>
+<body>
+
+<div style="max-width:1060px;margin:0 auto;">
+
+  <!-- Tab bar — matches calculator.html -->
+  <div class="tab-bar">
+    <span class="tab-bar-title">Tactician's Fundamentals by <a href="https://tiffanygaming.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Tiffany</a> (TFT Set 17)</span>
+    <a href="/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
+    <a href="/calculator.html#coach" class="tab-btn">TFT Coach</a>
+    <a href="/gods.html" class="tab-btn active">Gods</a>
+  </div>
+
+  <!-- Page header -->
+  <div class="page-header">
+    <div class="page-title">Realm of Gods</div>
+    <div class="page-sub">God boons reference</div>
+  </div>
+
+  <!-- Grid of god cards -->
+  <div class="gods-grid" id="godsGrid"></div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <p style="margin-bottom: 6px;"><strong style="color:#8a9aaa;">Data sources:</strong> Data shown is not guaranteed to be accurate — third-party sources (<a href="https://communitydragon.org" target="_blank" rel="noopener">Community Dragon</a>, Riot Data Dragon, <a href="https://mobalytics.gg" target="_blank" rel="noopener">Mobalytics</a>) may contain errors, outdated values, or incomplete samples.</p>
+    <p style="font-size:11px;color:#556070;line-height:1.6;max-width:760px;margin:0 auto 8px;">This tool isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
+    <p>Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener">Tiffany Tsang</a></p>
+  </div>
+
+</div>
+
+<script>
+const GODS = [
+  {
+    name: 'Ahri', title: 'God of Opulence', key: 'Ahri',
+    boon: 'Gain 2 gold, 2 XP, and 2 rerolls each round.',
+    stage2: ['6 gold', '8 XP', '5 Rerolls', '6 gold, maybe +1'],
+    stage3: ['8 gold', '10 XP', '7 Rerolls', '8 gold, maybe +2'],
+    stage4: ['12 gold', '8 Rerolls', '12 gold, maybe +3'],
+  },
+  {
+    name: 'Aurelion Sol', title: 'God of Trials', key: 'AurelionSol',
+    boon: 'Choose one of three trials to prove yourself to Aurelion Sol.',
+    trials: [
+      'Your team gains 15 Attack Damage and Ability Power.',
+      'After 3 player combats, gain a completed item anvil and 22 gold.',
+      'After 8 player combats, gain +1 to all non-unique traits.',
+    ],
+    stage2: ['Reach 50 gold to gain component anvil + 4 gold', 'Field 6 non-unique traits to get a random emblem and a reforger'],
+    stage3: ['Star up a unit to get 10 gold', 'Field 6 non-unique traits to get a random emblem and a reforger'],
+    stage4: ['Reach level 9 to get 20 gold'],
+  },
+  {
+    name: 'Ekko', title: 'God of Anomaly', key: 'Ekko',
+    boon: 'Gain the Anomaly item, which provides unique bonuses based on role.',
+    stage2: ['Scuttle Puddle (+blue orb & 3 gold)', 'Blessing at 30 HP (25g value)', 'Spat in 4 rounds', 'Artifact in 8 rounds', '4-cost in 3 rounds'],
+    stage3: ['Scuttle Puddle (+blue orb & 4 gold)', 'Implant (20% AS)', '2x 5-cost in 4 rounds', 'Component anvil in 3 rounds'],
+    stage4: ['Artifact in 5 rounds', 'Completed Anvil in 4 rounds', '2 gold every turn', 'Full 5-cost shop in 3 rounds', 'Implant Item (20% AS)'],
+  },
+  {
+    name: 'Evelynn', title: 'God of Sacrifice', key: 'Evelynn',
+    boon: 'Your team gains 10% Durability. Lose an additional 1 health when you lose combat.',
+    stage2: ['8g, lose -1 HP per player picking Evelynn', '2x 2-cost, lose -1 HP', '2x lesser dupe, no shop 2 rounds'],
+    stage3: ['11g, lose -1 HP per player picking Evelynn', 'Random emblem, -3 HP', '15 gold, no shop 2 rounds', '2★ 3-cost and -2 HP', '3★ 1-cost and -2 HP'],
+    stage4: ['14g, lose -1 HP per player picking Evelynn', '2★ 4-cost and -3 HP', 'Completed item, -5 HP', '18 gold, no shop 2 rounds'],
+  },
+  {
+    name: 'Kayle', title: 'God of Items', key: 'Kayle',
+    boon: 'Upgrade a random completed item to Radiant.',
+    stage2: ['Random component + 1 item component: Sparring Gloves, Recurve Bow, or Tear of the Goddess'],
+    stage3: ['Random component + 1 item component: B.F. Sword, Chain Vest, Needlessly Large Rod, or Negatron Cloak'],
+    stage4: ['Random component + 1 item component: from all above item components'],
+  },
+  {
+    name: 'Soraka', title: 'God of Healing', key: 'Soraka',
+    boon: 'Team gains 2 HP per missing Tactician health. +1 current and max health on Tactician each round.',
+    stage2: ['8 HP, maybe 3 gold', '12 HP', "Giant's Belt"],
+    stage3: ['8 HP, maybe 5 gold', '12 HP', "Giant's Belt", 'Implant Item (350 HP)'],
+    stage4: ['8 HP, maybe 5 gold', '12 HP', "Giant's Belt", 'Implant Item (350 HP)'],
+  },
+  {
+    name: 'Thresh', title: 'God of Chance', key: 'Thresh',
+    boon: 'After each player combat, roll a die. Gain rewards based on the result.',
+    stage2: ['Random Boon from any God +2 gold', 'Mystery Loot'],
+    stage3: ['Random Boon from any God +3 gold', 'Mystery Loot'],
+    stage4: ['Random Boon from any God +5 gold', 'Mystery Loot'],
+  },
+  {
+    name: 'Varus', title: 'God of Stars', key: 'Varus',
+    boon: 'Your team gains 10 health for each total star level in your army. Increase 5-cost odds by 4%.',
+    stage2: ['2 & 3 Cost', 'Owned 3-cost', '2 Tiny Dupes', '3-cost shop'],
+    stage3: ['3 & 4 Cost', 'Lesser Dupe', 'Owned 3-cost', '4-cost shop'],
+    stage4: ['4 & 5 Cost', 'Lesser Dupe + 3 gold', '1 Lesser Duplicator + 5 Tiny Duplicators', 'Owned 4-cost', '1% 5-cost odds'],
+  },
+  {
+    name: 'Yasuo', title: 'God of Hexes', key: 'Yasuo',
+    boon: "Increase the power of Yasuo's hexes by 50%. If you only have 2 hexes, gain 12 gold.",
+    stage2: ['Fire Hex (18% dmg, burn/wound)', 'Wood Hex (10% + 30 HP)', 'Wind Hex (30% AS)', 'Ice Hex (15% heal)', 'Electric Hex (2s stun)', 'Socialite Hex (2 mana regen)'],
+    stage3: ['Fire Hex (18% dmg, burn/wound)', 'Wind Hex (30% AS)', 'Ice Hex (15% heal)', 'Electric Hex (2s stun)', 'Socialite Hex (2 mana regen)'],
+    stage4: ['Fire Hex (18% dmg, burn/wound)', 'Wind Hex (30% AS)', 'Ice Hex (15% heal)', 'Electric Hex (2s stun)', 'Socialite Hex (2 mana regen)'],
+  },
+];
+
+function godPortraitUrl(key) {
+  // Gods in Set 17 are a mechanic, not all are champions — but all 9 happen to
+  // exist as LoL champions, so we pull portraits from Riot's Data Dragon CDN.
+  return `https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${key}.png`;
+}
+
+// ── State persistence (shared with calculator.html via sessionStorage) ───
+const STATE_KEY = 'tftCoachState';
+function navIsReload() {
+  const nav = performance.getEntriesByType('navigation')[0];
+  return nav && nav.type === 'reload';
+}
+function loadSavedState() {
+  if (navIsReload()) { sessionStorage.removeItem(STATE_KEY); return {}; }
+  try { return JSON.parse(sessionStorage.getItem(STATE_KEY) || '{}'); }
+  catch { return {}; }
+}
+function saveState(patch) {
+  const cur = JSON.parse(sessionStorage.getItem(STATE_KEY) || '{}');
+  sessionStorage.setItem(STATE_KEY, JSON.stringify({ ...cur, ...patch }));
+}
+
+// Restore active god from previous session
+const _saved = loadSavedState();
+let activeGodIdx = (_saved.gods && _saved.gods.activeGodIdx != null) ? _saved.gods.activeGodIdx : null;
+
+function renderGods() {
+  const grid = document.getElementById('godsGrid');
+
+  // Reorder: active god goes first, the rest stay in original order
+  let order;
+  if (activeGodIdx == null) {
+    order = GODS.map((_, i) => i);
+  } else {
+    order = [activeGodIdx, ...GODS.map((_, i) => i).filter(i => i !== activeGodIdx)];
+  }
+
+  grid.innerHTML = order.map(idx => {
+    const g = GODS[idx];
+    const isActive = idx === activeGodIdx;
+    const stages = isActive ? `
+      <div class="god-stages">
+        ${['stage2', 'stage3', 'stage4'].map((s, i) => `
+          <div class="stage-block">
+            <div class="stage-label">Stage ${i + 2}</div>
+            <ul class="stage-list">
+              ${g[s].map(opt => `<li>${opt}</li>`).join('')}
+            </ul>
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+    return `
+      <div class="god-card${isActive ? ' active' : ''}" data-idx="${idx}">
+        <div class="god-head">
+          <div class="god-portrait">
+            <img src="${godPortraitUrl(g.key)}" alt="${g.name}"
+                 onerror="this.style.display='none'; this.parentElement.textContent='${g.name[0]}';">
+          </div>
+          <div class="god-info">
+            <div class="god-name">${g.name}</div>
+            <div class="god-title">${g.title}</div>
+          </div>
+        </div>
+        <div class="god-boon">
+          <div class="god-boon-label">Boon (4–7)</div>
+          ${g.boon}
+          ${isActive && g.trials ? `
+            <ul class="god-trials">
+              ${g.trials.map(t => `<li>${t}</li>`).join('')}
+            </ul>
+          ` : ''}
+        </div>
+        ${stages}
+      </div>
+    `;
+  }).join('');
+}
+
+document.getElementById('godsGrid').addEventListener('click', e => {
+  const card = e.target.closest('.god-card');
+  if (!card) return;
+  const idx = parseInt(card.dataset.idx);
+  activeGodIdx = (activeGodIdx === idx) ? null : idx;
+  saveState({ gods: { activeGodIdx } });
+  renderGods();
+});
+
+renderGods();
+</script>
+</body>
+</html>

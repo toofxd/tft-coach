@@ -1,0 +1,358 @@
+[
+  {
+    "url": "https://gum.criteo.com/sid/json?origin=prebid&topUrl=https%3A%2F%2Ftactics.tools%2F&domain=tactics.tools&bundle=6fLjp184U3pieU53elRSalZKWjZCMnFoZ2ppT3clMkJUc2dDZHpBVzBlUUxnQ2ZacUdTNmFFJTJCNkZYbWdUdW44NFVDcUhKQnpMbGl2VzZOdW5EbWZYcnkyWjlkUWUxYjhxd1M4ZVlQVUZFbHVGUFl5Z21DNlBVam9sY1F1WHlONjc5dk5XYSUyRg&cw=1&lsw=1&gpp=DBABT~1YNN&gpp_sid=6",
+    "data": {
+      "bundle": "5URqAF84U3pieU53elRSalZKWjZCMnFoZ2pwc1RCZGI0ZzdBVHNJeHhpN2ZkeXR2RmI3ekxzYzI3NU9QTk1OTHNYYmlSaUtuWWVNWkRvc0EzOWhhc0hxWjFCanoxQmNtNkNpT20lMkJKblZqNUpLY2xvdHklMkI5Qk4zYlZWYlJCaWR4cFAzVGNjbmljaGlmWk9scTJ1ZlFwS2dUZlBBJTNEJTNE",
+      "bidId": "Epg06182NUt0cjRiOGdTTnM4Vnd0Wk8zVUYzVlozTkdXVW54QzZWbERnbDVYRjJlT2tzREJQb085cTd0TFY3THpQTTh4MGJmN0c0RiUyRm1HZ1dlVDliNVJhOVFtRElkUmQxMmhPaExGU0ppWjgyJTJGSW8lM0Q",
+      "pixels": []
+    }
+  },
+  {
+    "url": "https://id5-sync.com/api/config/prebid",
+    "data": {
+      "fetchCall": {
+        "url": "https://id5-sync.com/g/v2/482.json",
+        "overrides": {
+          "pbExtensions": {
+            "bounce": {
+              "setCookie": false
+            }
+          }
+        }
+      },
+      "extensionsCall": {
+        "url": "https://lb.eu-1-id5-sync.com/lb/v1",
+        "method": "GET"
+      }
+    }
+  },
+  {
+    "url": "https://api.id5-sync.com/analytics/1528/id5-api-js",
+    "data": {
+      "sampling": 20,
+      "ingestUrl": "https://api.id5-sync.com/analytics/event/id5-api-js/1528",
+      "additionalCleanupRules": {
+        "auctionEnd": [
+          {
+            "match": [
+              [
+                "adUnits"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "bidderRequests"
+              ],
+              [
+                "*"
+              ],
+              [
+                "bids"
+              ],
+              [
+                "*"
+              ],
+              [
+                "params",
+                "ortb2Imp",
+                "mediaTypes",
+                "sizes",
+                "metrics",
+                "rtd",
+                "nativeParams",
+                "nativeOrtbRequest"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "bidderRequests"
+              ],
+              [
+                "*"
+              ],
+              [
+                "bids"
+              ],
+              [
+                "*"
+              ],
+              [
+                "ortb2"
+              ],
+              [
+                "!user"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "bidderRequests"
+              ],
+              [
+                "*"
+              ],
+              [
+                "bids"
+              ],
+              [
+                "*"
+              ],
+              [
+                "ortb2"
+              ],
+              [
+                "user"
+              ],
+              [
+                "!ext"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "bidderRequests"
+              ],
+              [
+                "*"
+              ],
+              [
+                "bids"
+              ],
+              [
+                "*"
+              ],
+              [
+                "ortb2"
+              ],
+              [
+                "user"
+              ],
+              [
+                "ext"
+              ],
+              [
+                "!eids"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "bidderRequests"
+              ],
+              [
+                "*"
+              ],
+              [
+                "bids"
+              ],
+              [
+                "*"
+              ],
+              [
+                "ortb2"
+              ],
+              [
+                "user"
+              ],
+              [
+                "ext"
+              ],
+              [
+                "eids"
+              ],
+              [
+                "*"
+              ],
+              [
+                "uids"
+              ],
+              [
+                "*"
+              ],
+              [
+                "id"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "bidderRequests"
+              ],
+              [
+                "*"
+              ],
+              [
+                "refererInfo",
+                "metrics",
+                "gdprConsent",
+                "adUnitsS2SCopy"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "bidderRequests"
+              ],
+              [
+                "*"
+              ],
+              [
+                "ortb2"
+              ],
+              [
+                "!user"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "bidderRequests"
+              ],
+              [
+                "*"
+              ],
+              [
+                "ortb2"
+              ],
+              [
+                "user"
+              ],
+              [
+                "!ext"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "bidderRequests"
+              ],
+              [
+                "*"
+              ],
+              [
+                "ortb2"
+              ],
+              [
+                "user"
+              ],
+              [
+                "ext"
+              ],
+              [
+                "!eids"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "bidderRequests"
+              ],
+              [
+                "*"
+              ],
+              [
+                "ortb2"
+              ],
+              [
+                "user"
+              ],
+              [
+                "ext"
+              ],
+              [
+                "eids"
+              ],
+              [
+                "*"
+              ],
+              [
+                "uids"
+              ],
+              [
+                "*"
+              ],
+              [
+                "id"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "noBids"
+              ],
+              [
+                "*"
+              ],
+              [
+                "!bidId"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "metrics"
+              ]
+            ],
+            "apply": "erase"
+          },
+          {
+            "match": [
+              [
+                "bidsReceived"
+              ],
+              [
+                "*"
+              ],
+              [
+                "meta",
+                "metrics",
+                "adserverTargeting"
+              ]
+            ],
+            "apply": "erase"
+          }
+        ],
+        "bidWon": [
+          {
+            "match": [
+              [
+                "meta",
+                "metrics",
+                "adserverTargeting",
+                "pbsWurl",
+                "params"
+              ]
+            ],
+            "apply": "erase"
+          }
+        ]
+      }
+    }
+  }
+]
