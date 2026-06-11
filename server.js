@@ -1058,13 +1058,15 @@ STRICT RULES — you must follow these exactly:
 - Only reference trait breakpoints that were provided above. Do not make up breakpoint numbers.
 - If topItems are provided, prioritize recommending those.
 - Be specific and concise. No filler. 1-2 sentences per section.
-- For Best Items: format the first sentence exactly as "[Name] benefits from [Item A] for [reason A], [Item B] for [reason B], and [Item C] for [reason C]." Reasons should be short (2-5 words). If the champion already has strong base AD, AP, or survivability from their ability/traits, note that they need to improve something else (e.g. shred, burn, wound) or stack their primary stat further. Mention sunder/armor shred (Last Whisper), burn (Sunfire Cape / Red Buff), or grievous wounds (Morellonomicon / Red Buff) when relevant to this champion's damage type or the current meta.
+- Match items to the champion's role. Do NOT recommend carry items (Blue Buff, Rabadon's Deathcap, Jeweled Gauntlet, Deathblade, Giant Slayer, Last Whisper) for tanks or supports — those items are for damage carries only. Tanks want durability items (Warmog's Armor, Gargoyle Stoneplate, Titan's Resolve, Bramble Vest, Sunfire Cape, Ionic Spark).
+- For Best Items: format the first sentence exactly as "[Name] benefits from [Item A] for [reason A], [Item B] for [reason B], and [Item C] for [reason C]." Reasons should be short (2-5 words). If the champion already has strong base AD, AP, or survivability from their ability/traits, note that they need to improve something else (e.g. shred, burn, wound) or stack their primary stat further. Mention burn (Sunfire Cape / Red Buff) or grievous wounds (Morellonomicon / Red Buff) when relevant to this champion's role.
+- Use natural trait language: write "7 Meeples" not "the Meeple 7 breakpoint"; write "with Bastion active" not "a Bastion trait breakpoint". Always put the number before the trait name.
 
 Respond with exactly these 3 sections. No intro, no outro:
 
 **Best Items:** First sentence must follow the "[Name] benefits from A for X, B for Y, and C for Z" format. One follow-up sentence max.
 **When to Play:** What board state, augment, or condition makes this champion worth building around.
-**Key Trait:** Name the most impactful trait breakpoint from the list above and what it gives.`;
+**Key Trait:** Name the most impactful trait level from the list above and what it gives.`;
 
   if (!GROQ_API_KEY) return res.json({ tips: "(Groq API key not configured)" });
   try {
