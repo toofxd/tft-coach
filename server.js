@@ -1013,7 +1013,9 @@ Write 3–5 concise, specific coaching suggestions. Be direct and actionable. Us
 
     let coachingText = "(No AI API keys configured)";
     if (GEMINI_API_KEY || GROQ_API_KEY) {
-      coachingText = await callAI(prompt, 500);
+      coachingText = GEMINI_API_KEY
+        ? await callGeminiWithSearch(prompt).catch(() => callAI(prompt, 500))
+        : await callAI(prompt, 500);
     }
 
     res.json({
@@ -1068,9 +1070,11 @@ Respond with exactly these 3 sections. No intro, no outro:
 **When to Play:** What board state, augment, or condition makes this champion worth building around.
 **Key Trait:** Name the most impactful trait level from the list above and what it gives.`;
 
-  if (!GROQ_API_KEY) return res.json({ tips: "(Groq API key not configured)" });
+  if (!GEMINI_API_KEY && !GROQ_API_KEY) return res.json({ tips: "(No AI API keys configured)" });
   try {
-    const tips = await callGroq(prompt, 400);
+    const tips = GEMINI_API_KEY
+      ? await callGeminiWithSearch(prompt).catch(() => callGroq(prompt, 400))
+      : await callGroq(prompt, 400);
     res.json({ tips });
   } catch (e) {
     console.error("Groq champion-tips error:", e.message);
