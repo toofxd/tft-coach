@@ -140,4 +140,4 @@ def collect(
 
 
 if __name__ == "__main__":
-    collect()
+    collect(matches_per_player=30)

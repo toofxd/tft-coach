@@ -7,109 +7,123 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+:root {
+  --navy:      #0c2340;
+  --navy-card: #0e2850;
+  --navy-deep: #071830;
+  --gold:      #ae9142;
+  --gold-light:#c9a84c;
+  --text:      #f0ebe0;
+  --text-70:   rgba(240,235,224,0.7);
+  --text-50:   rgba(240,235,224,0.5);
+  --text-30:   rgba(240,235,224,0.3);
+  --border:    rgba(255,255,255,0.09);
+  --border-dim:rgba(255,255,255,0.06);
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: #0d1520; color: #d4cfc7; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 14px; padding: 20px; min-height: 100vh; }
+body { background: var(--navy); color: var(--text); font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 14px; padding: 80px 20px 20px; min-height: 100vh; }
 a { color: inherit; }
 
 /* Cards */
-.card { background: #111927; border: 1px solid #1e2d3e; border-radius: 6px; padding: 14px; }
+.card { background: var(--navy-card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
 
 /* Section label */
-.sec-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #a8a6b4; font-weight: 600; margin-bottom: 8px; }
+.sec-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-50); font-weight: 600; margin-bottom: 8px; }
 
 /* Inputs */
 input {
-  background: #0b1219;
-  border: 1px solid #1e2d3e;
-  color: #e0ddd8;
-  border-radius: 4px;
+  background: var(--navy-deep);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
   font-family: inherit;
   font-size: 14px;
 }
-input::placeholder { color: #3a3848; }
-input:focus { outline: none; border-color: #4a9fe0; }
+input::placeholder { color: var(--text-30); }
+input:focus { outline: none; border-color: var(--gold); }
 
 /* Star buttons */
 .star-btn {
-  padding: 5px 14px; border: 1px solid #1e2d3e; border-radius: 4px;
-  font-size: 14px; cursor: pointer; background: #0b1219; color: #5a5868;
-  font-family: inherit; transition: all 0.12s;
+  padding: 5px 14px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 14px; cursor: pointer; background: var(--navy-deep); color: var(--text-30);
+  font-family: inherit; transition: all 0.15s;
 }
-.star-btn.active { background: #4a9fe0; color: #fff; border-color: #4a9fe0; font-weight: 700; }
-.star-btn:hover:not(.active) { border-color: #4a9fe0; color: #4a9fe0; }
+.star-btn.active { background: var(--gold); color: var(--navy); border-color: var(--gold); font-weight: 700; }
+.star-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
 
 /* Breakpoint buttons */
 .bp-btn {
-  padding: 4px 12px; border: 1px solid #1e2d3e; border-radius: 4px;
-  font-size: 13px; cursor: pointer; background: #0b1219; color: #5a5868;
-  font-family: inherit; transition: all 0.12s;
+  padding: 4px 12px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 13px; cursor: pointer; background: var(--navy-deep); color: var(--text-30);
+  font-family: inherit; transition: all 0.15s;
 }
-.bp-btn.active { background: #4a9fe0; color: #fff; border-color: #4a9fe0; font-weight: 700; }
-.bp-btn:hover:not(.active) { border-color: #4a9fe0; color: #4a9fe0; }
+.bp-btn.active { background: var(--gold); color: var(--navy); border-color: var(--gold); font-weight: 700; }
+.bp-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
 
 /* Trait pill */
 .trait-pill {
-  display: inline-block; padding: 3px 9px; border-radius: 3px;
-  font-size: 12px; background: #1e1e26; color: #8a8898;
-  border: 1px solid #2a2a32; font-weight: 500;
+  display: inline-block; padding: 3px 9px; border-radius: 4px;
+  font-size: 12px; background: rgba(255,255,255,0.05); color: var(--text-50);
+  border: 1px solid var(--border-dim); font-weight: 500;
 }
 
 /* Item slots */
 .item-slot {
-  border: 1px dashed #1e2d3e; border-radius: 4px; padding: 9px 11px; min-height: 52px;
-  background: #0b1219;
+  border: 1px dashed var(--border); border-radius: 6px; padding: 9px 11px; min-height: 52px;
+  background: var(--navy-deep);
 }
-.item-slot.has-item { border-style: solid; border-color: #4a9fe044; background: #0e1620; }
+.item-slot.has-item { border-style: solid; border-color: rgba(174,145,66,0.3); background: rgba(174,145,66,0.05); }
 
 /* Cost colors */
-.cost-1 { color: #777; }
+.cost-1 { color: var(--text-30); }
 .cost-2 { color: #3eb87a; }
-.cost-3 { color: #4a9fe0; }
+.cost-3 { color: var(--gold-light); }
 .cost-4 { color: #b054d4; }
 .cost-5 { color: #e0b830; }
 
 /* Stat table */
 .stat-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .stat-table th {
-  font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
-  color: #a8a6b4; font-weight: 600; text-align: right;
-  padding: 0 8px 9px 8px; border-bottom: 1px solid #2a2a32;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-50); font-weight: 600; text-align: right;
+  padding: 0 8px 9px 8px; border-bottom: 1px solid var(--border);
 }
 .stat-table th:first-child { text-align: left; }
 .stat-table td {
-  padding: 7px 8px; border-bottom: 1px solid #1c1c22;
-  text-align: right; font-variant-numeric: tabular-nums; color: #b8b4c0;
+  padding: 7px 8px; border-bottom: 1px solid var(--border-dim);
+  text-align: right; font-variant-numeric: tabular-nums; color: var(--text-70);
 }
-.stat-table td:first-child { text-align: left; color: #9a98a8; }
+.stat-table td:first-child { text-align: left; color: var(--text-50); }
 .stat-table tr:last-child td { border-bottom: none; }
-.stat-table .td-bonus { color: #4a9fe0; font-weight: 600; }
+.stat-table .td-bonus { color: var(--gold-light); font-weight: 600; }
 .stat-table .td-trait { color: #b054d4; font-weight: 600; }
-.stat-table .td-total { font-weight: 700; color: #c8c4c0; font-size: 15px; }
-.stat-table .td-zero { color: #1e2d3e; }
-.stat-table tr:hover td { background: #ffffff05; }
+.stat-table .td-total { font-weight: 700; color: var(--text); font-size: 15px; }
+.stat-table .td-zero { color: var(--border); }
+.stat-table tr:hover td { background: rgba(255,255,255,0.03); }
 
 /* Searchable dropdown */
 .search-wrap { position: relative; }
 .search-input { width: 100%; padding: 8px 11px; }
 .search-drop {
   position: absolute; top: 100%; left: 0; right: 0;
-  background: #111927; border: 1px solid #1e2d3e; border-top: none;
-  border-radius: 0 0 5px 5px; max-height: 260px; overflow-y: auto;
-  z-index: 100; display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  background: var(--navy-card); border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 6px 6px; max-height: 260px; overflow-y: auto;
+  z-index: 100; display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 .search-drop.open { display: block; }
-.search-opt { padding: 7px 11px; font-size: 14px; cursor: pointer; color: #d4cfc7; }
-.search-opt:hover, .search-opt.focused { background: #1a2840; color: #4a9fe0; }
-.search-opt .opt-sub { font-size: 12px; color: #4a4858; margin-left: 5px; }
+.search-opt { padding: 7px 11px; font-size: 14px; cursor: pointer; color: var(--text-70); }
+.search-opt:hover, .search-opt.focused { background: rgba(174,145,66,0.1); color: var(--gold-light); }
+.search-opt .opt-sub { font-size: 12px; color: var(--text-30); margin-left: 5px; }
 .search-group {
   padding: 5px 11px 3px; font-size: 11px; text-transform: uppercase;
-  letter-spacing: 0.08em; color: #4a4858; background: #0b1219;
-  border-top: 1px solid #1e2d3e; pointer-events: none; font-weight: 600;
+  letter-spacing: 0.1em; color: var(--text-30); background: var(--navy-deep);
+  border-top: 1px solid var(--border-dim); pointer-events: none; font-weight: 600;
 }
 
 /* Ability section */
 .ability-card {
-  background: #0b1219; border: 1px solid #1e2d3e; border-radius: 5px;
+  background: var(--navy-deep); border: 1px solid var(--border); border-radius: 6px;
   padding: 12px 14px; margin-bottom: 14px;
 }
 
@@ -119,60 +133,142 @@ input:focus { outline: none; border-color: #4a9fe0; }
   border: 1px solid currentColor; letter-spacing: 0.04em; font-weight: 600;
 }
 
-/* Scrollbar styling */
+/* Scrollbar — gold on hover, matches tiffanygaming.com */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0b1219; }
-::-webkit-scrollbar-thumb { background: #1e2d3e; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #2a3d52; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: transparent; border-radius: 3px; transition: background 0.3s; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+* { scrollbar-color: transparent transparent; scrollbar-width: thin; }
+*:hover { scrollbar-color: var(--gold) transparent; }
 
 /* Cost filter buttons */
 .cost-btn {
-  padding: 4px 9px; border: 1px solid #1e2d3e; border-radius: 4px;
-  font-size: 12px; cursor: pointer; background: #0b1219; color: #5a5868;
-  font-family: inherit; font-weight: 600; transition: all 0.12s;
+  padding: 4px 9px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 12px; cursor: pointer; background: var(--navy-deep); color: var(--text-30);
+  font-family: inherit; font-weight: 600; transition: all 0.15s;
   display: inline-flex; align-items: center; gap: 3px;
 }
 img.coin { width: 12px; height: 12px; flex-shrink: 0; }
-.cost-btn.active { background: #4a9fe0; color: #fff; border-color: #4a9fe0; }
-.cost-btn:hover:not(.active) { border-color: #4a9fe0; color: #4a9fe0; }
-/* All cost buttons use the same blue active state — no per-tier colors */
+.cost-btn.active { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.cost-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
 </style>
 </head>
 <style>
-.tab-bar { display:flex; align-items:center; gap:0; margin-bottom:18px; border-bottom:1px solid #2e2e36; background:#0d1117; }
-.tab-bar-title { font-size:18px; font-weight:700; color:#e8e4de; margin-right:24px; padding-bottom:12px; }
-.tab-btn {
-  padding: 10px 18px 12px; font-size:13px; font-weight:600; cursor:pointer;
-  color:#5a5868; background:none; border:none; border-bottom:2px solid transparent;
-  font-family:inherit; letter-spacing:0.02em; transition:color 0.12s;
-  margin-bottom:-1px;
+/* ── Sticky nav ───────────────────────────────────────────────── */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
-.tab-btn:hover { color:#d4cfc7; }
-.tab-btn.active { color:#4a9fe0; border-bottom-color:#4a9fe0; }
+.site-nav.scrolled {
+  background: rgba(12,35,64,0.92);
+  border-color: var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+/* ── Shimmer title (matches tiffanygaming.com "Featured Work" style) ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.nav-title {
+  background: linear-gradient(105deg,
+    #ae9142 0%, #f0d98a 22%, #ae9142 40%,
+    #c9a84c 58%, #f0d98a 78%, #ae9142 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 9s linear infinite;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+/* ── Right nav group ─────────────────────────────────────────── */
+.nav-right { display:flex; align-items:center; gap:2px; }
+.tab-btn {
+  height: 62px;
+  padding: 0 15px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  color: var(--text-30); background: none; border: none;
+  border-bottom: 2px solid transparent;
+  font-family: inherit; letter-spacing: 0.03em; transition: color 0.15s;
+  display: inline-flex; align-items: center;
+  text-decoration: none;
+}
+.tab-btn:hover { color:var(--text-70); }
+.tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
+.nav-divider { width:1px; height:18px; background:rgba(255,255,255,0.18); margin:0 8px; flex-shrink:0; }
+.icon-btn {
+  width:34px; height:34px;
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:50%; color:var(--text-50); text-decoration:none;
+  transition:background 0.15s, color 0.15s; flex-shrink:0;
+}
+.icon-btn:hover { background:rgba(174,145,66,0.18); color:var(--gold-light); }
+/* ── Content panes ───────────────────────────────────────────── */
 .tab-pane { display:none; }
 .tab-pane.active { display:block; }
 .coach-count-btn {
-  padding:8px 12px; border:1px solid #1e2d3e; border-radius:6px;
-  background:#0b1219; color:#5a5868; font-family:inherit; font-size:13px;
-  font-weight:600; cursor:pointer; transition:all 0.12s;
+  padding:8px 12px; border:1px solid var(--border); border-radius:6px;
+  background:var(--navy-deep); color:var(--text-30); font-family:inherit; font-size:13px;
+  font-weight:600; cursor:pointer; transition:all 0.15s;
 }
-.coach-count-btn:hover { border-color:#4a9fe0; color:#4a9fe0; }
-.coach-count-btn.active { background:#4a9fe0; color:#fff; border-color:#4a9fe0; }
+.coach-count-btn:hover { border-color:var(--gold); color:var(--gold); }
+.coach-count-btn.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
 .coach-tip { margin-bottom:12px; line-height:1.7; display:flex; gap:8px; align-items:flex-start; }
 .coach-tip:last-child { margin-bottom:0; }
-.tip-num { color:#b8b4c0; font-weight:700; flex-shrink:0; min-width:18px; }
+.tip-num { color:var(--gold); font-weight:700; flex-shrink:0; min-width:18px; }
 </style>
 
 <body>
-<div style="max-width:1060px;margin:0 auto;">
 
-  <!-- Tab bar -->
-  <div class="tab-bar">
-    <span class="tab-bar-title">Tactician's Fundamentals by <a href="https://tiffanygaming.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Tiffany</a> (TFT Set 17)</span>
-    <button class="tab-btn active" onclick="switchTab('calculator')">Stat Calculator</button>
-    <button class="tab-btn" onclick="switchTab('coach')">TFT Coach</button>
-    <a href="/gods.html" class="tab-btn" style="text-decoration:none;display:inline-block;">Gods</a>
+<!-- ── Sticky nav ── -->
+<header class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="https://tiffanygaming.com" target="_blank" rel="noopener noreferrer" class="nav-title">
+      Tactician's Fundamentals by Tiffany
+    </a>
+    <nav class="nav-right">
+      <button class="tab-btn active" onclick="switchTab('calculator')">Stat Calculator</button>
+      <button class="tab-btn" onclick="switchTab('coach')">TFT Coach</button>
+      <a href="/gods.html" class="tab-btn">Gods</a>
+      <a href="/about.html" class="tab-btn">About</a>
+      <span class="nav-divider"></span>
+      <a href="https://www.linkedin.com/in/tsangtiffany" target="_blank" rel="noopener noreferrer"
+         class="icon-btn" aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+      <a href="mailto:ttsang@alumni.nd.edu" class="icon-btn" aria-label="Email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+      </a>
+    </nav>
   </div>
+</header>
+
+<div style="max-width:1060px;margin:0 auto;">
 
   <!-- CALCULATOR TAB -->
   <div id="tab-calculator" class="tab-pane active">
@@ -293,8 +389,8 @@ img.coin { width: 12px; height: 12px; flex-shrink: 0; }
 
         <!-- Champ header -->
         <div style="display:flex;align-items:center;gap:9px;margin-bottom:5px;">
-          <span id="champName" style="font-size:20px;font-weight:700;color:#e8e4de;letter-spacing:0.01em;"></span>
-          <span id="champStar" style="font-size:15px;color:#4a9fe0;letter-spacing:2px;"></span>
+          <span id="champName" style="font-size:20px;font-weight:700;color:#f0ebe0;letter-spacing:0.01em;"></span>
+          <span id="champStar" style="font-size:15px;color:#ae9142;letter-spacing:2px;"></span>
           <span id="champRole" class="role-tag"></span>
         </div>
         <div id="champTraits" style="margin-bottom:12px;display:flex;flex-wrap:wrap;gap:4px;"></div>
@@ -302,7 +398,7 @@ img.coin { width: 12px; height: 12px; flex-shrink: 0; }
         <!-- Ability -->
         <div class="ability-card">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-            <span id="abilityName" style="font-size:15px;font-weight:700;color:#4a9fe0;"></span>
+            <span id="abilityName" style="font-size:15px;font-weight:700;color:#ae9142;"></span>
             <span id="abilityMana" style="font-size:12px;color:#5b8dd9;"></span>
           </div>
           <div id="abilityDesc" style="font-size:13px;color:#c8c4c0;line-height:1.7;margin-bottom:6px;white-space:pre-line;"></div>
@@ -344,16 +440,16 @@ img.coin { width: 12px; height: 12px; flex-shrink: 0; }
 
   <!-- Disclaimer -->
   <div style="margin-top:40px;padding:16px 0 8px;border-top:1px solid #2a3040;text-align:center;">
-    <p style="font-size:11px;color:#6a7a8a;line-height:1.7;max-width:760px;margin:0 auto 8px;">
+    <p style="font-size:11px;color:rgba(240,235,224,0.4);line-height:1.7;max-width:760px;margin:0 auto 8px;">
       <strong style="color:#8a9aaa;">Data sources:</strong>
-      Data shown is not guaranteed to be accurate — third-party sources (<a href="https://communitydragon.org" target="_blank" rel="noopener" style="color:#6a9fc0;text-decoration:none;">Community Dragon</a>, Riot Data Dragon, <a href="https://tactics.tools" target="_blank" rel="noopener" style="color:#6a9fc0;text-decoration:none;">tactics.tools</a>, <a href="https://mobalytics.gg" target="_blank" rel="noopener" style="color:#6a9fc0;text-decoration:none;">Mobalytics</a>) may contain errors, outdated values, or incomplete samples.
-      AI coaching and champion tips are generated by <a href="https://groq.com" target="_blank" rel="noopener" style="color:#6a9fc0;text-decoration:none;">Groq</a> (LLaMA 3.3) and Google Gemini (gemini-2.5-flash), and may not reflect current patch state.
+      Data shown is not guaranteed to be accurate — third-party sources (<a href="https://communitydragon.org" target="_blank" rel="noopener" style="color:#c9a84c;text-decoration:none;">Community Dragon</a>, Riot Data Dragon, <a href="https://tactics.tools" target="_blank" rel="noopener" style="color:#c9a84c;text-decoration:none;">tactics.tools</a>, <a href="https://mobalytics.gg" target="_blank" rel="noopener" style="color:#c9a84c;text-decoration:none;">Mobalytics</a>) may contain errors, outdated values, or incomplete samples.
+      AI coaching and champion tips are generated by <a href="https://groq.com" target="_blank" rel="noopener" style="color:#c9a84c;text-decoration:none;">Groq</a> (LLaMA 3.3) and Google Gemini (gemini-2.5-flash), and may not reflect current patch state.
     </p>
     <p style="font-size:11px;color:#556070;line-height:1.6;max-width:760px;margin:0 auto 8px;">
       This tool isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
     </p>
-    <p style="font-size:11px;color:#6a7a8a;margin:0;">
-      Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener" style="color:#6a9fc0;text-decoration:none;">Tiffany Tsang</a>
+    <p style="font-size:11px;color:rgba(240,235,224,0.4);margin:0;">
+      Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener" style="color:#c9a84c;text-decoration:none;">Tiffany Tsang</a>
     </p>
   </div>
 
@@ -362,129 +458,77 @@ img.coin { width: 12px; height: 12px; flex-shrink: 0; }
   <!-- COACH TAB -->
   <div id="tab-coach" class="tab-pane">
 
-    <!-- Search bar + game count buttons -->
-    <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center;">
-      <input id="coachHandle" type="text" placeholder="Riot ID  e.g. toofxd#NA1"
-        style="flex:1;padding:10px 14px;background:#0b1219;border:1px solid #1e2d3e;border-radius:6px;color:#e0ddd8;font-family:inherit;font-size:14px;outline:none;"
-        onfocus="this.style.borderColor='#4a9fe0'" onblur="this.style.borderColor='#1e2d3e'"
-        onkeydown="if(event.key==='Enter')loadProfile()">
-      <div style="display:flex;gap:4px;">
-        <button class="coach-count-btn active" data-count="20" onclick="setCoachCount(20)">20</button>
-        <button class="coach-count-btn" data-count="10" onclick="setCoachCount(10)">10</button>
-        <button class="coach-count-btn" data-count="5" onclick="setCoachCount(5)">5</button>
-        <button class="coach-count-btn" data-count="1" onclick="setCoachCount(1)">1</button>
+    <!-- Challenger/GM Takeaways — always visible, no Riot API needed -->
+    <div class="card" id="metaInsightsCard" style="margin-bottom:14px;">
+      <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.09);display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:11px;font-weight:700;color:rgba(240,235,224,0.5);text-transform:uppercase;letter-spacing:0.1em;">Challenger / GM Takeaways</span>
+        <span id="metaGamesLabel" style="font-size:11px;color:rgba(240,235,224,0.4);"></span>
       </div>
-      <button onclick="loadProfile()"
-        style="padding:10px 20px;background:#4a9fe0;color:#fff;border:none;border-radius:6px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;">
-        Load
-      </button>
-    </div>
-
-    <div id="coachError" style="display:none;padding:10px 14px;background:#1a0a0a;border:1px solid #5a1a1a;border-radius:6px;color:#e07070;margin-bottom:14px;font-size:13px;"></div>
-
-    <!-- All Set 17 stats banner — shown as soon as profile loads -->
-    <div id="coachStats" style="display:none;margin-bottom:6px;">
-      <div style="font-size:10px;font-weight:700;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">All Set 17 Games</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="coachAvgPlace" style="font-size:26px;font-weight:800;color:#e8e4de;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Avg Place</div>
-        </div>
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="coachTop4" style="font-size:26px;font-weight:800;color:#3eb87a;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Top 4</div>
-        </div>
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="coachWins" style="font-size:26px;font-weight:800;color:#e0b830;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Wins</div>
-        </div>
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="coachGames" style="font-size:26px;font-weight:800;color:#e8e4de;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Games</div>
-        </div>
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="coachAvgLevel" style="font-size:26px;font-weight:800;color:#b054d4;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Avg Level</div>
-        </div>
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="coachAvgGold" style="font-size:26px;font-weight:800;color:#4a9fe0;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Gold Left</div>
+      <div style="padding:14px;">
+        <div id="metaBenchmarks" style="display:flex;flex-direction:column;gap:10px;font-size:13px;color:rgba(240,235,224,0.7);line-height:1.7;">
+          <span style="color:rgba(240,235,224,0.4);font-style:italic;">Loading…</span>
         </div>
       </div>
     </div>
 
-    <!-- AI Coaching box — shown immediately with loading state -->
-    <div class="card" id="coachBox" style="display:none;margin-top:14px;">
-      <div style="padding:10px 14px;border-bottom:1px solid #1e2d3e;display:flex;align-items:center;justify-content:space-between;">
-        <span style="font-size:11px;font-weight:700;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.1em;" id="coachBoxLabel">AI Coaching</span>
-        <span id="coachTipsLoading" style="font-size:11px;color:#3a3848;display:none;">Analyzing…</span>
+    <!-- Analyze My Matches -->
+    <div class="card" style="margin-top:14px;">
+      <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.09);">
+        <span style="font-size:11px;font-weight:700;color:rgba(240,235,224,0.5);text-transform:uppercase;letter-spacing:0.1em;">Analyze My Matches</span>
       </div>
-      <div id="coachTips" style="padding:16px;font-size:13px;color:#b8b4c0;min-height:60px;"></div>
-    </div>
-
-    <!-- Recent X games stats banner — shown below coaching -->
-    <div id="coachRecentStats" style="display:none;margin-top:14px;">
-      <div style="font-size:10px;font-weight:700;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;" id="coachRecentLabel">Last 20 Games</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="recentAvgPlace" style="font-size:26px;font-weight:800;color:#e8e4de;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Avg Place</div>
+      <div style="padding:14px;">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <input id="analyzeInput" type="text" placeholder="Riot ID  e.g. toofxd#NA1"
+            style="flex:1;min-width:160px;padding:9px 12px;background:#071830;border:1px solid rgba(255,255,255,0.09);border-radius:5px;color:#e0ddd8;font-family:inherit;font-size:13px;outline:none;"
+            onfocus="this.style.borderColor='#ae9142'" onblur="this.style.borderColor='#1e2d3e'"
+            onkeydown="if(event.key==='Enter')analyzeMatches()">
+          <div style="display:flex;gap:4px;">
+            <button class="coach-count-btn active" data-analyze-count="20" onclick="setAnalyzeCount(20)">20</button>
+            <button class="coach-count-btn" data-analyze-count="10" onclick="setAnalyzeCount(10)">10</button>
+            <button class="coach-count-btn" data-analyze-count="5" onclick="setAnalyzeCount(5)">5</button>
+            <button class="coach-count-btn" data-analyze-count="1" onclick="setAnalyzeCount(1)">1</button>
+          </div>
+          <button onclick="analyzeMatches()"
+            style="padding:9px 18px;background:#ae9142;border:none;border-radius:6px;color:#0c2340;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;letter-spacing:0.02em;">
+            Analyze
+          </button>
         </div>
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="recentTop4" style="font-size:26px;font-weight:800;color:#3eb87a;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Top 4</div>
-        </div>
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="recentWins" style="font-size:26px;font-weight:800;color:#e0b830;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Wins</div>
-        </div>
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="recentGames" style="font-size:26px;font-weight:800;color:#e8e4de;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Games</div>
-        </div>
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="recentAvgLevel" style="font-size:26px;font-weight:800;color:#b054d4;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Avg Level</div>
-        </div>
-        <div class="card" style="padding:14px 20px;flex:1;min-width:90px;text-align:center;">
-          <div id="recentAvgGold" style="font-size:26px;font-weight:800;color:#4a9fe0;">—</div>
-          <div style="font-size:11px;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">Gold Left</div>
-        </div>
+        <div id="analyzeResponse" style="display:none;margin-top:14px;font-size:13px;color:rgba(240,235,224,0.7);line-height:1.7;border-top:1px solid #1e2d3e;padding-top:12px;"></div>
       </div>
     </div>
 
     <!-- Ask AI -->
     <div class="card" style="margin-top:14px;">
-      <div style="padding:10px 14px;border-bottom:1px solid #1e2d3e;">
-        <span style="font-size:11px;font-weight:700;color:#a8a6b4;text-transform:uppercase;letter-spacing:0.1em;">Ask AI</span>
+      <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.09);">
+        <span style="font-size:11px;font-weight:700;color:rgba(240,235,224,0.5);text-transform:uppercase;letter-spacing:0.1em;">Ask AI</span>
       </div>
       <div style="padding:14px;">
         <div style="display:flex;gap:8px;">
           <input id="askInput" type="text" placeholder="Ask anything TFT… e.g. When should I slow roll on 6?"
-            style="flex:1;padding:9px 12px;background:#0b1219;border:1px solid #1e2d3e;border-radius:5px;color:#e0ddd8;font-family:inherit;font-size:13px;outline:none;"
-            onfocus="this.style.borderColor='#4a9fe0'" onblur="this.style.borderColor='#1e2d3e'"
+            style="flex:1;padding:9px 12px;background:#071830;border:1px solid rgba(255,255,255,0.09);border-radius:5px;color:#e0ddd8;font-family:inherit;font-size:13px;outline:none;"
+            onfocus="this.style.borderColor='#ae9142'" onblur="this.style.borderColor='#1e2d3e'"
             onkeydown="if(event.key==='Enter')askAI()">
           <button onclick="askAI()"
-            style="padding:9px 18px;background:#4a9fe0;border:none;border-radius:5px;color:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;">
+            style="padding:9px 18px;background:#ae9142;border:none;border-radius:6px;color:#0c2340;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;letter-spacing:0.02em;">
             Ask
           </button>
         </div>
-        <div id="askResponse" style="display:none;margin-top:14px;font-size:13px;color:#b8b4c0;line-height:1.7;border-top:1px solid #1e2d3e;padding-top:12px;"></div>
+        <div id="askResponse" style="display:none;margin-top:14px;font-size:13px;color:rgba(240,235,224,0.7);line-height:1.7;border-top:1px solid #1e2d3e;padding-top:12px;"></div>
       </div>
     </div>
 
   <!-- Disclaimer -->
   <div style="margin-top:40px;padding:16px 0 8px;border-top:1px solid #2a3040;text-align:center;">
-    <p style="font-size:11px;color:#6a7a8a;line-height:1.7;max-width:760px;margin:0 auto 8px;">
+    <p style="font-size:11px;color:rgba(240,235,224,0.4);line-height:1.7;max-width:760px;margin:0 auto 8px;">
       <strong style="color:#8a9aaa;">Data sources:</strong>
-      Data shown is not guaranteed to be accurate — third-party sources (<a href="https://communitydragon.org" target="_blank" rel="noopener" style="color:#6a9fc0;text-decoration:none;">Community Dragon</a>, Riot Data Dragon, <a href="https://tactics.tools" target="_blank" rel="noopener" style="color:#6a9fc0;text-decoration:none;">tactics.tools</a>, <a href="https://mobalytics.gg" target="_blank" rel="noopener" style="color:#6a9fc0;text-decoration:none;">Mobalytics</a>) may contain errors, outdated values, or incomplete samples.
-      AI coaching and champion tips are generated by <a href="https://groq.com" target="_blank" rel="noopener" style="color:#6a9fc0;text-decoration:none;">Groq</a> (LLaMA 3.3) and Google Gemini (gemini-2.5-flash), and may not reflect current patch state.
+      Data shown is not guaranteed to be accurate — third-party sources (<a href="https://communitydragon.org" target="_blank" rel="noopener" style="color:#c9a84c;text-decoration:none;">Community Dragon</a>, Riot Data Dragon, <a href="https://tactics.tools" target="_blank" rel="noopener" style="color:#c9a84c;text-decoration:none;">tactics.tools</a>, <a href="https://mobalytics.gg" target="_blank" rel="noopener" style="color:#c9a84c;text-decoration:none;">Mobalytics</a>) may contain errors, outdated values, or incomplete samples.
+      AI coaching and champion tips are generated by <a href="https://groq.com" target="_blank" rel="noopener" style="color:#c9a84c;text-decoration:none;">Groq</a> (LLaMA 3.3) and Google Gemini (gemini-2.5-flash), and may not reflect current patch state.
     </p>
     <p style="font-size:11px;color:#556070;line-height:1.6;max-width:760px;margin:0 auto 8px;">
       This tool isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
     </p>
-    <p style="font-size:11px;color:#6a7a8a;margin:0;">
-      Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener" style="color:#6a9fc0;text-decoration:none;">Tiffany Tsang</a>
+    <p style="font-size:11px;color:rgba(240,235,224,0.4);margin:0;">
+      Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener" style="color:#c9a84c;text-decoration:none;">Tiffany Tsang</a>
     </p>
   </div>
 
@@ -742,11 +786,20 @@ function selectOpt(type, key, e) {
 }
 
 // Map "TFT_Item_WarmogsArmor" / "TFT17_Item_WarmogsArmor" → DATA key "WarmogsArmor"
+// Also handles emblem items whose DATA keys are prefixed with a set number:
+//   DATA key "17DarkStarEmblemItem" ← CSV stores as "TFT17_Item_DarkStarEmblemItem"
 const itemIdToKey = {};
 Object.keys(DATA.items).forEach(k => {
   itemIdToKey['TFT_Item_' + k] = k;
   itemIdToKey['TFT17_Item_' + k] = k;
   itemIdToKey[k] = k; // tactics.tools IDs are already plain keys
+  // Emblem/spat keys start with a set number (e.g. "17DarkStarEmblemItem").
+  // The CSV omits that set prefix, storing them as "TFT17_Item_DarkStarEmblemItem".
+  const noSetNum = k.replace(/^\d+/, '');
+  if (noSetNum !== k) {
+    itemIdToKey['TFT_Item_' + noSetNum] = k;
+    itemIdToKey['TFT17_Item_' + noSetNum] = k;
+  }
 });
 
 function itemIconUrl(id) {
@@ -768,7 +821,7 @@ function formatTips(text) {
     .replace(/\b([A-Z][a-zA-Z]*)UniqueTrait\b/g, (_, n) => n.replace(/([A-Z])/g, ' $1').trim())
     .replace(/\b([A-Z][a-zA-Z]*)Trait\b/g,       (_, n) => n.replace(/([A-Z])/g, ' $1').trim());
   // Bold blue section headers **...**
-  s = s.replace(/\*\*([^*\n]+)\*\*/g, '<strong style="color:#4a9fe0;display:block;margin-top:10px;margin-bottom:2px;">$1</strong>');
+  s = s.replace(/\*\*([^*\n]+)\*\*/g, '<strong style="color:#ae9142;display:block;margin-top:10px;margin-bottom:2px;">$1</strong>');
   s = s.replace(/\*([^*\n]+)\*/g, '<em>$1</em>');
   // Line breaks
   s = s.replace(/\n/g, '<br>');
@@ -888,7 +941,7 @@ function renderAbilityDetails(ab, star) {
     const vals = row.values;
     const inner = vals.map((v, i) =>
       i === star - 1
-        ? `<strong style="color:#4a9fe0;font-weight:700;">${v}</strong>`
+        ? `<strong style="color:#ae9142;font-weight:700;">${v}</strong>`
         : `<span style="opacity:0.35">${v}</span>`
     ).join(' / ');
     html += `<tr>
@@ -1072,7 +1125,7 @@ function pickStarValues(s, star) {
   return (s || '').replace(/([a-zA-Z])?([0-9]+(?:[.][0-9]+)?)[/]([0-9]+(?:[.][0-9]+)?)[/]([0-9]+(?:[.][0-9]+)?)/g, (_, pre, a, b, c) => {
     const val = [a, b, c][star - 1] ?? a;
     const space = pre ? pre + ' ' : '';
-    return `${space}<strong style="color:#4a9fe0;font-weight:700;">${val}</strong>`;
+    return `${space}<strong style="color:#ae9142;font-weight:700;">${val}</strong>`;
   });
 }
 
@@ -1225,7 +1278,7 @@ function renderStats() {
 
   const baseNote = (s) => {
     if (abilityBase !== null && (s === 'ad' || s === 'ap'))
-      return `<span title="Adaptive — scales with ability" style="font-size:10px;color:#4a9fe0;margin-left:3px;">~</span>`;
+      return `<span title="Adaptive — scales with ability" style="font-size:10px;color:#ae9142;margin-left:3px;">~</span>`;
     return '';
   };
 
@@ -1505,17 +1558,6 @@ function switchTab(name) {
   saveState({ tab: name });
 }
 
-// ── TFT Coach ─────────────────────────────────────────────────────────
-let coachCount = 20;
-
-function setCoachCount(n) {
-  coachCount = n;
-  document.querySelectorAll('.coach-count-btn').forEach(b => {
-    b.classList.toggle('active', parseInt(b.dataset.count) === n);
-  });
-  saveState({ coach: { ...(JSON.parse(sessionStorage.getItem(STATE_KEY) || '{}').coach || {}), coachCount: n } });
-}
-
 // ── Restore state on load ─────────────────────────────────────────────
 (function restoreState() {
   const s = loadSavedState();
@@ -1527,16 +1569,6 @@ function setCoachCount(n) {
       document.getElementById('unitInput').value = DATA.units[state.unitKey].name;
       renderAll();
       fetchItemRecommendations(state.unitKey).then(() => fetchChampionTips(DATA.units[state.unitKey], state.unitKey));
-    }
-  }
-
-  // Coach inputs + previously-loaded profile/coaching data
-  if (s.coach) {
-    if (s.coach.handle) document.getElementById('coachHandle').value = s.coach.handle;
-    if (s.coach.coachCount) setCoachCount(s.coach.coachCount);
-    if (s.coach.profileData) {
-      // Restore the full coach UI from cached fetch results — no re-fetching
-      renderCoachUI(s.coach.profileData, s.coach.coachingText, s.coach.coachingError);
     }
   }
 
@@ -1559,6 +1591,9 @@ function setCoachCount(n) {
   }
 })();
 
+// Load meta insights immediately — no Riot API needed
+loadMetaInsights();
+
 // When user switches tabs via in-page buttons, also update the URL hash so
 // back/forward and reload land on the correct tab.
 const _origSwitchTab = switchTab;
@@ -1573,12 +1608,6 @@ renderAll = function() {
   _origRenderAll();
   saveState({ calc: { unitKey: state.unitKey, star: state.star, traitBPs: state.traitBPs, items: state.items, costFilter: state.costFilter } });
 };
-
-// Save coach handle as user types
-document.getElementById('coachHandle').addEventListener('input', e => {
-  const cur = JSON.parse(sessionStorage.getItem(STATE_KEY) || '{}').coach || {};
-  saveState({ coach: { ...cur, handle: e.target.value } });
-});
 
 // Save leveling guide filter on change (wraps existing setupLevelingFilters click logic)
 document.querySelectorAll('.lvl-filter').forEach(btn => {
@@ -1603,7 +1632,7 @@ function formatCoaching(text) {
   s = s.replace(/^[-*]{3,}\s*$/gm, '');
 
   // **Bold text** → blue bold (titles inside numbered items)
-  s = s.replace(/\*\*([^*\n]+)\*\*/g, '<strong style="color:#4a9fe0">$1</strong>');
+  s = s.replace(/\*\*([^*\n]+)\*\*/g, '<strong style="color:#ae9142">$1</strong>');
 
   // *italic* → em
   s = s.replace(/\*([^*\n]+)\*/g, '<em>$1</em>');
@@ -1645,7 +1674,7 @@ async function askAI() {
   if (!q) return;
 
   response.style.display = 'block';
-  response.innerHTML = '<span style="color:#3a3848;font-style:italic;">Thinking…</span>';
+  response.innerHTML = '<span style="color:rgba(240,235,224,0.4);font-style:italic;font-size:13px;">Thinking…</span>';
 
   try {
     const res  = await fetch('/api/ask', {
@@ -1660,124 +1689,114 @@ async function askAI() {
   }
 }
 
-// Populate the coach UI from a profileData object + coaching text (no fetching).
-// Reused both after a fresh fetch and when restoring from sessionStorage.
-function renderCoachUI(profileData, coachingText, coachingError) {
-  const stats       = document.getElementById('coachStats');
-  const box         = document.getElementById('coachBox');
-  const tips        = document.getElementById('coachTips');
-  const label       = document.getElementById('coachBoxLabel');
-  const spin        = document.getElementById('coachTipsLoading');
-  const recentStats = document.getElementById('coachRecentStats');
 
-  box.style.display = 'block';
-  label.textContent = `AI Coaching — Last ${coachCount} Games`;
-  spin.style.display = 'none';
+// ---------------------------------------------------------------------------
+// Analyze My Matches — standalone card, mirrors Ask AI UX
+// ---------------------------------------------------------------------------
 
-  // Top banner (all-Set-17 stats)
-  const a = profileData.allStats || {};
-  document.getElementById('coachAvgPlace').textContent = a.avgPlacement ?? '—';
-  document.getElementById('coachTop4').textContent     = a.top4Count ?? '—';
-  document.getElementById('coachWins').textContent     = a.wins ?? '—';
-  document.getElementById('coachGames').textContent    = a.total ?? '—';
-  document.getElementById('coachAvgLevel').textContent = a.avgLevel ?? '—';
-  document.getElementById('coachAvgGold').textContent  = a.avgGoldLeft ?? '—';
-  stats.style.display = 'block';
+let analyzeCount = 20;
 
-  // Coaching tips
-  if (coachingError) {
-    tips.innerHTML = `<span style="color:#e07070">Coaching unavailable: ${coachingError}</span>`;
-  } else if (coachingText) {
-    tips.innerHTML = formatCoaching(coachingText);
-  }
-
-  // Bottom banner (recent N games)
-  const r = profileData.recentStats || {};
-  document.getElementById('coachRecentLabel').textContent = `Last ${coachCount} Game${coachCount === 1 ? '' : 's'}`;
-  document.getElementById('recentAvgPlace').textContent = r.avgPlacement ?? '—';
-  document.getElementById('recentTop4').textContent     = r.top4Count ?? '—';
-  document.getElementById('recentWins').textContent     = r.wins ?? '—';
-  document.getElementById('recentGames').textContent    = r.total ?? '—';
-  document.getElementById('recentAvgLevel').textContent = r.avgLevel ?? '—';
-  document.getElementById('recentAvgGold').textContent  = r.avgGoldLeft ?? '—';
-  recentStats.style.display = 'block';
+function setAnalyzeCount(n) {
+  analyzeCount = n;
+  document.querySelectorAll('[data-analyze-count]').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.analyzeCount) === n);
+  });
 }
 
-function saveCoachData(patch) {
-  const cur = JSON.parse(sessionStorage.getItem(STATE_KEY) || '{}').coach || {};
-  saveState({ coach: { ...cur, ...patch } });
-}
-
-async function loadProfile() {
-  const handle = document.getElementById('coachHandle').value.trim();
+async function analyzeMatches() {
+  const handle = document.getElementById('analyzeInput').value.trim();
   if (!handle) return;
 
-  const err         = document.getElementById('coachError');
-  const stats       = document.getElementById('coachStats');
-  const box         = document.getElementById('coachBox');
-  const tips        = document.getElementById('coachTips');
-  const label       = document.getElementById('coachBoxLabel');
-  const spin        = document.getElementById('coachTipsLoading');
-  const recentStats = document.getElementById('coachRecentStats');
+  const resp = document.getElementById('analyzeResponse');
+  resp.style.display = 'block';
+  resp.innerHTML = '<span style="color:rgba(240,235,224,0.4);font-style:italic;font-size:13px;">Fetching your last ' + analyzeCount + ' matches…</span>';
 
-  err.style.display = 'none';
-  stats.style.display = 'none';
-  recentStats.style.display = 'none';
-  box.style.display = 'block';
-  label.textContent = `AI Coaching — Last ${coachCount} Games`;
-  spin.style.display = 'inline';
-  tips.innerHTML = '<span style="color:#3a3848">Coach is reviewing your past games…</span>';
-
-  let profileData;
   try {
-    const res = await fetch(`/api/profile?handle=${encodeURIComponent(handle)}&count=${coachCount}`);
-    profileData = await res.json();
-    if (profileData.error) throw new Error(profileData.error);
-  } catch (e) {
-    box.style.display = 'none';
-    err.textContent = e.message;
-    err.style.display = 'block';
-    saveCoachData({ profileData: null, coachingText: null, coachingError: null });
-    return;
-  }
+    // Step 1: fetch profile stats with the selected game count
+    const encoded = encodeURIComponent(handle);
+    const profileRes = await fetch(`/api/profile?handle=${encoded}&count=${analyzeCount}`);
+    if (!profileRes.ok) {
+      const err = await profileRes.json().catch(() => ({}));
+      throw new Error(err.error || `Could not load profile (${profileRes.status}). Check the Riot ID format: Name#TAG`);
+    }
+    const profile = await profileRes.json();
 
-  // Render banners immediately + cache the profile
-  saveCoachData({ profileData, coachingText: null, coachingError: null });
-  renderCoachUI(profileData, null);
-  tips.innerHTML = '<span style="color:#3a3848">Coach is reviewing your past games…</span>';
-  spin.style.display = 'inline';
+    resp.innerHTML = '<span style="color:rgba(240,235,224,0.4);font-style:italic;font-size:13px;">Analyzing with AI…</span>';
 
-  // Then fire coaching request
-  let coachingText = null, coachingError = null;
-  try {
-    const cRes = await fetch('/api/coaching', {
+    // Step 2: send flat stats to coaching endpoint (same shape as the old loadProfile flow)
+    const { avgPlacement, top4Count, wins, avgLevel, avgGoldLeft, avgLevelEff,
+            goldWastedGames, avgBot4LevelEff, topComps, synergies, games } = profile;
+    const matchIds = (games || []).map(g => g.matchId);
+
+    const coachRes = await fetch('/api/coaching', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        avgPlacement:    profileData.avgPlacement,
-        top4Count:       profileData.top4Count,
-        wins:            profileData.wins,
-        total:           profileData.total,
-        avgLevel:        profileData.avgLevel,
-        avgGoldLeft:     profileData.avgGoldLeft,
-        avgLevelEff:     profileData.avgLevelEff,
-        goldWastedGames: profileData.goldWastedGames,
-        avgBot4LevelEff: profileData.avgBot4LevelEff,
-        topComps:        profileData.topComps,
-        synergies:       profileData.synergies,
-        matchIds:        (profileData.games || []).map(g => g.matchId).filter(Boolean),
-      })
+        avgPlacement, top4Count, wins, total: analyzeCount,
+        avgLevel, avgGoldLeft, avgLevelEff,
+        goldWastedGames, avgBot4LevelEff,
+        topComps, synergies, matchIds,
+      }),
     });
-    const cData = await cRes.json();
-    if (cData.error) throw new Error(cData.error);
-    coachingText = cData.coaching;
-  } catch (e) {
-    coachingError = e.message;
-  }
+    if (!coachRes.ok) throw new Error(`Coaching failed (${coachRes.status})`);
+    const coachData = await coachRes.json();
+    if (coachData.error) throw new Error(coachData.error);
 
-  saveCoachData({ coachingText, coachingError });
-  renderCoachUI(profileData, coachingText, coachingError);
+    resp.innerHTML = formatCoaching(coachData.coaching || 'No analysis returned.');
+  } catch (e) {
+    resp.innerHTML = `<span style="color:#e07070;">${e.message}</span>`;
+  }
 }
+
+// ---------------------------------------------------------------------------
+// Challenger/GM Meta Insights — fetched once on page load, no Riot API needed
+// ---------------------------------------------------------------------------
+
+async function loadMetaInsights() {
+  try {
+    const data = await fetch('/api/meta-insights').then(r => r.json());
+
+    // Game count label
+    document.getElementById('metaGamesLabel').textContent =
+      `${data.totalGames.toLocaleString()} Challenger/GM games`;
+
+    // Convert benchmarks into written insights
+    const b = data.benchmarks;
+    const winLevel   = b.avgLevel.top4.toFixed(1);
+    const loseLevel  = b.avgLevel.bot4.toFixed(1);
+    const goldFirst  = b.avgGoldLeft.first.toFixed(1);
+    const goldTop4   = b.avgGoldLeft.top4.toFixed(1);
+    const goldBot4   = b.avgGoldLeft.bot4.toFixed(1);
+    const effWin     = (b.avgLevelEff.top4 * 100).toFixed(1);
+    const effLose    = (b.avgLevelEff.bot4 * 100).toFixed(1);
+    const starsWin   = b.avgUnitStars.top4.toFixed(2);
+    const starsLose  = b.avgUnitStars.bot4.toFixed(2);
+
+    const insights = [
+      `<strong>Hit level 9.</strong> Top-4 winners end games at level ${winLevel} on average, nearly a full level above players who miss top-4 (${loseLevel}). Reaching level 9 before the lobby ends is the single biggest separator at high elo — prioritize leveling through stage 4-5 even at the cost of some HP.`,
+      `<strong>Spend your gold — but at the right moments.</strong> 1st place finishers leave ${goldFirst}g unspent on average, not because they hoard, but because a level-9 board earns interest faster than it can be spent. The key is spending at designated roll-down windows, not trickling gold every round. For most comps, that means holding 50g through stage 3, leveling to 7 on 3-2 or 4-1 and rolling down to stabilize, then pushing level 8 on 4-2 or 4-5 for your 4-cost carries. Fast-9 strategies skip the mid-roll and save everything to push level 9 on 5-1.`,
+      `<strong>Survive longer, level higher.</strong> "Level efficiency" (final level ÷ rounds played) is ${effWin}% for winners vs ${effLose}% for losers — and lower is better. Winners reach high level over many rounds; losers level quickly but die in mid-game. If your efficiency is high, that's a sign you're getting eliminated before your board scales, not that you're leveling well.`,
+      `<strong>Star up your carries.</strong> Top-4 boards average ${starsWin}★ across all units vs ${starsLose}★ for bottom-4. The gap is small but consistent across ${data.totalGames.toLocaleString()} games. Holding for 3-stars on your key units beats chasing perfect items on a 1-star board.`,
+    ];
+
+    document.getElementById('metaBenchmarks').innerHTML = insights.map(text =>
+      `<p style="margin:0;">${text}</p>`
+    ).join('');
+
+  } catch (e) {
+    document.getElementById('metaTopComps').innerHTML =
+      `<span style="color:#4a5a6a;font-size:12px;">Could not load insights.</span>`;
+  }
+}
+
+// ── Sticky nav scroll effect ───────────────────────────────────
+(function () {
+  const nav = document.getElementById('siteNav');
+  function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 30); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
 </script>
 </body>
 </html>

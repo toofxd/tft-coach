@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TFT Set 17 — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:      #0c2340;
+  --navy-card: #0e2850;
+  --navy-deep: #071830;
+  --gold:      #ae9142;
+  --gold-light:#c9a84c;
+  --text:      #f0ebe0;
+  --text-70:   rgba(240,235,224,0.7);
+  --text-50:   rgba(240,235,224,0.5);
+  --text-30:   rgba(240,235,224,0.3);
+  --border:    rgba(255,255,255,0.09);
+  --border-dim:rgba(255,255,255,0.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  padding: 80px 20px 40px;
+  min-height: 100vh;
+}
+a { color: inherit; }
+
+/* ── Sticky nav ── */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.site-nav.scrolled {
+  background: rgba(12, 35, 64, 0.92);
+  border-color: var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.nav-title {
+  background: linear-gradient(105deg,
+    #ae9142 0%, #f0d98a 22%, #ae9142 40%,
+    #c9a84c 58%, #f0d98a 78%, #ae9142 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 9s linear infinite;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.tab-btn {
+  padding: 8px 15px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-30);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+  transition: color 0.15s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  height: 62px;
+}
+.tab-btn:hover { color: var(--text-70); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+.nav-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.18);
+  margin: 0 8px;
+  flex-shrink: 0;
+}
+
+.icon-btn {
+  width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  color: var(--text-50);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.icon-btn:hover {
+  background: rgba(174,145,66,0.18);
+  color: var(--gold-light);
+}
+
+/* ── Page layout ── */
+.page-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.page-title { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: 0.01em; }
+.page-sub   { font-size: 12px; color: var(--text-30); }
+
+/* ── Memo card ── */
+.memo {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px 32px;
+}
+
+.memo-lede {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.memo-section {
+  margin-bottom: 24px;
+}
+.memo-section:last-child { margin-bottom: 0; }
+
+.memo-heading {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.memo-body {
+  font-size: 13px;
+  color: var(--text-70);
+  line-height: 1.75;
+}
+
+.memo-body p + p { margin-top: 8px; }
+
+.memo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-70);
+  line-height: 1.75;
+}
+.memo-list li {
+  padding-left: 16px;
+  position: relative;
+  margin-bottom: 6px;
+}
+.memo-list li:last-child { margin-bottom: 0; }
+.memo-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-30);
+}
+.memo-list strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.memo-note {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-dim);
+  font-size: 12px;
+  color: var(--text-50);
+  line-height: 1.7;
+}
+.memo-note p + p { margin-top: 6px; }
+
+.warn {
+  color: #c9a84c;
+}
+
+/* ── Disclaimer ── */
+.disclaimer {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-30);
+  line-height: 1.7;
+}
+.disclaimer a { color: var(--text-50); text-decoration: none; }
+.disclaimer a:hover { color: var(--text-70); }
+</style>
+</head>
+<body>
+
+<!-- ── Sticky nav ── -->
+<header class="site-nav" id="siteNav">
+  <div class="nav-inner">
+
+    <a href="https://tiffanygaming.com" target="_blank" rel="noopener noreferrer" class="nav-title">
+      Tactician's Fundamentals by Tiffany
+    </a>
+
+    <nav class="nav-right">
+      <a href="/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
+      <a href="/calculator.html#coach" class="tab-btn">TFT Coach</a>
+      <a href="/gods.html" class="tab-btn">Gods</a>
+      <a href="/about.html" class="tab-btn active">About</a>
+
+      <span class="nav-divider"></span>
+
+      <a href="https://www.linkedin.com/in/tsangtiffany" target="_blank" rel="noopener noreferrer"
+         class="icon-btn" aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+
+      <a href="mailto:ttsang@alumni.nd.edu" class="icon-btn" aria-label="Email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+      </a>
+    </nav>
+
+  </div>
+</header>
+
+<!-- ── Page content ── -->
+<div class="page-wrap">
+
+  <div class="page-header">
+    <div class="page-title">About</div>
+    <div class="page-sub">Tactician's Fundamentals — TFT Set 17</div>
+  </div>
+
+  <div class="memo">
+
+    <div class="memo-lede">
+      Most TFT tools give you stats. This one tries to explain what to do with them.
+    </div>
+
+    <div class="memo-section">
+      <div class="memo-heading">Why it exists</div>
+      <div class="memo-body">
+        <p>When I took <em>Science and Strategy of AI</em> at UCLA Anderson, I knew I wanted my final project to be a gaming application. TFT felt like the ideal use case: it has rich structured data, clear performance differences across skill levels, and no tool that actually explains why a Challenger player makes different decisions than everyone else. After learning about retrieval-augmented generation and how models can be grounded in domain-specific context, I wanted to build an AI that could reason about TFT the way a high-elo player does — rather than just repeat generic tier-list advice.</p>
+        <p style="margin-top:10px;">High-elo players don't win because they memorized patch notes. They win because they've internalized thousands of repetitions: when to level, when to greed economy, when to preserve streaks, when an item slam is actually worth more than holding for a perfect three-star. That knowledge usually lives in experience and VOD review, not in a system that can explain the gap back to a player in a structured way. This project is an attempt to close that gap — combining curated high-elo match data with LLM-based reasoning so the output feels less like a static stats page and more like a coach that can interpret what winning TFT actually looks like.</p>
+      </div>
+    </div>
+
+    <div class="memo-section">
+      <div class="memo-heading">How it works</div>
+      <div class="memo-body">
+        <p>The system is built around a dataset of roughly 140,000 Challenger and Grandmaster TFT matches from North America, updated periodically. From that data, I compute benchmarks around leveling efficiency, economy management, placement outcomes, and item performance — with win-rate metrics anchored to top-4 finishes so the model is grounded in what successful play looks like, not what's merely common.</p>
+        <p style="margin-top:10px;">The reasoning layer uses a RAG-style approach. Instead of relying only on what a model may have seen during training, each response is grounded at inference time in a TFT-specific knowledge base — champion data, traits, item stats, and high-elo benchmarks — which keeps the system tied to current game context and structured evidence rather than generalized recall. Three models work together: Gemini 2.5 Flash handles coaching and live search, Groq LLaMA 3.3 handles champion-specific tips and fallback responses, and Riot's Match API provides personal game history when available.</p>
+      </div>
+    </div>
+
+    <div class="memo-section">
+      <div class="memo-heading">What you can do here</div>
+      <ul class="memo-list">
+        <li><strong>Stat Calculator</strong> — check a unit's stats across star levels and item combinations, with recommendations derived from Challenger win-rate data</li>
+        <li><strong>TFT Coach</strong> — enter your Riot ID to compare your economy and leveling decisions against high-elo benchmarks and see where your play diverged</li>
+        <li><strong>Gods</strong> — full reference for all Set 17 god boons and trials, organized by god and stage</li>
+        <li><strong>Ask AI</strong> — open-ended questions about comps, augments, and positioning, answered with live search grounding and a structured TFT reference layer</li>
+      </ul>
+    </div>
+
+    <div class="memo-section">
+      <div class="memo-heading">Data and limits</div>
+      <div class="memo-body">
+        <p>The Riot API provides an end-of-game snapshot for each match — enough to analyze board strength, itemization, placements, and outcomes at a meaningful level, but not a full reconstruction of every in-game decision. That's sufficient for personal match analysis, but falls short of what a true replay or event telemetry feed would allow.</p>
+        <p style="margin-top:10px;">Pro-play analysis is similarly constrained. Ranked match patterns can be quantified from structured data, but tournament and top-level decision-making still requires leaning partly on VODs and community interpretation rather than a clean official data layer.</p>
+        <p style="margin-top:10px;"><span class="warn">Personal game lookup can break when the Riot developer key expires</span> — development keys require manual renewal on a short cycle. A production API key would be the clearest next step toward making that part of the product reliable. Champion and item references also depend on Community Dragon and Riot Data Dragon, so not every number is guaranteed to be fully current with the latest patch.</p>
+      </div>
+    </div>
+
+    <div class="memo-note">
+      <p>Champion and item data is sourced from Community Dragon and Riot Data Dragon. Win rates update when new match data is collected. Check patch notes for recent changes.</p>
+    </div>
+
+  </div>
+
+  <div class="disclaimer">
+    <p style="font-size:11px;color:#556070;line-height:1.6;max-width:640px;margin:0 auto 8px;">This tool isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
+    <p>Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener">Tiffany Tsang</a></p>
+  </div>
+
+</div>
+
+<script>
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+</script>
+</body>
+</html>

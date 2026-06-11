@@ -100,6 +100,54 @@ const challengerBench = (() => {
   return { avgLevelEff, avgGoldLeft, avgLevel, top4Rate, games: all.length, winnerGames: w };
 })();
 
+// Pre-compute meta insights from the full Challenger/GM dataset.
+// Used by /api/meta-insights — no Riot API dependency.
+const metaInsights = (() => {
+  const all = matchFeatures;
+  if (!all.length) return null;
+
+  // Group rows by top_trait
+  const traitMap = {};
+  for (const r of all) {
+    const t = r.top_trait;
+    if (!t) continue;
+    if (!traitMap[t]) traitMap[t] = { games: 0, top4: 0, placementSum: 0 };
+    traitMap[t].games++;
+    if (parseInt(r.top4) === 1) traitMap[t].top4++;
+    traitMap[t].placementSum += parseFloat(r.placement);
+  }
+
+  // Top comps sorted by top4 rate (min 100 games for significance; skip malformed/unknown traits)
+  const topComps = Object.entries(traitMap)
+    .filter(([trait, v]) => v.games >= 100 && trait && trait !== 'unknown' && trait.startsWith('TFT'))
+    .map(([trait, v]) => ({
+      trait,
+      games: v.games,
+      top4Rate: v.top4 / v.games,
+      avgPlacement: v.placementSum / v.games,
+    }))
+    .sort((a, b) => b.top4Rate - a.top4Rate)
+    .slice(0, 8);
+
+  // Helper averages
+  const avg = (arr, key) => arr.reduce((s, r) => s + parseFloat(r[key] || 0), 0) / arr.length;
+
+  const top1 = all.filter(r => parseInt(r.placement) === 1);
+  const top4 = all.filter(r => parseInt(r.top4) === 1);
+  const bot4 = all.filter(r => parseInt(r.top4) === 0);
+
+  return {
+    totalGames: all.length,
+    topComps,
+    benchmarks: {
+      avgLevel:     { top4: avg(top4, 'level'),            bot4: avg(bot4, 'level') },
+      avgGoldLeft:  { first: avg(top1, 'gold_left'),       top4: avg(top4, 'gold_left'),  bot4: avg(bot4, 'gold_left') },
+      avgLevelEff:  { top4: avg(top4, 'level_efficiency'), bot4: avg(bot4, 'level_efficiency') },
+      avgUnitStars: { top4: avg(top4, 'unit_star_avg'),    bot4: avg(bot4, 'unit_star_avg') },
+    },
+  };
+})();
+
 // Load calculator_data.json — authoritative Set 17 champion/trait/item data
 // Used to ground AI prompts with accurate costs, traits, and roles.
 const calcData = (() => {
@@ -167,6 +215,23 @@ let ttItems = loadTacticsToolsItems();
 const ttItemMap = {};
 for (const item of ttItems.items) ttItemMap[item.itemId] = item;
 console.log(`Loaded ${ttItems.items.length} tactics.tools items (updated ${new Date(ttItems.lastUpdated * 1000).toLocaleDateString()})`);
+
+// Wilson score lower bound — ranks items by statistically conservative win rate.
+// Prevents items with 5 games at 1.00 from outranking items with 1000 games at 0.72.
+// z=1.96 → 95% confidence interval lower bound.
+function wilsonLower(p, n, z = 1.96) {
+  if (n === 0) return 0;
+  const z2 = z * z;
+  return (p + z2 / (2 * n) - z * Math.sqrt(p * (1 - p) / n + z2 / (4 * n * n))) / (1 + z2 / n);
+}
+
+// Returns true if an item ID should be excluded from recommendations.
+// Allows: craftable items (in ttItemMap) + emblem/spat items.
+// Rejects: components, invalid test items, etc.
+function isJunkItem(id) {
+  if (id.includes('Emblem') || id.includes('Spat')) return false;
+  return !ttItemMap[id.replace(/TFT\d*_Item_/, '')];
+}
 
 // ---------------------------------------------------------------------------
 // Riot API helpers
@@ -383,17 +448,19 @@ function proStats(topTrait) {
 // Returns top item combos for a unit from the Challenger dataset, formatted for AI prompts.
 function proUnitStats(unitId) {
   if (!unitId || !itemWinrates.length) return null;
-  const isJunk = id => !ttItemMap[id.replace(/TFT\d*_Item_/, "")];
   const rows = itemWinrates
     .filter(r => {
-      if (r.unit_id !== unitId || parseInt(r.games) < 5) return false;
+      if (r.unit_id !== unitId || parseInt(r.games) < 10) return false;
       try {
         const m = r.item_combo.match(/'([^']+)'/g);
         if (!m) return false;
-        return !m.map(s => s.replace(/'/g, "")).some(isJunk);
+        return !m.map(s => s.replace(/'/g, "")).some(isJunkItem);
       } catch { return false; }
     })
-    .sort((a, b) => parseFloat(b.top4_rate) - parseFloat(a.top4_rate))
+    .sort((a, b) =>
+      wilsonLower(parseFloat(b.top4_rate), parseInt(b.games)) -
+      wilsonLower(parseFloat(a.top4_rate), parseInt(a.games))
+    )
     .slice(0, 4);
   if (!rows.length) return null;
   return rows.map(r => {
@@ -759,35 +826,52 @@ app.post("/api/coaching", async (req, res) => {
   const synSummary  = (synergies || []).slice(0, 3).map(s => `${s.name} (avg #${s.avgPlacement})`).join(", ");
 
   const bench = challengerBench;
-  const benchBlock = bench
-    ? `\nChallenger/GM benchmarks (${bench.games.toLocaleString()} pro games):\n- Avg level efficiency: ${bench.avgLevelEff.toFixed(2)}\n- Avg gold left unspent: ${bench.avgGoldLeft.toFixed(1)}\n- Avg final level: ${bench.avgLevel.toFixed(1)}\n- Overall top-4 rate: ${(bench.top4Rate * 100).toFixed(0)}%`
-    : "";
+  const mi = metaInsights?.benchmarks;
+
+  // Build a rich benchmark block with interpretations baked in
+  const benchBlock = bench ? `
+Challenger/GM benchmarks (${bench.games.toLocaleString()} games, top-4 data only unless noted):
+- Avg final level: ${bench.avgLevel.toFixed(1)} (top-4 winners)
+- Avg gold left unspent: ${bench.avgGoldLeft.toFixed(1)}g (top-4 winners) | ${mi ? mi.avgGoldLeft.first.toFixed(1) : "~10.7"}g (1st place only)
+- Avg level efficiency (level ÷ rounds played): ${bench.avgLevelEff.toFixed(3)} (top-4 winners) vs ${mi ? mi.avgLevelEff.bot4.toFixed(3) : "~0.296"} (bottom-4)
+- Overall top-4 rate across all pros: ${(bench.top4Rate * 100).toFixed(0)}%
+
+HOW TO READ THESE METRICS:
+• Gold left: Challenger winners average ${bench.avgGoldLeft.toFixed(1)}g unspent — not zero, because level-9 players naturally accumulate interest gold they can't fully spend. If a player consistently has 0–2g left, they're likely over-rolling too early or panic-spending. If they routinely leave 15g+, they may be hoarding and missing rolls or leveling opportunities.
+• Level efficiency (= final level ÷ rounds survived): Lower is better — it means you reached a high level AND survived many rounds. Challenger top-4 players average ${bench.avgLevelEff.toFixed(3)}. If this number is above 0.30, the player is reaching a low level relative to rounds played, which typically means dying in mid-game before fully leveling up. High efficiency in losing games (avgBot4LevelEff) is a red flag: it means even in bad games, the player levels quickly but still can't survive.
+` : "";
 
   // Query TFT Academy for aggregate patterns across recent games
   const taAgg = matchIds?.length ? await getTftAcademyData(matchIds) : null;
   const taBlock = fmtAcademyAggregate(taAgg);
 
-  const prompt = `You are a TFT (Teamfight Tactics) coaching assistant analyzing a player's last ${total} games.
+  const prompt = `You are an expert TFT (Teamfight Tactics) coach. Below is a player's data for their last ${total} games. Use it to write 4–6 coaching insights.
 
-Player stats:
-- Average placement: ${avgPlacement}
-- Top-4 rate: ${top4Rate}% (${top4Count}/${total} games)
-- Win rate: ${winRate}% (${wins} wins)
-- Average level at end: ${avgLevel}
-- Average level efficiency (level/round): ${avgLevelEff}
-- Average gold left unspent: ${avgGoldLeft}
-- Games with >10 gold left unspent: ${goldWastedGames}/${total}
-- Average level efficiency in bottom-4 games: ${avgBot4LevelEff ?? "N/A"}
+FORMAT RULES — follow exactly:
+- Number each insight (1. 2. 3. etc.)
+- Each insight is 2–4 sentences of flowing prose. No sub-bullets, no stat tables, no headers.
+- Do NOT repeat the player's raw numbers back. Instead, interpret what those numbers mean in plain English and say what to do differently.
+- Start insight 1 immediately — no intro paragraph, no "Here is your coaching:" preamble.
 
-Most-played comps: ${compSummary || "N/A"}
-Best synergies by avg placement: ${synSummary || "N/A"}
-${benchBlock}
-${taBlock ? `\n${taBlock}` : ""}
-Based on these ${total} games, give 4–6 specific, actionable coaching tips. Where the player's numbers differ from the Challenger/GM benchmarks above, call that out explicitly. Where TFT Academy round-by-round data is available, reference specific patterns (level timing, rolling habits, augment choices). Focus on patterns across all games — not a single game. Be direct and concise. Use TFT terminology.`;
+PLAYER DATA (last ${total} games, for your reference only — do not echo these back):
+- Placement: avg #${avgPlacement}, top-4 ${top4Rate}%, wins ${winRate}%
+- Avg final level: ${avgLevel} | Avg gold left: ${avgGoldLeft}g | Games ending with >10g unspent: ${goldWastedGames}/${total}
+- Level efficiency (final level ÷ rounds played): ${avgLevelEff} | Same stat in losing games only: ${avgBot4LevelEff ?? "N/A"}
+- Most-played comps: ${compSummary || "N/A"}
+- Best comps by placement: ${synSummary || "N/A"}
+${benchBlock}${taBlock ? `Round-by-round patterns (TFT Academy):\n${taBlock}\n` : ""}
+FOCUS AREAS — address at least two of these if the data supports it:
+- Gold economy: Is this player hoarding (too much gold left) or panic-spending (too little)? What should they do at specific round intervals?
+- Leveling: Their level efficiency vs Challenger/GM tells a story. What is that story and what should change?
+- Comp consistency and when to pivot vs commit.
+- Current patch context: use search to check what comps/augments/items are strong right now and whether this player's tendencies align or fight the meta.`;
 
   if (!GEMINI_API_KEY && !GROQ_API_KEY) return res.json({ coaching: "(No AI API keys configured)" });
   try {
-    const coaching = await callAI(prompt, 600);
+    // Use Gemini with Google Search grounding for patch-aware coaching, fall back to Groq
+    const coaching = GEMINI_API_KEY
+      ? await callGeminiWithSearch(prompt).catch(() => callAI(prompt, 700))
+      : await callAI(prompt, 700);
     res.json({ coaching });
   } catch (e) {
     res.status(500).json({ error: e.message });
@@ -828,19 +912,29 @@ app.get("/api/items", (req, res) => {
   });
 });
 
+// GET /api/meta-insights — Challenger/GM takeaways derived from the local CSV dataset.
+// No Riot API dependency — always available regardless of key expiry.
+app.get("/api/meta-insights", (req, res) => {
+  if (!metaInsights) return res.status(503).json({ error: "No match data loaded." });
+  res.json({
+    totalGames: metaInsights.totalGames,
+    benchmarks: metaInsights.benchmarks,
+    topComps: metaInsights.topComps.map(c => ({
+      ...c,
+      name: traitName(c.trait),
+    })),
+  });
+});
+
 // GET /api/item-recs?unitId=TFT17_Caitlyn
-// Extracts individual items from pro CSV combos, scores each by weighted avg top-4 rate.
+// Extracts individual items from pro CSV combos, scored by Wilson lower bound (95% CI).
+// This prevents items with tiny sample sizes (e.g. 5 games, 100% rate) from outranking
+// statistically significant items (e.g. 1000 games, 72% rate).
 app.get("/api/item-recs", (req, res) => {
   const { unitId } = req.query;
   if (!unitId) return res.status(400).json({ error: "unitId required" });
 
-  // Whitelist: only items present in the tactics.tools craftable set
-  const isJunk = id => {
-    const key = id.replace(/TFT\d*_Item_/, '');
-    return !ttItemMap[key];
-  };
-
-  // Parse all valid combos for this unit
+  // Parse all valid combos for this unit (min 10 games, no junk items)
   const combos = itemWinrates
     .filter(r => r.unit_id === unitId)
     .map(r => {
@@ -851,7 +945,7 @@ app.get("/api/item-recs", (req, res) => {
       } catch {}
       return { items, top4Rate: parseFloat(r.top4_rate), games: parseInt(r.games) };
     })
-    .filter(r => r.items.length > 0 && r.games >= 3 && !r.items.some(isJunk));
+    .filter(r => r.items.length > 0 && r.games >= 10 && !r.items.some(isJunkItem));
 
   // Total unique games for this unit = sum of all combo games (denominator for play rate)
   const totalUnitGames = combos.reduce((s, c) => s + c.games, 0);
@@ -874,7 +968,8 @@ app.get("/api/item-recs", (req, res) => {
       games: s.totalGames,
       playRate: totalUnitGames > 0 ? parseFloat((s.totalGames / totalUnitGames * 100).toFixed(1)) : 0,
     }))
-    .sort((a, b) => b.top4Rate - a.top4Rate)
+    // Sort by Wilson score lower bound — statistically conservative, penalises small samples
+    .sort((a, b) => wilsonLower(b.top4Rate, b.games) - wilsonLower(a.top4Rate, a.games))
     .slice(0, 10);
 
   res.json({ recommendations: recs, totalUnitGames });
