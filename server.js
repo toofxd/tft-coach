@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Redirect root to the main app
 app.get("/", (req, res) => {
-  res.redirect("/calculator.html");
+  res.redirect("/about.html");
 });
 
 // ---------------------------------------------------------------------------

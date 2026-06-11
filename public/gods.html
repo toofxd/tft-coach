@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TFT Set 17 — Realm of Gods</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --navy:      #0c2340;
@@ -65,21 +65,27 @@ a { color: inherit; }
 }
 
 .nav-title {
-  background: linear-gradient(105deg,
-    #ae9142 0%, #f0d98a 22%, #ae9142 40%,
-    #c9a84c 58%, #f0d98a 78%, #ae9142 100%);
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 9s linear infinite;
+  font-family: 'Cinzel', serif;
   font-size: 17px;
   font-weight: 900;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.08em;
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-title-main {
+  color: #c9a84c;
+  -webkit-text-fill-color: #c9a84c;
+}
+.nav-title-by {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-30);
+  -webkit-text-fill-color: var(--text-30);
 }
 
 /* ── Right-side nav group ───────────────────────────────────── */
@@ -233,16 +239,16 @@ a { color: inherit; }
   <div class="nav-inner">
 
     <!-- Left: big glowing title -->
-    <a href="https://tiffanygaming.com" target="_blank" rel="noopener noreferrer" class="nav-title">
-      Tactician's Fundamentals by Tiffany
+    <a href="/about.html" class="nav-title">
+      <span class="nav-title-main">Tactician's Fundamentals</span><span class="nav-title-by">by Tiffany</span>
     </a>
 
     <!-- Right: tabs + social icons -->
     <nav class="nav-right">
-      <a href="/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
-      <a href="/calculator.html#coach" class="tab-btn">TFT Coach</a>
-      <a href="/gods.html" class="tab-btn active">Gods</a>
       <a href="/about.html" class="tab-btn">About</a>
+      <a href="/calculator.html#coach" class="tab-btn">TFT Coach</a>
+      <a href="/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
+      <a href="/gods.html" class="tab-btn active">Gods</a>
 
       <span class="nav-divider"></span>
 

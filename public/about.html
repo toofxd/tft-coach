@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TFT Set 17 — About</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --navy:      #0c2340;
@@ -64,21 +64,27 @@ a { color: inherit; }
   100% { background-position:  200% center; }
 }
 .nav-title {
-  background: linear-gradient(105deg,
-    #ae9142 0%, #f0d98a 22%, #ae9142 40%,
-    #c9a84c 58%, #f0d98a 78%, #ae9142 100%);
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 9s linear infinite;
+  font-family: 'Cinzel', serif;
   font-size: 17px;
   font-weight: 900;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.08em;
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-title-main {
+  color: #c9a84c;
+  -webkit-text-fill-color: #c9a84c;
+}
+.nav-title-by {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-30);
+  -webkit-text-fill-color: var(--text-30);
 }
 
 .nav-right {
@@ -243,15 +249,15 @@ a { color: inherit; }
 <header class="site-nav" id="siteNav">
   <div class="nav-inner">
 
-    <a href="https://tiffanygaming.com" target="_blank" rel="noopener noreferrer" class="nav-title">
-      Tactician's Fundamentals by Tiffany
+    <a href="/about.html" class="nav-title">
+      <span class="nav-title-main">Tactician's Fundamentals</span><span class="nav-title-by">by Tiffany</span>
     </a>
 
     <nav class="nav-right">
-      <a href="/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
-      <a href="/calculator.html#coach" class="tab-btn">TFT Coach</a>
-      <a href="/gods.html" class="tab-btn">Gods</a>
       <a href="/about.html" class="tab-btn active">About</a>
+      <a href="/calculator.html#coach" class="tab-btn">TFT Coach</a>
+      <a href="/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
+      <a href="/gods.html" class="tab-btn">Gods</a>
 
       <span class="nav-divider"></span>
 
@@ -277,7 +283,7 @@ a { color: inherit; }
 <div class="page-wrap">
 
   <div style="border-radius:12px;overflow:hidden;margin-bottom:24px;border:1px solid var(--border);">
-    <img src="https://tiffanygaming.com/images/articles/tft-coach.jpg" alt="Tactician's Fundamentals" style="width:100%;display:block;">
+    <img src="/tft-asol-card.jpg" alt="Tactician's Fundamentals" style="width:100%;display:block;">
   </div>
 
   <div class="memo">
@@ -290,7 +296,7 @@ a { color: inherit; }
       <div class="memo-heading">Why it exists</div>
       <div class="memo-body">
         <p>When I took <em>Science and Strategy of AI</em> at UCLA Anderson, I knew I wanted my final project to be a gaming application. TFT felt like the ideal use case: it has rich structured data, clear performance differences across skill levels, and no tool that actually explains why a Challenger player makes different decisions than everyone else. After learning about retrieval-augmented generation and how models can be grounded in domain-specific context, I wanted to build an AI that could reason about TFT the way a high-elo player does — rather than just repeat generic tier-list advice.</p>
-        <p style="margin-top:10px;">High-elo players don't win because they memorized patch notes. They've built intuition through thousands of games — how to manage economy (greed, roll, or level), how to preserve streaks, and how to itemize (slam or BSS). That knowledge usually lives in experience and VOD review, not in a system that can explain the gap back to a player in a structured way. This project is an attempt to close that gap — combining curated high-elo match data with LLM-based reasoning so the output feels less like a static stats page and more like a coach that can interpret what winning TFT actually looks like.</p>
+        <p style="margin-top:10px;">High-elo players don't win because they memorized patch notes. They've built intuition through thousands of games — how to manage economy (greed, roll, or level), how to preserve streaks, and how to itemize (slam or BIS). That knowledge usually lives in experience and VOD review, not in a system that can explain the gap back to a player in a structured way. This project is an attempt to close that gap — combining curated high-elo match data with LLM-based reasoning so the output feels less like a static stats page and more like a coach that can interpret what winning TFT actually looks like.</p>
       </div>
     </div>
 
@@ -305,10 +311,10 @@ a { color: inherit; }
     <div class="memo-section">
       <div class="memo-heading">What you can do here</div>
       <ul class="memo-list">
-        <li><strong>Stat Calculator</strong> — check a unit's stats across star levels and item combinations, with recommendations derived from Challenger win-rate data</li>
-        <li><strong>TFT Coach</strong> — enter your Riot ID to compare your economy and leveling decisions against high-elo benchmarks and see where your play diverged</li>
-        <li><strong>Gods</strong> — full reference for all Set 17 god boons and trials, organized by god and stage</li>
-        <li><strong>Ask AI</strong> — open-ended questions about comps, augments, and positioning, answered with live search grounding and a structured TFT reference layer</li>
+        <li><strong>TFT Coach:</strong> enter your Riot ID to compare your economy and leveling decisions against high-elo benchmarks and see where your play diverged</li>
+        <li><strong>Stat Calculator:</strong> check a unit's stats across star levels and item combinations, with recommendations derived from Challenger win-rate data</li>
+        <li><strong>Gods:</strong> full reference for all Set 17 god boons and trials, organized by god and stage</li>
+        <li><strong>Ask AI:</strong> open-ended questions about comps, augments, and positioning, answered with live search grounding and a structured TFT reference layer</li>
       </ul>
     </div>
 
@@ -316,6 +322,7 @@ a { color: inherit; }
       <div class="memo-heading">Data and limits</div>
       <div class="memo-body">
         <p>The Riot API provides an end-of-game snapshot for each match — enough to analyze board strength, itemization, placements, and outcomes at a meaningful level, but not a full reconstruction of every in-game decision. That's sufficient for personal match analysis, but falls short of what a true replay or event telemetry feed would allow.</p>
+        <p style="margin-top:10px;">Since all benchmarks are drawn from Challenger and Grandmaster games, the gaps between your decisions and the reference numbers can look large — high-elo players operate on a different skill level and meta than most of the ladder. The TFT Coach breaks each match down into specific, actionable steps you can take to close that gap at your own rank.</p>
         <p style="margin-top:10px;">Pro-play analysis is similarly constrained. Ranked match patterns can be quantified from structured data, but tournament and top-level decision-making still requires leaning partly on VODs and community interpretation rather than a clean official data layer.</p>
         <p style="margin-top:10px;"><span class="warn">Personal game lookup can break when the Riot developer key expires</span> — development keys require manual renewal on a short cycle. A production API key would be the clearest next step toward making that part of the product reliable. Champion and item references also depend on Community Dragon and Riot Data Dragon, so not every number is guaranteed to be fully current with the latest patch.</p>
       </div>
