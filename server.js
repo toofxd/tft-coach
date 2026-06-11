@@ -1070,14 +1070,27 @@ Respond with exactly these 3 sections. No intro, no outro:
 **When to Play:** What board state, augment, or condition makes this champion worth building around.
 **Key Trait:** Name the most impactful trait level from the list above and what it gives.`;
 
-  if (!GEMINI_API_KEY && !GROQ_API_KEY) return res.json({ tips: "(No AI API keys configured)" });
+  if (!GROQ_API_KEY) return res.json({ tips: "(Groq API key not configured)" });
   try {
-    const tips = GEMINI_API_KEY
-      ? await callGeminiWithSearch(prompt).catch(() => callGroq(prompt, 400))
-      : await callGroq(prompt, 400);
+    const draft = await callGroq(prompt, 400);
+
+    const checkPrompt = `You are a TFT fact-checker. Review these champion tips and correct any errors. Return the corrected tips in exactly the same 3-section format. If nothing needs fixing, return them unchanged — do not add commentary.
+
+CHAMPION: ${name} | Role: ${role}
+Valid items from Challenger data: ${topItems || "none"}
+
+TIPS TO REVIEW:
+${draft}
+
+CHECK FOR AND FIX:
+- Carry items (Blue Buff, Rabadon's Deathcap, Jeweled Gauntlet, Deathblade, Giant Slayer, Last Whisper) recommended for a tank or support — replace with role-appropriate items
+- Trait language written as "the X Y breakpoint" or "a Y trait breakpoint" — rewrite naturally (e.g. "7 Meeples", "with Bastion active")
+- Any item names that don't exist in TFT Set 17 — replace with real items`;
+
+    const tips = await callGroq(checkPrompt, 400).catch(() => draft);
     res.json({ tips });
   } catch (e) {
-    console.error("Groq champion-tips error:", e.message);
+    console.error("champion-tips error:", e.message);
     res.json({ tips: "(Error fetching tips)" });
   }
 });

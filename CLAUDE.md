@@ -186,7 +186,7 @@ All AI prompts are grounded in the Challenger/GM dataset. **Only top-4 (winning)
 ### What each AI endpoint receives from the dataset
 | Endpoint | AI routing | Pro data injected |
 |----------|------------|-------------------|
-| `/api/champion-tips` | `callGeminiWithSearch` → Groq fallback | Top 4 item combos with win % + game count from `itemWinrates` |
+| `/api/champion-tips` | Groq generate → Groq fact-check (2 calls) | Top 4 item combos with win % + game count from `itemWinrates` |
 | `/api/coach` | `callGeminiWithSearch` → Groq fallback | Comp-specific avgLevelEff, avgGoldLeft, top4Rate (top-4 games only) + overall `challengerBench` |
 | `/api/coaching` | `callGeminiWithSearch` → Groq fallback | Overall `challengerBench` (avgLevelEff, avgGoldLeft, avgLevel, top4Rate) |
 | `/api/ask` | `callGeminiWithSearch` → Groq fallback | Champion roster, trait breakpoints, craftable items (see below) + live Google Search grounding via Gemini |
