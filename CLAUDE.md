@@ -10,6 +10,29 @@ Then tail the log to show progress: `Get-Content logs\collect_$(Get-Date -Format
 
 The task runs `collect_pro.py → features.py` and logs to `logs/collect_YYYY-MM-DD.log`.
 
+## ⚠️ CRITICAL: After Refreshing Data (Railway deploy)
+
+After running `features.py`, regenerate the slim CSV and push **both** files:
+
+```python
+# Slim CSV for Railway (full match_features.csv is too large for GitHub)
+# MUST go in data/processed/ — that is where loadCsv() looks
+python -c "
+import csv
+cols = ['placement','top4','level','gold_left','level_efficiency','top_trait','unit_star_avg']
+inp, out = 'data/processed/match_features.csv', 'data/processed/match_features_slim.csv'
+with open(inp,newline='',encoding='utf-8') as fi, open(out,'w',newline='',encoding='utf-8') as fo:
+    r=csv.DictReader(fi); w=csv.DictWriter(fo,fieldnames=cols); w.writeheader()
+    [w.writerow({c:row[c] for c in cols}) for row in r]
+"
+```
+
+Then: `git add data/processed/match_features_slim.csv data/processed/item_winrates.csv && git commit && git push`
+
+⚠️ **`data/match_features_slim.csv` (root-level) does NOT exist and must never be created.** The server's `loadCsv()` always resolves paths under `data/processed/`.
+
+---
+
 ## ⚠️ CRITICAL: File Editing Rules
 
 **The server serves from `/public`, NOT the project root.**
