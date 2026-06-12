@@ -1772,21 +1772,23 @@ async function loadMetaInsights() {
 
     // Convert benchmarks into written insights
     const b = data.benchmarks;
-    const winLevel   = b.avgLevel.top4.toFixed(1);
-    const loseLevel  = b.avgLevel.bot4.toFixed(1);
-    const goldFirst  = b.avgGoldLeft.first.toFixed(1);
-    const goldTop4   = b.avgGoldLeft.top4.toFixed(1);
-    const goldBot4   = b.avgGoldLeft.bot4.toFixed(1);
-    const effWin     = (b.avgLevelEff.top4 * 100).toFixed(1);
-    const effLose    = (b.avgLevelEff.bot4 * 100).toFixed(1);
-    const starsWin   = b.avgUnitStars.top4.toFixed(2);
-    const starsLose  = b.avgUnitStars.bot4.toFixed(2);
+    const fmt1 = v => (v != null ? (+v).toFixed(1) : '—');
+    const fmt2 = v => (v != null ? (+v).toFixed(2) : '—');
+    const winLevel   = fmt1(b.avgLevel.top4);
+    const loseLevel  = fmt1(b.avgLevel.bot4);
+    const goldFirst  = fmt1(b.avgGoldLeft.first);
+    const goldTop4   = fmt1(b.avgGoldLeft.top4);
+    const goldBot4   = fmt1(b.avgGoldLeft.bot4);
+    const effWin     = b.avgLevelEff.top4 != null ? (b.avgLevelEff.top4 * 100).toFixed(1) : '—';
+    const effLose    = b.avgLevelEff.bot4 != null ? (b.avgLevelEff.bot4 * 100).toFixed(1) : '—';
+    const starsWin   = fmt2(b.avgUnitStars?.top4 || null);
+    const starsLose  = fmt2(b.avgUnitStars?.bot4 || null);
 
     const insights = [
       `<strong>Hit level 9.</strong> Top-4 winners end games at level ${winLevel} on average, nearly a full level above players who miss top-4 (${loseLevel}). Reaching level 9 before the lobby ends is the single biggest separator at high elo — prioritize leveling through stage 4-5 even at the cost of some HP.`,
       `<strong>Spend your gold — but at the right moments.</strong> 1st place finishers leave ${goldFirst}g unspent on average, not because they hoard, but because a level-9 board earns interest faster than it can be spent. The key is spending at designated roll-down windows, not trickling gold every round. For most comps, that means holding 50g through stage 3, leveling to 7 on 3-2 or 4-1 and rolling down to stabilize, then pushing level 8 on 4-2 or 4-5 for your 4-cost carries. Fast-9 strategies skip the mid-roll and save everything to push level 9 on 5-1.`,
       `<strong>Survive longer, level higher.</strong> "Level efficiency" (final level ÷ rounds played) is ${effWin}% for winners vs ${effLose}% for losers — and lower is better. Winners reach high level over many rounds; losers level quickly but die in mid-game. If your efficiency is high, that's a sign you're getting eliminated before your board scales, not that you're leveling well.`,
-      `<strong>Star up your carries.</strong> Top-4 boards average ${starsWin}★ across all units vs ${starsLose}★ for bottom-4. The gap is small but consistent across ${data.totalGames.toLocaleString()} games. Holding for 3-stars on your key units beats chasing perfect items on a 1-star board.`,
+      ...(starsWin !== '—' ? [`<strong>Star up your carries.</strong> Top-4 boards average ${starsWin}★ across all units vs ${starsLose}★ for bottom-4. The gap is small but consistent across ${data.totalGames.toLocaleString()} games. Holding for 3-stars on your key units beats chasing perfect items on a 1-star board.`] : []),
     ];
 
     document.getElementById('metaBenchmarks').innerHTML = insights.map(text =>
