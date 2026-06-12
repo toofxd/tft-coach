@@ -1792,8 +1792,9 @@ async function loadMetaInsights() {
     ).join('');
 
   } catch (e) {
-    document.getElementById('metaTopComps').innerHTML =
-      `<span style="color:#4a5a6a;font-size:12px;">Could not load insights.</span>`;
+    console.error('loadMetaInsights error:', e);
+    document.getElementById('metaBenchmarks').innerHTML =
+      `<span style="color:#4a5a6a;font-size:12px;">Could not load insights: ${e.message}</span>`;
   }
 }
 
