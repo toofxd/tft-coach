@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const { parse } = require("csv-parse/sync");
 const { spawn } = require("child_process");
+const bandit = require("./src/bandit");
 
 const app = express();
 const PORT = process.env.PORT || 30002;
@@ -413,20 +414,21 @@ function analyzeItems(feats) {
       .sort((a, b) => parseFloat(b.top4_rate) - parseFloat(a.top4_rate));
     if (!unitRows.length) continue;
 
-    const userCombo = JSON.stringify([...items].sort());
-    const userRow = unitRows.find((r) => {
-      try { return JSON.stringify(JSON.parse(r.item_combo).sort()) === userCombo; }
-      catch { return false; }
-    });
+    // Score the user's build as the average top4_rate of their items
+    const userRates = items
+      .map(id => unitRows.find(r => r.item_id === id))
+      .filter(Boolean)
+      .map(r => parseFloat(r.top4_rate));
+    const userRate = userRates.length ? userRates.reduce((a, b) => a + b, 0) / userRates.length : null;
     const best = unitRows[0];
-    const userRate = userRow ? parseFloat(userRow.top4_rate) : null;
     const bestRate = parseFloat(best.top4_rate);
 
     if (!userRate || bestRate > userRate + 0.08) {
-      const userStr = userRate !== null ? `${(userRate * 100).toFixed(0)}% top-4` : "no pro data";
+      const userStr = userRate !== null ? `${(userRate * 100).toFixed(0)}% top-4 (avg across items)` : "no pro data";
+      const bestName = best.item_id.replace(/TFT_Item_|TFT\d*_Item_/, "").replace(/([A-Z])/g, " $1").trim();
       issues.push(
         `${unitId}: your items had ${userStr}. ` +
-        `Top Challenger build ${best.item_combo} reaches ${(bestRate * 100).toFixed(0)}% top-4 (n=${best.games}).`
+        `Top Challenger item ${bestName} reaches ${(bestRate * 100).toFixed(0)}% top-4 (n=${best.games}).`
       );
     }
   }
@@ -445,18 +447,11 @@ function proStats(topTrait) {
   return { avgLevelEff, avgGoldLeft, top4Rate, games: compRows.length };
 }
 
-// Returns top item combos for a unit from the Challenger dataset, formatted for AI prompts.
+// Returns top items for a unit from the Challenger dataset, formatted for AI prompts.
 function proUnitStats(unitId) {
   if (!unitId || !itemWinrates.length) return null;
   const rows = itemWinrates
-    .filter(r => {
-      if (r.unit_id !== unitId || parseInt(r.games) < 10) return false;
-      try {
-        const m = r.item_combo.match(/'([^']+)'/g);
-        if (!m) return false;
-        return !m.map(s => s.replace(/'/g, "")).some(isJunkItem);
-      } catch { return false; }
-    })
+    .filter(r => r.unit_id === unitId && parseInt(r.games) >= 10 && !isJunkItem(r.item_id))
     .sort((a, b) =>
       wilsonLower(parseFloat(b.top4_rate), parseInt(b.games)) -
       wilsonLower(parseFloat(a.top4_rate), parseInt(a.games))
@@ -464,13 +459,9 @@ function proUnitStats(unitId) {
     .slice(0, 4);
   if (!rows.length) return null;
   return rows.map(r => {
-    let items = [];
-    try {
-      const m = r.item_combo.match(/'([^']+)'/g);
-      if (m) items = m.map(s => s.replace(/'/g, "").replace(/TFT_Item_|TFT\d*_Item_/, "").replace(/([A-Z])/g, " $1").trim());
-    } catch {}
+    const name = r.item_id.replace(/TFT_Item_|TFT\d*_Item_/, "").replace(/([A-Z])/g, " $1").trim();
     const pct = (parseFloat(r.top4_rate) * 100).toFixed(0);
-    return `  • ${items.join(" + ")}: ${pct}% top-4 (${r.games} games)`;
+    return `  • ${name}: ${pct}% top-4 (${r.games} games)`;
   }).join("\n");
 }
 
@@ -818,7 +809,7 @@ app.get("/api/profile", async (req, res) => {
 // GET /api/puuid?handle=toofxd%23NA1 — resolve Riot ID to PUUID
 // POST /api/coaching — generate aggregate coaching from profile stats (called separately so UI can show stats first)
 app.post("/api/coaching", async (req, res) => {
-  const { avgPlacement, top4Count, wins, total, avgLevel, avgGoldLeft, avgLevelEff, goldWastedGames, avgBot4LevelEff, topComps, synergies, matchIds } = req.body;
+  const { avgPlacement, top4Count, wins, total, avgLevel, avgGoldLeft, avgLevelEff, goldWastedGames, avgBot4LevelEff, topComps, synergies, matchIds, puuid, handle } = req.body;
 
   const top4Rate = total ? (top4Count / total * 100).toFixed(0) : 0;
   const winRate  = total ? (wins / total * 100).toFixed(0) : 0;
@@ -845,6 +836,22 @@ HOW TO READ THESE METRICS:
   const taAgg = matchIds?.length ? await getTftAcademyData(matchIds) : null;
   const taBlock = fmtAcademyAggregate(taAgg);
 
+  // --- Bandit: update reward from prior session, then select focus arm ---
+  let banditFocus = "";
+  let banditArm = null;
+  let banditLabel = null;
+  if (puuid) {
+    try {
+      bandit.updateReward(puuid, parseFloat(avgPlacement), matchIds || []);
+      const session = bandit.startSession(puuid, handle || puuid, parseFloat(avgPlacement), matchIds || []);
+      banditFocus = session.focus;
+      banditArm   = session.arm;
+      banditLabel = session.armLabel;
+    } catch (e) {
+      console.error("Bandit error:", e.message);
+    }
+  }
+
   const prompt = `You are an expert TFT (Teamfight Tactics) coach. Below is a player's data for their last ${total} games. Use it to write 4–6 coaching insights.
 
 FORMAT RULES — follow exactly:
@@ -860,7 +867,7 @@ PLAYER DATA (last ${total} games, for your reference only — do not echo these 
 - Most-played comps: ${compSummary || "N/A"}
 - Best comps by placement: ${synSummary || "N/A"}
 ${benchBlock}${taBlock ? `Round-by-round patterns (TFT Academy):\n${taBlock}\n` : ""}
-FOCUS AREAS — address at least two of these if the data supports it:
+${banditFocus ? banditFocus + "\n\n" : ""}FOCUS AREAS — address at least two of these if the data supports it:
 - Gold economy: Is this player hoarding (too much gold left) or panic-spending (too little)? What should they do at specific round intervals?
 - Leveling: Their level efficiency vs Challenger/GM tells a story. What is that story and what should change?
 - Comp consistency and when to pivot vs commit.
@@ -872,7 +879,7 @@ FOCUS AREAS — address at least two of these if the data supports it:
     const coaching = GEMINI_API_KEY
       ? await callGeminiWithSearch(prompt).catch(() => callAI(prompt, 700))
       : await callAI(prompt, 700);
-    res.json({ coaching });
+    res.json({ coaching, banditArm, banditLabel });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -927,48 +934,28 @@ app.get("/api/meta-insights", (req, res) => {
 });
 
 // GET /api/item-recs?unitId=TFT17_Caitlyn
-// Extracts individual items from pro CSV combos, scored by Wilson lower bound (95% CI).
-// This prevents items with tiny sample sizes (e.g. 5 games, 100% rate) from outranking
-// statistically significant items (e.g. 1000 games, 72% rate).
+// Per-item top-4 rate: each game counts once per unique item the unit carried.
+// Scored by Wilson lower bound (95% CI) to penalise small samples.
 app.get("/api/item-recs", (req, res) => {
   const { unitId } = req.query;
   if (!unitId) return res.status(400).json({ error: "unitId required" });
 
-  // Parse all valid combos for this unit (min 10 games, no junk items)
-  const combos = itemWinrates
-    .filter(r => r.unit_id === unitId)
-    .map(r => {
-      let items = [];
-      try {
-        const match = r.item_combo.match(/'([^']+)'/g);
-        if (match) items = match.map(s => s.replace(/'/g, ""));
-      } catch {}
-      return { items, top4Rate: parseFloat(r.top4_rate), games: parseInt(r.games) };
-    })
-    .filter(r => r.items.length > 0 && r.games >= 10 && !r.items.some(isJunkItem));
-
-  // Total unique games for this unit = sum of all combo games (denominator for play rate)
-  const totalUnitGames = combos.reduce((s, c) => s + c.games, 0);
-
-  // Aggregate per individual item: weighted avg top-4 rate and total game appearances
-  // Use Set to deduplicate items within a combo (e.g. 2× Deathblade counts as one appearance)
-  const itemMap = {};
-  for (const combo of combos) {
-    for (const id of new Set(combo.items)) {
-      if (!itemMap[id]) itemMap[id] = { weightedSum: 0, totalGames: 0 };
-      itemMap[id].weightedSum += combo.top4Rate * combo.games;
-      itemMap[id].totalGames += combo.games;
-    }
-  }
-
-  const recs = Object.entries(itemMap)
-    .map(([id, s]) => ({
-      itemId: id,
-      top4Rate: s.weightedSum / s.totalGames,
-      games: s.totalGames,
-      playRate: totalUnitGames > 0 ? parseFloat((s.totalGames / totalUnitGames * 100).toFixed(1)) : 0,
+  const rows = itemWinrates
+    .filter(r => r.unit_id === unitId && !isJunkItem(r.item_id))
+    .map(r => ({
+      itemId: r.item_id,
+      top4Rate: parseFloat(r.top4_rate),
+      games: parseInt(r.games),
     }))
-    // Sort by Wilson score lower bound — statistically conservative, penalises small samples
+    .filter(r => r.games >= 10);
+
+  const totalUnitGames = rows.length ? Math.max(...rows.map(r => r.games)) : 0;
+
+  const recs = rows
+    .map(r => ({
+      ...r,
+      playRate: totalUnitGames > 0 ? parseFloat((r.games / totalUnitGames * 100).toFixed(1)) : 0,
+    }))
     .sort((a, b) => wilsonLower(b.top4Rate, b.games) - wilsonLower(a.top4Rate, a.games))
     .slice(0, 10);
 
@@ -1087,7 +1074,9 @@ CHECK FOR AND FIX:
 - Trait language written as "the X Y breakpoint" or "a Y trait breakpoint" — rewrite naturally (e.g. "7 Meeples", "with Bastion active")
 - Any item names that don't exist in TFT Set 17 — replace with real items`;
 
-    const tips = await callGroq(checkPrompt, 400).catch(() => draft);
+    let tips = await callGroq(checkPrompt, 400).catch(() => draft);
+    // Strip any echoed header lines Groq may include from the fact-check prompt context
+    tips = tips.replace(/^(CHAMPION:.*|Valid items from Challenger data:.*|TIPS TO REVIEW:\s*)\n?/gim, '').trim();
     res.json({ tips });
   } catch (e) {
     console.error("champion-tips error:", e.message);

@@ -147,29 +147,28 @@ def build_match_features(save: bool = True) -> pd.DataFrame:
 
 def build_item_winrates(df: pd.DataFrame) -> pd.DataFrame:
     """
-    For each (unit, item_combo_sorted) pair, compute top-4 rate.
-    item_combo is stored as a sorted tuple of item IDs for deduplication.
+    For each (unit, item) pair, compute top-4 rate across all games where
+    that unit carried that item — regardless of what other items were equipped.
+    Each game is counted once per unique item on the unit.
     """
     records = []
     for _, row in df.iterrows():
         unit_items = json.loads(row["_unit_items"])
         for unit_id, items in unit_items.items():
-            if not items:
-                continue
-            combo = tuple(sorted(items))
-            records.append({
-                "unit_id": unit_id,
-                "item_combo": str(combo),
-                "top4": row["top4"],
-                "placement": row["placement"],
-            })
+            for item_id in set(items):  # deduplicate doubled items within one game
+                records.append({
+                    "unit_id": unit_id,
+                    "item_id": item_id,
+                    "top4": row["top4"],
+                    "placement": row["placement"],
+                })
 
-    item_df = pd.DataFrame(records, columns=["unit_id", "item_combo", "top4", "placement"])
+    item_df = pd.DataFrame(records, columns=["unit_id", "item_id", "top4", "placement"])
     if item_df.empty:
         print("No item data found — skipping item win-rate table.")
         return item_df
     result = (
-        item_df.groupby(["unit_id", "item_combo"])
+        item_df.groupby(["unit_id", "item_id"])
         .agg(
             games=("top4", "count"),
             top4_rate=("top4", "mean"),

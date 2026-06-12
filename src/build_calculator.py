@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 DATA_PATH = Path(__file__).parent.parent / "data" / "static" / "calculator_data.json"
-OUT_PATH = Path(__file__).parent.parent / "calculator.html"
+OUT_PATH = Path(__file__).parent.parent / "public" / "calculator.html"
 
 data = json.load(open(DATA_PATH, encoding="utf-8"))
 data_json = json.dumps(data, separators=(",", ":"), ensure_ascii=False)
@@ -837,5 +837,15 @@ renderItems();
 </body>
 </html>"""
 
-OUT_PATH.write_text(html, encoding="utf-8")
-print(f"Written: {OUT_PATH}  ({OUT_PATH.stat().st_size // 1024}KB)")
+# Inject data into the existing public/calculator.html rather than overwriting
+# the whole file. This preserves all hand-edits to the UI.
+if OUT_PATH.exists():
+    existing = OUT_PATH.read_text(encoding="utf-8")
+    pre  = existing.split('const DATA = ')[0]
+    post = existing.split('const UNITS_LIST')[1]
+    new_html = pre + 'const DATA = ' + data_json + ';\nconst UNITS_LIST' + post
+    OUT_PATH.write_text(new_html, encoding="utf-8")
+    print(f"Injected data into existing: {OUT_PATH}  ({OUT_PATH.stat().st_size // 1024}KB)")
+else:
+    OUT_PATH.write_text(html, encoding="utf-8")
+    print(f"Written (new file): {OUT_PATH}  ({OUT_PATH.stat().st_size // 1024}KB)")

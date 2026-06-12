@@ -213,10 +213,18 @@ a { color: inherit; }
 }
 .memo-list li:last-child { margin-bottom: 0; }
 .memo-list li::before {
-  content: '—';
+  content: '•';
   position: absolute;
   left: 0;
   color: var(--text-30);
+}
+.memo-list.numbered { counter-reset: memo-counter; }
+.memo-list.numbered > li { padding-left: 20px; }
+.memo-list.numbered > li::before {
+  content: counter(memo-counter) '.';
+  counter-increment: memo-counter;
+  font-weight: 600;
+  color: var(--gold);
 }
 .memo-list strong {
   color: var(--text);
@@ -303,33 +311,48 @@ a { color: inherit; }
     <div class="memo-section">
       <div class="memo-heading">Why it exists</div>
       <div class="memo-body">
-        <p>When I took <em>Science and Strategy of AI</em> at UCLA Anderson, I knew I wanted my final project to be a gaming application. TFT felt like the ideal use case: it has rich structured data, clear performance differences across skill levels, and no tool that actually explains why a Challenger player makes different decisions than everyone else. After learning about retrieval-augmented generation and how models can be grounded in domain-specific context, I wanted to build an AI that could reason about TFT the way a high-elo player does — rather than just repeat generic tier-list advice.</p>
-        <p style="margin-top:10px;">High-elo players don't win because they memorized patch notes. They've built intuition through thousands of games — how to manage economy (greed, roll, or level), how to preserve streaks, and how to itemize (slam or BIS). That knowledge usually lives in experience and VOD review, not in a system that can explain the gap back to a player in a structured way. This project is an attempt to close that gap — combining curated high-elo match data with LLM-based reasoning so the output feels less like a static stats page and more like a coach that can interpret what winning TFT actually looks like.</p>
+        <p>When I took <em>Science and Strategy of AI</em> at UCLA Anderson, I knew I wanted my final project to be a gaming application. TFT was the obvious choice — it's the game that has kept me hooked across multiple sets since COVID, even though I've only been able to grind to Emerald.</p>
+        <p style="margin-top:10px;">After learning about retrieval-augmented generation and how models can be grounded in domain-specific context, I wanted to build an AI that could reason about TFT the way a high-elo player does, rather than just recycle generic tier-list advice. High-elo players do not win because they memorize patch notes. They build intuition through thousands of games: when to greed, roll, or level; how to preserve streaks; and when to slam items versus hold for BIS. That kind of knowledge usually lives in experience and VOD review, not in a system that can explain the gap back to a player in a structured way.</p>
+        <p style="margin-top:10px;">This project is my attempt to close that gap. It combines curated high-elo match data with LLM-based reasoning so the output feels less like a static stats page and more like a coach that can explain what winning TFT actually looks like.</p>
       </div>
     </div>
 
     <div class="memo-section">
       <div class="memo-heading">How it works</div>
       <div class="memo-body">
-        <p>The system is built around a dataset of roughly 140,000 Challenger and Grandmaster TFT matches from North America, updated periodically. From that data, I compute benchmarks around leveling efficiency, economy management, placement outcomes, and item performance — with win-rate metrics anchored to top-4 finishes so the model is grounded in what successful play looks like, not what's merely common.</p>
+        <p>The system is built around a dataset of over 150,000 Challenger and Grandmaster TFT matches from North America, updated periodically. From that data, I compute benchmarks around leveling efficiency, economy management, placement outcomes, and item performance — with win-rate metrics anchored to top-4 finishes so the model is grounded in what successful play looks like, not what's merely common.</p>
         <p style="margin-top:10px;">The reasoning layer uses a RAG-style approach. Instead of relying only on what a model may have seen during training, each response is grounded at inference time in a TFT-specific knowledge base — champion data, traits, item stats, and high-elo benchmarks — which keeps the system tied to current game context and structured evidence rather than generalized recall. Three models work together: Gemini 2.5 Flash handles coaching and live search, Groq LLaMA 3.3 handles champion-specific tips and fallback responses, and Riot's Match API provides personal game history when available.</p>
+        <p style="margin-top:10px;">Coaching also adapts over time using a multi-armed bandit. Each session, a UCB1 algorithm selects one of five focus areas — economy, comp flexibility, item prioritization, board consistency, or meta alignment — and steers the AI's emphasis toward whichever has produced the most placement improvement for that specific player. The bandit balances exploration (trying all focus areas) with exploitation (leaning into what has worked), so the coaching gets more targeted the more you use it.</p>
       </div>
     </div>
 
     <div class="memo-section">
-      <div class="memo-heading">What you can do here</div>
-      <ul class="memo-list">
-        <li><strong>TFT Coach:</strong> enter your Riot ID to compare your economy and leveling decisions against high-elo benchmarks and see where your play diverged</li>
-        <li><strong>Stat Calculator:</strong> check a unit's stats across star levels and item combinations, with recommendations derived from Challenger win-rate data</li>
-        <li><strong>Gods:</strong> full reference for all Set 17 god boons and trials, organized by god and stage</li>
-        <li><strong>Ask AI:</strong> open-ended questions about comps, augments, and positioning, answered with live search grounding and a structured TFT reference layer</li>
+      <div class="memo-heading">Tactician's Fundamentals</div>
+      <ul class="memo-list numbered">
+        <li><strong>TFT Coach</strong>
+          <ul class="memo-list" style="margin-top:6px;">
+            <li><strong>Challenger/GM takeaways:</strong> key patterns distilled from the high-elo dataset — level targets, economy benchmarks, star-level gaps, and top comp win rates, computed fresh from the data</li>
+            <li><strong>Analyze my matches:</strong> enter your Riot ID to compare your economy and leveling decisions against high-elo benchmarks and see where your play diverged</li>
+            <li><strong>Ask AI:</strong> open-ended questions about comps, augments, and positioning, answered with live search grounding and a structured TFT reference layer</li>
+          </ul>
+        </li>
+        <li style="margin-top:8px;"><strong>Stat Calculator</strong>
+          <ul class="memo-list" style="margin-top:6px;">
+            <li><strong>Stats:</strong> unit stats across star levels and item combinations</li>
+            <li><strong>Recommended builds:</strong> item recommendations derived from per-item Challenger win-rate data</li>
+            <li><strong>Champion tips:</strong> AI-generated tips grounded in pro item combos and win rates</li>
+            <li>Emblem recipes, shop odds, and leveling guides for quick reference</li>
+          </ul>
+        </li>
+        <li style="margin-top:8px;"><strong>Gods:</strong> full reference for all Set 17 god boons and trials, organized by god and stage</li>
       </ul>
     </div>
 
     <div class="memo-section">
       <div class="memo-heading">Data and limits</div>
       <div class="memo-body">
-        <p>The Riot API provides an end-of-game snapshot for each match — enough to analyze board strength, itemization, placements, and outcomes at a meaningful level, but not a full reconstruction of every in-game decision. That's sufficient for personal match analysis, but falls short of what a true replay or event telemetry feed would allow.</p>
+        <p>This tool was built as an academic project. The data has not been fully vetted and is pulled from third-party sources — use it as a reference, not a definitive authority.</p>
+        <p style="margin-top:10px;">The Riot API provides an end-of-game snapshot for each match — enough to analyze board strength, itemization, placements, and outcomes at a meaningful level, but not a full reconstruction of every in-game decision. That's sufficient for personal match analysis, but falls short of what a true replay or event telemetry feed would allow.</p>
         <p style="margin-top:10px;">Since all benchmarks are drawn from Challenger and Grandmaster games, the gaps between your decisions and the reference numbers can look large — high-elo players operate on a different skill level and meta than most of the ladder. The TFT Coach breaks each match down into specific, actionable steps you can take to close that gap at your own rank.</p>
         <p style="margin-top:10px;">Pro-play analysis is similarly constrained. Ranked match patterns can be quantified from structured data, but tournament and top-level decision-making still requires leaning partly on VODs and community interpretation rather than a clean official data layer.</p>
         <p style="margin-top:10px;"><span class="warn">Personal game lookup can break when the Riot developer key expires</span> — development keys require manual renewal on a short cycle. A production API key would be the clearest next step toward making that part of the product reliable. Champion and item references also depend on Community Dragon and Riot Data Dragon, so not every number is guaranteed to be fully current with the latest patch.</p>
@@ -344,7 +367,7 @@ a { color: inherit; }
 
   <div class="disclaimer">
     <p style="font-size:11px;color:#556070;line-height:1.6;max-width:640px;margin:0 auto 8px;">This tool isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
-    <p>Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener">Tiffany Tsang</a></p>
+    <p>Created by <a href="https://tiffanygaming.com">Tiffany Tsang</a></p>
   </div>
 
 </div>

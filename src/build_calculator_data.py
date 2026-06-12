@@ -211,7 +211,12 @@ def build_traits(tactics_traits, cdragon_traits):
             if "BonusAD" in vars_ or "AD" in vars_:
                 bp["bonuses"]["ad"] = vars_.get("BonusAD", vars_.get("AD", 0))
             if "BonusAP" in vars_ or "AP" in vars_:
-                bp["bonuses"]["ap"] = vars_.get("BonusAP", vars_.get("AP", 0))
+                raw_ap = vars_.get("BonusAP", vars_.get("AP", 0))
+                ad_val = bp["bonuses"].get("ad", 0)
+                # AP stored as whole-number % when AD is already decimal (e.g. AP=12, AD=0.12)
+                if ad_val and 0 < ad_val < 1 and round(ad_val * 100) == round(raw_ap):
+                    raw_ap = raw_ap / 100
+                bp["bonuses"]["ap"] = raw_ap
             if "BonusHealth" in vars_ or "Health" in vars_:
                 bp["bonuses"]["hp"] = vars_.get("BonusHealth", vars_.get("Health", 0))
             if "BonusAS" in vars_ or "AttackSpeed" in vars_:
@@ -284,6 +289,10 @@ def main():
 
     print(f"Saved {len(units)} units, {len(traits)} traits, {len(items)} items")
     print(f"Output: {path}")
+
+    print("Injecting into calculator.html...")
+    import subprocess
+    subprocess.run(["python", str(Path(__file__).parent / "build_calculator.py")], check=True)
 
 
 if __name__ == "__main__":
