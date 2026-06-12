@@ -19,6 +19,9 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/coach",      (_, res) => res.redirect(301, "/calculator.html#coach"));
+app.get("/calculator", (_, res) => res.redirect(301, "/calculator.html"));
+
 // Redirect root to the main app
 app.get("/", (req, res) => {
   res.redirect("/about.html");
