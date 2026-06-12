@@ -943,18 +943,18 @@ app.get("/api/item-recs", (req, res) => {
   const { unitId } = req.query;
   if (!unitId) return res.status(400).json({ error: "unitId required" });
 
-  const rows = itemWinrates
+  const allRows = itemWinrates
     .filter(r => r.unit_id === unitId && !isJunkItem(r.item_id))
-    .map(r => ({
-      itemId: r.item_id,
-      top4Rate: parseFloat(r.top4_rate),
-      games: parseInt(r.games),
-    }))
-    .filter(r => r.games >= 10);
+    .map(r => ({ itemId: r.item_id, top4Rate: parseFloat(r.top4_rate), games: parseInt(r.games) }));
 
-  const totalUnitGames = rows.length ? Math.max(...rows.map(r => r.games)) : 0;
+  // Approximate total unit appearances from the most-seen item
+  const totalUnitGames = allRows.length ? Math.max(...allRows.map(r => r.games)) : 0;
 
-  const recs = rows
+  // Scaled floor: 5% of total unit games, with a minimum of 50
+  const minGames = Math.max(50, totalUnitGames * 0.05);
+
+  const recs = allRows
+    .filter(r => r.games >= minGames)
     .map(r => ({
       ...r,
       playRate: totalUnitGames > 0 ? parseFloat((r.games / totalUnitGames * 100).toFixed(1)) : 0,
