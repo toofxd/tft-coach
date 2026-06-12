@@ -1762,7 +1762,9 @@ async function analyzeMatches() {
 
 async function loadMetaInsights() {
   try {
-    const data = await fetch('/api/meta-insights').then(r => r.json());
+    const res = await fetch('/api/meta-insights');
+    if (!res.ok) { document.getElementById('metaInsightsCard').style.display = 'none'; return; }
+    const data = await res.json();
 
     // Game count label
     document.getElementById('metaGamesLabel').textContent =
