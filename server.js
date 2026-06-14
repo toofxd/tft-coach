@@ -736,6 +736,13 @@ app.get("/api/profile", async (req, res) => {
   const [gameName, tagLine] = handle.split("#");
   if (!gameName || !tagLine) return res.status(400).json({ error: "Format must be Name#TAG" });
 
+  console.log(`[SEARCH] ${new Date().toISOString()} ${handle}`);
+  fs.appendFile(
+    path.join(__dirname, "logs", "searches.log"),
+    `${new Date().toISOString()}\t${handle}\n`,
+    () => {}
+  );
+
   try {
     const puuid = await getPuuid(gameName, tagLine);
 
@@ -1093,6 +1100,13 @@ CHECK FOR AND FIX:
 app.post("/api/ask", async (req, res) => {
   const { question } = req.body;
   if (!question) return res.status(400).json({ error: "question required" });
+
+  console.log(`[ASK] ${new Date().toISOString()} ${question}`);
+  fs.appendFile(
+    path.join(__dirname, "logs", "searches.log"),
+    `${new Date().toISOString()}\t[ASK]\t${question}\n`,
+    () => {}
+  );
 
   const groundingBlock = [
     champSheet  && `Set 17 champions (authoritative — name | cost | traits | role):\n${champSheet}`,

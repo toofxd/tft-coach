@@ -143,6 +143,42 @@ a { color: inherit; }
   color: var(--gold-light);
 }
 
+/* ── Mobile hamburger ── */
+.hamburger-btn {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  padding: 8px; color: var(--text-50);
+  flex-direction: column; gap: 5px; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hamburger-btn span {
+  display: block; width: 22px; height: 2px;
+  background: currentColor; border-radius: 2px;
+}
+.mobile-menu {
+  display: none;
+  background: rgba(7,24,48,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-direction: column;
+  padding: 6px 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 13px 24px;
+  color: var(--text-50); text-decoration: none;
+  font-size: 14px; font-weight: 600; font-family: inherit;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a.active { color: var(--gold); }
+@media (max-width: 640px) {
+  .nav-right { display: none; }
+  .hamburger-btn { display: flex; }
+}
+
 /* ── Page layout ── */
 .page-wrap {
   max-width: 720px;
@@ -292,7 +328,18 @@ a { color: inherit; }
       </a>
     </nav>
 
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open navigation menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+
   </div>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/about.html" class="active">About</a>
+    <a href="/calculator.html#coach">TFT Coach</a>
+    <a href="/calculator.html#calculator">Stat Calculator</a>
+    <a href="/gods.html">Gods</a>
+  </nav>
 </header>
 
 <!-- ── Page content ── -->
@@ -317,7 +364,7 @@ a { color: inherit; }
       </div>
     </div>
 
-    <div class="memo-section">
+    <div class="memo-section" id="how-it-works">
       <div class="memo-heading">How it works</div>
       <div class="memo-body">
         <p>The system is built around a dataset of over 150,000 Challenger and Grandmaster TFT matches from North America, updated periodically. From that data, I compute benchmarks around leveling efficiency, economy management, placement outcomes, and item performance — with win-rate metrics anchored to top-4 finishes so the model is grounded in what successful play looks like, not what's merely common.</p>
@@ -329,14 +376,14 @@ a { color: inherit; }
     <div class="memo-section">
       <div class="memo-heading">Tactician's Fundamentals</div>
       <ul class="memo-list numbered">
-        <li><strong>TFT Coach</strong>
+        <li><strong><a href="/calculator.html#coach" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);">TFT Coach</a></strong>
           <ul class="memo-list" style="margin-top:6px;">
             <li><strong>Challenger/GM takeaways:</strong> key patterns distilled from the high-elo dataset — level targets, economy benchmarks, star-level gaps, and top comp win rates, computed fresh from the data</li>
             <li><strong>Analyze my matches:</strong> enter your Riot ID to compare your economy and leveling decisions against high-elo benchmarks and see where your play diverged</li>
             <li><strong>Ask AI:</strong> open-ended questions about comps, augments, and positioning, answered with live search grounding and a structured TFT reference layer</li>
           </ul>
         </li>
-        <li style="margin-top:8px;"><strong>Stat Calculator</strong>
+        <li style="margin-top:8px;"><strong><a href="/calculator.html#calculator" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);">Stat Calculator</a></strong>
           <ul class="memo-list" style="margin-top:6px;">
             <li><strong>Stats:</strong> unit stats across star levels and item combinations</li>
             <li><strong>Recommended builds:</strong> item recommendations derived from per-item Challenger win-rate data</li>
@@ -344,7 +391,7 @@ a { color: inherit; }
             <li>Emblem recipes, shop odds, and leveling guides for quick reference</li>
           </ul>
         </li>
-        <li style="margin-top:8px;"><strong>Gods:</strong> full reference for all Set 17 god boons and trials, organized by god and stage</li>
+        <li style="margin-top:8px;"><strong><a href="/gods.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);">Gods</a>:</strong> full reference for all Set 17 god boons and trials, organized by god and stage</li>
       </ul>
     </div>
 
@@ -372,6 +419,9 @@ a { color: inherit; }
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 10);
   });
+  function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
 </script>
 </body>
 </html>

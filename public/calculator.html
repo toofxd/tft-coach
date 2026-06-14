@@ -242,6 +242,41 @@ img.coin { width: 12px; height: 12px; flex-shrink: 0; }
 .coach-tip { margin-bottom:12px; line-height:1.7; display:flex; gap:8px; align-items:flex-start; }
 .coach-tip:last-child { margin-bottom:0; }
 .tip-num { color:var(--gold); font-weight:700; flex-shrink:0; min-width:18px; }
+/* ── Mobile hamburger ── */
+.hamburger-btn {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  padding: 8px; color: var(--text-50);
+  flex-direction: column; gap: 5px; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hamburger-btn span {
+  display: block; width: 22px; height: 2px;
+  background: currentColor; border-radius: 2px;
+}
+.mobile-menu {
+  display: none;
+  background: rgba(7,24,48,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-direction: column;
+  padding: 6px 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 13px 24px;
+  color: var(--text-50); text-decoration: none;
+  font-size: 14px; font-weight: 600; font-family: inherit;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a.active { color: var(--gold); }
+@media (max-width: 640px) {
+  .nav-right { display: none; }
+  .hamburger-btn { display: flex; }
+}
 </style>
 
 <body>
@@ -271,7 +306,19 @@ img.coin { width: 12px; height: 12px; flex-shrink: 0; }
         </svg>
       </a>
     </nav>
+
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open navigation menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+
   </div>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/about.html">About</a>
+    <a href="#coach" onclick="switchTab('coach');toggleMobileMenu()">TFT Coach</a>
+    <a href="#calculator" onclick="switchTab('calculator');toggleMobileMenu()">Stat Calculator</a>
+    <a href="/gods.html">Gods</a>
+  </nav>
 </header>
 
 <div style="max-width:1060px;margin:0 auto;">
@@ -1809,6 +1856,10 @@ async function loadMetaInsights() {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
+
+function toggleMobileMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
 
 </script>
 </body>

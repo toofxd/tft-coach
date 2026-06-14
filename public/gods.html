@@ -140,6 +140,42 @@ a { color: inherit; }
   color: var(--gold-light);
 }
 
+/* ── Mobile hamburger ── */
+.hamburger-btn {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  padding: 8px; color: var(--text-50);
+  flex-direction: column; gap: 5px; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hamburger-btn span {
+  display: block; width: 22px; height: 2px;
+  background: currentColor; border-radius: 2px;
+}
+.mobile-menu {
+  display: none;
+  background: rgba(7,24,48,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-direction: column;
+  padding: 6px 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 13px 24px;
+  color: var(--text-50); text-decoration: none;
+  font-size: 14px; font-weight: 600; font-family: inherit;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a.active { color: var(--gold); }
+@media (max-width: 640px) {
+  .nav-right { display: none; }
+  .hamburger-btn { display: flex; }
+}
+
 /* ── Page header (below sticky nav) ──────────────────────────── */
 .page-header {
   display: flex; align-items: baseline; gap: 12px;
@@ -269,7 +305,18 @@ a { color: inherit; }
       </a>
     </nav>
 
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open navigation menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+
   </div>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/about.html">About</a>
+    <a href="/calculator.html#coach">TFT Coach</a>
+    <a href="/calculator.html#calculator">Stat Calculator</a>
+    <a href="/gods.html" class="active">Gods</a>
+  </nav>
 </header>
 
 <!-- ── Page content ── -->
@@ -462,6 +509,10 @@ renderGods();
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll(); // run once on load in case page is already scrolled
 })();
+
+function toggleMobileMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
 </script>
 </body>
 </html>
