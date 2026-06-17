@@ -99,7 +99,7 @@ So re-running the script at any time is always safe — it only fetches genuinel
 
 ### Current tiers collected
 The default in `collect()` is `tiers=("challenger", "grandmaster")` — both are already included.
-Current dataset: ~79,700 rows in `data/processed/match_features.csv`, ~12,900 rows in `item_winrates.csv`.
+Current dataset: ~220,588 rows in `data/processed/match_features.csv`, ~6,610 rows in `item_winrates.csv`. Last updated: June 17, 2026.
 
 ### To add Master tier
 Edit line 84 of `src/collect_pro.py`:
