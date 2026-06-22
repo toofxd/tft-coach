@@ -842,10 +842,6 @@ HOW TO READ THESE METRICS:
 • Level efficiency (= final level ÷ rounds survived): Lower is better — it means you reached a high level AND survived many rounds. Challenger top-4 players average ${bench.avgLevelEff.toFixed(3)}. If this number is above 0.30, the player is reaching a low level relative to rounds played, which typically means dying in mid-game before fully leveling up. High efficiency in losing games (avgBot4LevelEff) is a red flag: it means even in bad games, the player levels quickly but still can't survive.
 ` : "";
 
-  // Query TFT Academy for aggregate patterns across recent games
-  const taAgg = matchIds?.length ? await getTftAcademyData(matchIds) : null;
-  const taBlock = fmtAcademyAggregate(taAgg);
-
   // --- Bandit: update reward from prior session, then select focus arm ---
   let banditFocus = "";
   let banditArm = null;
@@ -876,7 +872,7 @@ PLAYER DATA (last ${total} games, for your reference only — do not echo these 
 - Level efficiency (final level ÷ rounds played): ${avgLevelEff} | Same stat in losing games only: ${avgBot4LevelEff ?? "N/A"}
 - Most-played comps: ${compSummary || "N/A"}
 - Best comps by placement: ${synSummary || "N/A"}
-${benchBlock}${taBlock ? `Round-by-round patterns (TFT Academy):\n${taBlock}\n` : ""}
+${benchBlock}
 ${banditFocus ? banditFocus + "\n\n" : ""}FOCUS AREAS — address at least two of these if the data supports it:
 - Gold economy: Is this player hoarding (too much gold left) or panic-spending (too little)? What should they do at specific round intervals?
 - Leveling: Their level efficiency vs Challenger/GM tells a story. What is that story and what should change?
@@ -987,10 +983,6 @@ app.post("/api/coach", async (req, res) => {
     const pro = proStats(feats.topTrait);
     const itemIssues = analyzeItems(feats);
 
-    // Query TFT Academy for round-by-round data (non-blocking, falls back to null)
-    const ta = await getTftAcademyData(matchId);
-    const taBlock = fmtAcademyGame(ta);
-
     // Build Gemini prompt
     const bench = challengerBench;
     const prompt = `You are a TFT (Teamfight Tactics) coaching assistant. A player just finished a game.
@@ -1005,8 +997,8 @@ ${pro ? `This comp has ${(pro.top4Rate * 100).toFixed(0)}% top-4 rate in Challen
 
 Item issues (based on Challenger item win rates):
 ${itemIssues.length ? itemIssues.join("\n") : "None detected."}
-${taBlock ? `\nRound-by-round data from TFT Academy (your actual in-game decisions):\n${taBlock}` : ""}
-Write 3–5 concise, specific coaching suggestions. Be direct and actionable. Use TFT terminology naturally. Where round-by-round data is available, reference specific rounds and decisions. Do not repeat raw numbers — synthesize them into advice.`;
+
+Write 3–5 concise, specific coaching suggestions. Be direct and actionable. Use TFT terminology naturally. Do not repeat raw numbers — synthesize them into advice.`;
 
     let coachingText = "(No AI API keys configured)";
     if (GEMINI_API_KEY || GROQ_API_KEY) {
