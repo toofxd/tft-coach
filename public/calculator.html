@@ -550,6 +550,33 @@ img.coin { width: 12px; height: 12px; flex-shrink: 0; }
       </div>
     </div>
 
+    <!-- Analyze My Recordings (local TFTAcademy DB) — local dev only, revealed by JS on localhost -->
+    <div id="recCard" class="card" style="margin-top:14px;display:none;">
+      <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.09);display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:11px;font-weight:700;color:rgba(240,235,224,0.5);text-transform:uppercase;letter-spacing:0.1em;">Analyze My Recordings</span>
+        <span style="font-size:11px;color:rgba(240,235,224,0.35);font-style:italic;">reads your local TFTAcademy data</span>
+      </div>
+      <div style="padding:14px;">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
+          <input id="localDbPath" type="text"
+            value="C:\Users\Tiffany\AppData\Roaming\TFTAcademy\tft-events.db"
+            placeholder="Path to tft-events.db"
+            style="flex:1;min-width:200px;padding:9px 12px;background:#071830;border:1px solid rgba(255,255,255,0.09);border-radius:5px;color:#e0ddd8;font-family:inherit;font-size:12px;outline:none;"
+            onfocus="this.style.borderColor='#ae9142'" onblur="this.style.borderColor='#1e2d3e'">
+          <div style="display:flex;gap:4px;">
+            <button class="coach-count-btn active" data-rec-count="3" onclick="setRecCount(3)">3</button>
+            <button class="coach-count-btn" data-rec-count="5" onclick="setRecCount(5)">5</button>
+            <button class="coach-count-btn" data-rec-count="10" onclick="setRecCount(10)">10</button>
+          </div>
+          <button onclick="analyzeRecordings()"
+            style="padding:9px 18px;background:#ae9142;border:none;border-radius:6px;color:#0c2340;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;letter-spacing:0.02em;">
+            Analyze
+          </button>
+        </div>
+        <div id="recResponse" style="display:none;margin-top:12px;border-top:1px solid #1e2d3e;padding-top:12px;"></div>
+      </div>
+    </div>
+
     <!-- Ask AI -->
     <div class="card" style="margin-top:14px;">
       <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.09);">
@@ -1644,6 +1671,17 @@ function switchTab(name) {
 // Load meta insights immediately — no Riot API needed
 loadMetaInsights();
 
+// "Analyze My Recordings" reads a local TFTAcademy SQLite DB, so it only works
+// when the server runs on this machine. Reveal it only on localhost — on the
+// hosted site (/api/local-coach returns 403) the card stays hidden.
+(function revealLocalOnlyFeatures() {
+  const h = location.hostname;
+  if (h === '127.0.0.1' || h === 'localhost' || h === '[::1]') {
+    const card = document.getElementById('recCard');
+    if (card) card.style.display = '';
+  }
+})();
+
 // When user switches tabs via in-page buttons, also update the URL hash so
 // back/forward and reload land on the correct tab.
 const _origSwitchTab = switchTab;
@@ -1798,6 +1836,74 @@ async function analyzeMatches() {
       ? `<div style="margin-bottom:10px;font-size:11px;color:rgba(240,235,224,0.45);letter-spacing:0.04em;">ADAPTIVE FOCUS &mdash; <span style="color:rgba(240,235,224,0.7);">${coachData.banditLabel}</span></div>`
       : '';
     resp.innerHTML = focusBadge + formatCoaching(coachData.coaching || 'No analysis returned.');
+  } catch (e) {
+    resp.innerHTML = `<span style="color:#e07070;">${e.message}</span>`;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Analyze My Recordings — reads local TFTAcademy SQLite DB via server
+// ---------------------------------------------------------------------------
+
+let recCount = 3;
+
+function setRecCount(n) {
+  recCount = n;
+  document.querySelectorAll('[data-rec-count]').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.recCount) === n);
+  });
+}
+
+async function analyzeRecordings() {
+  const dbPath = document.getElementById('localDbPath').value.trim();
+  if (!dbPath) return;
+
+  const resp = document.getElementById('recResponse');
+  resp.style.display = 'block';
+  resp.innerHTML = '<span style="color:rgba(240,235,224,0.4);font-style:italic;font-size:13px;">Reading your recordings and asking AI…</span>';
+
+  try {
+    const r = await fetch('/api/local-coach', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ dbPath, numGames: recCount }),
+    });
+    if (!r.ok) {
+      const err = await r.json().catch(() => ({}));
+      throw new Error(err.error || `Server error (${r.status})`);
+    }
+    const data = await r.json();
+
+    if (data.message) {
+      resp.innerHTML = `<span style="color:rgba(240,235,224,0.5);font-style:italic;">${data.message}</span>`;
+      return;
+    }
+
+    resp.innerHTML = data.results.map((g, i) => {
+      const placementColor = g.placement <= 4 ? '#6db86d' : '#e07070';
+      const header = `<div style="font-size:11px;font-weight:700;color:rgba(240,235,224,0.45);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">
+        Game ${i + 1} &mdash; <span style="color:${placementColor};">Placement #${g.placement}</span>
+      </div>`;
+
+      if (g.noData) {
+        return header + '<div style="color:rgba(240,235,224,0.4);font-style:italic;font-size:12px;">No event data for this game.</div>';
+      }
+
+      const issueHtml = g.issues && g.issues.length
+        ? `<div style="margin-bottom:10px;padding:8px 10px;background:rgba(174,145,66,0.08);border-radius:4px;border-left:2px solid #ae9142;">
+            <div style="font-size:11px;color:#ae9142;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.06em;">Auto-detected flags</div>
+            ${g.issues.map(iss => `<div style="font-size:12px;color:rgba(240,235,224,0.65);margin-bottom:3px;">⚠ ${iss}</div>`).join('')}
+          </div>`
+        : '';
+
+      return `<div style="margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #1e2d3e;">
+        ${header}${issueHtml}
+        <div style="font-size:13px;color:rgba(240,235,224,0.75);line-height:1.75;">
+          ${formatCoaching(g.tips || '(No AI response)')}
+        </div>
+      </div>`;
+    }).join('');
+
   } catch (e) {
     resp.innerHTML = `<span style="color:#e07070;">${e.message}</span>`;
   }

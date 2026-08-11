@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "data/processed/match_features_slim.csv",
+          "data/processed/item_winrates.csv",
+          "data/processed/tactics_tools_items.json",
+          "data/static/calculator_data.json",
+          "public/**"
+        ],
+        "maxDuration": 60
+      }
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/server.js" }
+  ]
+}

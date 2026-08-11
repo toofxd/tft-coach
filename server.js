@@ -5,7 +5,6 @@ const fs = require("fs");
 const path = require("path");
 const { parse } = require("csv-parse/sync");
 const { spawn } = require("child_process");
-const bandit = require("./src/bandit");
 
 const app = express();
 const PORT = process.env.PORT || 30002;
@@ -18,6 +17,14 @@ const GROQ_MODEL = "llama-3.3-70b-versatile";
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
+// Name mappings load asynchronously at startup (CommunityDragon fetch). On
+// serverless cold starts the exported app handles requests immediately, so gate
+// /api until they're ready — otherwise AI prompts would use fallback IDs instead
+// of real champion/trait names. In local dev this resolves before listen(), so
+// there's no added latency.
+const namesReady = loadNameMappings();
+app.use("/api", (req, _res, next) => { namesReady.then(() => next()); });
 
 app.get("/coach",      (_, res) => res.redirect(301, "/calculator.html#coach"));
 app.get("/calculator", (_, res) => res.redirect(301, "/calculator.html"));
@@ -83,8 +90,10 @@ function loadCsv(filename) {
   return parse(content, { columns: true, skip_empty_lines: true });
 }
 
-// Use slim CSV on Railway (full file is 116MB, over GitHub's limit)
-const matchFeatureFile = process.env.RAILWAY_ENVIRONMENT ? "match_features_slim.csv" : "match_features.csv";
+// Use slim CSV on hosted platforms (full file is 335MB — over GitHub's limit and
+// over Vercel's serverless bundle limit). Full file is local-dev only.
+const useSlimCsv = process.env.RAILWAY_ENVIRONMENT || process.env.VERCEL;
+const matchFeatureFile = useSlimCsv ? "match_features_slim.csv" : "match_features.csv";
 const matchFeatures = loadCsv(matchFeatureFile);
 const itemWinrates = loadCsv("item_winrates.csv");
 console.log(`Loaded: ${matchFeatures.length} pro records, ${itemWinrates.length} item rows`);
@@ -594,7 +603,10 @@ function callGemini(prompt) {
         res.on("end", () => {
           try {
             const json = JSON.parse(data);
-            const text = json.candidates?.[0]?.content?.parts?.[0]?.text;
+            // gemini-2.5-flash includes thinking parts (thought:true) before the answer —
+            // find the first non-thought part to get the actual response text
+            const parts = json.candidates?.[0]?.content?.parts || [];
+            const text = parts.find(p => !p.thought && p.text)?.text;
             if (text) return resolve(text);
             // Log the full response so we can see what Gemini actually returned
             const reason = json.candidates?.[0]?.finishReason || "unknown";
@@ -737,11 +749,13 @@ app.get("/api/profile", async (req, res) => {
   if (!gameName || !tagLine) return res.status(400).json({ error: "Format must be Name#TAG" });
 
   console.log(`[SEARCH] ${new Date().toISOString()} ${handle}`);
-  fs.appendFile(
-    path.join(__dirname, "logs", "searches.log"),
-    `${new Date().toISOString()}\t${handle}\n`,
-    () => {}
-  );
+  if (!process.env.VERCEL) {
+    fs.appendFile(
+      path.join(__dirname, "logs", "searches.log"),
+      `${new Date().toISOString()}\t${handle}\n`,
+      () => {}
+    );
+  }
 
   try {
     const puuid = await getPuuid(gameName, tagLine);
@@ -842,21 +856,12 @@ HOW TO READ THESE METRICS:
 • Level efficiency (= final level ÷ rounds survived): Lower is better — it means you reached a high level AND survived many rounds. Challenger top-4 players average ${bench.avgLevelEff.toFixed(3)}. If this number is above 0.30, the player is reaching a low level relative to rounds played, which typically means dying in mid-game before fully leveling up. High efficiency in losing games (avgBot4LevelEff) is a red flag: it means even in bad games, the player levels quickly but still can't survive.
 ` : "";
 
-  // --- Bandit: update reward from prior session, then select focus arm ---
-  let banditFocus = "";
-  let banditArm = null;
-  let banditLabel = null;
-  if (puuid) {
-    try {
-      bandit.updateReward(puuid, parseFloat(avgPlacement), matchIds || []);
-      const session = bandit.startSession(puuid, handle || puuid, parseFloat(avgPlacement), matchIds || []);
-      banditFocus = session.focus;
-      banditArm   = session.arm;
-      banditLabel = session.armLabel;
-    } catch (e) {
-      console.error("Bandit error:", e.message);
-    }
-  }
+  // Bandit (per-user focus-area learning) disabled — it required persistent
+  // per-user disk writes, which don't work on serverless. Coaching now uses the
+  // static FOCUS AREAS listed in the prompt below.
+  const banditFocus = "";
+  const banditArm = null;
+  const banditLabel = null;
 
   const prompt = `You are an expert TFT (Teamfight Tactics) coach. Below is a player's data for their last ${total} games. Use it to write 4–6 coaching insights.
 
@@ -1094,11 +1099,13 @@ app.post("/api/ask", async (req, res) => {
   if (!question) return res.status(400).json({ error: "question required" });
 
   console.log(`[ASK] ${new Date().toISOString()} ${question}`);
-  fs.appendFile(
-    path.join(__dirname, "logs", "searches.log"),
-    `${new Date().toISOString()}\t[ASK]\t${question}\n`,
-    () => {}
-  );
+  if (!process.env.VERCEL) {
+    fs.appendFile(
+      path.join(__dirname, "logs", "searches.log"),
+      `${new Date().toISOString()}\t[ASK]\t${question}\n`,
+      () => {}
+    );
+  }
 
   const groundingBlock = [
     champSheet  && `Set 17 champions (authoritative — name | cost | traits | role):\n${champSheet}`,
@@ -1145,10 +1152,289 @@ Question: ${question}`;
   res.json({ answer: "(AI services temporarily unavailable — please try again in a minute.)" });
 });
 
-// Bind to 0.0.0.0 on Railway (required); localhost only in local dev
-const host = process.env.RAILWAY_ENVIRONMENT ? "0.0.0.0" : "127.0.0.1";
-loadNameMappings().then(() => {
-  app.listen(PORT, host, () => {
-    console.log(`TFT Coach running at http://${host}:${PORT}`);
+// ---------------------------------------------------------------------------
+// /api/local-coach — reads TFTAcademy's local SQLite DB and coaches on your
+// actual games (item redundancy, augment decisions, missed synergies).
+// Only works when the server is running on the same machine as TFTAcademy.
+// ---------------------------------------------------------------------------
+
+const UNIQUE_ITEMS = new Set([
+  "TFT_Item_GargoyleStoneplate","TFT_Item_SunfireCape","TFT_Item_FrozenHeart",
+  "TFT_Item_Redemption","TFT_Item_SpiritVisage","TFT_Item_ZzRotPortal",
+]);
+
+const CONFLICT_PAIRS = [
+  ["TFT_Item_MadredsBloodrazor","TFT_Item_KrakenSlayer",
+   "both are anti-tank shred — one source is usually enough"],
+  ["TFT_Item_InfinityEdge","TFT_Item_JeweledGauntlet",
+   "both scale with crit — Infinity Edge alone makes crits shine"],
+  ["TFT_Item_GuinsoosRageblade","TFT_Item_StatikkShiv",
+   "both ramp on attack speed — swap one for a flat damage item"],
+  ["TFT_Item_SpearOfShojin","TFT_Item_BlueBuff",
+   "both funnel mana — one is enough unless the ability cost is extreme"],
+];
+
+function lcReadable(apiName) {
+  // Use CommunityDragon names if loaded, else strip prefix + split CamelCase
+  if (itemNames[apiName]) return itemNames[apiName];
+  if (champNames[apiName]) return champNames[apiName];
+  let s = apiName
+    .replace(/^TFT\d*_Item_Artifact_/, "[Artifact] ")
+    .replace(/^TFT\d*_Item_/, "")
+    .replace(/^TFT\d*_Augment_/, "")
+    .replace(/^TFT\d+_/, "")
+    .replace(/^TFT_/, "");
+  return s.replace(/([a-z])([A-Z])/g, "$1 $2").trim();
+}
+
+function lcParseBoards(events) {
+  const timeline = {};
+  for (const { event_type, round, data } of events) {
+    if (event_type !== "board" || !data) continue;
+    let obj;
+    try { obj = JSON.parse(data); } catch { continue; }
+    const units = {};
+    for (const [, unit] of Object.entries(obj)) {
+      const name = unit.name || "";
+      if (!name || name.includes("PVE")) continue;
+      const items = [unit.item_1, unit.item_2, unit.item_3]
+        .filter(i => i && !i.includes("EmptyBag"));
+      units[name] = { stars: unit.level || "1", items };
+    }
+    if (Object.keys(units).length) timeline[round] = units;
+  }
+  return timeline;
+}
+
+function lcFinalBoard(timeline) {
+  const rounds = Object.keys(timeline);
+  if (!rounds.length) return {};
+  rounds.sort((a, b) => {
+    const [as, ar] = a.split("-").map(Number);
+    const [bs, br] = b.split("-").map(Number);
+    return as !== bs ? as - bs : ar - br;
   });
+  return timeline[rounds[rounds.length - 1]];
+}
+
+function lcParseAugments(events) {
+  const offers = {};   // round -> Set of option names
+  const chosen = [];   // [{round, picked:[]}]
+  let prevEquipped = new Set();
+
+  for (const { event_type, round, data } of events) {
+    if (event_type !== "me" || !data) continue;
+    let obj;
+    try { obj = JSON.parse(data); } catch { continue; }
+    if (typeof obj !== "object") continue;
+
+    // Offer screen (augment_1/2/3 keys)
+    if (obj.augment_1 !== undefined) {
+      const opts = [obj.augment_1, obj.augment_2, obj.augment_3]
+        .filter(v => v?.name).map(v => v.name);
+      if (opts.length) {
+        if (!offers[round]) offers[round] = new Set();
+        opts.forEach(o => offers[round].add(o));
+      }
+    }
+
+    // Chosen augments (slot_1/2/3/4 keys)
+    if (obj.slot_1 !== undefined) {
+      const equipped = new Set(
+        Object.entries(obj)
+          .filter(([k, v]) => k.startsWith("slot_") && v?.name)
+          .map(([, v]) => v.name)
+      );
+      const newPicks = [...equipped].filter(a => !prevEquipped.has(a));
+      if (newPicks.length) chosen.push({ round, picked: newPicks });
+      prevEquipped = equipped;
+    }
+  }
+  return { chosen, offers };
+}
+
+function lcDetectIssues(board) {
+  const issues = [];
+  for (const [name, info] of Object.entries(board)) {
+    const unit = lcReadable(name);
+    const items = info.items;
+
+    // Duplicate items
+    const counts = {};
+    for (const item of items) counts[item] = (counts[item] || 0) + 1;
+    for (const [item, n] of Object.entries(counts)) {
+      if (n > 1) issues.push(`${unit} has ${n}× ${lcReadable(item)} — duplicate item wastes a slot`);
+    }
+
+    // Unique-passive items equipped twice
+    for (const item of items) {
+      if (UNIQUE_ITEMS.has(item) && items.filter(i => i === item).length > 1) {
+        issues.push(`${unit}: ${lcReadable(item)} has a unique passive — second copy gives no extra benefit`);
+      }
+    }
+
+    // Conflicting pairs
+    for (const [a, b, reason] of CONFLICT_PAIRS) {
+      if (items.includes(a) && items.includes(b)) {
+        issues.push(`${unit}: ${lcReadable(a)} + ${lcReadable(b)} — ${reason}`);
+      }
+    }
+  }
+  return issues;
+}
+
+function lcFormatBoard(board) {
+  return Object.entries(board)
+    .map(([name, info]) => {
+      const items = info.items.map(lcReadable).join(", ") || "no items";
+      return `  ${lcReadable(name)} (${info.stars}*): ${items}`;
+    })
+    .join("\n") || "  (empty)";
+}
+
+function lcFormatAugments(chosen, offers) {
+  return chosen.map(({ round, picked }) => {
+    const pickedNames = picked.map(lcReadable).join(", ");
+    const allOffered = offers[round] ? [...offers[round]] : [];
+    const skipped = allOffered.filter(o => !picked.includes(o)).map(lcReadable).join(", ");
+    return `  Round ${round}: chose → ${pickedNames}` +
+           (skipped ? `\n             skipped → ${skipped}` : "");
+  }).join("\n") || "  (no augment data)";
+}
+
+app.post("/api/local-coach", async (req, res) => {
+  // Block this endpoint on hosted platforms — only works locally, and node:sqlite
+  // is experimental so we require it lazily to avoid crashing serverless cold starts.
+  if (process.env.RAILWAY_ENVIRONMENT || process.env.VERCEL) {
+    return res.status(403).json({ error: "This endpoint only works when running the server locally." });
+  }
+  let DatabaseSync;
+  try {
+    ({ DatabaseSync } = require("node:sqlite"));
+  } catch (e) {
+    return res.status(500).json({ error: `node:sqlite unavailable: ${e.message}` });
+  }
+
+  const { dbPath, numGames = 3 } = req.body;
+  if (!dbPath || typeof dbPath !== "string") {
+    return res.status(400).json({ error: "dbPath is required." });
+  }
+
+  // Reject path traversal attempts
+  const resolved = path.resolve(dbPath);
+  if (!resolved.endsWith(".db") && !resolved.endsWith(".sqlite")) {
+    return res.status(400).json({ error: "dbPath must point to a .db or .sqlite file." });
+  }
+  if (!fs.existsSync(resolved)) {
+    return res.status(404).json({ error: `Database not found at: ${resolved}` });
+  }
+
+  let db;
+  try {
+    db = new DatabaseSync(resolved, { open: true });
+  } catch (e) {
+    return res.status(500).json({ error: `Could not open database: ${e.message}` });
+  }
+
+  try {
+    const games = db.prepare(`
+      SELECT id, final_placement, started_at
+      FROM games
+      WHERE final_placement IS NOT NULL
+      ORDER BY started_at DESC
+      LIMIT ?
+    `).all(Math.min(parseInt(numGames) || 3, 10));
+
+    if (!games.length) {
+      db.close();
+      return res.json({ results: [], message: "No completed games found in this database." });
+    }
+
+    const results = [];
+
+    for (const game of games) {
+      const events = db.prepare(`
+        SELECT event_type, round, data
+        FROM events
+        WHERE game_id = ? AND event_type IN ('board','me')
+        ORDER BY id
+      `).all(game.id);
+
+      if (!events.length) {
+        results.push({ placement: game.placement || game.final_placement, tips: null, noData: true });
+        continue;
+      }
+
+      const placement = game.placement || game.final_placement;
+      const timeline = lcParseBoards(events);
+      const board = lcFinalBoard(timeline);
+      if (!Object.keys(board).length) {
+        results.push({ placement, tips: null, noData: true });
+        continue;
+      }
+
+      const { chosen, offers } = lcParseAugments(events);
+      const issues = lcDetectIssues(board);
+
+      const boardText = lcFormatBoard(board);
+      const augText = lcFormatAugments(chosen, offers);
+      const issueText = issues.length
+        ? issues.map(i => `  • ${i}`).join("\n")
+        : "  (none detected)";
+
+      const prompt = `You are an expert TFT Set 17 coach. A player finished ${placement}th in a game. Analyze their decisions and give specific coaching feedback.
+
+FINAL BOARD:
+${boardText}
+
+AUGMENT CHOICES (chose → / skipped →):
+${augText}
+
+AUTOMATICALLY DETECTED ITEM ISSUES:
+${issueText}
+
+Give coaching in exactly three sections:
+
+**Item Efficiency**
+Flag any redundant, conflicting, or role-mismatched items. Name the unit and the specific items. Suggest a replacement if there's a clearly better option.
+
+**Augment Decisions**
+For each augment pick, was it correct given the board? If a skipped augment would have been stronger, explain concisely why.
+
+**Top 2 Improvements**
+The two highest-impact changes for future games. Be direct — one sentence each.
+
+Keep every bullet to 1–2 sentences. Name specific units, items, and augments.`;
+
+      let tips;
+      try {
+        tips = await callGemini(prompt);
+      } catch (e) {
+        tips = `(AI error: ${e.message})`;
+      }
+
+      results.push({ placement, board: boardText, tips, issues });
+    }
+
+    db.close();
+    res.json({ results });
+  } catch (e) {
+    try { db.close(); } catch {}
+    console.error("local-coach error:", e);
+    res.status(500).json({ error: e.message });
+  }
 });
+
+// On Vercel (serverless), export the app — the platform invokes it per request.
+// Name mappings load in the background; the /api gate above waits on them.
+if (process.env.VERCEL) {
+  module.exports = app;
+} else {
+  // Bind to 0.0.0.0 on Railway (required); localhost only in local dev
+  const host = process.env.RAILWAY_ENVIRONMENT ? "0.0.0.0" : "127.0.0.1";
+  namesReady.then(() => {
+    app.listen(PORT, host, () => {
+      console.log(`TFT Coach running at http://${host}:${PORT}`);
+    });
+  });
+}
