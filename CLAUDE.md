@@ -10,12 +10,14 @@ Then tail the log to show progress: `Get-Content logs\collect_$(Get-Date -Format
 
 The task runs `collect_pro.py → features.py` and logs to `logs/collect_YYYY-MM-DD.log`.
 
-## ⚠️ CRITICAL: After Refreshing Data (Railway deploy)
+## ⚠️ CRITICAL: After Refreshing Data (Vercel deploy)
 
-After running `features.py`, regenerate the slim CSV and push **both** files:
+After running `features.py`, regenerate the slim CSV and push **both** files.
+Vercel auto-deploys on push to `main`.
 
 ```python
-# Slim CSV for Railway (full match_features.csv is too large for GitHub)
+# Slim CSV for hosted deploys (full match_features.csv is 335MB — over GitHub's
+# limit and over Vercel's serverless bundle limit)
 # MUST go in data/processed/ — that is where loadCsv() looks
 python -c "
 import csv
@@ -27,9 +29,18 @@ with open(inp,newline='',encoding='utf-8') as fi, open(out,'w',newline='',encodi
 "
 ```
 
-Then: `git add data/processed/match_features_slim.csv data/processed/item_winrates.csv && git commit && git push`
+Then: `git add data/processed/match_features_slim.csv data/processed/item_winrates.csv public/dataset_info.json && git commit && git push`
 
 ⚠️ **`data/match_features_slim.csv` (root-level) does NOT exist and must never be created.** The server's `loadCsv()` always resolves paths under `data/processed/`.
+
+⚠️ **Regenerate the slim CSV every time `features.py` runs**, or production silently
+serves stale data. Local dev reads the full CSV and hosted reads the slim one, so a
+missed regeneration is invisible locally. Verify they agree:
+
+```powershell
+# Row counts should match (minus 1 header line each)
+python -c "import csv; [print(f, sum(1 for _ in csv.reader(open(f,newline='',encoding='utf-8')))-1) for f in ['data/processed/match_features.csv','data/processed/match_features_slim.csv']]"
+```
 
 ---
 
@@ -51,9 +62,18 @@ Then: `git add data/processed/match_features_slim.csv data/processed/item_winrat
 ## Architecture Overview
 
 ### Server
-- `server.js` — Express on port `30002`, binds to `127.0.0.1` in local dev, `0.0.0.0` on Railway
+- `server.js` — Express on port `30002`; binds `127.0.0.1` in local dev
+- On Vercel it **exports the app** instead of calling `listen()` (see the
+  `process.env.VERCEL` branch at the bottom of `server.js`) — the platform invokes
+  it per request
 - Serves static files from `/public`
-- Riot API key, Gemini key, and Groq key loaded from `.env`
+- **There is no `.env` file.** `require("dotenv").config()` runs on line 1 but
+  silently no-ops; `RIOT_API_KEY`, `GEMINI_API_KEY`, and `GROQ_API_KEY` come from
+  **Windows User environment variables** locally, and from Vercel project env vars
+  in production. To read them locally:
+  ```powershell
+  'RIOT_API_KEY','GEMINI_API_KEY','GROQ_API_KEY' | ForEach-Object { "$_=$([Environment]::GetEnvironmentVariable($_,'User'))" }
+  ```
 
 ### Data Pipeline (run manually to refresh data)
 ```
@@ -71,6 +91,53 @@ pre  = html.split('const DATA = ')[0]
 post = html.split('const UNITS_LIST')[1]
 new_html = pre + 'const DATA = ' + data_json + ';\nconst UNITS_LIST' + post
 ```
+
+---
+
+## Deployment (Vercel)
+
+Live at **https://tft.tiffanygaming.com**. Auto-deploys on push to `main`.
+
+| Thing | Value |
+|-------|-------|
+| Host | Vercel — project builds `toofxd/tft-coach` |
+| Config | `vercel.json` — `@vercel/node`, all routes → `server.js` |
+| Domain | `tft.tiffanygaming.com` → CNAME → `*.vercel-dns-017.com` |
+| DNS managed at | **Google Cloud DNS** (nameservers `ns-cloud-e1..e4.googledomains.com`) — *not* Vercel, so adding a domain in Vercel does **not** auto-create the record |
+| Env vars | `RIOT_API_KEY`, `GEMINI_API_KEY`, `GROQ_API_KEY` (set in Vercel project settings) |
+
+The portfolio site `tiffanygaming.com` is a **separate** repo (`toofxd/tiffanygaming`,
+Next.js) and a **separate** Vercel project. Two projects can serve subdomains of the
+same root domain; they cannot be merged without rewriting Express as Next.js routes.
+
+### ⚠️ `vercel.json` includeFiles
+Any file read at runtime via `path.join(__dirname, ...)` is **invisible to Vercel's
+bundler** and must be listed in `includeFiles`, or it will be missing from the lambda:
+
+```
+data/processed/match_features_slim.csv
+data/processed/item_winrates.csv
+data/processed/tactics_tools_items.json
+data/static/calculator_data.json
+public/**
+```
+
+These loaders have `fs.existsSync` guards, so a missing file **fails silently** —
+empty results, no error. If a feature shows no data in production but works locally,
+check this list first.
+
+### Serverless constraints
+- **No disk writes.** `searches.log` writes are skipped under `process.env.VERCEL`.
+- **The bandit focus-area learner is disabled** — it needed persistent per-user disk
+  writes. `/api/coaching` uses the static FOCUS AREAS in the prompt instead.
+- **`/api/local-coach` is gated off** on hosted platforms (needs local `node:sqlite`
+  access to TFTAcademy's DB).
+- **Cold starts** re-parse the slim CSV and re-fetch CommunityDragon. Measured at
+  0.1–0.3s in practice, but this is the first thing to check if latency regresses.
+
+### Railway (retired)
+Previously hosted on Railway; `railway.toml` is kept only for reference. The service
+was removed, which is what took the site down. Nothing points at Railway now.
 
 ---
 
@@ -99,7 +166,18 @@ So re-running the script at any time is always safe — it only fetches genuinel
 
 ### Current tiers collected
 The default in `collect()` is `tiers=("challenger", "grandmaster")` — both are already included.
-Current dataset: ~235,524 rows in `data/processed/match_features.csv`, ~6,733 rows in `item_winrates.csv`. Last updated: June 19, 2026.
+Current dataset (as of 11 Aug 2026):
+
+| File | Rows | Used by |
+|------|------|---------|
+| `data/processed/match_features.csv` | 261,460 | local dev only (335MB, gitignored) |
+| `data/processed/match_features_slim.csv` | 254,282 | **production** (committed) |
+| `data/processed/item_winrates.csv` | 6,915 | both |
+
+`public/dataset_info.json` reports `261460` / "22 June 2026" — that is the **full**
+CSV count, so the About page slightly overstates what production actually loads.
+The slim CSV is ~7,200 rows behind; regenerate it (see the top of this file) to close
+the gap.
 
 ### To add Master tier
 Edit line 84 of `src/collect_pro.py`:
@@ -144,7 +222,16 @@ powercfg /hibernate on
 # 5. Rebuild data and restart server
 python src/features.py       # rebuild match_features.csv + item_winrates.csv
 node server.js               # restart server to reload CSVs
+
+# 6. Regenerate the slim CSV and push — otherwise production stays stale
+#    (see "After Refreshing Data" at the top of this file)
+git add data/processed/match_features_slim.csv data/processed/item_winrates.csv public/dataset_info.json
+git commit -m "Refresh data: <N>k match features, updated item win rates"
+git push                     # Vercel auto-deploys
 ```
+
+⚠️ Put the **real** match count in the commit message — commit `c6f5489` shipped with
+the literal placeholder `XYZk` copied from the template.
 
 ⚠️ **Do not shut down or hibernate** during collection — locking the screen is fine.
 - Sleep → disabled via `powercfg` above, won't trigger automatically
@@ -187,7 +274,13 @@ Using `re.sub()` to inject JSON into HTML expands `\n` sequences into real newli
 | Groq (`api.groq.com`) — model: `llama-3.3-70b-versatile` | Champion tips (primary); fallback for coaching + Ask AI |
 | Google Gemini (`gemini-2.5-flash`) | Per-match coaching + aggregate coaching (primary); Ask AI with Google Search grounding (primary) |
 
-**Riot dev keys expire every 24 hours.** If API calls return 401/403, the user needs to renew at developer.riotgames.com and update `.env`.
+**Riot dev keys expire every 24 hours.** If API calls return 401/403, renew at
+developer.riotgames.com and update the key in **both** places:
+- **Local:** the `RIOT_API_KEY` Windows User environment variable
+- **Production:** Vercel → tft-coach → Settings → Environment Variables, then redeploy
+
+Only the Coach tab (`/api/profile`) depends on it — the Calculator and Ask AI keep
+working when the key is stale. A **production key** ends this daily chore.
 
 ---
 
