@@ -117,7 +117,6 @@ bundler** and must be listed in `includeFiles`, or it will be missing from the l
 ```
 data/processed/match_features_slim.csv
 data/processed/item_winrates.csv
-data/processed/tactics_tools_items.json
 data/static/calculator_data.json
 data/archive/**
 public/**
@@ -152,7 +151,6 @@ was removed, which is what took the site down. Nothing points at Railway now.
 | `/api/item-recs` | GET | `?unitId=TFT18_Caitlyn[&set=17]` — item recommendations from CSV |
 | `/api/champion-tips` | GET | Groq (gpt-oss-120b) tips for a champion; accepts `unitId` to inject pro item combo win rates |
 | `/api/ask` | POST | `{ question }` — free-form TFT Q&A; Gemini+Search grounding → Groq fallback |
-| `/api/items` | GET | tactics.tools item rankings |
 
 ---
 

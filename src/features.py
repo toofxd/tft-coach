@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 
 RAW_DIR = Path(__file__).parent.parent / "data" / "raw" / "matches"
+TFT_SET = 18  # keep in sync with TFT_SET in collect_pro.py
 LIVE_DIR = Path(__file__).parent.parent / "data" / "live"
 PROCESSED_DIR = Path(__file__).parent.parent / "data" / "processed"
 PUBLIC_DIR = Path(__file__).parent.parent / "public"
@@ -118,7 +119,7 @@ def build_match_features(save: bool = True) -> pd.DataFrame:
             continue
 
         # Skip matches from other sets
-        if match.get("info", {}).get("tft_set_number") != 18:
+        if match.get("info", {}).get("tft_set_number") != TFT_SET:
             continue
 
         match_id = match.get("metadata", {}).get("match_id", path.stem)
@@ -234,6 +235,10 @@ def build_my_features(save: bool = True) -> pd.DataFrame:
         try:
             match = json.loads(path.read_text())
         except Exception:
+            continue
+
+        # Same set filter as the pro data — older personal games would skew comparisons
+        if match.get("info", {}).get("tft_set_number") != TFT_SET:
             continue
 
         match_id = match.get("metadata", {}).get("match_id", path.stem)

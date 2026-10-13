@@ -276,17 +276,6 @@ const itemSheet = calcData
 console.log(`Loaded calculator data: ${calcData ? Object.keys(calcData.units).length : 0} champions, ${calcData ? Object.values(calcData.traits).length : 0} traits, ${calcData ? Object.entries(calcData.items).filter(([,v]) => v.tags?.includes("Craftable")).length : 0} craftable items`);
 
 // Load tactics.tools scraped item stats (Diamond+ ranked, 3M+ games)
-function loadTacticsToolsItems() {
-  const p = path.join(__dirname, "data", "processed", "tactics_tools_items.json");
-  if (!fs.existsSync(p)) return { items: [] };
-  return JSON.parse(fs.readFileSync(p, "utf8"));
-}
-let ttItems = loadTacticsToolsItems();
-// Build lookup: itemId → stats
-const ttItemMap = {};
-for (const item of ttItems.items) ttItemMap[item.itemId] = item;
-console.log(`Loaded ${ttItems.items.length} tactics.tools items (updated ${new Date(ttItems.lastUpdated * 1000).toLocaleDateString()})`);
-
 // Wilson score lower bound — ranks items by statistically conservative win rate.
 // Prevents items with 5 games at 1.00 from outranking items with 1000 games at 0.72.
 // z=1.96 → 95% confidence interval lower bound.
@@ -297,14 +286,14 @@ function wilsonLower(p, n, z = 1.96) {
 }
 
 // Returns true if an item ID should be excluded from recommendations.
-// Allows: craftable items (in ttItemMap or calculator_data) + emblem/spat items.
-// Rejects: components, invalid test items, etc.
-// Set 18 match data uses "DA_EdgeOfNight" rather than "TFT_Item_EdgeOfNight".
-function isJunkItem(id) {
+// Allows: the set's craftable items (from its calculator_data) + emblems.
+// Rejects: components, consumables, test items, etc.
+// Set 18 match data uses "DA_EdgeOfNight"; Set 17 used "TFT_Item_EdgeOfNight".
+function isJunkItem(id, set = CURRENT_SET) {
   if (id.includes('Component')) return true;  // "DA_Component_Spatula" is a component, not an item
   if (id.includes('Emblem') || id.includes('Spat')) return false;
   const key = id.replace(/^DA_|TFT\d*_Item_/, '');
-  return !ttItemMap[key] && !calcData?.items?.[key]?.tags?.includes('Craftable');
+  return !calcDataFor(set)?.items?.[key]?.tags?.includes('Craftable');
 }
 
 // ---------------------------------------------------------------------------
@@ -525,7 +514,7 @@ function proUnitStats(unitId, set = CURRENT_SET) {
   const winrates = winratesFor(set);
   if (!unitId || !winrates.length) return null;
   const rows = winrates
-    .filter(r => r.unit_id === resolveUnitId(unitId) && parseInt(r.games) >= 10 && !isJunkItem(r.item_id))
+    .filter(r => r.unit_id === resolveUnitId(unitId) && parseInt(r.games) >= 10 && !isJunkItem(r.item_id, set))
     .sort((a, b) =>
       wilsonLower(parseFloat(b.top4_rate), parseInt(b.games)) -
       wilsonLower(parseFloat(a.top4_rate), parseInt(a.games))
@@ -988,14 +977,6 @@ app.get("/api/matches", async (req, res) => {
 });
 
 // GET /api/items — overall item rankings from tactics.tools (Diamond+ data)
-app.get("/api/items", (req, res) => {
-  res.json({
-    lastUpdated: ttItems.lastUpdated,
-    totalEntries: ttItems.totalEntries,
-    items: ttItems.items,
-  });
-});
-
 // GET /api/meta-insights — Challenger/GM takeaways derived from the local CSV dataset.
 // No Riot API dependency — always available regardless of key expiry.
 app.get("/api/meta-insights", (req, res) => {
@@ -1050,8 +1031,9 @@ app.get("/api/item-recs", (req, res) => {
   const { unitId } = req.query;
   if (!unitId) return res.status(400).json({ error: "unitId required" });
 
-  const allRows = winratesFor(setFrom(req))
-    .filter(r => r.unit_id === resolveUnitId(unitId) && !isJunkItem(r.item_id))
+  const set = setFrom(req);
+  const allRows = winratesFor(set)
+    .filter(r => r.unit_id === resolveUnitId(unitId) && !isJunkItem(r.item_id, set))
     .map(r => ({ itemId: r.item_id, top4Rate: parseFloat(r.top4_rate), games: parseInt(r.games) }));
 
   // Approximate total unit appearances from the most-seen item
@@ -1307,19 +1289,18 @@ Question: ${question}`;
 // Only works when the server is running on the same machine as TFTAcademy.
 // ---------------------------------------------------------------------------
 
+// Matched by display name, not ID: Riot reuses legacy IDs across sets
+// ("TFT_Item_StatikkShiv" is Void Staff in Set 18) and Set 18 uses "DA_*" IDs.
 const UNIQUE_ITEMS = new Set([
-  "TFT_Item_GargoyleStoneplate","TFT_Item_SunfireCape","TFT_Item_FrozenHeart",
-  "TFT_Item_Redemption","TFT_Item_SpiritVisage","TFT_Item_ZzRotPortal",
+  "Gargoyle Stoneplate", "Sunfire Cape", "Protector's Vow", "Spirit Visage",
 ]);
 
 const CONFLICT_PAIRS = [
-  ["TFT_Item_MadredsBloodrazor","TFT_Item_KrakenSlayer",
-   "both are anti-tank shred — one source is usually enough"],
-  ["TFT_Item_InfinityEdge","TFT_Item_JeweledGauntlet",
+  ["Giant Slayer", "Kraken's Fury",
+   "both are anti-tank damage — one source is usually enough"],
+  ["Infinity Edge", "Jeweled Gauntlet",
    "both scale with crit — Infinity Edge alone makes crits shine"],
-  ["TFT_Item_GuinsoosRageblade","TFT_Item_StatikkShiv",
-   "both ramp on attack speed — swap one for a flat damage item"],
-  ["TFT_Item_SpearOfShojin","TFT_Item_BlueBuff",
+  ["Spear of Shojin", "Blue Buff",
    "both funnel mana — one is enough unless the ability cost is extreme"],
 ];
 
@@ -1329,7 +1310,7 @@ function lcReadable(apiName) {
   if (champNames[apiName]) return champNames[apiName];
   let s = apiName
     .replace(/^TFT\d*_Item_Artifact_/, "[Artifact] ")
-    .replace(/^TFT\d*_Item_/, "")
+    .replace(/^TFT\d*_Item_|^DA_/, "")
     .replace(/^TFT\d*_Augment_/, "")
     .replace(/^TFT\d+_/, "")
     .replace(/^TFT_/, "");
@@ -1417,15 +1398,16 @@ function lcDetectIssues(board) {
 
     // Unique-passive items equipped twice
     for (const item of items) {
-      if (UNIQUE_ITEMS.has(item) && items.filter(i => i === item).length > 1) {
+      if (UNIQUE_ITEMS.has(lcReadable(item)) && items.filter(i => i === item).length > 1) {
         issues.push(`${unit}: ${lcReadable(item)} has a unique passive — second copy gives no extra benefit`);
       }
     }
 
     // Conflicting pairs
+    const names = items.map(lcReadable);
     for (const [a, b, reason] of CONFLICT_PAIRS) {
-      if (items.includes(a) && items.includes(b)) {
-        issues.push(`${unit}: ${lcReadable(a)} + ${lcReadable(b)} — ${reason}`);
+      if (names.includes(a) && names.includes(b)) {
+        issues.push(`${unit}: ${a} + ${b} — ${reason}`);
       }
     }
   }

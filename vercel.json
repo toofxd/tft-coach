@@ -8,7 +8,6 @@
         "includeFiles": [
           "data/processed/match_features_slim.csv",
           "data/processed/item_winrates.csv",
-          "data/processed/tactics_tools_items.json",
           "data/static/calculator_data.json",
           "data/archive/**",
           "public/**"
