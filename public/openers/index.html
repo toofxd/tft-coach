@@ -219,7 +219,6 @@ a { color: inherit; }
 .cost-1 { border-color: #9b9b9b !important; } .cost-2 { border-color: #11b288 !important; } .cost-3 { border-color: #207ac7 !important; }
 .cost-4 { border-color: #c440da !important; } .cost-5 { border-color: #ffb93b !important; }
 
-.count { font-size: 12px; color: var(--text-50); margin-bottom: 10px; }
 /* Masonry: cards are absolutely positioned by layoutOpeners() into ~330px columns,
    each dropping into the shortest column; wide boards span two columns. */
 .openers { position: relative; }
@@ -229,22 +228,19 @@ a { color: inherit; }
 }
 .opener a { display: block; }
 /* Broken openers (a "Broken Openers" rule fits this board) get a red border */
-.opener.broken { border: 2px solid #e53935; box-shadow: 0 0 0 1px rgba(229,57,53,0.25), 0 0 14px rgba(229,57,53,0.25); }
+.opener.broken { border: 2px solid #ff1f1f; box-shadow: 0 0 0 1px rgba(229,57,53,0.25), 0 0 14px rgba(229,57,53,0.25); }
 .opener .tier-tag {
   position: absolute; top: 6px; left: 6px; z-index: 2; width: 24px; height: 24px; border-radius: 6px;
   display: flex; align-items: center; justify-content: center; font: 900 14px/1 'Cinzel', serif; color: #0c2340;
   box-shadow: 0 1px 4px rgba(0,0,0,0.5); pointer-events: none;
 }
-.tier-tag.S { background: #ff7f7f; } .tier-tag.A { background: #ffbf7f; }
-.tier-tag.B { background: #ffdf7f; } .tier-tag.C { background: #bfbfbf; }
+.tier-tag.S { background: #FE454B; } .tier-tag.A { background: #FF9C00; }
+.tier-tag.B { background: #FEEA33; } .tier-tag.C { background: #A7F238; }
 .opener .broken-tag {
   position: absolute; top: 6px; left: 34px; z-index: 2; pointer-events: none;
   background: #e53935; color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
   border-radius: 4px; padding: 5px 6px 4px;
 }
-.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 12px; color: var(--text-50); margin-bottom: 10px; }
-.legend .tier-tag { position: static; width: 18px; height: 18px; font-size: 11px; display: inline-flex; vertical-align: middle; margin-right: 4px; border-radius: 4px; }
-.legend .swatch { display: inline-block; width: 14px; height: 14px; border: 2px solid #e53935; border-radius: 3px; vertical-align: middle; margin-right: 4px; }
 .opener img { display: block; width: 100%; height: auto; }
 .opener .meta { height: 30px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 7px 10px; font-size: 12px; color: var(--text-70); }
 .opener .meta span { margin-right: 10px; }
@@ -263,14 +259,14 @@ a { color: inherit; }
   width: 22px; height: 22px; border-radius: 5px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
   font: 900 13px/1 'Cinzel', serif; color: #0c2340;
 }
-.comp-tip .tier.S { background: #ff7f7f; } .comp-tip .tier.A { background: #ffbf7f; }
+.comp-tip .tier.S { background: #FE454B; } .comp-tip .tier.A { background: #FF9C00; }
 .comp-tip .lbl { font-size: 10px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; }
 .comp-tip .list { color: var(--text-70); }
 .comp-tip .list.s { color: var(--text); font-weight: 600; }
 .comp-tip .brk { background: rgba(229,57,53,0.15); border: 1px solid rgba(229,57,53,0.5); border-radius: 6px;
   padding: 6px 8px; margin-bottom: 8px; color: var(--text); }
 .comp-tip .brk b { color: #ff8a80; }
-.comp-tip .src { font-size: 10px; color: var(--text-30); margin-top: 2px; }
+.comp-tip .tip-line { color: var(--text-70); border-top: 1px solid var(--border); padding-top: 7px; margin-top: 2px; }
 .empty { font-size: 13px; color: var(--text-50); padding: 30px 0; text-align: center; }
 .disclaimer {
   margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border);
@@ -344,15 +340,10 @@ a { color: inherit; }
   </div>
   <div class="selected" id="selected"></div>
 
-  <div class="legend">
-    <span><span class="tier-tag S">S</span><span class="tier-tag A">A</span><span class="tier-tag B">B</span><span class="tier-tag C">C</span>
-      ranked by how many comps the board can still go into (more = more flexible)</span>
-    <span><span class="swatch"></span>Broken opener — hits a "go this comp" rule</span>
-  </div>
-  <div class="count" id="count"></div>
   <div class="openers" id="openers"></div>
 
   <div class="disclaimer">
+    <p style="margin-bottom:6px;"><strong style="color:#8a9aaa;">Source:</strong> opener boards, comps, broken-opener rules and tips adapted from <a href="https://bunnymuffins.lol/openers" target="_blank" rel="noopener">BunnyMuffins</a> (patch 18.3b). Tiers are our own ranking.</p>
     <p style="font-size:11px;color:#556070;line-height:1.6;max-width:760px;margin:0 auto 8px;">This tool isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
     <p>Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener">Tiffany Tsang</a></p>
   </div>
@@ -395,8 +386,6 @@ function render() {
       + '<button type="button" class="clear" id="clearAll">Clear</button>'
     : '<span class="hint">Showing all openers. Search a champion to filter — openers must include every champion you add.</span>';
 
-  document.getElementById("count").textContent =
-    `${shown.length} of ${OPENERS.length} opener${OPENERS.length === 1 ? "" : "s"}`;
   document.getElementById("openers").innerHTML = shown.length ? shown.map(o => `
     <div class="opener${o.broken ? " broken" : ""}" data-w="${+o.w || 0}" data-h="${+o.h || 0}" data-i="${OPENERS.indexOf(o)}">
       ${o.tier ? `<span class="tier-tag ${esc(o.tier)}">${esc(o.tier)}</span>` : ""}${o.broken ? '<span class="broken-tag">BROKEN</span>' : ""}
@@ -421,7 +410,7 @@ function tipHtml(o) {
       <div class="list s">${c.S.length ? c.S.map(esc).join(", ") : "None — this board is flexible; pick from A"}</div></div></div>
     ${c.A.length ? `<div class="row"><span class="tier A">A</span><div><div class="lbl">Also works</div>
       <div class="list">${c.A.map(esc).join(", ")}</div></div></div>` : ""}
-    <div class="src">Comps: bunnymuffins.lol</div>`;
+    ${o.tip ? `<div class="tip-line">💡 ${esc(o.tip)}</div>` : ""}`;
 }
 
 function showTip(card) {
