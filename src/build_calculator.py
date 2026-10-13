@@ -368,7 +368,7 @@ function renderDrop(type) {
     }
     const focused = i === dropState[type].focused ? ' focused' : '';
     const subHtml = item.sub != null
-      ? `<span class="opt-sub">${type === 'unit' ? item.sub + icon('goldCoins') : item.sub}</span>`
+      ? `<span class="opt-sub">${type === 'unit' ? icon('goldCoins') + item.sub : item.sub}</span>`
       : '';
     html += `<div class="search-opt${focused}" data-key="${item.key}" data-idx="${i}"
       onmousedown="selectOpt('${type}', '${item.key}', event)">
@@ -613,7 +613,7 @@ const TFT_ICONS = {
   scaleHealth: 'https://ap.tft.tools/img/general/hp.png',
   scaleAS:     'https://ap.tft.tools/img/general/as.png',
   scaleMana:   'https://ap.tft.tools/img/general/mana.png',
-  goldCoins:   'https://cdn.tft.tools/general/gold.png',
+  goldCoins:   '/img/gold.webp',
 };
 
 function icon(name) {

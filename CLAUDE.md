@@ -384,7 +384,7 @@ to `public/<N>/` + `data/archive/<N>/` and add `<N>` to the archive loop and `SE
 
 ## UI Conventions
 
-- **Gold cost** must always be shown as coin icon THEN number — never `Ng` or number-first. Use `<span class="coin-cell"><img class="coin" src="https://cdn.tft.tools/general/gold.png">N</span>` for table headers, or `<img class="coin" src="https://cdn.tft.tools/general/gold.png">N` inside flex containers (buttons). The `.coin` CSS class sets `width/height: 12px`. The `.coin-cell` wrapper is `inline-flex` to guarantee icon-before-number order.
+- **Gold cost** must always be shown as coin icon THEN number — never `Ng` or number-first. Use `<span class="coin-cell"><img class="coin" src="/img/gold.webp">N</span>` for table headers, or `<img class="coin" src="/img/gold.webp">N` inside flex containers (buttons). The `.coin` CSS class sets `width/height: 12px`. The `.coin-cell` wrapper is `inline-flex` to guarantee icon-before-number order.
 
 ---
 

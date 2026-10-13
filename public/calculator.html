@@ -335,11 +335,11 @@ img.coin { width: 12px; height: 12px; flex-shrink: 0; }
           <span onclick="setCostFilter(0)" style="font-size:11px;color:#4a5868;cursor:pointer;user-select:none;" onmouseover="this.style.color='#8a9aaa'" onmouseout="this.style.color='#4a5868'">Clear</span>
         </div>
         <div style="display:flex;gap:5px;align-items:center;margin-top:8px;">
-          <button class="cost-btn cost-1-btn" data-cost="1" onclick="setCostFilter(1)"><img class="coin" src="https://cdn.tft.tools/general/gold.png">1</button>
-          <button class="cost-btn cost-2-btn" data-cost="2" onclick="setCostFilter(2)"><img class="coin" src="https://cdn.tft.tools/general/gold.png">2</button>
-          <button class="cost-btn cost-3-btn" data-cost="3" onclick="setCostFilter(3)"><img class="coin" src="https://cdn.tft.tools/general/gold.png">3</button>
-          <button class="cost-btn cost-4-btn" data-cost="4" onclick="setCostFilter(4)"><img class="coin" src="https://cdn.tft.tools/general/gold.png">4</button>
-          <button class="cost-btn cost-5-btn" data-cost="5" onclick="setCostFilter(5)"><img class="coin" src="https://cdn.tft.tools/general/gold.png">5</button>
+          <button class="cost-btn cost-1-btn" data-cost="1" onclick="setCostFilter(1)"><img class="coin" src="/img/gold.webp">1</button>
+          <button class="cost-btn cost-2-btn" data-cost="2" onclick="setCostFilter(2)"><img class="coin" src="/img/gold.webp">2</button>
+          <button class="cost-btn cost-3-btn" data-cost="3" onclick="setCostFilter(3)"><img class="coin" src="/img/gold.webp">3</button>
+          <button class="cost-btn cost-4-btn" data-cost="4" onclick="setCostFilter(4)"><img class="coin" src="/img/gold.webp">4</button>
+          <button class="cost-btn cost-5-btn" data-cost="5" onclick="setCostFilter(5)"><img class="coin" src="/img/gold.webp">5</button>
         </div>
       </div>
 
@@ -398,11 +398,11 @@ img.coin { width: 12px; height: 12px; flex-shrink: 0; }
           <thead>
             <tr>
               <th class="odds-th odds-label-col">Lvl</th>
-              <th class="odds-th"><span class="coin-cell"><img class="coin" src="https://cdn.tft.tools/general/gold.png">1</span></th>
-              <th class="odds-th"><span class="coin-cell"><img class="coin" src="https://cdn.tft.tools/general/gold.png">2</span></th>
-              <th class="odds-th"><span class="coin-cell"><img class="coin" src="https://cdn.tft.tools/general/gold.png">3</span></th>
-              <th class="odds-th"><span class="coin-cell"><img class="coin" src="https://cdn.tft.tools/general/gold.png">4</span></th>
-              <th class="odds-th"><span class="coin-cell"><img class="coin" src="https://cdn.tft.tools/general/gold.png">5</span></th>
+              <th class="odds-th"><span class="coin-cell"><img class="coin" src="/img/gold.webp">1</span></th>
+              <th class="odds-th"><span class="coin-cell"><img class="coin" src="/img/gold.webp">2</span></th>
+              <th class="odds-th"><span class="coin-cell"><img class="coin" src="/img/gold.webp">3</span></th>
+              <th class="odds-th"><span class="coin-cell"><img class="coin" src="/img/gold.webp">4</span></th>
+              <th class="odds-th"><span class="coin-cell"><img class="coin" src="/img/gold.webp">5</span></th>
             </tr>
           </thead>
           <tbody id="oddsTbody"></tbody>
@@ -414,8 +414,8 @@ img.coin { width: 12px; height: 12px; flex-shrink: 0; }
         <a href="https://bunnymuffins.lol/tft-leveling-guide/" target="_blank" rel="noopener" class="sec-label" style="display:block;text-decoration:none;">Leveling Guide</a>
         <div id="levelFilters" style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px;">
           <button class="lvl-filter bp-btn active" data-filter="standard">Standard</button>
-          <button class="lvl-filter bp-btn" data-filter="twoCostRR"><img class="coin" src="https://cdn.tft.tools/general/gold.png" style="margin-right:4px;vertical-align:-1px;">2 RR</button>
-          <button class="lvl-filter bp-btn" data-filter="threeCostRR"><img class="coin" src="https://cdn.tft.tools/general/gold.png" style="margin-right:4px;vertical-align:-1px;">3 RR</button>
+          <button class="lvl-filter bp-btn" data-filter="twoCostRR"><img class="coin" src="/img/gold.webp" style="margin-right:4px;vertical-align:-1px;">2 RR</button>
+          <button class="lvl-filter bp-btn" data-filter="threeCostRR"><img class="coin" src="/img/gold.webp" style="margin-right:4px;vertical-align:-1px;">3 RR</button>
         </div>
         <table id="levelingTable" style="width:100%;border-collapse:collapse;font-size:12px;">
           <thead>
@@ -797,7 +797,7 @@ function renderDrop(type) {
     }
     const focused = i === dropState[type].focused ? ' focused' : '';
     const subHtml = item.sub != null
-      ? `<span class="opt-sub">${type === 'unit' ? item.sub + icon('goldCoins') : item.sub}</span>`
+      ? `<span class="opt-sub">${type === 'unit' ? icon('goldCoins') + item.sub : item.sub}</span>`
       : '';
     html += `<div class="search-opt${focused}" data-key="${item.key}" data-idx="${i}"
       onmousedown="selectOpt('${type}', '${item.key}', event)">
@@ -1191,7 +1191,7 @@ const TFT_ICONS = {
   scaleHealth: 'https://ap.tft.tools/img/general/hp.png',
   scaleAS:     'https://ap.tft.tools/img/general/as.png',
   scaleMana:   'https://ap.tft.tools/img/general/mana.png',
-  goldCoins:   'https://cdn.tft.tools/general/gold.png',
+  goldCoins:   '/img/gold.webp',
 };
 
 function icon(name) {
