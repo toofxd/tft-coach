@@ -189,8 +189,9 @@ and the calculator use `TFT18_Ahri` / `EdgeOfNight`. Bridged by:
 
 ### Bumping to a new set
 Change the set number in `src/collect_pro.py` (`TFT_SET`), `src/features.py`,
-`src/build_calculator_data.py` (`s18`/`data18`/`TFTSet18`), and "Set 18"/patch text in
-`server.js` prompts + page titles. Then run `build_calculator_data.py` and
+`src/build_calculator_data.py` (`s18`/`data18`/`TFTSet18`), `CURRENT_SET` + `SET_PATCH` and "Set 18" text in
+`server.js` prompts, and page titles. Bump `SET_PATCH` each TFT patch (TFT numbers patches by set,
+e.g. 18.4 — not the LoL client version like 16.20). Then run `build_calculator_data.py` and
 `build_calculator.py` (it now regenerates UNITS_LIST and item lists too).
 
 ### To add Master tier

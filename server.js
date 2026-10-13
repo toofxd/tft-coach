@@ -205,7 +205,8 @@ function resolveUnitId(id) {
 // Endpoints take ?set=17; anything else means the current set.
 // ---------------------------------------------------------------------------
 const CURRENT_SET = 18;
-const SET_PATCH = { 18: "16.20", 17: "16.10" };
+// Patch label for AI prompts — TFT patches are numbered by set (18.4), not the LoL client version
+const SET_PATCH = { 18: "patch 18.4", 17: "the final Set 17 patch" };
 const archive = {};
 for (const s of [17]) {
   const dir = path.join(__dirname, "data", "archive", String(s));
@@ -1144,7 +1145,7 @@ app.get("/api/champion-tips", async (req, res) => {
   const bp = (traitBreakpoints || "").match(/([^,(]+)\((\d+)/);
   const traitExample = bp ? `${bp[2]} ${bp[1].trim()}` : "3 of a trait";
 
-  const prompt = `You are a TFT Set ${set} expert coach on patch ${SET_PATCH[set]}.
+  const prompt = `You are a TFT Set ${set} expert coach as of ${SET_PATCH[set]}.
 
 CHAMPION: ${name}
 Cost: ${cost}g | Role: ${role}
@@ -1226,7 +1227,7 @@ app.post("/api/ask", async (req, res) => {
     itemSheet   && `Set 18 craftable items (authoritative — only these items exist):\n${itemSheet}`,
   ].filter(Boolean).join("\n\n");
 
-  const prompt = `You are an expert TFT (Teamfight Tactics) coach specializing in Set 18 patch 16.20. Answer the following question clearly and concisely. Stay strictly on the topic of TFT — if the question is not related to TFT, politely redirect the user to ask a TFT question instead.
+  const prompt = `You are an expert TFT (Teamfight Tactics) coach specializing in Set ${CURRENT_SET} as of ${SET_PATCH[CURRENT_SET]}. Answer the following question clearly and concisely. Stay strictly on the topic of TFT — if the question is not related to TFT, politely redirect the user to ask a TFT question instead.
 
 ${groundingBlock}
 
