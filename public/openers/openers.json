@@ -1,0 +1,23 @@
+{
+  "_howto": "To add an opener: save the screenshot as img/opener-NN.webp and add an entry below. Champion names must match the game (e.g. \"Kha'Zix\", \"LeBlanc\"). traits = active traits as [name, count].",
+  "openers": [
+    { "img": "img/opener-01.webp", "champions": ["Yorick", "Rakan", "Karma", "Yunara"],
+      "traits": [["Blossom", 3], ["Juggernaut", 2]] },
+    { "img": "img/opener-02.webp", "champions": ["Diana", "Camille", "Akali", "Warwick"],
+      "traits": [["Ravager", 4]] },
+    { "img": "img/opener-03.webp", "champions": ["Yorick", "Scuttlecrab", "Gromp", "Cinderling"],
+      "traits": [["Riftbeast", 3], ["Juggernaut", 2]] },
+    { "img": "img/opener-04.webp", "champions": ["Scuttlecrab", "Rakan", "Cinderling", "Caitlyn"],
+      "traits": [["Hunter", 2], ["Juggernaut", 2]] },
+    { "img": "img/opener-05.webp", "champions": ["Ornn", "Leona", "Rengar"],
+      "traits": [["Defender", 2], ["Rival", 1]] },
+    { "img": "img/opener-06.webp", "champions": ["Shen", "Ornn", "Alistar", "Xayah", "Varus"],
+      "traits": [["Elderwood", 3], ["Defender", 2], ["Inferno", 2], ["Rapidfire", 2]] },
+    { "img": "img/opener-07.webp", "champions": ["Leona", "Ornn", "Karma", "LeBlanc"],
+      "traits": [["Defender", 2], ["Spellweaver", 2]] },
+    { "img": "img/opener-08.webp", "champions": ["Kobuko", "Rek'Sai", "Teemo", "Veigar"],
+      "traits": [["Sprykin", 3], ["Blackthorn", 2], ["Brawler", 2]] },
+    { "img": "img/opener-09.webp", "champions": ["Leona", "Ornn", "Kha'Zix"],
+      "traits": [["Defender", 2], ["Rival", 1]] }
+  ]
+}
