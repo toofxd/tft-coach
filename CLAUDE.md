@@ -119,6 +119,7 @@ data/processed/match_features_slim.csv
 data/processed/item_winrates.csv
 data/processed/tactics_tools_items.json
 data/static/calculator_data.json
+data/archive/**
 public/**
 ```
 
@@ -355,7 +356,13 @@ The Groq prompt for champion tips enforces a specific output format — **do not
 
 ## UI Structure
 
-Three pages sharing the same tab bar: **Stat Calculator**, **TFT Coach** (`public/calculator.html`), **Gods** (`public/gods.html`).
+Current set: **Stat Calculator** + **TFT Coach** (`public/calculator.html`), plus `public/about.html`.
+
+**Set 17 archive** lives in `public/17/` (`calculator.html`, `gods.html`) with frozen data in
+`data/archive/17/` (`item_winrates.csv`, `calculator_data.json`). Archive pages call the API with
+`&set=17`; `setFrom(req)` / `winratesFor()` / `calcDataFor()` in `server.js` pick the data.
+`/gods.html` 301-redirects to `/17/gods.html`. To archive a future set, copy the same pattern
+to `public/<N>/` + `data/archive/<N>/` and add `<N>` to the archive loop and `SET_PATCH`.
 
 ### Calculator tab (`#tab-calculator`)
 - Left column: champion search, cost filter buttons (`setCostFilter` clears unit input), item/trait selectors

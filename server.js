@@ -16,6 +16,8 @@ const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_MODEL = "openai/gpt-oss-120b";  // llama-3.3-70b-versatile was retired by Groq (Oct 2026)
 
 app.use(express.json());
+// Set 17 pages moved to /17/ when Set 18 launched — keep old links working
+app.get("/gods.html", (_req, res) => res.redirect(301, "/17/gods.html"));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Name mappings load asynchronously at startup (CommunityDragon fetch). On
@@ -197,6 +199,31 @@ function resolveUnitId(id) {
   const key = cdToKey[id] || id;
   return unitAlias[key] || key;
 }
+
+// ---------------------------------------------------------------------------
+// Archived sets — frozen data behind the /17/ pages (data/archive/<set>/).
+// Endpoints take ?set=17; anything else means the current set.
+// ---------------------------------------------------------------------------
+const CURRENT_SET = 18;
+const SET_PATCH = { 18: "16.20", 17: "16.10" };
+const archive = {};
+for (const s of [17]) {
+  const dir = path.join(__dirname, "data", "archive", String(s));
+  const csvPath = path.join(dir, "item_winrates.csv");
+  const dataPath = path.join(dir, "calculator_data.json");
+  archive[s] = {
+    itemWinrates: fs.existsSync(csvPath)
+      ? parse(fs.readFileSync(csvPath, "utf8"), { columns: true, skip_empty_lines: true }) : [],
+    calcData: fs.existsSync(dataPath) ? JSON.parse(fs.readFileSync(dataPath, "utf8")) : null,
+  };
+  console.log(`Loaded Set ${s} archive: ${archive[s].itemWinrates.length} item rows`);
+}
+function setFrom(req) {
+  const s = parseInt(req.query.set, 10);
+  return archive[s] ? s : CURRENT_SET;
+}
+function winratesFor(set) { return set === CURRENT_SET ? itemWinrates : archive[set].itemWinrates; }
+function calcDataFor(set) { return set === CURRENT_SET ? calcData : archive[set].calcData; }
 
 // Compact champion sheet: one line per champion, for AI system prompts
 const champSheet = calcData
@@ -491,9 +518,10 @@ function proStats(topTrait) {
 }
 
 // Returns top items for a unit from the Challenger dataset, formatted for AI prompts.
-function proUnitStats(unitId) {
-  if (!unitId || !itemWinrates.length) return null;
-  const rows = itemWinrates
+function proUnitStats(unitId, set = CURRENT_SET) {
+  const winrates = winratesFor(set);
+  if (!unitId || !winrates.length) return null;
+  const rows = winrates
     .filter(r => r.unit_id === resolveUnitId(unitId) && parseInt(r.games) >= 10 && !isJunkItem(r.item_id))
     .sort((a, b) =>
       wilsonLower(parseFloat(b.top4_rate), parseInt(b.games)) -
@@ -986,7 +1014,7 @@ app.get("/api/item-recs", (req, res) => {
   const { unitId } = req.query;
   if (!unitId) return res.status(400).json({ error: "unitId required" });
 
-  const allRows = itemWinrates
+  const allRows = winratesFor(setFrom(req))
     .filter(r => r.unit_id === resolveUnitId(unitId) && !isJunkItem(r.item_id))
     .map(r => ({ itemId: r.item_id, top4Rate: parseFloat(r.top4_rate), games: parseInt(r.games) }));
 
@@ -1067,58 +1095,95 @@ Write 3–5 concise, specific coaching suggestions. Be direct and actionable. Us
 // ---------------------------------------------------------------------------
 // GET /api/champion-tips — Groq-powered tips for a specific champion
 // ---------------------------------------------------------------------------
+// Craftable item + emblem names and trait names for a set — the only ones tips may mention
+function setVocabulary(set) {
+  const data = calcDataFor(set);
+  if (!data) return { items: [], traits: [] };
+  // Keys like "17AstronautEmblemItem" carry a set prefix; drop ones from other sets
+  const otherSet = k => { const m = k.match(/^(\d\d)\D/); return m && m[1] !== String(set); };
+  const items = [...new Set(Object.entries(data.items)
+    .filter(([k, v]) => v.name && !otherSet(k)
+      && (v.tags || []).some(t => t === "Craftable" || t === "CraftableEmblem"))
+    .map(([, v]) => v.name))].sort();
+  const traits = [...new Set(Object.values(data.traits).map(t => t.name).filter(Boolean))].sort();
+  return { items, traits };
+}
+
+// True when tips have all 3 sections and Best Items opens "<Name> benefits from"
+function tipsWellFormed(text, name) {
+  const best = text.match(/\*\*Best Items:\*\*\s*(.*)/i);
+  return !!best && /\*\*When to Play:\*\*/i.test(text) && /\*\*Key Trait:\*\*/i.test(text)
+    && best[1].replace(/\*/g, "").trim().toLowerCase().startsWith(`${name.toLowerCase()} benefits from`);
+}
+
 app.get("/api/champion-tips", async (req, res) => {
   const { name, cost, traits, traitBreakpoints, role, abilityName, abilityDesc, topItems, unitId } = req.query;
   if (!name) return res.status(400).json({ error: "name required" });
+  const set = setFrom(req);
+  const vocab = setVocabulary(set);
 
-  const proItemStats = proUnitStats(unitId);
+  const proItemStats = proUnitStats(unitId, set);
   const proItemBlock = proItemStats
-    ? `\nTop item combos from our Challenger/GM dataset (${matchFeatures.length.toLocaleString()} pro games):\n${proItemStats}`
+    ? `\nTop items on ${name} in our Challenger/GM dataset (ranked by top-4 rate):\n${proItemStats}`
     : "";
+  const validItems = vocab.items.length ? vocab.items.join(", ") : "(not available)";
+  const validTraits = vocab.traits.length ? vocab.traits.join(", ") : "(not available)";
 
-  const prompt = `You are a TFT Set 18 expert coach on patch 16.20.
+  // Trait-language example built from this champion's own first breakpoint, e.g. "3 Elderwood"
+  const bp = (traitBreakpoints || "").match(/([^,(]+)\((\d+)/);
+  const traitExample = bp ? `${bp[2]} ${bp[1].trim()}` : "3 of a trait";
+
+  const prompt = `You are a TFT Set ${set} expert coach on patch ${SET_PATCH[set]}.
 
 CHAMPION: ${name}
 Cost: ${cost}g | Role: ${role}
-Traits: ${traitBreakpoints || traits}
+Traits (with valid breakpoints): ${traitBreakpoints || traits}
 Ability: ${abilityName} — ${abilityDesc}
 Top items from Challenger data: ${topItems || "none provided"}${proItemBlock}
 
+VALID SET ${set} ITEMS (mention no other items): ${validItems}
+VALID SET ${set} TRAITS (mention no other traits): ${validTraits}
+
 STRICT RULES — you must follow these exactly:
-- Only reference real TFT Set 18 items. TFT items are crafted from components (B.F. Sword, Recurve Bow, Chain Vest, Negatron Cloak, Needlessly Large Rod, Tear of the Goddess, Giant's Belt, Sparring Gloves, Spatula). Examples of valid items: Deathblade, Guinsoo's Rageblade, Kraken Slayer, Giant Slayer, Bloodthirster, Sterak's Gage, Edge of Night, Titan's Resolve, Warmog's Armor, Sunfire Cape, Gargoyle Stoneplate, Rabadon's Deathcap, Jeweled Gauntlet, Spear of Shojin, Blue Buff, Nashor's Tooth, Hextech Gunblade, Red Buff, Last Whisper, Bramble Vest, Ionic Spark. Do NOT invent items.
-- Only reference trait breakpoints that were provided above. Do not make up breakpoint numbers.
-- If topItems are provided, prioritize recommending those.
+- Only mention items from the VALID ITEMS list and traits from the VALID TRAITS list. Never mention traits, items, or mechanics from other sets.
+- Recommend items from the Challenger data first — they are what actually wins on this champion. Only add others if fewer than 3 are given.
+- Only reference this champion's trait breakpoints listed above. Do not make up breakpoint numbers.
+- Match items to the champion's role. Tanks and supports want durability items, not damage-carry items.
 - Be specific and concise. No filler. 1-2 sentences per section.
-- Match items to the champion's role. Do NOT recommend carry items (Blue Buff, Rabadon's Deathcap, Jeweled Gauntlet, Deathblade, Giant Slayer, Last Whisper) for tanks or supports — those items are for damage carries only. Tanks want durability items (Warmog's Armor, Gargoyle Stoneplate, Titan's Resolve, Bramble Vest, Sunfire Cape, Ionic Spark).
-- For Best Items: format the first sentence exactly as "[Name] benefits from [Item A] for [reason A], [Item B] for [reason B], and [Item C] for [reason C]." Reasons should be short (2-5 words). If the champion already has strong base AD, AP, or survivability from their ability/traits, note that they need to improve something else (e.g. shred, burn, wound) or stack their primary stat further. Mention burn (Sunfire Cape / Red Buff) or grievous wounds (Morellonomicon / Red Buff) when relevant to this champion's role.
-- Use natural trait language: write "5 Elderwood" not "the Elderwood 5 breakpoint"; write "with Inferno active" not "an Inferno trait breakpoint". Always put the number before the trait name.
+- Use natural trait language: write "${traitExample}", never "the ${bp ? bp[1].trim() : "X"} ${bp ? bp[2] : "N"} breakpoint". Always put the number before the trait name.
 
-Respond with exactly these 3 sections. No intro, no outro:
+Respond with exactly these 3 sections and nothing else:
 
-**Best Items:** First sentence must follow the "[Name] benefits from A for X, B for Y, and C for Z" format. One follow-up sentence max.
-**When to Play:** What board state, augment, or condition makes this champion worth building around.
-**Key Trait:** Name the most impactful trait level from the list above and what it gives.`;
+**Best Items:** ${name} benefits from [Item A] for [reason A], [Item B] for [reason B], and [Item C] for [reason C]. (Reasons 2-5 words. Optional second sentence: if ${name} already has strong base AD/AP/survivability, say what gap to cover — shred, burn, or wounds — or which primary stat to stack.)
+**When to Play:** What board state or condition makes ${name} worth building around.
+**Key Trait:** The most impactful trait level from the list above and what it gives.`;
 
   if (!GROQ_API_KEY) return res.json({ tips: "(Groq API key not configured)" });
   try {
     const draft = await callGroq(prompt, 400);
 
-    const checkPrompt = `You are a TFT fact-checker. Review these champion tips and correct any errors. Return the corrected tips in exactly the same 3-section format. If nothing needs fixing, return them unchanged — do not add commentary.
+    const checkPrompt = `You are a TFT Set ${set} fact-checker. Correct any errors in these champion tips and return ONLY the corrected tips — no commentary.
 
 CHAMPION: ${name} | Role: ${role}
-Valid items from Challenger data: ${topItems || "none"}
+Traits (with valid breakpoints): ${traitBreakpoints || traits}
+VALID SET ${set} ITEMS: ${validItems}
+VALID SET ${set} TRAITS: ${validTraits}
 
 TIPS TO REVIEW:
 ${draft}
 
 CHECK FOR AND FIX:
-- Carry items (Blue Buff, Rabadon's Deathcap, Jeweled Gauntlet, Deathblade, Giant Slayer, Last Whisper) recommended for a tank or support — replace with role-appropriate items
-- Trait language written as "the X Y breakpoint" or "a Y trait breakpoint" — rewrite naturally (e.g. "5 Elderwood", "with Inferno active")
-- Any item names that don't exist in TFT Set 18 — replace with real items`;
+- Any item not in VALID ITEMS, or any trait not in VALID TRAITS — replace with a valid one
+- Damage-carry items recommended for a tank or support — replace with durability items
+- Trait language like "the X Y breakpoint" — rewrite as "${traitExample}"
+- Output must be exactly 3 sections: **Best Items:**, **When to Play:**, **Key Trait:**
+- **Best Items:** must start with exactly "${name} benefits from"`;
 
-    let tips = await callGroq(checkPrompt, 400).catch(() => draft);
-    // Strip any echoed header lines Groq may include from the fact-check prompt context
-    tips = tips.replace(/^(CHAMPION:.*|Valid items from Challenger data:.*|TIPS TO REVIEW:\s*)\n?/gim, '').trim();
+    const clean = t => t.replace(/^(CHAMPION:.*|Traits \(with.*|VALID SET.*|TIPS TO REVIEW:\s*)\n?/gim, "").trim();
+    let tips = clean(await callGroq(checkPrompt, 400).catch(() => draft));
+    // Fact-checker occasionally drops the required opening — fall back to the draft if it was right
+    if (!tipsWellFormed(tips, name) && tipsWellFormed(draft, name)) tips = clean(draft);
+    if (!tipsWellFormed(tips, name)) console.warn(`[tips] format drift for ${name} (set ${set})`);
     res.json({ tips });
   } catch (e) {
     console.error("champion-tips error:", e.message);

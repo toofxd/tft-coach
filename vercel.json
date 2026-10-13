@@ -10,6 +10,7 @@
           "data/processed/item_winrates.csv",
           "data/processed/tactics_tools_items.json",
           "data/static/calculator_data.json",
+          "data/archive/**",
           "public/**"
         ],
         "maxDuration": 60

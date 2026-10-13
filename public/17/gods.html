@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TFT Set 17 — Realm of Gods</title>
+<title>TFT Set 17 — Realm of Gods (Archive)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
@@ -283,8 +283,8 @@ a { color: inherit; }
     <nav class="nav-right">
       <a href="/about.html" class="tab-btn">About</a>
       <a href="/calculator.html#coach" class="tab-btn">TFT Coach</a>
-      <a href="/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
-      <a href="/gods.html" class="tab-btn active">Gods</a>
+      <a href="/17/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
+      <a href="/17/gods.html" class="tab-btn active">Gods</a>
 
       <span class="nav-divider"></span>
 
@@ -314,13 +314,18 @@ a { color: inherit; }
   <nav class="mobile-menu" id="mobileMenu">
     <a href="/about.html">About</a>
     <a href="/calculator.html#coach">TFT Coach</a>
-    <a href="/calculator.html#calculator">Stat Calculator</a>
-    <a href="/gods.html" class="active">Gods</a>
+    <a href="/17/calculator.html#calculator">Stat Calculator</a>
+    <a href="/17/gods.html" class="active">Gods</a>
   </nav>
 </header>
 
 <!-- ── Page content ── -->
 <div style="max-width:1060px;margin:0 auto;">
+<div style="margin:16px 16px 0;padding:10px 14px;border:1px solid rgba(174,145,66,0.35);border-radius:6px;background:rgba(174,145,66,0.08);font-size:13px;color:#c9b87a;">
+  <strong style="color:#ae9142;">Set 17 archive.</strong> Data frozen at the end of Set 17.
+  <a href="/calculator.html" style="color:#e0c878;margin-left:6px;">Go to the current set &rarr;</a>
+</div>
+
 
   <!-- Page header -->
   <div class="page-header">
@@ -419,7 +424,7 @@ function godPortraitUrl(key) {
 }
 
 // ── State persistence (shared with calculator.html via sessionStorage) ───
-const STATE_KEY = 'tftCoachState';
+const STATE_KEY = 'tftCoachState17';  // separate from the current-set pages
 function navIsReload() {
   const nav = performance.getEntriesByType('navigation')[0];
   return nav && nav.type === 'reload';
