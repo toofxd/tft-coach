@@ -149,7 +149,7 @@ was removed, which is what took the site down. Nothing points at Railway now.
 | `/api/coaching` | POST | Gemini aggregate coaching from profile stats + Challenger/GM benchmarks |
 | `/api/coach` | POST | Gemini per-match coaching with comp-specific pro comparison |
 | `/api/item-recs` | GET | `?unitId=TFT17_Caitlyn` — item recommendations from CSV |
-| `/api/champion-tips` | GET | Groq LLaMA tips for a champion; accepts `unitId` to inject pro item combo win rates |
+| `/api/champion-tips` | GET | Groq (gpt-oss-120b) tips for a champion; accepts `unitId` to inject pro item combo win rates |
 | `/api/ask` | POST | `{ question }` — free-form TFT Q&A; Gemini+Search grounding → Groq fallback |
 | `/api/items` | GET | tactics.tools item rankings |
 
@@ -284,7 +284,7 @@ Using `re.sub()` to inject JSON into HTML expands `\n` sequences into real newli
 | `ap.tft.tools` | Champion stats, item win rates, stat icon images |
 | `raw.communitydragon.org` | Champion costs, traits, ability text, name mappings (fetched live at server start) |
 | Riot Games API (`americas.api.riotgames.com`) | Personal match history |
-| Groq (`api.groq.com`) — model: `llama-3.3-70b-versatile` | Champion tips (primary); fallback for coaching + Ask AI |
+| Groq (`api.groq.com`) — model: `openai/gpt-oss-120b` (llama-3.3 retired Oct 2026) | Champion tips (primary); fallback for coaching + Ask AI |
 | Google Gemini (`gemini-2.5-flash`) | Per-match coaching + aggregate coaching (primary); Ask AI with Google Search grounding (primary) |
 
 **Riot dev keys expire every 24 hours.** If API calls return 401/403, renew at

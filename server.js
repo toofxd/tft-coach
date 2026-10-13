@@ -13,7 +13,7 @@ const RIOT_API_KEY = process.env.RIOT_API_KEY;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
-const GROQ_MODEL = "llama-3.3-70b-versatile";
+const GROQ_MODEL = "openai/gpt-oss-120b";  // llama-3.3-70b-versatile was retired by Groq (Oct 2026)
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -706,7 +706,11 @@ function callGroq(prompt, maxTokens = 400) {
     const body = JSON.stringify({
       model: GROQ_MODEL,
       messages: [{ role: "user", content: prompt }],
-      max_tokens: maxTokens,
+      // gpt-oss is a reasoning model: reasoning tokens count against the cap, so
+      // keep effort low and leave headroom so the visible answer isn't cut off
+      max_completion_tokens: maxTokens + 1024,
+      reasoning_effort: "low",
+      include_reasoning: false,
       temperature: 0.5,
     });
     const req = https.request(
