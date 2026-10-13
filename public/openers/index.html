@@ -203,24 +203,21 @@ a { color: inherit; }
 .clear { font-size: 12px; color: var(--text-50); background: none; border: none; cursor: pointer; font-family: inherit; }
 .clear:hover { color: var(--text); }
 
-.champ-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
-.champ {
-  width: 70px; border-radius: 6px; overflow: hidden; background: var(--navy-deep); cursor: pointer;
-  border: 2px solid #808080; display: flex; flex-direction: column; padding: 0; font-family: inherit;
-  transition: transform 0.1s, opacity 0.15s;
+.suggest {
+  position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 20;
+  background: var(--navy-deep); border: 1px solid rgba(174,145,66,0.4); border-radius: 8px;
+  max-height: 300px; overflow-y: auto; padding: 4px;
 }
-.champ:hover { transform: translateY(-2px); }
-.champ.on { box-shadow: 0 0 0 2px var(--gold-light); }
-.champ.dim { opacity: 0.25; }
-.champ > img { width: 100%; height: 42px; object-fit: cover; object-position: 50% 20%; display: block; }
-.champ .cap {
-  display: flex; justify-content: space-between; align-items: center; gap: 2px;
-  padding: 3px 4px; font-size: 10px; font-weight: 600; color: var(--text);
+.opt {
+  display: flex; align-items: center; gap: 8px; width: 100%; padding: 6px 8px; cursor: pointer;
+  background: none; border: none; border-radius: 6px; color: var(--text); font: 500 13px/1.2 inherit; font-family: inherit; text-align: left;
 }
-.champ .cap .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.champ .n { color: var(--text-30); font-size: 10px; }
-.cost-1 { border-color: #9b9b9b; } .cost-2 { border-color: #11b288; } .cost-3 { border-color: #207ac7; }
-.cost-4 { border-color: #c440da; } .cost-5 { border-color: #ffb93b; }
+.opt:hover, .opt.focused { background: rgba(174,145,66,0.15); }
+.opt img { width: 28px; height: 28px; border-radius: 4px; object-fit: cover; object-position: 50% 20%; border: 2px solid #808080; }
+.opt .n { margin-left: auto; font-size: 11px; color: var(--text-30); }
+.opt .none { color: var(--text-30); }
+.cost-1 { border-color: #9b9b9b !important; } .cost-2 { border-color: #11b288 !important; } .cost-3 { border-color: #207ac7 !important; }
+.cost-4 { border-color: #c440da !important; } .cost-5 { border-color: #ffb93b !important; }
 
 .count { font-size: 12px; color: var(--text-50); margin-bottom: 10px; }
 .openers { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(480px, 100%), 1fr)); gap: 12px; }
@@ -292,14 +289,15 @@ a { color: inherit; }
 <div style="max-width:1060px;margin:0 auto;">
   <div class="page-header">
     <div class="page-title">Openers</div>
-    <div class="page-sub">Early boards — pick a champion to see openers that use it</div>
+    <div class="page-sub">Early boards — search a champion to see openers that use it</div>
   </div>
 
   <div class="search-wrap">
-    <input class="search" id="search" type="search" placeholder="Search champion… (Enter to add)" autocomplete="off">
+    <input class="search" id="search" type="search" placeholder="Search champion… (Enter to add)" autocomplete="off"
+           role="combobox" aria-expanded="false" aria-controls="suggest">
+    <div class="suggest" id="suggest" role="listbox" hidden></div>
   </div>
   <div class="selected" id="selected"></div>
-  <div class="champ-grid" id="champGrid"></div>
 
   <div class="count" id="count"></div>
   <div class="openers" id="openers"></div>
@@ -336,26 +334,16 @@ const matches = o => [...selected].every(n => o.champions.includes(n));
 function render() {
   const q = norm(searchEl.value);
   const shown = OPENERS.filter(matches);
-  // Champions that still appear in the visible openers (others dim out)
-  const live = new Set(shown.flatMap(o => o.champions));
   const counts = {};
   OPENERS.forEach(o => new Set(o.champions).forEach(n => { counts[n] = (counts[n] || 0) + 1; }));
 
-  const list = Object.values(CHAMPS)
-    .filter(c => counts[c.name] && (!q || norm(c.name).includes(q)))
-    .sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name));
-  document.getElementById("champGrid").innerHTML = list.map(c => `
-    <button type="button" class="champ cost-${esc(c.cost)}${selected.has(c.name) ? " on" : ""}${live.has(c.name) ? "" : " dim"}"
-            data-name="${esc(c.name)}" title="${esc(c.name)} — ${counts[c.name]} opener${counts[c.name] > 1 ? "s" : ""}">
-      ${c.icon ? `<img src="${esc(c.icon)}" alt="" loading="lazy">` : ""}
-      <div class="cap"><span class="nm">${esc(c.name)}</span><span class="n">${counts[c.name]}</span></div>
-    </button>`).join("") || '<div class="hint" style="font-size:12px;color:var(--text-30)">No champion matches that search.</div>';
+  renderSuggest(q, counts);
 
   document.getElementById("selected").innerHTML = selected.size
     ? [...selected].map(n => `<button type="button" class="pill" data-name="${esc(n)}">
         ${CHAMPS[n]?.icon ? `<img src="${esc(CHAMPS[n].icon)}" alt="">` : ""}${esc(n)}<span class="x">✕</span></button>`).join("")
       + '<button type="button" class="clear" id="clearAll">Clear</button>'
-    : '<span class="hint">Showing all openers. Click champions to filter — openers must include every champion you pick.</span>';
+    : '<span class="hint">Showing all openers. Search a champion to filter — openers must include every champion you add.</span>';
 
   document.getElementById("count").textContent =
     `${shown.length} of ${OPENERS.length} opener${OPENERS.length === 1 ? "" : "s"}`;
@@ -367,6 +355,23 @@ function render() {
     : '<div class="empty">No opener has all of those champions together. Remove one to see more.</div>';
 }
 
+let focusIdx = 0;
+function renderSuggest(q, counts) {
+  const box = document.getElementById("suggest");
+  if (!q) { box.hidden = true; searchEl.setAttribute("aria-expanded", "false"); return; }
+  const list = Object.values(CHAMPS)
+    .filter(c => counts[c.name] && !selected.has(c.name) && norm(c.name).includes(q))
+    .sort((a, b) => norm(a.name).indexOf(q) - norm(b.name).indexOf(q) || a.name.localeCompare(b.name));
+  focusIdx = Math.min(focusIdx, Math.max(list.length - 1, 0));
+  box.innerHTML = list.length ? list.map((c, i) => `
+    <button type="button" class="opt${i === focusIdx ? " focused" : ""}" role="option" data-name="${esc(c.name)}">
+      ${c.icon ? `<img class="cost-${esc(c.cost)}" src="${esc(c.icon)}" alt="">` : ""}
+      <span>${esc(c.name)}</span>${c.cost ? `<span class="n">${COIN}${esc(c.cost)} · ${counts[c.name]} opener${counts[c.name] > 1 ? "s" : ""}</span>` : ""}
+    </button>`).join("")
+    : '<div class="opt none">No opener uses that champion yet.</div>';
+  box.hidden = false; searchEl.setAttribute("aria-expanded", "true");
+}
+
 function toggle(name) {
   selected.has(name) ? selected.delete(name) : selected.add(name);
   writeUrl(); render();
@@ -374,14 +379,21 @@ function toggle(name) {
 
 document.addEventListener("click", e => {
   const b = e.target.closest("[data-name]");
-  if (b) { toggle(b.dataset.name); return; }
+  if (b) { toggle(b.dataset.name); searchEl.value = ""; focusIdx = 0; render(); searchEl.focus(); return; }
+  if (!e.target.closest(".search-wrap")) document.getElementById("suggest").hidden = true;
   if (e.target.id === "clearAll") { selected.clear(); writeUrl(); render(); }
 });
-searchEl.addEventListener("input", render);
+searchEl.addEventListener("input", () => { focusIdx = 0; render(); });
 searchEl.addEventListener("keydown", e => {
-  if (e.key !== "Enter") return;
-  const first = document.querySelector("#champGrid .champ");
-  if (first) { toggle(first.dataset.name); searchEl.value = ""; render(); }
+  const opts = [...document.querySelectorAll("#suggest .opt[data-name]")];
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+    e.preventDefault();
+    if (opts.length) { focusIdx = (focusIdx + (e.key === "ArrowDown" ? 1 : opts.length - 1)) % opts.length; render(); }
+  } else if (e.key === "Enter" && opts[focusIdx]) {
+    toggle(opts[focusIdx].dataset.name); searchEl.value = ""; focusIdx = 0; render();
+  } else if (e.key === "Escape") {
+    searchEl.value = ""; render();
+  }
 });
 
 Promise.all([
