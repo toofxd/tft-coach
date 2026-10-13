@@ -28,4 +28,4 @@ def crop_opener(img):
 
 if __name__ == "__main__":
     out = crop_opener(Image.open(sys.argv[1]))
-    out.save(sys.argv[2]); print(sys.argv[2], out.size)
+    out.save(sys.argv[2]); print(sys.argv[2], f"\"w\": {out.width}, \"h\": {out.height}")

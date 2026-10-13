@@ -220,15 +220,17 @@ a { color: inherit; }
 .cost-4 { border-color: #c440da !important; } .cost-5 { border-color: #ffb93b !important; }
 
 .count { font-size: 12px; color: var(--text-50); margin-bottom: 10px; }
-/* Crops differ in size — cards hug their image instead of stretching it */
-.openers { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+/* Masonry: cards are absolutely positioned by layoutOpeners() into ~330px columns,
+   each dropping into the shortest column; wide boards span two columns. */
+.openers { position: relative; }
 .opener {
-  flex: 0 0 auto; max-width: 100%; background: #111017;
-  border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  position: absolute; background: #111017; border: 1px solid var(--border); border-radius: 8px;
+  overflow: hidden; transition: top 0.2s, left 0.2s;
 }
 .opener a { display: block; }
-.opener img { display: block; max-width: 100%; height: auto; }
-.opener .meta { width: 0; min-width: 100%; padding: 8px 12px; display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; color: var(--text-70); }
+.opener img { display: block; width: 100%; height: auto; }
+.opener .meta { height: 30px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 7px 10px; font-size: 12px; color: var(--text-70); }
+.opener .meta span { margin-right: 10px; }
 .opener .meta strong { color: var(--gold-light); font-weight: 700; }
 .empty { font-size: 13px; color: var(--text-50); padding: 30px 0; text-align: center; }
 .disclaimer {
@@ -352,12 +354,44 @@ function render() {
   document.getElementById("count").textContent =
     `${shown.length} of ${OPENERS.length} opener${OPENERS.length === 1 ? "" : "s"}`;
   document.getElementById("openers").innerHTML = shown.length ? shown.map(o => `
-    <div class="opener">
-      <a href="${esc(o.img)}" target="_blank" rel="noopener"><img src="${esc(o.img)}" alt="${esc(o.champions.join(", "))}" loading="lazy"></a>
-      <div class="meta">${o.traits.map(([t, n]) => `<span><strong>${esc(n)}</strong> ${esc(t)}</span>`).join("")}</div>
+    <div class="opener" data-w="${+o.w || 0}" data-h="${+o.h || 0}">
+      <a href="${esc(o.img)}" target="_blank" rel="noopener"><img src="${esc(o.img)}" width="${+o.w || ""}" height="${+o.h || ""}" alt="${esc(o.champions.join(", "))}" loading="lazy"></a>
+      <div class="meta" title="${esc(o.traits.map(([t, n]) => n + " " + t).join(", "))}">${o.traits.map(([t, n]) => `<span><strong>${esc(n)}</strong> ${esc(t)}</span>`).join("")}</div>
     </div>`).join("")
     : '<div class="empty">No opener has all of those champions together. Remove one to see more.</div>';
+  layoutOpeners();
 }
+
+// ── Masonry ───────────────────────────────────────────────────────────
+const COL_W = 330, GAP = 10, META_H = 30, BORDER = 2;
+function layoutOpeners() {
+  const box = document.getElementById("openers");
+  const cards = [...box.querySelectorAll(".opener")];
+  if (!cards.length) { box.style.height = ""; return; }
+  const W = box.clientWidth;
+  const n = Math.max(1, Math.floor((W + GAP) / (COL_W + GAP)));
+  const colW = (W - GAP * (n - 1)) / n;
+  const heights = new Array(n).fill(0);
+  // Wide boards (e.g. a full-width Elderwood board) span 2 columns; place those first
+  const items = cards.map(c => {
+    const w = +c.dataset.w || colW, h = +c.dataset.h || colW;
+    return { c, w, h, span: n >= 2 && w > colW * 1.4 ? 2 : 1 };
+  }).sort((a, b) => b.span - a.span);
+  for (const it of items) {
+    // pick the start column whose span is lowest
+    let best = 0, bestTop = Infinity;
+    for (let i = 0; i + it.span <= n; i++) {
+      const top = Math.max(...heights.slice(i, i + it.span));
+      if (top < bestTop) { bestTop = top; best = i; }
+    }
+    const cardW = colW * it.span + GAP * (it.span - 1);
+    const cardH = (cardW - BORDER) * it.h / it.w + META_H + BORDER;
+    Object.assign(it.c.style, { left: `${best * (colW + GAP)}px`, top: `${bestTop}px`, width: `${cardW}px` });
+    for (let i = best; i < best + it.span; i++) heights[i] = bestTop + cardH + GAP;
+  }
+  box.style.height = `${Math.max(...heights) - GAP}px`;
+}
+window.addEventListener("resize", layoutOpeners);
 
 let focusIdx = 0;
 function renderSuggest(q, counts) {
