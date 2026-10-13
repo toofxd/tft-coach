@@ -232,6 +232,25 @@ a { color: inherit; }
 .opener .meta { height: 30px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 7px 10px; font-size: 12px; color: var(--text-70); }
 .opener .meta span { margin-right: 10px; }
 .opener .meta strong { color: var(--gold-light); font-weight: 700; }
+/* Comps-to-play box — floats next to the hovered card (cards clip their overflow) */
+.comp-tip {
+  position: absolute; z-index: 50; width: 280px; pointer-events: none;
+  background: rgba(7,24,48,0.97); border: 1px solid rgba(174,145,66,0.5); border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5); padding: 11px 12px; font-size: 12.5px; line-height: 1.45;
+  opacity: 0; transition: opacity 0.12s;
+}
+.comp-tip.show { opacity: 1; }
+.comp-tip .tt { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.comp-tip .row { display: flex; gap: 9px; align-items: flex-start; margin-bottom: 7px; }
+.comp-tip .tier {
+  width: 22px; height: 22px; border-radius: 5px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font: 900 13px/1 'Cinzel', serif; color: #0c2340;
+}
+.comp-tip .tier.S { background: #ff7f7f; } .comp-tip .tier.A { background: #ffbf7f; }
+.comp-tip .lbl { font-size: 10px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; }
+.comp-tip .list { color: var(--text-70); }
+.comp-tip .list.s { color: var(--text); font-weight: 600; }
+.comp-tip .src { font-size: 10px; color: var(--text-30); margin-top: 2px; }
 .empty { font-size: 13px; color: var(--text-50); padding: 30px 0; text-align: center; }
 .disclaimer {
   margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border);
@@ -354,13 +373,62 @@ function render() {
   document.getElementById("count").textContent =
     `${shown.length} of ${OPENERS.length} opener${OPENERS.length === 1 ? "" : "s"}`;
   document.getElementById("openers").innerHTML = shown.length ? shown.map(o => `
-    <div class="opener" data-w="${+o.w || 0}" data-h="${+o.h || 0}">
+    <div class="opener" data-w="${+o.w || 0}" data-h="${+o.h || 0}" data-i="${OPENERS.indexOf(o)}">
       <a href="${esc(o.img)}" target="_blank" rel="noopener"><img src="${esc(o.img)}" width="${+o.w || ""}" height="${+o.h || ""}" alt="${esc(o.champions.join(", "))}" loading="lazy"></a>
       <div class="meta" title="${esc(o.traits.map(([t, n]) => n + " " + t).join(", "))}">${o.traits.map(([t, n]) => `<span><strong>${esc(n)}</strong> ${esc(t)}</span>`).join("")}</div>
     </div>`).join("")
     : '<div class="empty">No opener has all of those champions together. Remove one to see more.</div>';
   layoutOpeners();
 }
+
+// ── Comps-to-play hover box ─────────────────────────────────────────────
+const tip = document.createElement("div");
+tip.className = "comp-tip";
+document.body.appendChild(tip);
+let tipFor = null;
+
+function tipHtml(o) {
+  const c = o.comps || { S: [], A: [] };
+  return `<div class="tt">${esc(o.name || "Opener")}</div>
+    <div class="row"><span class="tier S">S</span><div><div class="lbl">Direct comps to play</div>
+      <div class="list s">${c.S.length ? c.S.map(esc).join(", ") : "None — this board is flexible; pick from A"}</div></div></div>
+    ${c.A.length ? `<div class="row"><span class="tier A">A</span><div><div class="lbl">Also works</div>
+      <div class="list">${c.A.map(esc).join(", ")}</div></div></div>` : ""}
+    <div class="src">Comps: bunnymuffins.lol</div>`;
+}
+
+function showTip(card) {
+  const o = OPENERS[+card.dataset.i];
+  if (!o) return;
+  tipFor = card;
+  tip.innerHTML = tipHtml(o);
+  const r = card.getBoundingClientRect(), tw = 280, pad = 10;
+  const sx = window.scrollX, sy = window.scrollY, vw = document.documentElement.clientWidth;
+  // Prefer the right side of the card, then the left, else overlap its top edge
+  let left = r.right + pad;
+  if (left + tw > vw - pad) left = r.left - tw - pad;
+  if (left < pad) left = Math.min(Math.max(r.left, pad), vw - tw - pad);
+  tip.style.left = `${left + sx}px`;
+  tip.style.top = `${r.top + sy}px`;
+  tip.classList.add("show");
+}
+function hideTip() { tipFor = null; tip.classList.remove("show"); }
+
+const openersEl = document.getElementById("openers");
+openersEl.addEventListener("mouseover", e => {
+  const card = e.target.closest(".opener");
+  if (!card) hideTip();
+  else if (card !== tipFor) showTip(card);
+});
+openersEl.addEventListener("mouseleave", hideTip);
+// Touch screens have no hover: first tap on a board shows its comps, a second tap opens the image
+openersEl.addEventListener("click", e => {
+  if (!matchMedia("(hover: none)").matches) return;
+  const card = e.target.closest(".opener");
+  if (!card) return;
+  if (card !== tipFor) { e.preventDefault(); showTip(card); }
+});
+window.addEventListener("resize", hideTip);
 
 // ── Masonry ───────────────────────────────────────────────────────────
 const COL_W = 330, GAP = 10, META_H = 30, BORDER = 2;
@@ -416,6 +484,7 @@ function toggle(name) {
 }
 
 document.addEventListener("click", e => {
+  if (!e.target.closest(".opener")) hideTip();
   const b = e.target.closest("[data-name]");
   if (b) { toggle(b.dataset.name); searchEl.value = ""; focusIdx = 0; render(); searchEl.focus(); return; }
   if (!e.target.closest(".search-wrap")) document.getElementById("suggest").hidden = true;
