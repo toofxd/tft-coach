@@ -53,6 +53,13 @@ def fetch_cdragon_data():
     return set_data
 
 
+def cdragon_png(asset_path):
+    """cdragon asset path ("assets/.../x.tex") → public PNG URL, or None."""
+    if not asset_path:
+        return None
+    return "https://raw.communitydragon.org/latest/game/" + asset_path.lower().replace(".tex", ".png")
+
+
 # Component → numeric id used in item "from" arrays (matches EMBLEM_COMP_MAP in calculator.html)
 COMPONENT_IDS = {
     "BFSword": 1, "RecurveBow": 2, "NeedlesslyLargeRod": 3, "TearOfTheGoddess": 4,
@@ -233,6 +240,7 @@ def build_units(tactics_units, cdragon_champs, en_locale):
             "cost": cd.get("cost", 0),
             "traits": cd.get("traits", []),
             "cdId": cd.get("apiName", api_name),  # Riot match data uses this ID in Set 18
+            "icon": cdragon_png(cd.get("squareIcon")),  # shop-card art (splash tile)
             "role": role,
             "roleTag": role_tag(role),
             "stats": {
@@ -351,6 +359,7 @@ def build_traits(tactics_traits, cdragon_traits):
             "name": cd["name"],
             "apiName": api_name,
             "desc": render_trait_desc(cd),
+            "icon": cdragon_png(cd.get("icon")),
             "breakpoints": breakpoints,
         }
     return traits

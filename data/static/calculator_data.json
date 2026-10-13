@@ -8,6 +8,7 @@
         "Juggernaut"
       ],
       "cdId": "DA_Amumu18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_amumu/skins/base/images/tft18_amumu_splash_tile_17.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -63,6 +64,7 @@
         "Avatar"
       ],
       "cdId": "DA_18_Lux_Primal",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_lux/hud/splashes/t_18_lux_primal_teamplanner.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -101,6 +103,7 @@
         "Summoner"
       ],
       "cdId": "DA_18_Zyra",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_zyra/skins/base/images/tft18_zyra_splash_tile_0.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -157,6 +160,7 @@
         "Spellweaver"
       ],
       "cdId": "DA_18_Veigar",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_veigar/skins/base/images/tft18_veigar_splash_tile_13.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -213,6 +217,7 @@
         "Invoker"
       ],
       "cdId": "DA_KogMaw18_AD",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_kogmaw/skins/base/images/tft18_kogmaw_splash_tile_3.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -268,6 +273,7 @@
         "Defender"
       ],
       "cdId": "DA_18_Shen",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_shen/skins/base/images/tft18_shen_splash_tile_16.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -323,6 +329,7 @@
         "Avatar"
       ],
       "cdId": "DA_18_Lux_Elderwood",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_lux/hud/splashes/t_18_lux_elderwood_teamplanner.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -361,6 +368,7 @@
         "Brawler"
       ],
       "cdId": "DA_18_Alistar",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_alistar/skins/base/images/tft18_alistar_splash_tile_40.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -416,6 +424,7 @@
         "Avatar"
       ],
       "cdId": "DA_18_Lux_Fae",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_lux/hud/splashes/t_18_lux_fae_teamplanner.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -455,6 +464,7 @@
         "Invoker"
       ],
       "cdId": "DA_Sentinel18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_sentinel/skins/base/images/t_18_sentinel_teamplannersplash.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -510,6 +520,7 @@
         "Vanguard"
       ],
       "cdId": "DA_18_Hecarim",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_hecarim/skins/base/images/tft18_hecarim_splash_tile_5.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -565,6 +576,7 @@
         "Riftbeast"
       ],
       "cdId": "DA_18_ElderDragon",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_elderdragon/skins/base/images/t_18_elderdragon_teamplannersplash.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -620,6 +632,7 @@
         "Rapidfire"
       ],
       "cdId": "DA_18_Aphelios",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_aphelios/skins/base/images/tft18_aphelios_splash_tile_0.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -675,6 +688,7 @@
         "Rapidfire"
       ],
       "cdId": "DA_18_Kayle",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_kayle/skins/base/images/tft18_kayle_splash_tile_42.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -731,6 +745,7 @@
         "Hunter"
       ],
       "cdId": "DA_18_Tristana",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_tristana/skins/base/images/tft18_tristana_splash_tile_61.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -786,6 +801,7 @@
         "Brawler"
       ],
       "cdId": "DA_18_Kobuko",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_kobuko/skins/base/images/tft18_kobuko_splash_tile_2.png",
       "role": "APTank",
       "roleTag": {
         "label": "AP Tank",
@@ -824,6 +840,7 @@
         "Hunter"
       ],
       "cdId": "DA_18_Ashe",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_ashe/skins/base/images/tft18_ashe_splash_tile_76.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -879,6 +896,7 @@
         "Defender"
       ],
       "cdId": "DA_18_Rammus",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_rammus/skins/base/images/tft18_rammus_splash_tile_26.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -934,6 +952,7 @@
         "Avatar"
       ],
       "cdId": "DA_Lux18_Blossom",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_lux/hud/splashes/t_18_lux_blossom_teamplanner.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -972,6 +991,7 @@
         "Juggernaut"
       ],
       "cdId": "DA_18_Maokai",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_maokai/skins/base/images/tft18_maokai_splash_tile_0.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1027,6 +1047,7 @@
         "Brawler"
       ],
       "cdId": "DA_Krug18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_krug/skins/base/images/t_18_krug_teamplannersplash.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1082,6 +1103,7 @@
         "Ravager"
       ],
       "cdId": "DA_Brambleback18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_brambleback/skins/base/images/t_18_brambleback_teamplannersplash.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1137,6 +1159,7 @@
         "Adaptor"
       ],
       "cdId": "DA_Gromp18_AP",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_gromp/skins/base/images/t_18_gromp_teamplannersplash.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1192,6 +1215,7 @@
         "Rapidfire"
       ],
       "cdId": "DA_18_Varus",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_varus/skins/base/images/tft18_varus_splash_tile_9.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1247,6 +1271,7 @@
         "Spellweaver"
       ],
       "cdId": "DA_Karma18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_karma/skins/base/images/tft18_karma_splash_tile_70.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1303,6 +1328,7 @@
         "Summoner"
       ],
       "cdId": "DA_18_Azir",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_azir/skins/base/images/tft18_azir_splash_tile_5.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1358,6 +1384,7 @@
         "Hunter"
       ],
       "cdId": "DA_18_Caitlyn",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_caitlyn/skins/base/images/tft18_caitlyn_splash_tile_30.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1414,6 +1441,7 @@
         "Brawler"
       ],
       "cdId": "DA_18_GnarSmall",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_gnar/skins/base/images/tft18_gnar_splash_tile_0.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1468,6 +1496,7 @@
         "Rival"
       ],
       "cdId": "DA_18_KhaZix",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_khazix/skins/base/images/tft18_khazix_splash_tile_0.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1524,6 +1553,7 @@
         "Rapidfire"
       ],
       "cdId": "DA_CrimsonRaptor18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_raptor/skins/base/images/t_18_crimsonraptor_teamplannersplash.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1562,6 +1592,7 @@
         "Vanguard"
       ],
       "cdId": "DA_18_Elise",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_elise/skins/base/images/tft18_elise_splash_tile_24.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1617,6 +1648,7 @@
         "Executioner"
       ],
       "cdId": "DA_18_Kennen",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_kennen/skins/base/images/tft18_kennen_splash_tile_8.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1672,6 +1704,7 @@
         "Avatar"
       ],
       "cdId": "DA_18_Lux_Coven",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_lux/hud/splashes/t_18_lux_coven_teamplanner.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1710,6 +1743,7 @@
         "Juggernaut"
       ],
       "cdId": "DA_18_Sejuani",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_sejuani/skins/base/images/tft18_sejuani_splash_tile_26.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1765,6 +1799,7 @@
         "Juggernaut"
       ],
       "cdId": "DA_Scuttlecrab18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_scuttlecrab/skins/base/images/t_18_scuttlecrab_teamplannersplash.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1820,6 +1855,7 @@
         "Ravager"
       ],
       "cdId": "DA_18_Camille",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_camille/skins/base/images/tft18_camille_splash_tile_2.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1875,6 +1911,7 @@
         "Executioner"
       ],
       "cdId": "DA_18_Soraka",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_soraka/skins/base/images/tft18_soraka_splash_tile_53.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1930,6 +1967,7 @@
         "Hunter"
       ],
       "cdId": "DA_Cinderling18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_cinderling/skins/base/images/t_18_cinderling_teamplannersplash.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -1985,6 +2023,7 @@
         "Defender"
       ],
       "cdId": "DA_18_Lillia",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_lillia/skins/base/images/tft18_lillia_splash_tile_28.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2041,6 +2080,7 @@
         "Spellweaver"
       ],
       "cdId": "DA_18_Alune",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_alune/skins/base/images/tft18_alune_splash_tile_15.png",
       "role": "APCaster",
       "roleTag": {
         "label": "AP Caster",
@@ -2089,6 +2129,7 @@
         "Rapidfire"
       ],
       "cdId": "DA_18_Xayah",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_xayah/skins/base/images/tft18_xayah_splash_tile_8.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2144,6 +2185,7 @@
         "Vanguard"
       ],
       "cdId": "DA_Taric18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_taric/skins/base/images/tft18_taric_splash_tile_1.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2199,6 +2241,7 @@
         "Brawler"
       ],
       "cdId": "DA_18_Sett",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_sett/skins/base/images/tft18_sett_splash_tile_38.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2254,6 +2297,7 @@
         "Brawler"
       ],
       "cdId": "DA_18_RekSai",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_reksai/skins/base/images/tft18_reksai_splash_tile_17.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2308,6 +2352,7 @@
         "Bounty Seeker"
       ],
       "cdId": "DA_Draven18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_draven/skins/base/images/tft18_draven_splash_tile_5.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2363,6 +2408,7 @@
         "Adaptor"
       ],
       "cdId": "DA_Nidalee18_AP",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_nidalee/skins/base/images/tft18_nidalee_splash_tile_0.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2417,6 +2463,7 @@
         "Greenfather"
       ],
       "cdId": "DA_18_Ivern",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_ivern/skins/base/images/tft18_ivern_splash_tile_0.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2471,6 +2518,7 @@
         "Rival"
       ],
       "cdId": "DA_18_Rengar",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_rengar/skins/base/images/tft18_rengar_splash_tile_0.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2526,6 +2574,7 @@
         "Avatar"
       ],
       "cdId": "DA_18_Lux_Sunbeam",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_lux/hud/splashes/t_18_lux_sunbeam_teamplanner.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2563,6 +2612,7 @@
         "Avatar"
       ],
       "cdId": "DA_Lux18_Base",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_lux/skins/base/images/tft18_lux_splash_tile_7.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2601,6 +2651,7 @@
         "Avatar"
       ],
       "cdId": "DA_Lux18_Blackthorn",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_lux/hud/splashes/t_18_lux_blackthorn_teamplanner.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2640,6 +2691,7 @@
         "Ravager"
       ],
       "cdId": "DA_18_Akali_AD",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_akali/skins/base/images/tft18_akali_splash_tile_2.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2695,6 +2747,7 @@
         "Defender"
       ],
       "cdId": "DA_18_Leona",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_leona/skins/base/images/tft18_leona_splash_tile_10.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2750,6 +2803,7 @@
         "Ravager"
       ],
       "cdId": "DA_18_Warwick",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_warwick/skins/base/images/tft18_warwick_splash_tile_35.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2806,6 +2860,7 @@
         "Vanguard"
       ],
       "cdId": "DA_18_Diana",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_diana/skins/base/images/tft18_diana_splash_tile_0.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2861,6 +2916,7 @@
         "Spellweaver"
       ],
       "cdId": "DA_18_Cassiopeia",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_cassiopeia/skins/base/images/tft18_cassiopeia_splash_tile_18.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2916,6 +2972,7 @@
         "Avatar"
       ],
       "cdId": "DA_18_Lux_Inferno",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_lux/hud/splashes/t_18_lux_inferno_teamplanner.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -2955,6 +3012,7 @@
         "Vanguard"
       ],
       "cdId": "DA_18_Rakan",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_rakan/skins/base/images/tft18_rakan_splash_tile_9.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3010,6 +3068,7 @@
         "Invoker"
       ],
       "cdId": "DA_18_Teemo",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_teemo/skins/base/images/tft18_teemo_splash_tile_0.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3065,6 +3124,7 @@
         "Ravager"
       ],
       "cdId": "DA_Murkwolf18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_murkwolf/skins/base/images/t_18_murkwolf_teamplannersplash.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3121,6 +3181,7 @@
         "Summoner"
       ],
       "cdId": "DA_18_Yorick",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_yorick/skins/base/images/tft18_yorick_splash_tile_30.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3176,6 +3237,7 @@
         "Invoker"
       ],
       "cdId": "DA_18_Sentry",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_sentry/skins/base/images/t_18_sentry_teamplannersplash.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3214,6 +3276,7 @@
         "Hunter"
       ],
       "cdId": "DA_18_Sivir",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_sivir/skins/base/images/tft18_sivir_splash_tile_61.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3269,6 +3332,7 @@
         "Executioner"
       ],
       "cdId": "DA_18_Ezreal",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_ezreal/skins/base/images/tft18_ezreal_splash_tile_1.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3324,6 +3388,7 @@
         "Executioner"
       ],
       "cdId": "DA_18_Yunara",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_yunara/skins/base/images/tft18_yunara_splash_tile_0.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3379,6 +3444,7 @@
         "Spellweaver"
       ],
       "cdId": "DA_18_LeBlanc",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_leblanc/skins/base/images/tft18_leblanc_splash_tile_5.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3434,6 +3500,7 @@
         "Defender"
       ],
       "cdId": "DA_18_Ornn",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_ornn/skins/base/images/tft18_ornn_splash_tile_2.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3490,6 +3557,7 @@
         "Spellweaver"
       ],
       "cdId": "DA_Fiddlesticks18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_fiddlesticks/skins/base/images/tft18_fiddlesticks_splash_tile_46.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3545,6 +3613,7 @@
         "Juggernaut"
       ],
       "cdId": "DA_Vi18",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_vi/skins/base/images/tft18_vi_splash_tile_39.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3600,6 +3669,7 @@
         "Monolith"
       ],
       "cdId": "DA_18_Malphite",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_malphite/skins/base/images/tft18_malphite_splash_tile_27.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3655,6 +3725,7 @@
         "Invoker"
       ],
       "cdId": "DA_18_Morgana",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_morgana/skins/base/images/tft18_morgana_splash_tile_26.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3710,6 +3781,7 @@
         "Avatar"
       ],
       "cdId": "DA_18_Lux_Moonbeam",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_lux/hud/splashes/t_18_lux_moonbeam_teamplanner.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3748,6 +3820,7 @@
         "Adaptor"
       ],
       "cdId": "DA_18_MasterYi_AD",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_masteryi/skins/base/images/tft18_masteryi_splash_tile_52.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3803,6 +3876,7 @@
         "Spellweaver"
       ],
       "cdId": "DA_18_Ahri",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_ahri/skins/base/images/tft18_ahri_splash_tile_27.png",
       "role": "",
       "roleTag": {
         "label": "",
@@ -3856,6 +3930,7 @@
       "name": "Bounty Seeker",
       "apiName": "DA_DravenUniqueTrait18",
       "desc": "Choose a bounty. Your strongest Draven can progress on the bounty to earn its reward. Upon completing a bounty, choose another.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_bountyseeker.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -3870,6 +3945,7 @@
       "name": "Emerald Aspect",
       "apiName": "DA_Emerald18",
       "desc": "Drag an ally onto your strongest Taric to pair them, granting the ally powerful bonuses from Taric's Ability.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_emeraldaspect.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -3884,6 +3960,7 @@
       "name": "Old Growth",
       "apiName": "DA_18_Maokai_UniqueTrait",
       "desc": "Whenever an enemy within X hexes dies, your strongest Old Growth champion gains X permanent max Health. Current: 0",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_oldgrowth.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -3901,6 +3978,7 @@
       "name": "Coven",
       "apiName": "DA_18_Coven",
       "desc": "Gather Essence by killing champions, plus more by losing player combat. Beginning at X Essence, choose to convert Essence to rewards or continue gathering Essence. Each reward requires increasing amounts of Essence. (3) X Essence per kill, X Essence per loss (4) X per kill, X per loss (5) X per kill, X per loss (7) X per kill, X per loss",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_coven.png",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -3952,6 +4030,7 @@
       "name": "Invoker",
       "apiName": "DA_18_Invoker",
       "desc": "Your team gains Mana Regen, increased for Invokers. (2) 1 | X (3) 1 | X (4) 2 | X (5) 2 | X",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_invoker.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -3999,6 +4078,7 @@
       "name": "Riftbeast",
       "apiName": "DA_Riftbeast18",
       "desc": "(3) Use the Alpha Mark to grant a Riftbeast their unique Buff (5) Every X combats, your next shop is overrun with Riftbeasts. (7) On combat start and every 5 seconds Riftbeasts grow gaining X% AD X% AP X% Attack Speed +X Armor +X MR +X Health +X (10) +2 maximum team size",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_riftbeast.png",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -4046,6 +4126,7 @@
       "name": "Greenfather",
       "apiName": "DA_18_Greenfather",
       "desc": "Gain X seed when your strongest Ivern casts, plus X every combat. Ivern uses X seeds to grow a hex on your board that grants a bonus to its occupant. Seeds: 0 / X Current Biome:",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_greenfather.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4064,6 +4145,7 @@
       "name": "Spellweaver",
       "apiName": "DA_18_Spellweaver",
       "desc": "Your team gains 10% Ability Power. Spellweavers gain more, plus extra Ability Power whenever a Spellweaver casts an Ability. (2) X% AP, +1% AP per cast (4) X% AP, +1% AP per cast (6) X% AP, +2% AP per cast",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_spellweaver.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4104,6 +4186,7 @@
       "name": "Rival",
       "apiName": "DA_18_Rival",
       "desc": "(1) Only active while fielding 1 Rival. Rivals collect takedowns, gaining 3 if they takedown another Rival. (1) Rivals collect takedowns, gaining 3 if they takedown another Rival. Takedowns evolve Kha'Zix, permanently granting him your choice of Executioner, Rapidfire, Ravager, or Spellweaver. Rengar grants X/X/X gold every X takedowns. After X takedowns, your team gains X% Attack Damage plus X% AD per additional takedown. Kha'Zix Takedowns: 0 / 0 Rengar Takedowns: 0 Gold Earned: 0 (2) Rivals can be fielded together, and their abilities grant each other bonuses.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_rival.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4140,6 +4223,7 @@
       "name": "Thornmaiden",
       "apiName": "DA_18_ZyraUniqueTrait",
       "desc": "Your team gains 5% Durability, increased to X% if X or more Zyra plants are alive.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_zyraorigin.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4158,6 +4242,7 @@
       "name": "Ravager",
       "apiName": "DA_18_Slayer",
       "desc": "Ravagers gain 10% Omnivamp. Additionally, Ravagers deal bonus damage, doubled against units below X% Health. (2) X% Bonus Damage (4) X% Bonus Damage (6) X% Bonus Damage",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_ravager.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4198,6 +4283,7 @@
       "name": "Summoner",
       "apiName": "DA_18_Summoner",
       "desc": "Summoners empower their summons in different ways. Yorick: +X% Health Azir: +X% Damage Mama Beak: +45% Damage Zyra: +X Plant Attacks (2) Empower Summons (3) Improve each effect by 50%",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_summoner.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4229,6 +4315,7 @@
       "name": "Lunar",
       "apiName": "DA_18_Lunar",
       "desc": "Lunar champions and adjacent allies gain Attack Speed and Ability Power. Lunar champions gain X% more. (2) 7% Attack Speed, 7% AP (3) 12% Attack Speed, 10% AP (4) 16% Attack Speed, 14% AP (5) 20% Attack Speed, 18% AP",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_lunar.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4288,6 +4375,7 @@
       "name": "Elderwood",
       "apiName": "DA_18_Elderwood",
       "desc": "Gain placeable Elderwood plants. (3) A Stonebark Tree and a Lifebloom (5) A second Stonebark Tree and Stonebark Trees gain X Health (7) and the Deepwood Protector (9) Plants star up to 2-star (11) Plants star up to 3-star and the forest comes to life",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_elderwood.png",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -4346,6 +4434,7 @@
       "name": "Hunter",
       "apiName": "DA_18_Hunter",
       "desc": "Hunters gain Attack Damage. If a Hunter hasn't swapped targets for X seconds, they gain 10% Damage Amp. (2) X% AD (3) X% AD (4) X% AD (5) X% AD",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_hunter.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4397,6 +4486,7 @@
       "name": "Apex Predator",
       "apiName": "DA_18_ApexPredator",
       "desc": "Elder Dragon takes up 2 team slots and grants +2 to the Riftbeast trait.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_apexpredator.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4411,6 +4501,7 @@
       "name": "Brawler",
       "apiName": "DA_18_Brawler",
       "desc": "Your team gains X max Health. Brawlers gain more. (2) X% Health (4) X% Health (6) X% Health",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_brawler.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4448,6 +4539,7 @@
       "name": "Primal",
       "apiName": "DA_Primal18",
       "desc": "Choose one of four Primal Blessings. (2) (4)",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_primal.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4469,6 +4561,7 @@
       "name": "Attuned",
       "apiName": "DA_AluneUniqueTrait18",
       "desc": "Your strongest Alune cycles to a new phase of the moon after each cast. While the moon is at or below half full, your team gains 7% Durabilty. While above, your team gains 7% Damage Amp.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_attuned.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4486,6 +4579,7 @@
       "name": "Rapidfire",
       "apiName": "DA_18_Rapidfire",
       "desc": "Your team gains X% Attack Speed. Rapidfire champions gain more on every attack, up to 10 stacks. (2) +X% Attack Speed per Attack (3) +X% Attack Speed per Attack (4) +X% Attack Speed per Attack (5) +X% Attack Speed per Attack",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_rapidfire.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4537,6 +4631,7 @@
       "name": "Adaptor",
       "apiName": "DA_18_Adaptor",
       "desc": "Innate: Adaptor abilities change depending on if their Attack Damage or Ability Power is higher. Adaptors gain Ability Power or Attack Damage, depending on which is higher. (2) X% OR (3) X% OR (4) X% OR",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_adaptor.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4571,6 +4666,7 @@
       "name": "Flora Fatalis",
       "apiName": "DA_FloraFatalis18",
       "desc": "Flora Fatalis champions harvest enemies on takedown, gaining: (1) 10 Mana (2) and grant a 8% max Health heal to the lowest Health ally.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_florafatalis.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4596,6 +4692,7 @@
       "name": "Blackthorn",
       "apiName": "DA_18_Blackthorn",
       "desc": "The ally on the Blackthorn hex is sacrificed before combat, granting your champions Health. Blackthorn champions gain additional stats based on the sacrifice's Role, Star Level, and Cost. (2) 175 Health (4) 350 Health; Bonus is 30% stronger (6) 600 Health; Bonus is 60% stronger",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_oldgod.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4638,6 +4735,7 @@
       "name": "Executioner",
       "apiName": "DA_18_Executioner",
       "desc": "(2) Executioners gain Precision and 15% Critical Strike Chance. (3) Additionally, enemies bleed for X% bonus true damage over 3 seconds. (4) Bleed damage increased to X%.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_executioner.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4673,6 +4771,7 @@
       "name": "Solar",
       "apiName": "DA_18_Solar",
       "desc": "(3) Your champions gain a 5% max Health shield and deal 8% bonus magic damage. Gain additional bonuses for each unique 3-star champion: 1 : Increase shield and magic damage by X% for each 3-star. X : X% Attack Speed and X ArmorMR X : Convert X% of the bonus magic damage to true damage. X : Every X seconds of combat, a 3-star champion ascends to 4-star.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_solar.png",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -4698,6 +4797,7 @@
       "name": "Monolith",
       "apiName": "DA_18_Battlemage",
       "desc": "Monoliths gain 10 Armor and Magic Resist for each enemy targeting them.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_monolith.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4714,6 +4814,7 @@
       "name": "Avatar",
       "apiName": "DA_18_LuxUniqueTrait",
       "desc": "Having an Avatar on your bench or board transforms all other Avatars in your shop to the Trait of that Avatar. An Avatar's chosen Trait is counted twice for Trait bonuses.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_avatar.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4728,6 +4829,7 @@
       "name": "Caustic",
       "apiName": "DA_18_Caustic",
       "desc": "Caustic damage 30% Shreds and Sunders enemies for 4 seconds. Shred: Reduce Magic Resist Sunder: Reduce Armor",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_caustic.png",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4745,6 +4847,7 @@
       "name": "Defender",
       "apiName": "DA_18_Defender",
       "desc": "Your team gains X Armor and Magic Resist. Defenders gain more. (2) X (4) X (6) X",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_defender.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4782,6 +4885,7 @@
       "name": "Sprykin",
       "apiName": "DA_18_Sprykin",
       "desc": "Gain the Big Furry Friend. Drop a Sprykin on the BFF to pick its Rider. (3) The Rider gains 15% Health and 15% Attack Speed (5) 40% Health 35% Attack Speed, and X% of the BFF's Ability applies to your Sprykin champions. (7) 45% Health 45% Attack Speed, and X% of the BFF's Ability applies to your Sprykin champions.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_sprykin.png",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -4821,6 +4925,7 @@
       "name": "Fae",
       "apiName": "DA_18_Fae",
       "desc": "Your team's damage, healing, and shielding attracts Pixies. Each Pixie grants Fae champions Attack Damage and Ability Power, and after they fall below 50% Health, they heal for each Pixie. (2) 4.5% and 2.5% Heal. (4) 7% and 4% Heal. After attracting 7 Pixies, start attracting Golden Pixies instead which grant gold.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_fae.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4850,6 +4955,7 @@
       "name": "Vanguard",
       "apiName": "DA_18_Vanguard",
       "desc": "At Combat Start and after dropping below 50% Health, Vanguards gain a max Health Shield for 10 seconds. (2) 18% max Health (4) 30% max Health (6) 40% max Health. Gain X% Durability while Shielded.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_vanguard.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4891,6 +4997,7 @@
       "name": "Inferno",
       "apiName": "DA_18_Inferno",
       "desc": "Inferno damage Burns and Wounds enemies for 3 seconds. Inferno Burns stack with other Burns. (2) X% Burn, 33% Wound (3) After combat, X of your shop slots without an Inferno champion ignites, rolling a champion one tier higher (5) Ignite X shop slots, X% Burn (7) Ignite X shop slots, X% Burn",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_inferno.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4941,6 +5048,7 @@
       "name": "Blossom",
       "apiName": "DA_18_Blossom",
       "desc": "After combat, your Wisps are empowered. Blossom champions gain Attack Damage, Ability Power, and 10% max Health. (3) Wisps are upgraded, 12% ADAP (5) Wisps are in every shop, 30% ADAP (7) Gain X gold after buying a Wisp, 50% ADAP (9) You can buy 2 Wisps per round, 55% ADAP (11) Wisps overflow with power, 100% ADAP",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_blossom.png",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -5009,6 +5117,7 @@
       "name": "Juggernaut",
       "apiName": "DA_Juggernaut18",
       "desc": "Your team gains Durability. Juggernauts gain more. (2) X% or X% (4) X% or X% (6) X% or X%",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_juggernaut.png",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -5046,6 +5155,7 @@
       "name": "Eclipse",
       "apiName": "DA_18_Eclipse",
       "desc": "After 8 seconds of combat, the Eclipse kills the lowest Health enemy, repeating every X seconds.",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_eclipse.png",
       "breakpoints": [
         {
           "minUnits": null,

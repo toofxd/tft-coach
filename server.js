@@ -994,6 +994,14 @@ app.get("/api/meta-insights", (req, res) => {
 // GET /api/trait-stats — every current-set trait with its units, breakpoints, description,
 // and how often pros finished top 4 when it was their main (top_trait) trait.
 // Built once at startup from calculator_data.json + the pro match CSV.
+const COMPONENT_KEYS = { 1: "BFSword", 2: "RecurveBow", 3: "NeedlesslyLargeRod", 4: "TearOfTheGoddess",
+  5: "ChainVest", 6: "NegatronCloak", 7: "GiantsBelt", 8: "SparringGloves", 9: "Spatula", 10: "FryingPan" };
+// Components aren't in calculator_data, so name them here
+const COMPONENT_NAMES = { BFSword: "B.F. Sword", RecurveBow: "Recurve Bow", NeedlesslyLargeRod: "Rod",
+  TearOfTheGoddess: "Tear", ChainVest: "Chain Vest", NegatronCloak: "Negatron Cloak", GiantsBelt: "Giant's Belt",
+  SparringGloves: "Sparring Gloves", Spatula: "Spatula", FryingPan: "Frying Pan" };
+const itemIcon = key => calcData?.items?.[key]?.icon || `https://ap.tft.tools/img/items_s14/${key}.png`;
+
 const traitStats = (() => {
   if (!calcData) return [];
   const byTrait = {};
@@ -1004,24 +1012,45 @@ const traitStats = (() => {
   // Lux forms are one champion; list base Lux only
   const units = Object.entries(calcData.units)
     .filter(([k, u]) => u.cost > 0 && u.traits?.length && !(/_Lux_/.test(k) && !k.endsWith("_Lux_Base")));
+  const emblems = {};
+  for (const [key, it] of Object.entries(calcData.items)) {
+    if ((it.tags || []).some(t => t === "Emblem" || t === "CraftableEmblem")) emblems[it.name] = { key, ...it };
+  }
   return Object.entries(calcData.traits).map(([apiName, t]) => {
     const s = byTrait[apiName] || { games: 0, top4: 0 };
+    const em = emblems[`${t.name} Emblem`];
     return {
       apiName,
       name: t.name,
+      icon: t.icon || null,
       desc: t.desc || "",
       breakpoints: t.breakpoints.map(b => b.minUnits).filter(n => n != null),
       units: units.filter(([, u]) => u.traits.includes(t.name))
-        .map(([key, u]) => ({ key, name: u.name, cost: u.cost }))
+        .map(([key, u]) => ({ key, name: u.name, cost: u.cost, icon: u.icon || null }))
         .sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name)),
+      emblem: em ? {
+        name: em.name,
+        icon: em.icon || null,
+        craftable: (em.tags || []).includes("CraftableEmblem"),
+        from: (em.from || []).map(n => COMPONENT_KEYS[n]).filter(Boolean)
+          .map(k => ({ key: k, name: COMPONENT_NAMES[k] || k, icon: itemIcon(k) })),
+      } : null,
       games: s.games,
       top4Rate: s.games ? s.top4 / s.games : null,
+      // 95% lower bound — ranks a 76% rate over 300 games below a 62% rate over 3,000
+      score: s.games ? wilsonLower(s.top4 / s.games, s.games) : null,
     };
   });
 })();
 
+// Lux's forms (Avatar): which trait each form carries
+const avatarForms = calcData
+  ? Object.entries(calcData.units).filter(([k]) => /_Lux_/.test(k) && !k.endsWith("_Lux_Base"))
+      .map(([, u]) => u.traits.find(t => t !== "Avatar")).filter(Boolean)
+  : [];
+
 app.get("/api/trait-stats", (_req, res) => {
-  res.json({ set: CURRENT_SET, totalGames: matchFeatures.length, traits: traitStats });
+  res.json({ set: CURRENT_SET, totalGames: matchFeatures.length, traits: traitStats, avatarForms });
 });
 
 // GET /api/item-recs?unitId=TFT18_Caitlyn

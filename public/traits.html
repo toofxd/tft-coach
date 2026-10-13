@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TFT Set 18 — Trait Cheat Sheet</title>
+<title>TFT Set 18 — Trait Tier List</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
@@ -184,29 +184,48 @@ a { color: inherit; }
 .page-title { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: 0.01em; }
 .page-sub { font-size: 12px; color: var(--text-30); }
 
-/* ── Trait cheat sheet ─────────────────────────────────────────── */
+/* ── Trait tier list ───────────────────────────────────────────── */
 .how-to {
   font-size: 13px; color: var(--text-70); line-height: 1.6;
   background: var(--navy-card); border: 1px solid var(--border); border-radius: 8px;
-  padding: 12px 14px; margin-bottom: 22px;
+  padding: 12px 14px; margin-bottom: 14px;
 }
 .how-to strong { color: var(--text); }
-.section { margin-bottom: 28px; }
-.section-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-.section-sub { font-size: 12px; color: var(--text-50); margin-bottom: 12px; }
-.sec-good  .section-title { color: #6fcf8a; }
-.sec-maybe .section-title { color: #8fb8e8; }
-.sec-trap  .section-title { color: #e07a7a; }
+.toolbar { display: flex; justify-content: flex-end; margin-bottom: 14px; }
+.btn {
+  font: 600 12px/1 inherit; font-family: inherit; color: var(--gold-light); cursor: pointer;
+  background: rgba(174,145,66,0.10); border: 1px solid rgba(174,145,66,0.35);
+  border-radius: 6px; padding: 8px 12px;
+}
+.btn:hover { background: rgba(174,145,66,0.2); }
+
+.tier { margin-bottom: 30px; }
+.tier-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.tier-letter {
+  width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font: 900 22px/1 'Cinzel', serif; color: #0c2340; flex-shrink: 0;
+}
+.tier-name { font-size: 15px; font-weight: 700; }
+.tier-sub { font-size: 12px; color: var(--text-50); }
+.tier-S .tier-letter { background: #ff7f7f; } .tier-S .trait-card { border-left: 3px solid #ff7f7f; }
+.tier-A .tier-letter { background: #ffbf7f; } .tier-A .trait-card { border-left: 3px solid #ffbf7f; }
+.tier-B .tier-letter { background: #ffdf7f; } .tier-B .trait-card { border-left: 3px solid #ffdf7f; }
+.tier-C .tier-letter { background: #bfbfbf; } .tier-C .trait-card { border-left: 3px solid #8a8a8a; }
+
 .trait-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 10px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 10px;
+  align-items: start;
 }
 .trait-card {
   background: var(--navy-card); border: 1px solid var(--border); border-radius: 8px;
-  padding: 12px 14px; display: flex; flex-direction: column; gap: 7px;
+  padding: 12px 14px; display: flex; flex-direction: column; gap: 9px;
 }
-.sec-good .trait-card { border-left: 3px solid #6fcf8a; }
-.sec-trap .trait-card { border-left: 3px solid #e07a7a; }
 .trait-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.trait-title { display: flex; align-items: center; gap: 8px; }
+.trait-icon {
+  width: 26px; height: 26px; padding: 3px; border-radius: 6px; flex-shrink: 0;
+  background: #1c1c1c; border: 1px solid rgba(255,255,255,0.15);
+}
 .trait-name { font-size: 15px; font-weight: 700; }
 .badge {
   font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap;
@@ -216,20 +235,47 @@ a { color: inherit; }
 .badge.bad  { background: rgba(224,122,122,0.15); color: #e07a7a; }
 .badge-wrap { text-align: right; }
 .games { font-size: 11px; color: var(--text-30); margin-top: 2px; }
+.small-sample { color: #e0c878; }
 .bps { display: flex; gap: 4px; flex-wrap: wrap; }
 .bp {
   font-size: 11px; font-weight: 700; color: var(--gold-light);
   border: 1px solid rgba(174,145,66,0.35); border-radius: 4px; padding: 1px 6px;
 }
 .blurb { font-size: 13px; color: var(--text); line-height: 1.5; }
-.units { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; color: var(--text-70); }
-.unit { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
-.coin-cell { display: inline-flex; align-items: center; gap: 2px; color: var(--text-50); }
-.coin { width: 12px; height: 12px; }
-details { font-size: 12px; color: var(--text-50); line-height: 1.55; }
+.extra { list-style: none; font-size: 12px; color: var(--text-70); line-height: 1.55; }
+.extra li { padding-left: 12px; position: relative; margin-bottom: 3px; }
+.extra li::before { content: '•'; position: absolute; left: 0; color: var(--gold); }
+.extra strong { color: var(--text); }
+
+.emblem {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  font-size: 12px; color: var(--text-70);
+}
+.emblem img { width: 22px; height: 22px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.12); }
+.emblem .lbl { font-size: 10px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; }
+.emblem .muted { color: var(--text-30); }
+
+.champs { display: flex; flex-wrap: wrap; gap: 6px; }
+.champ {
+  width: 76px; border-radius: 6px; overflow: hidden; background: var(--navy-deep);
+  border: 2px solid #808080; display: flex; flex-direction: column;
+}
+.champ > img { width: 100%; height: 46px; object-fit: cover; object-position: 50% 20%; display: block; }
+.champ .cap {
+  display: flex; justify-content: space-between; align-items: center; gap: 2px;
+  padding: 3px 4px; font-size: 10.5px; font-weight: 600; color: var(--text);
+}
+.champ .cap .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.coin-cell { display: inline-flex; align-items: center; gap: 1px; color: var(--text-70); flex-shrink: 0; }
+.coin { width: 11px; height: 11px; }
+.cost-1 { border-color: #9b9b9b; } .cost-2 { border-color: #11b288; } .cost-3 { border-color: #207ac7; }
+.cost-4 { border-color: #c440da; } .cost-5 { border-color: #ffb93b; }
+
+details { font-size: 12px; color: var(--text-50); line-height: 1.6; }
 details summary { cursor: pointer; color: var(--text-30); font-size: 11px; }
 details summary:hover { color: var(--text-70); }
-details p { margin-top: 6px; }
+details .desc { margin-top: 6px; }
+details .desc div { margin-bottom: 3px; }
 .disclaimer {
   margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border);
   text-align: center; font-size: 11px; color: var(--text-30); line-height: 1.7;
@@ -252,7 +298,7 @@ details p { margin-top: 6px; }
       <a href="/about.html" class="tab-btn">About</a>
       <a href="/calculator.html#coach" class="tab-btn">TFT Coach</a>
       <a href="/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
-      <a href="/traits.html" class="tab-btn active">Traits</a>
+      <a href="/traits.html" class="tab-btn active">Tier List</a>
 
       <span class="nav-divider"></span>
 
@@ -283,40 +329,43 @@ details p { margin-top: 6px; }
     <a href="/about.html">About</a>
     <a href="/calculator.html#coach">TFT Coach</a>
     <a href="/calculator.html#calculator">Stat Calculator</a>
-    <a href="/traits.html" class="active">Traits</a>
+    <a href="/traits.html" class="active">Tier List</a>
   </nav>
 </header>
 
 <div style="max-width:1060px;margin:0 auto;">
   <div class="page-header">
-    <div class="page-title">Trait Cheat Sheet</div>
+    <div class="page-title">Trait Tier List</div>
     <div class="page-sub" id="pageSub">Set 18 · Enchanted Wilds</div>
   </div>
 
   <div class="how-to">
-    <strong>How to read this:</strong> the % is how often Challenger/GM players finished
-    <strong>top 4</strong> when that trait was their <em>main</em> trait. <strong>50% is average.</strong>
-    The small number under it is how many pro games that's based on — fewer games, less trust.
-    <br><strong>New to the set?</strong> Read only the green section first.
+    <strong>How to read this:</strong> tiers come from how often Challenger/GM players finished
+    <strong>top 4</strong> when that trait was their <em>main</em> trait (<strong>50% is average</strong>).
+    Traits with few games get pulled down a tier until there's more data — those are marked
+    <span class="small-sample">small sample</span>.
+    <br><strong>New to the set?</strong> Learn S tier first.
   </div>
 
-  <div id="sections"><div class="section-sub">Loading traits…</div></div>
+  <div class="toolbar"><button class="btn" id="expandAll" type="button">Expand all</button></div>
+
+  <div id="sections"><div class="tier-sub">Loading traits…</div></div>
 
   <div class="disclaimer">
-    <p style="margin-bottom:6px;"><strong style="color:#8a9aaa;">Data sources:</strong> trait text from <a href="https://communitydragon.org" target="_blank" rel="noopener">Community Dragon</a>; win rates from our Challenger/GM match dataset. Not guaranteed accurate.</p>
+    <p style="margin-bottom:6px;"><strong style="color:#8a9aaa;">Data sources:</strong> trait text and art from <a href="https://communitydragon.org" target="_blank" rel="noopener">Community Dragon</a>; win rates from our Challenger/GM match dataset. Not guaranteed accurate.</p>
     <p style="font-size:11px;color:#556070;line-height:1.6;max-width:760px;margin:0 auto 8px;">This tool isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
     <p>Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener">Tiffany Tsang</a></p>
   </div>
 </div>
 
 <script>
-// Plain-language one-liners for Set 18. Traits not listed fall back to the
-// first sentence of the official description. Update these each set.
+// ── Hand-written per set (update each new set) ─────────────────────────
+// One-liners; traits not listed fall back to the first sentence of the description.
 const BLURBS = {
   "Executioner":    "Crit chance, then bleed damage on top.",
   "Avatar":         "Lux copies a trait — and that trait counts twice.",
   "Greenfather":    "Ivern grows bonus hexes on your board.",
-  "Primal":         "Pick 1 of 4 blessings.",
+  "Primal":         "Pick 1 of 4 animal blessings (2 at 4 Primal).",
   "Elderwood":      "You get trees to place on the board. More units = bigger forest.",
   "Lunar":          "Attack speed + AP for Lunar units and the units next to them. Placement matters.",
   "Inferno":        "Burn + healing cut. At 3+, it upgrades champions in your shop.",
@@ -348,46 +397,95 @@ const BLURBS = {
   "Attuned":        "Alune swaps between tankiness and damage with the moon.",
   "Monolith":       "Malphite gets tankier the more enemies hit him.",
   "Apex Predator":  "Elder Dragon takes 2 slots and counts as +2 Riftbeast.",
-  "Eclipse":        "No champion has this — it's granted another way. Kills the lowest-HP enemy every few seconds.",
+  "Eclipse":        "Hidden trait — no champion has it. 3 Solar + 3 Lunar turns it on.",
 };
 
+// Extra detail lines (HTML allowed — static text written here, never user data)
+const EXTRAS = {
+  "Primal": [
+    "Pick a blessing at <strong>2 Primal</strong>, and a second one at <strong>4 Primal</strong>:",
+    "🐢 <strong>Turtle</strong> — your team heals 4% max HP every 4 seconds",
+    "🐻 <strong>Bear</strong> — Primal damage executes enemies below 12% HP",
+    "🐯 <strong>Tiger</strong> — after 6 seconds: team +15% attack speed, Primal units +35%",
+    "🔥 <strong>Phoenix</strong> — every 15 Primal takedowns, gain an item component (max 4)",
+  ],
+  "Greenfather": [
+    "<strong>Seeds:</strong> +1 each time Ivern casts, +3 every combat. Every <strong>5 seeds</strong> grows one hex.",
+    "<strong>Current Biome</strong> = the hex layout Ivern picked (at random, 1 of 5) when the trait turned on. It decides <em>which</em> bonus hexes you get. The center hex grows last.",
+    "Stand units on grown hexes: 🌳 Tree = max HP · 🌸 Flower = attack speed · 🍄 Mushroom = damage amp · 💧 Water = mana regen · 🪨 Rock = armor + MR",
+    "Bonuses get bigger with your best Ivern's star level.",
+  ],
+  "Eclipse": [
+    "<strong>How to get it:</strong> have <strong>3 Solar + 3 Lunar</strong> champions on the board. It turns on by itself — no emblem, no unit.",
+    "<strong>What it does:</strong> after 8 seconds of combat, kills the lowest-HP enemy, then again about every 3.5 seconds.",
+    "<strong>Solar</strong> (Leona, Kayle, Sejuani) is cheap and easy to 3-star. <strong>Lunar</strong> is the hard half — a <strong>Lunar Emblem</strong> (Spatula + Tear) or a Lux (Lunar) helps a lot.",
+  ],
+};
+
+// ── Rendering ────────────────────────────────────────────────────────────
 const COIN = '<img class="coin" src="/img/gold.webp" alt="">';
 const ESC_MAP = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
 const esc = s => String(s).replace(/[&<>"']/g, c => ESC_MAP[c]);
 const firstSentence = d => (d.match(/^[^.]*\./) || [d])[0];
 
-// First matching section wins, so order matters
-const SECTIONS = [
-  { cls: "sec-good",  title: "🟢 Start here", sub: "Win often, backed by lots of games. Learn these first.",
-    test: t => t.top4Rate >= 0.55 && t.games >= 1000 },
-  { cls: "sec-maybe", title: "🔵 Strong but rare", sub: "Winning numbers, small sample. Try once you know the basics.",
-    test: t => t.top4Rate >= 0.55 && t.games >= 50 },
-  { cls: "sec-trap",  title: "🔴 Traps", sub: "Pros lose with these as their main trait. Skip until you know the set.",
-    test: t => t.top4Rate !== null && t.top4Rate < 0.40 && t.games >= 50 },
-  { cls: "",          title: "🟡 Comp traits", sub: "Average results. Fine to build around, or splash for the stats.",
-    test: t => t.units.length >= 3 },
-  { cls: "",          title: "⚪ One-unit specials", sub: "Come with a single champion (or a pair). Just know what they do.",
-    test: () => true },
+// Tier cutoffs on the 95% lower-bound top-4 rate (small samples score lower)
+const TIERS = [
+  { t: "S", min: 0.56, name: "S tier — build these",   sub: "Win the most, backed by data." },
+  { t: "A", min: 0.48, name: "A tier — strong",        sub: "Reliable top-4 traits." },
+  { t: "B", min: 0.42, name: "B tier — situational",   sub: "Fine when you hit the units or need the stats." },
+  { t: "C", min: -1,   name: "C tier — avoid for now", sub: "Pros lose with these as their main trait." },
 ];
+const tierOf = t => TIERS.find(x => (t.score ?? 0) >= x.min).t;
 
-function card(t) {
+// "(2) … (3) …" onto separate lines; drop live-counter placeholders ("Seeds: 0 / X", "Current Biome:")
+function descLines(d) {
+  return d.replace(/Seeds: \d+ \/ \w+/g, "").replace(/Current( Biome)?:\s*\d*\s*$/g, "").trim()
+    .split(/\s(?=\(\d+\))/).map(l => l.trim()).filter(Boolean);
+}
+
+function champCard(u) {
+  return `<div class="champ cost-${esc(u.cost)}" title="${esc(u.name)}">
+    ${u.icon ? `<img src="${esc(u.icon)}" alt="" loading="lazy">` : ""}
+    <div class="cap"><span class="nm">${esc(u.name)}</span><span class="coin-cell">${COIN}${esc(u.cost)}</span></div>
+  </div>`;
+}
+
+function emblemRow(e) {
+  if (!e) return "";
+  if (!e.craftable || e.from.length !== 2) {
+    return `<div class="emblem"><span class="lbl">Emblem</span>
+      ${e.icon ? `<img src="${esc(e.icon)}" alt="">` : ""}<span class="muted">not craftable — augments/rewards only</span></div>`;
+  }
+  const [a, b] = e.from;
+  return `<div class="emblem"><span class="lbl">Emblem</span>
+    ${e.icon ? `<img src="${esc(e.icon)}" alt="">` : ""} =
+    <img src="${esc(a.icon)}" alt="" title="${esc(a.name)}">${esc(a.name)} +
+    <img src="${esc(b.icon)}" alt="" title="${esc(b.name)}">${esc(b.name)}</div>`;
+}
+
+function card(t, extras) {
   const pct = t.top4Rate === null ? null : Math.round(t.top4Rate * 100);
-  const badgeCls = pct === null ? "" : pct >= 55 ? "good" : pct < 40 ? "bad" : "";
+  const badgeCls = pct === null ? "" : pct >= 55 ? "good" : pct < 45 ? "bad" : "";
   const blurb = BLURBS[t.name] || firstSentence(t.desc);
-  const units = t.units.map(u =>
-    `<span class="unit">${esc(u.name)} <span class="coin-cell">${COIN}${esc(u.cost)}</span></span>`).join("");
+  const extra = extras[t.name] || [];
+  const lines = descLines(t.desc);
   return `<div class="trait-card">
     <div class="trait-top">
-      <span class="trait-name">${esc(t.name)}</span>
+      <span class="trait-title">
+        ${t.icon ? `<img class="trait-icon" src="${esc(t.icon)}" alt="">` : ""}
+        <span class="trait-name">${esc(t.name)}</span>
+      </span>
       <span class="badge-wrap">
         <span class="badge ${badgeCls}">${pct === null ? "no data" : pct + "% top 4"}</span>
-        <div class="games">${t.games.toLocaleString()} games</div>
+        <div class="games">${t.games.toLocaleString()} games${t.games < 300 ? ' · <span class="small-sample">small sample</span>' : ""}</div>
       </span>
     </div>
-    <div class="bps">${t.breakpoints.map(b => `<span class="bp">${esc(b)}</span>`).join("")}</div>
+    ${t.breakpoints.length ? `<div class="bps">${t.breakpoints.map(b => `<span class="bp">${esc(b)}</span>`).join("")}</div>` : ""}
     <div class="blurb">${esc(blurb)}</div>
-    <div class="units">${units}</div>
-    ${t.desc ? `<details><summary>Full description</summary><p>${esc(t.desc)}</p></details>` : ""}
+    ${extra.length ? `<ul class="extra">${extra.map(l => `<li>${l}</li>`).join("")}</ul>` : ""}
+    ${emblemRow(t.emblem)}
+    ${t.units.length ? `<div class="champs">${t.units.map(champCard).join("")}</div>` : ""}
+    ${lines.length ? `<details><summary>Full description</summary><div class="desc">${lines.map(l => `<div>${esc(l)}</div>`).join("")}</div></details>` : ""}
   </div>`;
 }
 
@@ -396,21 +494,42 @@ fetch("/api/trait-stats")
   .then(data => {
     document.getElementById("pageSub").textContent =
       `Set ${data.set} · based on ${data.totalGames.toLocaleString()} Challenger/GM player-games`;
-    let left = data.traits.slice();
-    document.getElementById("sections").innerHTML = SECTIONS.map(s => {
-      const mine = left.filter(s.test).sort((a, b) => (b.top4Rate ?? 0) - (a.top4Rate ?? 0));
-      left = left.filter(t => !mine.includes(t));
+
+    // Avatar: rank Lux's forms by their trait's tier/score, strongest first
+    const byName = Object.fromEntries(data.traits.map(t => [t.name, t]));
+    const forms = (data.avatarForms || []).filter(n => byName[n])
+      .sort((a, b) => (byName[b].score ?? 0) - (byName[a].score ?? 0));
+    const extras = { ...EXTRAS };
+    if (forms.length) {
+      extras["Avatar"] = [
+        "Lux comes in a form for each of these traits. <strong>Best to worst</strong> (by that trait's tier):",
+        forms.map(n => `<strong>${esc(n)}</strong> (${tierOf(byName[n])})`).join(" → "),
+        "Owning a Lux turns every other Lux in your shop into your form — easy 2-star.",
+      ];
+    }
+
+    document.getElementById("sections").innerHTML = TIERS.map(tier => {
+      const mine = data.traits.filter(t => tierOf(t) === tier.t)
+        .sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
       if (!mine.length) return "";
-      return `<div class="section ${s.cls}">
-        <div class="section-title">${s.title}</div>
-        <div class="section-sub">${s.sub}</div>
-        <div class="trait-grid">${mine.map(card).join("")}</div>
+      return `<div class="tier tier-${tier.t}">
+        <div class="tier-head"><div class="tier-letter">${tier.t}</div>
+          <div><div class="tier-name">${tier.name}</div><div class="tier-sub">${tier.sub}</div></div></div>
+        <div class="trait-grid">${mine.map(t => card(t, extras)).join("")}</div>
       </div>`;
     }).join("");
   })
   .catch(() => {
-    document.getElementById("sections").innerHTML = '<div class="section-sub">Could not load traits.</div>';
+    document.getElementById("sections").innerHTML = '<div class="tier-sub">Could not load traits.</div>';
   });
+
+// Expand / collapse every "Full description"
+document.getElementById("expandAll").addEventListener("click", e => {
+  const all = [...document.querySelectorAll("#sections details")];
+  const open = !all.every(d => d.open);
+  all.forEach(d => { d.open = open; });
+  e.currentTarget.textContent = open ? "Collapse all" : "Expand all";
+});
 
 (function () {
   const nav = document.getElementById("siteNav");
