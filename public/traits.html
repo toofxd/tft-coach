@@ -242,12 +242,13 @@ a { color: inherit; }
   border: 1px solid rgba(174,145,66,0.35); border-radius: 4px; padding: 1px 6px;
 }
 .blurb { font-size: 13px; color: var(--text); line-height: 1.5; }
-.extra { list-style: none; font-size: 12px; color: var(--text-70); line-height: 1.55; }
+.extra { margin: 6px 0 8px; list-style: none; font-size: 12px; color: var(--text-70); line-height: 1.55; }
 .extra li { padding-left: 12px; position: relative; margin-bottom: 3px; }
 .extra li::before { content: '•'; position: absolute; left: 0; color: var(--gold); }
 .extra strong { color: var(--text); }
 
 .emblem {
+  font-weight: 600;
   display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
   font-size: 12px; color: var(--text-70);
 }
@@ -450,17 +451,17 @@ function champCard(u) {
   </div>`;
 }
 
+// "Lunar Emblem [icon] = [Spatula] + [Tear]" — icons only; hover shows the component name
 function emblemRow(e) {
   if (!e) return "";
+  const icon = e.icon ? `<img src="${esc(e.icon)}" alt="">` : "";
   if (!e.craftable || e.from.length !== 2) {
-    return `<div class="emblem"><span class="lbl">Emblem</span>
-      ${e.icon ? `<img src="${esc(e.icon)}" alt="">` : ""}<span class="muted">not craftable — augments/rewards only</span></div>`;
+    return `<div class="emblem">${esc(e.name)} ${icon}<span class="muted">not craftable</span></div>`;
   }
   const [a, b] = e.from;
-  return `<div class="emblem"><span class="lbl">Emblem</span>
-    ${e.icon ? `<img src="${esc(e.icon)}" alt="">` : ""} =
-    <img src="${esc(a.icon)}" alt="" title="${esc(a.name)}">${esc(a.name)} +
-    <img src="${esc(b.icon)}" alt="" title="${esc(b.name)}">${esc(b.name)}</div>`;
+  return `<div class="emblem">${esc(e.name)} ${icon} =
+    <img src="${esc(a.icon)}" alt="${esc(a.name)}" title="${esc(a.name)}"> +
+    <img src="${esc(b.icon)}" alt="${esc(b.name)}" title="${esc(b.name)}"></div>`;
 }
 
 function card(t, extras) {
@@ -480,12 +481,12 @@ function card(t, extras) {
         <div class="games">${t.games.toLocaleString()} games${t.games < 300 ? ' · <span class="small-sample">small sample</span>' : ""}</div>
       </span>
     </div>
-    ${t.breakpoints.length ? `<div class="bps">${t.breakpoints.map(b => `<span class="bp">${esc(b)}</span>`).join("")}</div>` : ""}
     <div class="blurb">${esc(blurb)}</div>
-    ${extra.length ? `<ul class="extra">${extra.map(l => `<li>${l}</li>`).join("")}</ul>` : ""}
     ${emblemRow(t.emblem)}
     ${t.units.length ? `<div class="champs">${t.units.map(champCard).join("")}</div>` : ""}
-    ${lines.length ? `<details><summary>Full description</summary><div class="desc">${lines.map(l => `<div>${esc(l)}</div>`).join("")}</div></details>` : ""}
+    ${extra.length || lines.length ? `<details><summary>Full description</summary>
+      ${extra.length ? `<ul class="extra">${extra.map(l => `<li>${l}</li>`).join("")}</ul>` : ""}
+      <div class="desc">${lines.map(l => `<div>${esc(l)}</div>`).join("")}</div></details>` : ""}
   </div>`;
 }
 
