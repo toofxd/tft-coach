@@ -76,7 +76,7 @@ async function loadNameMappings() {
 }
 
 function champName(id) { return champNames[id] || id.replace(/TFT\d+_/, ""); }
-function itemName(id) { return itemNames[id] || id.replace(/TFT_Item_|TFT\d+_Item_/, "").replace(/([A-Z])/g, " $1").trim(); }
+function itemName(id) { return itemNames[id] || id.replace(/^DA_|TFT_Item_|TFT\d+_Item_/, "").replace(/([A-Z])/g, " $1").trim(); }
 function traitName(id) { return traitNames[id] || id.replace(/TFT\d+_/, ""); }
 
 // ---------------------------------------------------------------------------
@@ -161,13 +161,42 @@ const metaInsights = (() => {
   };
 })();
 
-// Load calculator_data.json — authoritative Set 17 champion/trait/item data
+// Load calculator_data.json — authoritative Set 18 champion/trait/item data
 // Used to ground AI prompts with accurate costs, traits, and roles.
 const calcData = (() => {
   const p = path.join(__dirname, "data", "static", "calculator_data.json");
   if (!fs.existsSync(p)) return null;
   return JSON.parse(fs.readFileSync(p, "utf8"));
 })();
+
+// Set 18 match data names units "DA_18_Ahri" while the calculator uses "TFT18_Ahri".
+// Rewrite item_winrates.csv rows to calculator keys so /api/item-recs and
+// proUnitStats() can keep filtering on the ID the page sends.
+const cdToKey = {};
+if (calcData) {
+  for (const [key, u] of Object.entries(calcData.units)) if (u.cdId) cdToKey[u.cdId] = key;
+  for (const r of itemWinrates) if (cdToKey[r.unit_id]) r.unit_id = cdToKey[r.unit_id];
+}
+
+// Variants with no rows of their own share a sibling's stats by display name —
+// Riot records every Lux form (TFT18_Lux_Lunar, _Solar, ...) as base Lux.
+const unitAlias = (() => {
+  const alias = {};
+  if (!calcData) return alias;
+  const withRows = new Set(itemWinrates.map(r => r.unit_id));
+  const byName = {};
+  const base = n => n.replace(/ \(.*\)$/, "");  // "Lux (Lunar)" → "Lux"
+  for (const [key, u] of Object.entries(calcData.units)) if (withRows.has(key)) byName[base(u.name)] = key;
+  for (const [key, u] of Object.entries(calcData.units)) {
+    if (!withRows.has(key) && byName[base(u.name)]) alias[key] = byName[base(u.name)];
+  }
+  return alias;
+})();
+// Accepts a calculator key ("TFT18_Lux_Lunar") or a Riot match ID ("DA_18_Ahri")
+function resolveUnitId(id) {
+  const key = cdToKey[id] || id;
+  return unitAlias[key] || key;
+}
 
 // Compact champion sheet: one line per champion, for AI system prompts
 const champSheet = calcData
@@ -239,11 +268,13 @@ function wilsonLower(p, n, z = 1.96) {
 }
 
 // Returns true if an item ID should be excluded from recommendations.
-// Allows: craftable items (in ttItemMap) + emblem/spat items.
+// Allows: craftable items (in ttItemMap or calculator_data) + emblem/spat items.
 // Rejects: components, invalid test items, etc.
+// Set 18 match data uses "DA_EdgeOfNight" rather than "TFT_Item_EdgeOfNight".
 function isJunkItem(id) {
   if (id.includes('Emblem') || id.includes('Spat')) return false;
-  return !ttItemMap[id.replace(/TFT\d*_Item_/, '')];
+  const key = id.replace(/^DA_|TFT\d*_Item_/, '');
+  return !ttItemMap[key] && !calcData?.items?.[key]?.tags?.includes('Craftable');
 }
 
 // ---------------------------------------------------------------------------
@@ -422,7 +453,7 @@ function analyzeItems(feats) {
   for (const [unitId, items] of Object.entries(feats.unitItems)) {
     if (!items.length) continue;
     const unitRows = itemWinrates
-      .filter((r) => r.unit_id === unitId)
+      .filter((r) => r.unit_id === resolveUnitId(unitId))
       .sort((a, b) => parseFloat(b.top4_rate) - parseFloat(a.top4_rate));
     if (!unitRows.length) continue;
 
@@ -437,7 +468,7 @@ function analyzeItems(feats) {
 
     if (!userRate || bestRate > userRate + 0.08) {
       const userStr = userRate !== null ? `${(userRate * 100).toFixed(0)}% top-4 (avg across items)` : "no pro data";
-      const bestName = best.item_id.replace(/TFT_Item_|TFT\d*_Item_/, "").replace(/([A-Z])/g, " $1").trim();
+      const bestName = itemName(best.item_id);
       issues.push(
         `${unitId}: your items had ${userStr}. ` +
         `Top Challenger item ${bestName} reaches ${(bestRate * 100).toFixed(0)}% top-4 (n=${best.games}).`
@@ -463,7 +494,7 @@ function proStats(topTrait) {
 function proUnitStats(unitId) {
   if (!unitId || !itemWinrates.length) return null;
   const rows = itemWinrates
-    .filter(r => r.unit_id === unitId && parseInt(r.games) >= 10 && !isJunkItem(r.item_id))
+    .filter(r => r.unit_id === resolveUnitId(unitId) && parseInt(r.games) >= 10 && !isJunkItem(r.item_id))
     .sort((a, b) =>
       wilsonLower(parseFloat(b.top4_rate), parseInt(b.games)) -
       wilsonLower(parseFloat(a.top4_rate), parseInt(a.games))
@@ -471,7 +502,7 @@ function proUnitStats(unitId) {
     .slice(0, 4);
   if (!rows.length) return null;
   return rows.map(r => {
-    const name = r.item_id.replace(/TFT_Item_|TFT\d*_Item_/, "").replace(/([A-Z])/g, " $1").trim();
+    const name = itemName(r.item_id);
     const pct = (parseFloat(r.top4_rate) * 100).toFixed(0);
     return `  • ${name}: ${pct}% top-4 (${r.games} games)`;
   }).join("\n");
@@ -944,7 +975,7 @@ app.get("/api/meta-insights", (req, res) => {
   });
 });
 
-// GET /api/item-recs?unitId=TFT17_Caitlyn
+// GET /api/item-recs?unitId=TFT18_Caitlyn
 // Per-item top-4 rate: each game counts once per unique item the unit carried.
 // Scored by Wilson lower bound (95% CI) to penalise small samples.
 app.get("/api/item-recs", (req, res) => {
@@ -952,7 +983,7 @@ app.get("/api/item-recs", (req, res) => {
   if (!unitId) return res.status(400).json({ error: "unitId required" });
 
   const allRows = itemWinrates
-    .filter(r => r.unit_id === unitId && !isJunkItem(r.item_id))
+    .filter(r => r.unit_id === resolveUnitId(unitId) && !isJunkItem(r.item_id))
     .map(r => ({ itemId: r.item_id, top4Rate: parseFloat(r.top4_rate), games: parseInt(r.games) }));
 
   // Approximate total unit appearances from the most-seen item
@@ -1041,7 +1072,7 @@ app.get("/api/champion-tips", async (req, res) => {
     ? `\nTop item combos from our Challenger/GM dataset (${matchFeatures.length.toLocaleString()} pro games):\n${proItemStats}`
     : "";
 
-  const prompt = `You are a TFT Set 17 expert coach on patch 16.10.
+  const prompt = `You are a TFT Set 18 expert coach on patch 16.20.
 
 CHAMPION: ${name}
 Cost: ${cost}g | Role: ${role}
@@ -1050,13 +1081,13 @@ Ability: ${abilityName} — ${abilityDesc}
 Top items from Challenger data: ${topItems || "none provided"}${proItemBlock}
 
 STRICT RULES — you must follow these exactly:
-- Only reference real TFT Set 17 items. TFT items are crafted from components (B.F. Sword, Recurve Bow, Chain Vest, Negatron Cloak, Needlessly Large Rod, Tear of the Goddess, Giant's Belt, Sparring Gloves, Spatula). Examples of valid items: Deathblade, Guinsoo's Rageblade, Kraken Slayer, Giant Slayer, Bloodthirster, Sterak's Gage, Edge of Night, Titan's Resolve, Warmog's Armor, Sunfire Cape, Gargoyle Stoneplate, Rabadon's Deathcap, Jeweled Gauntlet, Spear of Shojin, Blue Buff, Nashor's Tooth, Hextech Gunblade, Red Buff, Last Whisper, Bramble Vest, Ionic Spark. Do NOT invent items.
+- Only reference real TFT Set 18 items. TFT items are crafted from components (B.F. Sword, Recurve Bow, Chain Vest, Negatron Cloak, Needlessly Large Rod, Tear of the Goddess, Giant's Belt, Sparring Gloves, Spatula). Examples of valid items: Deathblade, Guinsoo's Rageblade, Kraken Slayer, Giant Slayer, Bloodthirster, Sterak's Gage, Edge of Night, Titan's Resolve, Warmog's Armor, Sunfire Cape, Gargoyle Stoneplate, Rabadon's Deathcap, Jeweled Gauntlet, Spear of Shojin, Blue Buff, Nashor's Tooth, Hextech Gunblade, Red Buff, Last Whisper, Bramble Vest, Ionic Spark. Do NOT invent items.
 - Only reference trait breakpoints that were provided above. Do not make up breakpoint numbers.
 - If topItems are provided, prioritize recommending those.
 - Be specific and concise. No filler. 1-2 sentences per section.
 - Match items to the champion's role. Do NOT recommend carry items (Blue Buff, Rabadon's Deathcap, Jeweled Gauntlet, Deathblade, Giant Slayer, Last Whisper) for tanks or supports — those items are for damage carries only. Tanks want durability items (Warmog's Armor, Gargoyle Stoneplate, Titan's Resolve, Bramble Vest, Sunfire Cape, Ionic Spark).
 - For Best Items: format the first sentence exactly as "[Name] benefits from [Item A] for [reason A], [Item B] for [reason B], and [Item C] for [reason C]." Reasons should be short (2-5 words). If the champion already has strong base AD, AP, or survivability from their ability/traits, note that they need to improve something else (e.g. shred, burn, wound) or stack their primary stat further. Mention burn (Sunfire Cape / Red Buff) or grievous wounds (Morellonomicon / Red Buff) when relevant to this champion's role.
-- Use natural trait language: write "7 Meeples" not "the Meeple 7 breakpoint"; write "with Bastion active" not "a Bastion trait breakpoint". Always put the number before the trait name.
+- Use natural trait language: write "5 Elderwood" not "the Elderwood 5 breakpoint"; write "with Inferno active" not "an Inferno trait breakpoint". Always put the number before the trait name.
 
 Respond with exactly these 3 sections. No intro, no outro:
 
@@ -1078,8 +1109,8 @@ ${draft}
 
 CHECK FOR AND FIX:
 - Carry items (Blue Buff, Rabadon's Deathcap, Jeweled Gauntlet, Deathblade, Giant Slayer, Last Whisper) recommended for a tank or support — replace with role-appropriate items
-- Trait language written as "the X Y breakpoint" or "a Y trait breakpoint" — rewrite naturally (e.g. "7 Meeples", "with Bastion active")
-- Any item names that don't exist in TFT Set 17 — replace with real items`;
+- Trait language written as "the X Y breakpoint" or "a Y trait breakpoint" — rewrite naturally (e.g. "5 Elderwood", "with Inferno active")
+- Any item names that don't exist in TFT Set 18 — replace with real items`;
 
     let tips = await callGroq(checkPrompt, 400).catch(() => draft);
     // Strip any echoed header lines Groq may include from the fact-check prompt context
@@ -1108,12 +1139,12 @@ app.post("/api/ask", async (req, res) => {
   }
 
   const groundingBlock = [
-    champSheet  && `Set 17 champions (authoritative — name | cost | traits | role):\n${champSheet}`,
-    traitSheet  && `Set 17 trait breakpoints (authoritative — only these breakpoints are real):\n${traitSheet}`,
-    itemSheet   && `Set 17 craftable items (authoritative — only these items exist):\n${itemSheet}`,
+    champSheet  && `Set 18 champions (authoritative — name | cost | traits | role):\n${champSheet}`,
+    traitSheet  && `Set 18 trait breakpoints (authoritative — only these breakpoints are real):\n${traitSheet}`,
+    itemSheet   && `Set 18 craftable items (authoritative — only these items exist):\n${itemSheet}`,
   ].filter(Boolean).join("\n\n");
 
-  const prompt = `You are an expert TFT (Teamfight Tactics) coach specializing in Set 17 patch 16.10. Answer the following question clearly and concisely. Stay strictly on the topic of TFT — if the question is not related to TFT, politely redirect the user to ask a TFT question instead.
+  const prompt = `You are an expert TFT (Teamfight Tactics) coach specializing in Set 18 patch 16.20. Answer the following question clearly and concisely. Stay strictly on the topic of TFT — if the question is not related to TFT, politely redirect the user to ask a TFT question instead.
 
 ${groundingBlock}
 
@@ -1382,7 +1413,7 @@ app.post("/api/local-coach", async (req, res) => {
         ? issues.map(i => `  • ${i}`).join("\n")
         : "  (none detected)";
 
-      const prompt = `You are an expert TFT Set 17 coach. A player finished ${placement}th in a game. Analyze their decisions and give specific coaching feedback.
+      const prompt = `You are an expert TFT Set 18 coach. A player finished ${placement}th in a game. Analyze their decisions and give specific coaching feedback.
 
 FINAL BOARD:
 ${boardText}

@@ -118,7 +118,7 @@ def build_match_features(save: bool = True) -> pd.DataFrame:
             continue
 
         # Skip matches from other sets
-        if match.get("info", {}).get("tft_set_number") != 17:
+        if match.get("info", {}).get("tft_set_number") != 18:
             continue
 
         match_id = match.get("metadata", {}).get("match_id", path.stem)

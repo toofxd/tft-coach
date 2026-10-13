@@ -55,8 +55,8 @@ async function scrape() {
         !id.includes("Radiant") &&
         !id.includes("Trait") &&
         !id.includes("DRX") &&
-        !id.includes("TFT17_") &&
-        !id.includes("17") &&
+        !id.includes("TFT18_") &&
+        !id.includes("18") &&
         item.count > 1000
       );
     })

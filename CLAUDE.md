@@ -8,7 +8,7 @@ Start-ScheduledTask -TaskName "TFT-Coach-DailyCollect"
 ```
 Then tail the log to show progress: `Get-Content logs\collect_$(Get-Date -Format 'yyyy-MM-dd').log -Wait`
 
-The task runs `collect_pro.py → features.py` and logs to `logs/collect_YYYY-MM-DD.log`.
+The task runs `collect_daily.ps1` (this folder): `collect_pro.py → features.py → slim CSV`, logging to `logs/collect_YYYY-MM-DD.log`. It never commits or pushes.
 
 ## ⚠️ CRITICAL: After Refreshing Data (Vercel deploy)
 
@@ -166,18 +166,31 @@ So re-running the script at any time is always safe — it only fetches genuinel
 
 ### Current tiers collected
 The default in `collect()` is `tiers=("challenger", "grandmaster")` — both are already included.
-Current dataset (as of 11 Aug 2026):
+Current dataset — **Set 18** (as of 13 Oct 2026):
 
 | File | Rows | Used by |
 |------|------|---------|
-| `data/processed/match_features.csv` | 261,460 | local dev only (335MB, gitignored) |
-| `data/processed/match_features_slim.csv` | 254,282 | **production** (committed) |
-| `data/processed/item_winrates.csv` | 6,915 | both |
+| `data/processed/match_features.csv` | 79,776 | local dev only (gitignored) |
+| `data/processed/match_features_slim.csv` | 79,776 | **production** (committed) |
+| `data/processed/item_winrates.csv` | 4,362 | both |
 
-`public/dataset_info.json` reports `261460` / "22 June 2026" — that is the **full**
-CSV count, so the About page slightly overstates what production actually loads.
-The slim CSV is ~7,200 rows behind; regenerate it (see the top of this file) to close
-the gap.
+`features.py` keeps only `tft_set_number == 18`, so Set 17 rows dropped out.
+
+### ⚠️ Set 18 ID formats (`DA_*` vs `TFT18_*`)
+Riot match data and CommunityDragon use `DA_18_Ahri` / `DA_EdgeOfNight`; tactics.tools
+and the calculator use `TFT18_Ahri` / `EdgeOfNight`. Bridged by:
+- `calculator_data.json` units carry `cdId` (the `DA_*` ID); `server.js` rewrites
+  `item_winrates.csv` unit IDs to calculator keys at startup (`resolveUnitId()`)
+- All 9 Lux forms are recorded as `DA_Lux18_Base` → variants alias to base Lux by name
+- tactics.tools lags on new-set items: `build_calculator_data.py` adds emblems and missing
+  craftables from CommunityDragon (with `icon` URLs); stats borrowed by display name
+  from the older `TFT_Item_*` copy because Set 18 items ship with empty effects
+
+### Bumping to a new set
+Change the set number in `src/collect_pro.py` (`TFT_SET`), `src/features.py`,
+`src/build_calculator_data.py` (`s18`/`data18`/`TFTSet18`), and "Set 18"/patch text in
+`server.js` prompts + page titles. Then run `build_calculator_data.py` and
+`build_calculator.py` (it now regenerates UNITS_LIST and item lists too).
 
 ### To add Master tier
 Edit line 84 of `src/collect_pro.py`:

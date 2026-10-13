@@ -28,16 +28,16 @@ STAR_MULT = {1: 1.0, 2: 1.8, 3: 3.24}
 
 
 def fetch_tactics_data():
-    r = requests.get("https://ap.tft.tools/static/s17/data.js", headers=HEADERS, timeout=15)
+    r = requests.get("https://ap.tft.tools/static/s18/data.js", headers=HEADERS, timeout=15)
     r.raise_for_status()
-    match = re.search(r'window\.data17\s*=\s*JSON\.parse\(`(.*?)`\)', r.text, re.DOTALL)
+    match = re.search(r'window\.data18\s*=\s*JSON\.parse\(`(.*?)`\)', r.text, re.DOTALL)
     return json.loads(match.group(1))
 
 
 def fetch_en_locale():
-    r = requests.get("https://ap.tft.tools/static/s17/en.js", headers=HEADERS, timeout=15)
+    r = requests.get("https://ap.tft.tools/static/s18/en.js", headers=HEADERS, timeout=15)
     r.raise_for_status()
-    match = re.search(r'window\.s17Unitsi18n\s*=\s*(\{.*?\});?\s*window\.', r.text, re.DOTALL)
+    match = re.search(r'window\.s18Unitsi18n\s*=\s*(\{.*?\});?\s*window\.', r.text, re.DOTALL)
     return json.loads(match.group(1)) if match else {}
 
 
@@ -48,7 +48,81 @@ def fetch_cdragon_data():
     )
     r.raise_for_status()
     data = r.json()
-    return next(s for s in data["setData"] if s.get("mutator") == "TFTSet17")
+    set_data = next(s for s in data["setData"] if s.get("mutator") == "TFTSet18")
+    set_data["allItems"] = data["items"]  # global list — holds this set's emblem recipes
+    return set_data
+
+
+# Component → numeric id used in item "from" arrays (matches EMBLEM_COMP_MAP in calculator.html)
+COMPONENT_IDS = {
+    "BFSword": 1, "RecurveBow": 2, "NeedlesslyLargeRod": 3, "TearOfTheGoddess": 4,
+    "ChainVest": 5, "NegatronCloak": 6, "GiantsBelt": 7, "SparringGloves": 8,
+    "Spatula": 9, "FryingPan": 10,
+}
+
+
+def build_emblems(cdragon_items, set_num):
+    """Craftable emblems straight from cdragon — tactics.tools lags behind on new sets."""
+    emblems = {}
+    for it in cdragon_items:
+        api = it["apiName"]
+        if not re.search(rf"_{set_num}_Emblem[A-Z]", api):
+            continue
+        comps = [COMPONENT_IDS.get(c.split("_Component_")[-1]) for c in it.get("composition") or []]
+        if len(comps) != 2 or None in comps:
+            continue  # augment-only / non-craftable emblems
+        emblems[api] = {
+            "name": it["name"],
+            "id": it.get("id"),
+            "tags": ["CraftableEmblem"],
+            "from": comps,
+            "isAdaptive": False,
+            "statBonuses": {},
+            "allEffects": {},
+            "icon": "https://raw.communitydragon.org/latest/game/"
+                    + it["icon"].lower().replace(".tex", ".png"),
+        }
+    return emblems
+
+
+def build_cdragon_craftables(cdragon_items, existing):
+    """Completed items tactics.tools hasn't published yet for this set.
+    Riot match data uses "DA_EdgeOfNight"; we key them as "EdgeOfNight" like tactics.tools."""
+    base = {k: v for k, v in COMPONENT_IDS.items() if k not in ("Spatula", "FryingPan")}
+    # Older-set copy of the same item, by display name (Edge of Night is "TFT_Item_GuardianAngel")
+    by_name = {}
+    for i in cdragon_items:
+        if i.get("effects") and i["apiName"].startswith("TFT_Item_"):
+            by_name.setdefault(i.get("name"), i)
+    extra = {}
+    for it in cdragon_items:
+        api = it["apiName"]
+        if not api.startswith("DA_") or "Emblem" in api:
+            continue
+        comps = [c.split("_Component_")[-1] for c in it.get("composition") or []]
+        if len(comps) != 2 or not all(c in base for c in comps):
+            continue
+        key = api[len("DA_"):]
+        if key in existing:
+            continue
+        # Set 18 items ship with empty effects in cdragon — borrow the standard item's stats
+        effects = it.get("effects") or by_name.get(it["name"], {}).get("effects") or {}
+        extra[key] = {
+            "name": it["name"],
+            # DamageReduction on borrowed items is a passive value (e.g. EoN's 100), not a stat
+            "effects": {k: v for k, v in effects.items()
+                        if v is not None and (it.get("effects") or k != "DamageReduction")},
+            "tags": ["Craftable"],
+            "from": [base[c] for c in comps],
+        }
+    items = build_items(extra)
+    for key in items:
+        api = "DA_" + key
+        icon = next((i["icon"] for i in cdragon_items if i["apiName"] == api), None)
+        if icon:
+            items[key]["icon"] = ("https://raw.communitydragon.org/latest/game/"
+                                  + icon.lower().replace(".tex", ".png"))
+    return items
 
 
 ROLE_LABEL = {
@@ -120,17 +194,25 @@ def clean_label_html(html):
 def build_units(tactics_units, cdragon_champs, en_locale):
     """Merge base stats (tactics.tools) with cost+traits+ability (cdragon+en)."""
     cd_by_api = {c["apiName"]: c for c in cdragon_champs}
+    # Set 18: cdragon uses "DA_18_Ahri" while tactics.tools/Riot use "TFT18_Ahri",
+    # so fall back to matching on normalized display name ("Lux (Lunar)" → "luxlunar")
+    norm = lambda s: re.sub(r"[^a-z]", "", s.lower())
+    cd_by_name = {norm(c["name"]): c for c in cdragon_champs if c.get("traits")}
 
     units = {}
     for api_name, tu in tactics_units.items():
-        cd = cd_by_api.get(api_name, {})
+        key_name = norm(re.sub(r"^TFT\d+_", "", api_name))
+        cd = (cd_by_api.get(api_name) or cd_by_name.get(key_name)
+              or cd_by_name.get(norm(tu["name"])) or {})
         base = tu["stats"]
         role = cd.get("role", "") or ""
+        # Locale is keyed by the cdragon apiName in Set 18 ("DA_18_Ahri_desc")
+        loc_key = api_name if f"{api_name}_desc" in en_locale else cd.get("apiName", api_name)
 
         # Ability info
         cd_ab = cd.get("ability", {})
-        ab_name = en_locale.get(f"{api_name}_ability") or cd_ab.get("name", "")
-        raw_desc = en_locale.get(f"{api_name}_desc") or cd_ab.get("desc", "")
+        ab_name = en_locale.get(f"{loc_key}_ability") or cd_ab.get("name", "")
+        raw_desc = en_locale.get(f"{loc_key}_desc") or cd_ab.get("desc", "")
         ab_desc = clean_ability_html(raw_desc)
         # Store the conditional (scaleLevel) block separately if it exists
         cond_match = re.search(r'<scaleLevel[^>]*>(.*?)</scaleLevel>', raw_desc, re.DOTALL | re.IGNORECASE)
@@ -142,7 +224,7 @@ def build_units(tactics_units, cdragon_champs, en_locale):
         for i, vals in enumerate(tu_details):
             if vals is None:
                 continue
-            label_html = en_locale.get(f"{api_name}_details_{i}", "")
+            label_html = en_locale.get(f"{loc_key}_details_{i}", "")
             label = clean_label_html(label_html) if label_html else f"Value {i+1}"
             details.append({"label": label, "values": vals})
 
@@ -150,6 +232,7 @@ def build_units(tactics_units, cdragon_champs, en_locale):
             "name": tu["name"],
             "cost": cd.get("cost", 0),
             "traits": cd.get("traits", []),
+            "cdId": cd.get("apiName", api_name),  # Riot match data uses this ID in Set 18
             "role": role,
             "roleTag": role_tag(role),
             "stats": {
@@ -281,6 +364,12 @@ def main():
     units = build_units(tactics["units"], cdragon["champions"], en_locale)
     traits = build_traits(tactics["traits"], cdragon["traits"])
     items = build_items(tactics["items"])
+    # Drop leftovers from older sets ("17AstronautEmblemItem") and add this set's emblems
+    set_num = str(cdragon["number"])
+    items = {k: v for k, v in items.items()
+             if not (re.match(r"\d\d\D", k) and k[:2] != set_num)}
+    items.update(build_emblems(cdragon["allItems"], set_num))
+    items.update(build_cdragon_craftables(cdragon["allItems"], items))
 
     out = {"units": units, "traits": traits, "items": items}
     path = OUTPUT_DIR / "calculator_data.json"

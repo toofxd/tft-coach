@@ -54,7 +54,7 @@ def get_tier_puuids(tier: str = "challenger") -> list[str]:
     return puuids
 
 
-TFT_SET = 17  # Only collect matches from this set
+TFT_SET = 18  # Only collect matches from this set
 
 def get_match_ids(puuid: str, count: int = 20) -> list[str]:
     """Return up to `count` recent ranked TFT match IDs for a PUUID."""

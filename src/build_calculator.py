@@ -3,6 +3,7 @@ Generates calculator.html from calculator_data.json.
 Run: python src/build_calculator.py
 """
 import json
+import re
 from pathlib import Path
 
 DATA_PATH = Path(__file__).parent.parent / "data" / "static" / "calculator_data.json"
@@ -11,7 +12,7 @@ OUT_PATH = Path(__file__).parent.parent / "public" / "calculator.html"
 data = json.load(open(DATA_PATH, encoding="utf-8"))
 data_json = json.dumps(data, separators=(",", ":"), ensure_ascii=False)
 
-NON_PLAYABLE = {"TFT_BlueGolem", "TFT_TrainingDummy", "TFT17_Summon Bia & Bayin", "TFT17_PVE_ElderDragon"}
+NON_PLAYABLE = {"TFT_BlueGolem", "TFT_TrainingDummy"}
 
 # Unit list for JS — exclude non-playable units (no traits)
 units_sorted = sorted(
@@ -20,10 +21,18 @@ units_sorted = sorted(
     key=lambda x: (x[2], x[0]),
 )
 
-# Item lists for JS
+# Item lists for JS — tactics.tools carries over keys from older sets
+# (e.g. "17Artifact_YasuoArtifact"), so drop any two-digit set prefix that isn't current
+CURRENT_SET = re.match(r"TFT(\d+)_", next(iter(data["units"]))).group(1)
+
+def is_current(key):
+    m = re.match(r"(\d\d)\D", key)
+    return not m or m.group(1) == CURRENT_SET
+
 def item_list(tag):
     return sorted(
-        [(v["name"], k) for k, v in data["items"].items() if tag in v["tags"] and v["name"]],
+        [(v["name"], k) for k, v in data["items"].items()
+         if tag in v["tags"] and v["name"] and is_current(k)],
         key=lambda x: x[0],
     )
 
@@ -44,7 +53,7 @@ html = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TFT Set 17 — Stat Calculator</title>
+<title>TFT Set 18 — Stat Calculator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -186,7 +195,7 @@ input:focus { outline: none; border-color: #4a9fe0; }
 
   <!-- Header -->
   <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #2e2e36;">
-    <span style="font-size:11px;color:#4a9fe0;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Set 17</span>
+    <span style="font-size:11px;color:#4a9fe0;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Set 18</span>
     <h1 style="font-size:22px;font-weight:700;color:#e8e4de;letter-spacing:0.01em;">Stat Calculator</h1>
     <span style="font-size:12px;color:#3a3848;margin-left:auto;">Pick a champion · set star level · activate traits · equip items</span>
   </div>
@@ -841,9 +850,16 @@ renderItems();
 # the whole file. This preserves all hand-edits to the UI.
 if OUT_PATH.exists():
     existing = OUT_PATH.read_text(encoding="utf-8")
+    # Replace DATA plus the generated unit/item lists (they change every set);
+    # everything from ALL_ITEMS onward is hand-edited UI and is kept.
     pre  = existing.split('const DATA = ')[0]
-    post = existing.split('const UNITS_LIST')[1]
-    new_html = pre + 'const DATA = ' + data_json + ';\nconst UNITS_LIST' + post
+    post = existing.split('const ALL_ITEMS')[1]
+    new_html = (pre + 'const DATA = ' + data_json + ';\n'
+                + 'const UNITS_LIST  = ' + units_js + ';\n'
+                + 'const ITEMS_CRAFTABLE = ' + craftable_js + ';\n'
+                + 'const ITEMS_RADIANT   = ' + radiant_js + ';\n'
+                + 'const ITEMS_ARTIFACT  = ' + artifact_js + ';\n'
+                + 'const ALL_ITEMS' + post)
     OUT_PATH.write_text(new_html, encoding="utf-8")
     print(f"Injected data into existing: {OUT_PATH}  ({OUT_PATH.stat().st_size // 1024}KB)")
 else:
