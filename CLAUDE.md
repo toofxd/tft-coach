@@ -149,7 +149,7 @@ was removed, which is what took the site down. Nothing points at Railway now.
 | `/api/profile` | GET | `?handle=Name%23TAG` — full dashboard, allStats + recentStats |
 | `/api/coaching` | POST | Gemini aggregate coaching from profile stats + Challenger/GM benchmarks |
 | `/api/coach` | POST | Gemini per-match coaching with comp-specific pro comparison |
-| `/api/item-recs` | GET | `?unitId=TFT17_Caitlyn` — item recommendations from CSV |
+| `/api/item-recs` | GET | `?unitId=TFT18_Caitlyn[&set=17]` — item recommendations from CSV |
 | `/api/champion-tips` | GET | Groq (gpt-oss-120b) tips for a champion; accepts `unitId` to inject pro item combo win rates |
 | `/api/ask` | POST | `{ question }` — free-form TFT Q&A; Gemini+Search grounding → Groq fallback |
 | `/api/items` | GET | tactics.tools item rankings |
@@ -195,7 +195,7 @@ e.g. 18.4 — not the LoL client version like 16.20). Then run `build_calculator
 `build_calculator.py` (it now regenerates UNITS_LIST and item lists too).
 
 ### To add Master tier
-Edit line 84 of `src/collect_pro.py`:
+Edit line 92 of `src/collect_pro.py`:
 ```python
 # Before
 tiers: list[str] = ("challenger", "grandmaster"),
@@ -329,9 +329,9 @@ Free-form Q&A is the highest hallucination-risk endpoint — the AI is grounded 
 
 ### 1. Static grounding sheets (injected into every prompt)
 Built from `data/static/calculator_data.json` at server startup:
-- **`champSheet`** — all 67 champions: name, cost, traits, role (one line each)
-- **`traitSheet`** — all 35 traits with their valid breakpoints only (e.g. `Meeple (3/5/7/10)`)
-- **`itemSheet`** — all 39 craftable items with primary stat bonuses (HP/AD/AP/armor/MR/mana regen). Raw engine variables (AS multipliers, crit, etc.) are excluded to avoid garbage in the prompt.
+- **`champSheet`** — all 74 champions (incl. Lux forms): name, cost, traits, role (one line each)
+- **`traitSheet`** — all 36 traits with their valid breakpoints only (e.g. `Elderwood (3/5/7/9/11)`)
+- **`itemSheet`** — all 51 craftable items with primary stat bonuses (HP/AD/AP/armor/MR/mana regen). Raw engine variables (AS multipliers, crit, etc.) are excluded to avoid garbage in the prompt.
 
 Traits are deduplicated by name (keep entry with most breakpoints). `Choose Trait` and traits with no breakpoints are excluded.
 
@@ -357,7 +357,9 @@ The Groq prompt for champion tips enforces a specific output format — **do not
 
 ## UI Structure
 
-Current set: **Stat Calculator** + **TFT Coach** (`public/calculator.html`), plus `public/about.html`.
+Current set: **Stat Calculator** + **TFT Coach** (`public/calculator.html`), **Traits** (`public/traits.html`, data from `/api/trait-stats`; plain-language `BLURBS` are hand-written per set), plus `public/about.html`.
+
+**Hand-maintained per set (re-check every new set):** `ODDS_DATA` (shop odds) and `LEVELING_DATA` in `public/calculator.html`, takeaways copy in `loadMetaInsights()`, `BLURBS` in `public/traits.html`, `SET_PATCH` in `server.js`.
 
 **Set 17 archive** lives in `public/17/` (`calculator.html`, `gods.html`) with frozen data in
 `data/archive/17/` (`item_winrates.csv`, `calculator_data.json`). Archive pages call the API with
@@ -368,13 +370,12 @@ to `public/<N>/` + `data/archive/<N>/` and add `<N>` to the archive loop and `SE
 ### Calculator tab (`#tab-calculator`)
 - Left column: champion search, cost filter buttons (`setCostFilter` clears unit input), item/trait selectors
 - Right column: stat table, item recommendations (icon grid with hover tooltips), champion tips card (`#tipsCard`)
-- `selectOpt(key, unit)` → `fetchItemRecommendations(key).then(() => fetchChampionTips(unit, key))` (sequential — tips need item recs loaded first; `key` is the raw `TFT17_X` unit ID passed to the server for pro data lookup)
+- `selectOpt(key, unit)` → `fetchItemRecommendations(key).then(() => fetchChampionTips(unit, key))` (sequential — tips need item recs loaded first; `key` is the raw `TFT18_X` unit ID passed to the server for pro data lookup)
 - `filterDrop(type, autoOpen)` — `autoOpen=false` suppresses dropdown on cost filter clicks
 
 ### Coach tab (`#tab-coach`)
-- Riot ID input → `loadProfile()` → `/api/profile`
-- All Set 17 stats banner (`#coachStats`) populated from `profileData.allStats`
-- Recent N games banner (`#coachRecentStats`) populated from `profileData.recentStats`
+- Challenger/GM takeaways card → `loadMetaInsights()` → `/api/meta-insights` (copy in that function quotes leveling timings — keep in sync with `LEVELING_DATA`)
+- Riot ID input → `analyzeMatches()` → `/api/profile`
 - AI coaching box populated from `/api/coaching`
 - Ask AI box (`#askInput`) → `/api/ask` → Gemini+Search (Groq fallback)
 

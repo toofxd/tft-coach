@@ -348,6 +348,7 @@ const BLURBS = {
   "Attuned":        "Alune swaps between tankiness and damage with the moon.",
   "Monolith":       "Malphite gets tankier the more enemies hit him.",
   "Apex Predator":  "Elder Dragon takes 2 slots and counts as +2 Riftbeast.",
+  "Eclipse":        "No champion has this — it's granted another way. Kills the lowest-HP enemy every few seconds.",
 };
 
 const COIN = '<img class="coin" src="/img/gold.webp" alt="">';
@@ -394,7 +395,7 @@ fetch("/api/trait-stats")
   .then(r => r.json())
   .then(data => {
     document.getElementById("pageSub").textContent =
-      `Set ${data.set} · based on ${data.totalGames.toLocaleString()} Challenger/GM games`;
+      `Set ${data.set} · based on ${data.totalGames.toLocaleString()} Challenger/GM player-games`;
     let left = data.traits.slice();
     document.getElementById("sections").innerHTML = SECTIONS.map(s => {
       const mine = left.filter(s.test).sort((a, b) => (b.top4Rate ?? 0) - (a.top4Rate ?? 0));

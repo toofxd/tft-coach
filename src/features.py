@@ -272,10 +272,14 @@ if __name__ == "__main__":
         build_item_winrates(df)
 
         # Write dataset_info.json for the About page
-        count_k = f"~{round(len(df) / 1000)}k"
+        # Each row is one player's board; a match has 8 of them
+        matches = df["match_id"].nunique()
+        count_k = f"~{round(matches / 1000)}k"
         d = date.today()
         updated = f"{d.day} {d.strftime('%B %Y')}"
-        info = {"matchCount": len(df), "matchCountLabel": count_k, "updatedDate": updated}
+        info = {"matchCount": matches, "matchCountLabel": count_k,
+                "boardCount": len(df), "boardCountLabel": f"~{round(len(df) / 1000)}k",
+                "updatedDate": updated}
         info_path = PUBLIC_DIR / "dataset_info.json"
         info_path.write_text(json.dumps(info))
         print(f"Dataset info written: {count_k} matches, {updated}")

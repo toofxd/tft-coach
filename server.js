@@ -40,9 +40,9 @@ app.get("/", (req, res) => {
 // Name mappings from Community Dragon (loaded at startup)
 // ---------------------------------------------------------------------------
 
-let champNames = {};  // { "TFT17_Galio": "The Mighty Mech", ... }
-let itemNames = {};   // { "TFT17_Item_AstronautEmblemItem": "Meeple Emblem", ... }
-let traitNames = {};  // { "TFT17_Astronaut": "Astronaut", ... }
+let champNames = {};  // { "DA_18_Ahri": "Ahri", ... }  (Set 18 Riot match IDs)
+let itemNames = {};   // { "DA_EdgeOfNight": "Edge of Night", ... }
+let traitNames = {};  // { "DA_18_Elderwood": "Elderwood", ... }
 
 function httpsGet(url) {
   return new Promise((resolve, reject) => {
@@ -77,9 +77,10 @@ async function loadNameMappings() {
   }
 }
 
-function champName(id) { return champNames[id] || id.replace(/TFT\d+_/, ""); }
+// Fallbacks strip set prefixes: "TFT17_Galio", "DA_18_Ahri", "DA_Vi18"
+function champName(id) { return champNames[id] || id.replace(/^TFT\d+_|^DA_(\d+_)?/, "").replace(/\d*(_A[DP])?$/, ""); }
 function itemName(id) { return itemNames[id] || id.replace(/^DA_|TFT_Item_|TFT\d+_Item_/, "").replace(/([A-Z])/g, " $1").trim(); }
-function traitName(id) { return traitNames[id] || id.replace(/TFT\d+_/, ""); }
+function traitName(id) { return traitNames[id] || id.replace(/^TFT\d+_|^DA_(\d+_)?/, "").replace(/\d+$/, ""); }
 
 // ---------------------------------------------------------------------------
 // Load processed CSV data at startup
@@ -134,7 +135,7 @@ const metaInsights = (() => {
 
   // Top comps sorted by top4 rate (min 100 games for significance; skip malformed/unknown traits)
   const topComps = Object.entries(traitMap)
-    .filter(([trait, v]) => v.games >= 100 && trait && trait !== 'unknown' && trait.startsWith('TFT'))
+    .filter(([trait, v]) => v.games >= 100 && trait && trait !== 'unknown' && /^(TFT|DA_)/.test(trait))
     .map(([trait, v]) => ({
       trait,
       games: v.games,
@@ -300,6 +301,7 @@ function wilsonLower(p, n, z = 1.96) {
 // Rejects: components, invalid test items, etc.
 // Set 18 match data uses "DA_EdgeOfNight" rather than "TFT_Item_EdgeOfNight".
 function isJunkItem(id) {
+  if (id.includes('Component')) return true;  // "DA_Component_Spatula" is a component, not an item
   if (id.includes('Emblem') || id.includes('Spat')) return false;
   const key = id.replace(/^DA_|TFT\d*_Item_/, '');
   return !ttItemMap[key] && !calcData?.items?.[key]?.tags?.includes('Craftable');
@@ -911,8 +913,8 @@ app.post("/api/coaching", async (req, res) => {
   const benchBlock = bench ? `
 Challenger/GM benchmarks (${bench.games.toLocaleString()} games, top-4 data only unless noted):
 - Avg final level: ${bench.avgLevel.toFixed(1)} (top-4 winners)
-- Avg gold left unspent: ${bench.avgGoldLeft.toFixed(1)}g (top-4 winners) | ${mi ? mi.avgGoldLeft.first.toFixed(1) : "~10.7"}g (1st place only)
-- Avg level efficiency (level ÷ rounds played): ${bench.avgLevelEff.toFixed(3)} (top-4 winners) vs ${mi ? mi.avgLevelEff.bot4.toFixed(3) : "~0.296"} (bottom-4)
+- Avg gold left unspent: ${bench.avgGoldLeft.toFixed(1)}g (top-4 winners) | ${mi ? mi.avgGoldLeft.first.toFixed(1) + "g" : "n/a"} (1st place only)
+- Avg level efficiency (level ÷ rounds played): ${bench.avgLevelEff.toFixed(3)} (top-4 winners) vs ${mi ? mi.avgLevelEff.bot4.toFixed(3) : "n/a"} (bottom-4)
 - Overall top-4 rate across all pros: ${(bench.top4Rate * 100).toFixed(0)}%
 
 HOW TO READ THESE METRICS:
@@ -1027,7 +1029,7 @@ const traitStats = (() => {
       apiName,
       name: t.name,
       desc: t.desc || "",
-      breakpoints: t.breakpoints.map(b => b.minUnits),
+      breakpoints: t.breakpoints.map(b => b.minUnits).filter(n => n != null),
       units: units.filter(([, u]) => u.traits.includes(t.name))
         .map(([key, u]) => ({ key, name: u.name, cost: u.cost }))
         .sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name)),
@@ -1090,7 +1092,7 @@ app.post("/api/coach", async (req, res) => {
     const prompt = `You are a TFT (Teamfight Tactics) coaching assistant. A player just finished a game.
 Here is their performance compared to Challenger/GM-level players (dataset: ${bench ? bench.games.toLocaleString() : "N/A"} pro games):
 
-Comp: ${feats.topTrait}
+Comp: ${traitName(feats.topTrait)}
 Final placement: ${feats.placement}
 Level: ${feats.level} | Gold left: ${feats.goldLeft} | Eliminated round: ${feats.lastRound}
 Level efficiency: ${feats.levelEfficiency.toFixed(2)} ${pro ? `(Challenger avg for this comp: ${pro.avgLevelEff.toFixed(2)}, overall Challenger avg: ${bench ? bench.avgLevelEff.toFixed(2) : "N/A"})` : bench ? `(overall Challenger avg: ${bench.avgLevelEff.toFixed(2)})` : ""}

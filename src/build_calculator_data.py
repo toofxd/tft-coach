@@ -62,20 +62,20 @@ COMPONENT_IDS = {
 
 
 def build_emblems(cdragon_items, set_num):
-    """Craftable emblems straight from cdragon — tactics.tools lags behind on new sets."""
+    """This set's emblems straight from cdragon — tactics.tools lags behind on new sets.
+    Non-craftable ones (augment/encounter-only) are kept so item recs can name them."""
     emblems = {}
     for it in cdragon_items:
         api = it["apiName"]
         if not re.search(rf"_{set_num}_Emblem[A-Z]", api):
             continue
         comps = [COMPONENT_IDS.get(c.split("_Component_")[-1]) for c in it.get("composition") or []]
-        if len(comps) != 2 or None in comps:
-            continue  # augment-only / non-craftable emblems
+        craftable = len(comps) == 2 and None not in comps
         emblems[api] = {
             "name": it["name"],
             "id": it.get("id"),
-            "tags": ["CraftableEmblem"],
-            "from": comps,
+            "tags": ["CraftableEmblem"] if craftable else ["Emblem"],
+            "from": comps if craftable else [],
             "isAdaptive": False,
             "statBonuses": {},
             "allEffects": {},
@@ -302,7 +302,8 @@ def build_traits(tactics_traits, cdragon_traits):
     cd_by_api = {t["apiName"]: t for t in cdragon_traits}
 
     traits = {}
-    for api_name in tactics_traits:
+    # Union with cdragon: tactics.tools can miss traits (Set 18's Eclipse)
+    for api_name in list(tactics_traits) + [a for a in cd_by_api if a not in tactics_traits]:
         cd = cd_by_api.get(api_name)
         if not cd:
             continue
@@ -365,7 +366,8 @@ def build_items(tactics_items):
 
         for eff_key, val in effects.items():
             mapped = STAT_KEY_MAP.get(eff_key)
-            if mapped:
+            # DamageReduction >= 50 is a passive value (Edge of Night's revive), not a stat
+            if mapped and not (mapped == "dmgReduction" and val >= 50):
                 stat_bonuses[mapped] = stat_bonuses.get(mapped, 0) + val
             # Skip hash keys like {1543aa48}
             if not eff_key.startswith("{"):
@@ -388,6 +390,31 @@ def build_items(tactics_items):
     return items
 
 
+def rekey_legacy_items(items, cdragon_items):
+    """tactics.tools keys items by Riot's legacy internal IDs, which no longer match the names:
+    "GuardianAngel" is Edge of Night, and "RedBuff" is Sunfire Cape (Set 18 also has a separate,
+    real Red Buff). Set 18 match data uses honest IDs ("DA_EdgeOfNight", "DA_RedBuff"), so move
+    each item to the DA_ key with the same display name. Freed keys (e.g. RedBuff) are then
+    filled with the real item by build_cdragon_craftables()."""
+    norm = lambda s: re.sub(r"[^a-z]", "", s.lower())   # "Tacticians Crown" == "Tactician's Crown"
+    da = {}
+    for it in cdragon_items:
+        api = it["apiName"]
+        if api.startswith("DA_") and "Emblem" not in api and it.get("name"):
+            da.setdefault(norm(it["name"]), it)
+    out = {}
+    for key, v in items.items():
+        match = da.get(norm(v["name"] or ""))
+        target = match["apiName"][len("DA_"):] if match else key
+        if target in out or (target != key and target in items and items[target]["name"] == v["name"]):
+            target = key  # never clobber; an exact-name entry already owns that key
+        if target != key and match.get("icon"):
+            v = {**v, "icon": "https://raw.communitydragon.org/latest/game/"
+                              + match["icon"].lower().replace(".tex", ".png")}
+        out[target] = v
+    return out
+
+
 def main():
     print("Fetching tactics.tools data...")
     tactics = fetch_tactics_data()
@@ -406,6 +433,7 @@ def main():
     set_num = str(cdragon["number"])
     items = {k: v for k, v in items.items()
              if not (re.match(r"\d\d\D", k) and k[:2] != set_num)}
+    items = rekey_legacy_items(items, cdragon["allItems"])
     items.update(build_emblems(cdragon["allItems"], set_num))
     items.update(build_cdragon_craftables(cdragon["allItems"], items))
 
