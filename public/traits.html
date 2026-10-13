@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TFT Set 18 — Trait Cheat Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:      #0c2340;
+  --navy-card: #0e2850;
+  --navy-deep: #071830;
+  --gold:      #ae9142;
+  --gold-light:#c9a84c;
+  --text:      #f0ebe0;
+  --text-70:   rgba(240,235,224,0.7);
+  --text-50:   rgba(240,235,224,0.5);
+  --text-30:   rgba(240,235,224,0.3);
+  --border:    rgba(255,255,255,0.09);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  padding: 80px 20px 20px; /* 80px top clears the fixed nav */
+  min-height: 100vh;
+}
+a { color: inherit; }
+
+/* ── Sticky nav ────────────────────────────────────────────── */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.site-nav.scrolled {
+  background: rgba(12, 35, 64, 0.92);
+  border-color: var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ── Shimmer title (matches tiffanygaming.com "Featured Work" style) ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.nav-title {
+  font-family: 'Cinzel', serif;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-title-main {
+  color: #c9a84c;
+  -webkit-text-fill-color: #c9a84c;
+}
+.nav-title-by {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-30);
+  -webkit-text-fill-color: var(--text-30);
+}
+
+/* ── Right-side nav group ───────────────────────────────────── */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Tab buttons */
+.tab-btn {
+  padding: 8px 15px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-30);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+  transition: color 0.15s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  height: 62px;
+}
+.tab-btn:hover { color: var(--text-70); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* Vertical divider */
+.nav-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.18);
+  margin: 0 8px;
+  flex-shrink: 0;
+}
+
+/* Icon buttons (LinkedIn / Email) */
+.icon-btn {
+  width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  color: var(--text-50);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.icon-btn:hover {
+  background: rgba(174,145,66,0.18);
+  color: var(--gold-light);
+}
+
+/* ── Mobile hamburger ── */
+.hamburger-btn {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  padding: 8px; color: var(--text-50);
+  flex-direction: column; gap: 5px; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hamburger-btn span {
+  display: block; width: 22px; height: 2px;
+  background: currentColor; border-radius: 2px;
+}
+.mobile-menu {
+  display: none;
+  background: rgba(7,24,48,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-direction: column;
+  padding: 6px 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 13px 24px;
+  color: var(--text-50); text-decoration: none;
+  font-size: 14px; font-weight: 600; font-family: inherit;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a.active { color: var(--gold); }
+@media (max-width: 640px) {
+  .nav-right { display: none; }
+  .hamburger-btn { display: flex; }
+}
+
+/* ── Page header (below sticky nav) ──────────────────────────── */
+.page-header {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 20px;
+}
+.page-title { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: 0.01em; }
+.page-sub { font-size: 12px; color: var(--text-30); }
+
+/* ── Trait cheat sheet ─────────────────────────────────────────── */
+.how-to {
+  font-size: 13px; color: var(--text-70); line-height: 1.6;
+  background: var(--navy-card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 12px 14px; margin-bottom: 22px;
+}
+.how-to strong { color: var(--text); }
+.section { margin-bottom: 28px; }
+.section-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.section-sub { font-size: 12px; color: var(--text-50); margin-bottom: 12px; }
+.sec-good  .section-title { color: #6fcf8a; }
+.sec-maybe .section-title { color: #8fb8e8; }
+.sec-trap  .section-title { color: #e07a7a; }
+.trait-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 10px;
+}
+.trait-card {
+  background: var(--navy-card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 12px 14px; display: flex; flex-direction: column; gap: 7px;
+}
+.sec-good .trait-card { border-left: 3px solid #6fcf8a; }
+.sec-trap .trait-card { border-left: 3px solid #e07a7a; }
+.trait-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.trait-name { font-size: 15px; font-weight: 700; }
+.badge {
+  font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+  background: rgba(255,255,255,0.06); color: var(--text-70);
+}
+.badge.good { background: rgba(111,207,138,0.15); color: #6fcf8a; }
+.badge.bad  { background: rgba(224,122,122,0.15); color: #e07a7a; }
+.badge-wrap { text-align: right; }
+.games { font-size: 11px; color: var(--text-30); margin-top: 2px; }
+.bps { display: flex; gap: 4px; flex-wrap: wrap; }
+.bp {
+  font-size: 11px; font-weight: 700; color: var(--gold-light);
+  border: 1px solid rgba(174,145,66,0.35); border-radius: 4px; padding: 1px 6px;
+}
+.blurb { font-size: 13px; color: var(--text); line-height: 1.5; }
+.units { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; color: var(--text-70); }
+.unit { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.coin-cell { display: inline-flex; align-items: center; gap: 2px; color: var(--text-50); }
+.coin { width: 12px; height: 12px; }
+details { font-size: 12px; color: var(--text-50); line-height: 1.55; }
+details summary { cursor: pointer; color: var(--text-30); font-size: 11px; }
+details summary:hover { color: var(--text-70); }
+details p { margin-top: 6px; }
+.disclaimer {
+  margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border);
+  text-align: center; font-size: 11px; color: var(--text-30); line-height: 1.7;
+}
+.disclaimer a { color: var(--text-50); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-inner">
+
+    <!-- Left: big glowing title -->
+    <a href="https://tiffanygaming.com" class="nav-title">
+      <span class="nav-title-main">Tactician's Fundamentals</span><span class="nav-title-by">by Tiffany</span>
+    </a>
+
+    <!-- Right: tabs + social icons -->
+    <nav class="nav-right">
+      <a href="/about.html" class="tab-btn">About</a>
+      <a href="/calculator.html#coach" class="tab-btn">TFT Coach</a>
+      <a href="/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
+      <a href="/traits.html" class="tab-btn active">Traits</a>
+
+      <span class="nav-divider"></span>
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/tsangtiffany" target="_blank" rel="noopener noreferrer"
+         class="icon-btn" aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+
+      <!-- Email -->
+      <a href="mailto:ttsang@alumni.nd.edu" class="icon-btn" aria-label="Email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+      </a>
+    </nav>
+
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open navigation menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/about.html">About</a>
+    <a href="/calculator.html#coach">TFT Coach</a>
+    <a href="/calculator.html#calculator">Stat Calculator</a>
+    <a href="/traits.html" class="active">Traits</a>
+  </nav>
+</header>
+
+<div style="max-width:1060px;margin:0 auto;">
+  <div class="page-header">
+    <div class="page-title">Trait Cheat Sheet</div>
+    <div class="page-sub" id="pageSub">Set 18 · Enchanted Wilds</div>
+  </div>
+
+  <div class="how-to">
+    <strong>How to read this:</strong> the % is how often Challenger/GM players finished
+    <strong>top 4</strong> when that trait was their <em>main</em> trait. <strong>50% is average.</strong>
+    The small number under it is how many pro games that's based on — fewer games, less trust.
+    <br><strong>New to the set?</strong> Read only the green section first.
+  </div>
+
+  <div id="sections"><div class="section-sub">Loading traits…</div></div>
+
+  <div class="disclaimer">
+    <p style="margin-bottom:6px;"><strong style="color:#8a9aaa;">Data sources:</strong> trait text from <a href="https://communitydragon.org" target="_blank" rel="noopener">Community Dragon</a>; win rates from our Challenger/GM match dataset. Not guaranteed accurate.</p>
+    <p style="font-size:11px;color:#556070;line-height:1.6;max-width:760px;margin:0 auto 8px;">This tool isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
+    <p>Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener">Tiffany Tsang</a></p>
+  </div>
+</div>
+
+<script>
+// Plain-language one-liners for Set 18. Traits not listed fall back to the
+// first sentence of the official description. Update these each set.
+const BLURBS = {
+  "Executioner":    "Crit chance, then bleed damage on top.",
+  "Avatar":         "Lux copies a trait — and that trait counts twice.",
+  "Greenfather":    "Ivern grows bonus hexes on your board.",
+  "Primal":         "Pick 1 of 4 blessings.",
+  "Elderwood":      "You get trees to place on the board. More units = bigger forest.",
+  "Lunar":          "Attack speed + AP for Lunar units and the units next to them. Placement matters.",
+  "Inferno":        "Burn + healing cut. At 3+, it upgrades champions in your shop.",
+  "Riftbeast":      "Jungle monsters that grow every 5 seconds. At 10, +2 team size.",
+  "Rapidfire":      "Attack speed that stacks with every attack.",
+  "Spellweaver":    "Whole team gets AP; Spellweavers get more every cast.",
+  "Solar":          "Shield + magic damage, plus bonuses for each 3-star you own.",
+  "Coven":          "Collect essence from kills and losses, then cash it in. Complicated.",
+  "Bounty Seeker":  "Draven completes bounties for rewards. Draven is great; the bounties less so.",
+  "Thornmaiden":    "Team takes less damage while Zyra's plants are alive.",
+  "Sprykin":        "Ride a Big Furry Friend. Fun, but weak.",
+  "Blossom":        "Powered-up Wisps; at 5+, Wisps appear in every shop.",
+  "Juggernaut":     "Team takes less damage; Juggernauts more so.",
+  "Brawler":        "More max HP.",
+  "Defender":       "More armor + magic resist.",
+  "Vanguard":       "Shield at fight start and again at half HP.",
+  "Ravager":        "Lifesteal + bonus damage to low-HP enemies.",
+  "Hunter":         "AD, plus a damage bonus if it sticks to one target.",
+  "Invoker":        "Mana regen for the team; Invokers get more.",
+  "Adaptor":        "Gets AD or AP — whichever it already has more of.",
+  "Summoner":       "Stronger summons.",
+  "Fae":            "Pixies give AD/AP and healing, then start giving gold.",
+  "Blackthorn":     "Sacrifice a unit before combat to give your team HP.",
+  "Flora Fatalis":  "Mana on kills, then heals your lowest-HP ally.",
+  "Caustic":        "Shreds enemy armor and magic resist.",
+  "Rival":          "Play only ONE. Kha'Zix evolves; Rengar makes gold.",
+  "Emerald Aspect": "Drag an ally onto Taric to power it up.",
+  "Old Growth":     "Maokai gains permanent HP when enemies die nearby.",
+  "Attuned":        "Alune swaps between tankiness and damage with the moon.",
+  "Monolith":       "Malphite gets tankier the more enemies hit him.",
+  "Apex Predator":  "Elder Dragon takes 2 slots and counts as +2 Riftbeast.",
+};
+
+const COIN = '<img class="coin" src="/img/gold.webp" alt="">';
+const ESC_MAP = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+const esc = s => String(s).replace(/[&<>"']/g, c => ESC_MAP[c]);
+const firstSentence = d => (d.match(/^[^.]*\./) || [d])[0];
+
+// First matching section wins, so order matters
+const SECTIONS = [
+  { cls: "sec-good",  title: "🟢 Start here", sub: "Win often, backed by lots of games. Learn these first.",
+    test: t => t.top4Rate >= 0.55 && t.games >= 1000 },
+  { cls: "sec-maybe", title: "🔵 Strong but rare", sub: "Winning numbers, small sample. Try once you know the basics.",
+    test: t => t.top4Rate >= 0.55 && t.games >= 50 },
+  { cls: "sec-trap",  title: "🔴 Traps", sub: "Pros lose with these as their main trait. Skip until you know the set.",
+    test: t => t.top4Rate !== null && t.top4Rate < 0.40 && t.games >= 50 },
+  { cls: "",          title: "🟡 Comp traits", sub: "Average results. Fine to build around, or splash for the stats.",
+    test: t => t.units.length >= 3 },
+  { cls: "",          title: "⚪ One-unit specials", sub: "Come with a single champion (or a pair). Just know what they do.",
+    test: () => true },
+];
+
+function card(t) {
+  const pct = t.top4Rate === null ? null : Math.round(t.top4Rate * 100);
+  const badgeCls = pct === null ? "" : pct >= 55 ? "good" : pct < 40 ? "bad" : "";
+  const blurb = BLURBS[t.name] || firstSentence(t.desc);
+  const units = t.units.map(u =>
+    `<span class="unit">${esc(u.name)} <span class="coin-cell">${COIN}${esc(u.cost)}</span></span>`).join("");
+  return `<div class="trait-card">
+    <div class="trait-top">
+      <span class="trait-name">${esc(t.name)}</span>
+      <span class="badge-wrap">
+        <span class="badge ${badgeCls}">${pct === null ? "no data" : pct + "% top 4"}</span>
+        <div class="games">${t.games.toLocaleString()} games</div>
+      </span>
+    </div>
+    <div class="bps">${t.breakpoints.map(b => `<span class="bp">${esc(b)}</span>`).join("")}</div>
+    <div class="blurb">${esc(blurb)}</div>
+    <div class="units">${units}</div>
+    ${t.desc ? `<details><summary>Full description</summary><p>${esc(t.desc)}</p></details>` : ""}
+  </div>`;
+}
+
+fetch("/api/trait-stats")
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById("pageSub").textContent =
+      `Set ${data.set} · based on ${data.totalGames.toLocaleString()} Challenger/GM games`;
+    let left = data.traits.slice();
+    document.getElementById("sections").innerHTML = SECTIONS.map(s => {
+      const mine = left.filter(s.test).sort((a, b) => (b.top4Rate ?? 0) - (a.top4Rate ?? 0));
+      left = left.filter(t => !mine.includes(t));
+      if (!mine.length) return "";
+      return `<div class="section ${s.cls}">
+        <div class="section-title">${s.title}</div>
+        <div class="section-sub">${s.sub}</div>
+        <div class="trait-grid">${mine.map(card).join("")}</div>
+      </div>`;
+    }).join("");
+  })
+  .catch(() => {
+    document.getElementById("sections").innerHTML = '<div class="section-sub">Could not load traits.</div>';
+  });
+
+(function () {
+  const nav = document.getElementById("siteNav");
+  function onScroll() { nav.classList.toggle("scrolled", window.scrollY > 30); }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+function toggleMobileMenu() {
+  document.getElementById("mobileMenu").classList.toggle("open");
+}
+</script>
+</body>
+</html>

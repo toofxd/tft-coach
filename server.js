@@ -1008,6 +1008,39 @@ app.get("/api/meta-insights", (req, res) => {
   });
 });
 
+// GET /api/trait-stats — every current-set trait with its units, breakpoints, description,
+// and how often pros finished top 4 when it was their main (top_trait) trait.
+// Built once at startup from calculator_data.json + the pro match CSV.
+const traitStats = (() => {
+  if (!calcData) return [];
+  const byTrait = {};
+  for (const r of matchFeatures) {
+    const t = byTrait[r.top_trait] || (byTrait[r.top_trait] = { games: 0, top4: 0 });
+    t.games++; t.top4 += parseInt(r.top4) === 1 ? 1 : 0;
+  }
+  // Lux forms are one champion; list base Lux only
+  const units = Object.entries(calcData.units)
+    .filter(([k, u]) => u.cost > 0 && u.traits?.length && !(/_Lux_/.test(k) && !k.endsWith("_Lux_Base")));
+  return Object.entries(calcData.traits).map(([apiName, t]) => {
+    const s = byTrait[apiName] || { games: 0, top4: 0 };
+    return {
+      apiName,
+      name: t.name,
+      desc: t.desc || "",
+      breakpoints: t.breakpoints.map(b => b.minUnits),
+      units: units.filter(([, u]) => u.traits.includes(t.name))
+        .map(([key, u]) => ({ key, name: u.name, cost: u.cost }))
+        .sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name)),
+      games: s.games,
+      top4Rate: s.games ? s.top4 / s.games : null,
+    };
+  });
+})();
+
+app.get("/api/trait-stats", (_req, res) => {
+  res.json({ set: CURRENT_SET, totalGames: matchFeatures.length, traits: traitStats });
+});
+
 // GET /api/item-recs?unitId=TFT18_Caitlyn
 // Per-item top-4 rate: each game counts once per unique item the unit carried.
 // Scored by Wilson lower bound (95% CI) to penalise small samples.
