@@ -1129,6 +1129,17 @@ app.get("/api/champion-tips", async (req, res) => {
   const validItems = vocab.items.length ? vocab.items.join(", ") : "(not available)";
   const validTraits = vocab.traits.length ? vocab.traits.join(", ") : "(not available)";
 
+  // What this champion's traits actually do — stops the model guessing trait effects
+  const traitInfo = Object.values(calcDataFor(set)?.traits || {});
+  const traitDescs = (traits || "").split(",").map(n => n.trim()).filter(Boolean)
+    .map(n => traitInfo.find(t => t.name === n))
+    .filter(t => t && t.desc)
+    .map(t => `- ${t.name}: ${t.desc}`)
+    .join("\n");
+  const traitDescBlock = traitDescs
+    ? `\nWHAT ${name.toUpperCase()}'S TRAITS DO (authoritative; "X" = amount not published — never invent a number for it):\n${traitDescs}\n`
+    : "";
+
   // Trait-language example built from this champion's own first breakpoint, e.g. "3 Elderwood"
   const bp = (traitBreakpoints || "").match(/([^,(]+)\((\d+)/);
   const traitExample = bp ? `${bp[2]} ${bp[1].trim()}` : "3 of a trait";
@@ -1143,11 +1154,12 @@ Top items from Challenger data: ${topItems || "none provided"}${proItemBlock}
 
 VALID SET ${set} ITEMS (mention no other items): ${validItems}
 VALID SET ${set} TRAITS (mention no other traits): ${validTraits}
-
+${traitDescBlock}
 STRICT RULES — you must follow these exactly:
 - Only mention items from the VALID ITEMS list and traits from the VALID TRAITS list. Never mention traits, items, or mechanics from other sets.
 - Recommend items from the Challenger data first — they are what actually wins on this champion. Only add others if fewer than 3 are given.
 - Only reference this champion's trait breakpoints listed above. Do not make up breakpoint numbers.
+- Describe what a trait does ONLY using the trait descriptions above. If no description is given, name the trait level without explaining its effect.
 - Match items to the champion's role. Tanks and supports want durability items, not damage-carry items.
 - Be specific and concise. No filler. 1-2 sentences per section.
 - Use natural trait language: write "${traitExample}", never "the ${bp ? bp[1].trim() : "X"} ${bp ? bp[2] : "N"} breakpoint". Always put the number before the trait name.
@@ -1168,18 +1180,19 @@ CHAMPION: ${name} | Role: ${role}
 Traits (with valid breakpoints): ${traitBreakpoints || traits}
 VALID SET ${set} ITEMS: ${validItems}
 VALID SET ${set} TRAITS: ${validTraits}
-
+${traitDescBlock}
 TIPS TO REVIEW:
 ${draft}
 
 CHECK FOR AND FIX:
 - Any item not in VALID ITEMS, or any trait not in VALID TRAITS — replace with a valid one
+- Any claim about what a trait does that contradicts or goes beyond the trait descriptions — rewrite it to match the description
 - Damage-carry items recommended for a tank or support — replace with durability items
 - Trait language like "the X Y breakpoint" — rewrite as "${traitExample}"
 - Output must be exactly 3 sections: **Best Items:**, **When to Play:**, **Key Trait:**
 - **Best Items:** must start with exactly "${name} benefits from"`;
 
-    const clean = t => t.replace(/^(CHAMPION:.*|Traits \(with.*|VALID SET.*|TIPS TO REVIEW:\s*)\n?/gim, "").trim();
+    const clean = t => t.replace(/^(CHAMPION:.*|Traits \(with.*|VALID SET.*|WHAT .*TRAITS DO.*|TIPS TO REVIEW:\s*)\n?/gim, "").trim();
     let tips = clean(await callGroq(checkPrompt, 400).catch(() => draft));
     // Fact-checker occasionally drops the required opening — fall back to the draft if it was right
     if (!tipsWellFormed(tips, name) && tipsWellFormed(draft, name)) tips = clean(draft);

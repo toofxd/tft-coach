@@ -259,6 +259,43 @@ def build_units(tactics_units, cdragon_champs, en_locale):
     return units
 
 
+STAT_ICON_TEXT = {"scaleAS": "Attack Speed", "scaleAP": "AP", "scaleAD": "AD", "scaleHealth": "Health",
+                  "scaleArmor": "Armor", "scaleMR": "MR", "scaleMana": "Mana", "scaleCrit": "Crit"}
+
+
+def render_trait_desc(cd):
+    """Plain-text trait description with @Var@ placeholders filled per breakpoint.
+    Each <row> lines up with one entry in cd["effects"]; unknown variables become "X"
+    (cdragon hashes some names, e.g. {0f90e7a4})."""
+    effects = cd.get("effects") or []
+
+    def fill(text, vars_, min_units):
+        def sub(m):
+            name, mult = m.group(1), m.group(2)
+            if name == "MinUnits":
+                return str(min_units) if min_units is not None else "X"
+            val = vars_.get(name)
+            if val is None:
+                return "X"
+            val = val * float(mult) if mult else val
+            return f"{val:.0f}" if abs(val - round(val)) < 0.05 else f"{val:.1f}"
+        return re.sub(r"@([A-Za-z0-9_]+)(?:\*(\d+(?:\.\d+)?))?@", sub, text)
+
+    desc = cd.get("desc") or ""
+    rows = re.findall(r"<row>(.*?)</row>", desc, re.DOTALL)
+    header = re.sub(r"<row>.*?</row>", "", desc, flags=re.DOTALL)
+    first_vars = effects[0].get("variables", {}) if effects else {}
+    parts = [fill(header, first_vars, None)]
+    for i, row in enumerate(rows):
+        eff = effects[i] if i < len(effects) else {}
+        parts.append(fill(row, eff.get("variables", {}), eff.get("minUnits")))
+    text = " ".join(parts)
+    text = re.sub(r"%i:([A-Za-z]+)%", lambda m: STAT_ICON_TEXT.get(m.group(1), ""), text)
+    text = re.sub(r"<br\s*/?>", " ", text)
+    text = re.sub(r"<[^>]+>", "", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def build_traits(tactics_traits, cdragon_traits):
     """Build trait breakpoints from Community Dragon (more complete)."""
     # cdragon apiName → tactics name mapping
@@ -312,6 +349,7 @@ def build_traits(tactics_traits, cdragon_traits):
         traits[api_name] = {
             "name": cd["name"],
             "apiName": api_name,
+            "desc": render_trait_desc(cd),
             "breakpoints": breakpoints,
         }
     return traits

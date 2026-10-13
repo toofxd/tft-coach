@@ -3855,6 +3855,7 @@
     "DA_DravenUniqueTrait18": {
       "name": "Bounty Seeker",
       "apiName": "DA_DravenUniqueTrait18",
+      "desc": "Choose a bounty. Your strongest Draven can progress on the bounty to earn its reward. Upon completing a bounty, choose another.",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -3868,6 +3869,7 @@
     "DA_Emerald18": {
       "name": "Emerald Aspect",
       "apiName": "DA_Emerald18",
+      "desc": "Drag an ally onto your strongest Taric to pair them, granting the ally powerful bonuses from Taric's Ability.",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -3881,6 +3883,7 @@
     "DA_18_Maokai_UniqueTrait": {
       "name": "Old Growth",
       "apiName": "DA_18_Maokai_UniqueTrait",
+      "desc": "Whenever an enemy within X hexes dies, your strongest Old Growth champion gains X permanent max Health. Current: 0",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -3897,6 +3900,7 @@
     "DA_18_Coven": {
       "name": "Coven",
       "apiName": "DA_18_Coven",
+      "desc": "Gather Essence by killing champions, plus more by losing player combat. Beginning at X Essence, choose to convert Essence to rewards or continue gathering Essence. Each reward requires increasing amounts of Essence. (3) X Essence per kill, X Essence per loss (4) X per kill, X per loss (5) X per kill, X per loss (7) X per kill, X per loss",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -3947,6 +3951,7 @@
     "DA_18_Invoker": {
       "name": "Invoker",
       "apiName": "DA_18_Invoker",
+      "desc": "Your team gains Mana Regen, increased for Invokers. (2) 1 | X (3) 1 | X (4) 2 | X (5) 2 | X",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -3993,6 +3998,7 @@
     "DA_Riftbeast18": {
       "name": "Riftbeast",
       "apiName": "DA_Riftbeast18",
+      "desc": "(3) Use the Alpha Mark to grant a Riftbeast their unique Buff (5) Every X combats, your next shop is overrun with Riftbeasts. (7) On combat start and every 5 seconds Riftbeasts grow gaining X% AD X% AP X% Attack Speed +X Armor +X MR +X Health +X (10) +2 maximum team size",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -4039,6 +4045,7 @@
     "DA_18_Greenfather": {
       "name": "Greenfather",
       "apiName": "DA_18_Greenfather",
+      "desc": "Gain X seed when your strongest Ivern casts, plus X every combat. Ivern uses X seeds to grow a hex on your board that grants a bonus to its occupant. Seeds: 0 / X Current Biome:",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4056,6 +4063,7 @@
     "DA_18_Spellweaver": {
       "name": "Spellweaver",
       "apiName": "DA_18_Spellweaver",
+      "desc": "Your team gains 10% Ability Power. Spellweavers gain more, plus extra Ability Power whenever a Spellweaver casts an Ability. (2) X% AP, +1% AP per cast (4) X% AP, +1% AP per cast (6) X% AP, +2% AP per cast",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4095,6 +4103,7 @@
     "DA_18_Rival": {
       "name": "Rival",
       "apiName": "DA_18_Rival",
+      "desc": "(1) Only active while fielding 1 Rival. Rivals collect takedowns, gaining 3 if they takedown another Rival. (1) Rivals collect takedowns, gaining 3 if they takedown another Rival. Takedowns evolve Kha'Zix, permanently granting him your choice of Executioner, Rapidfire, Ravager, or Spellweaver. Rengar grants X/X/X gold every X takedowns. After X takedowns, your team gains X% Attack Damage plus X% AD per additional takedown. Kha'Zix Takedowns: 0 / 0 Rengar Takedowns: 0 Gold Earned: 0 (2) Rivals can be fielded together, and their abilities grant each other bonuses.",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4130,6 +4139,7 @@
     "DA_18_ZyraUniqueTrait": {
       "name": "Thornmaiden",
       "apiName": "DA_18_ZyraUniqueTrait",
+      "desc": "Your team gains 5% Durability, increased to X% if X or more Zyra plants are alive.",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4147,6 +4157,7 @@
     "DA_18_Slayer": {
       "name": "Ravager",
       "apiName": "DA_18_Slayer",
+      "desc": "Ravagers gain 10% Omnivamp. Additionally, Ravagers deal bonus damage, doubled against units below X% Health. (2) X% Bonus Damage (4) X% Bonus Damage (6) X% Bonus Damage",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4186,6 +4197,7 @@
     "DA_18_Summoner": {
       "name": "Summoner",
       "apiName": "DA_18_Summoner",
+      "desc": "Summoners empower their summons in different ways. Yorick: +X% Health Azir: +X% Damage Mama Beak: +45% Damage Zyra: +X Plant Attacks (2) Empower Summons (3) Improve each effect by 50%",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4216,6 +4228,7 @@
     "DA_18_Lunar": {
       "name": "Lunar",
       "apiName": "DA_18_Lunar",
+      "desc": "Lunar champions and adjacent allies gain Attack Speed and Ability Power. Lunar champions gain X% more. (2) 7% Attack Speed, 7% AP (3) 12% Attack Speed, 10% AP (4) 16% Attack Speed, 14% AP (5) 20% Attack Speed, 18% AP",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4274,6 +4287,7 @@
     "DA_18_Elderwood": {
       "name": "Elderwood",
       "apiName": "DA_18_Elderwood",
+      "desc": "Gain placeable Elderwood plants. (3) A Stonebark Tree and a Lifebloom (5) A second Stonebark Tree and Stonebark Trees gain X Health (7) and the Deepwood Protector (9) Plants star up to 2-star (11) Plants star up to 3-star and the forest comes to life",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -4331,6 +4345,7 @@
     "DA_18_Hunter": {
       "name": "Hunter",
       "apiName": "DA_18_Hunter",
+      "desc": "Hunters gain Attack Damage. If a Hunter hasn't swapped targets for X seconds, they gain 10% Damage Amp. (2) X% AD (3) X% AD (4) X% AD (5) X% AD",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4381,6 +4396,7 @@
     "DA_18_ApexPredator": {
       "name": "Apex Predator",
       "apiName": "DA_18_ApexPredator",
+      "desc": "Elder Dragon takes up 2 team slots and grants +2 to the Riftbeast trait.",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4394,6 +4410,7 @@
     "DA_18_Brawler": {
       "name": "Brawler",
       "apiName": "DA_18_Brawler",
+      "desc": "Your team gains X max Health. Brawlers gain more. (2) X% Health (4) X% Health (6) X% Health",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4430,6 +4447,7 @@
     "DA_Primal18": {
       "name": "Primal",
       "apiName": "DA_Primal18",
+      "desc": "Choose one of four Primal Blessings. (2) (4)",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4450,6 +4468,7 @@
     "DA_AluneUniqueTrait18": {
       "name": "Attuned",
       "apiName": "DA_AluneUniqueTrait18",
+      "desc": "Your strongest Alune cycles to a new phase of the moon after each cast. While the moon is at or below half full, your team gains 7% Durabilty. While above, your team gains 7% Damage Amp.",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4466,6 +4485,7 @@
     "DA_18_Rapidfire": {
       "name": "Rapidfire",
       "apiName": "DA_18_Rapidfire",
+      "desc": "Your team gains X% Attack Speed. Rapidfire champions gain more on every attack, up to 10 stacks. (2) +X% Attack Speed per Attack (3) +X% Attack Speed per Attack (4) +X% Attack Speed per Attack (5) +X% Attack Speed per Attack",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4516,6 +4536,7 @@
     "DA_18_Adaptor": {
       "name": "Adaptor",
       "apiName": "DA_18_Adaptor",
+      "desc": "Innate: Adaptor abilities change depending on if their Attack Damage or Ability Power is higher. Adaptors gain Ability Power or Attack Damage, depending on which is higher. (2) X% OR (3) X% OR (4) X% OR",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4549,6 +4570,7 @@
     "DA_FloraFatalis18": {
       "name": "Flora Fatalis",
       "apiName": "DA_FloraFatalis18",
+      "desc": "Flora Fatalis champions harvest enemies on takedown, gaining: (1) 10 Mana (2) and grant a 8% max Health heal to the lowest Health ally.",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4573,6 +4595,7 @@
     "DA_18_Blackthorn": {
       "name": "Blackthorn",
       "apiName": "DA_18_Blackthorn",
+      "desc": "The ally on the Blackthorn hex is sacrificed before combat, granting your champions Health. Blackthorn champions gain additional stats based on the sacrifice's Role, Star Level, and Cost. (2) 175 Health (4) 350 Health; Bonus is 30% stronger (6) 600 Health; Bonus is 60% stronger",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4614,6 +4637,7 @@
     "DA_18_Executioner": {
       "name": "Executioner",
       "apiName": "DA_18_Executioner",
+      "desc": "(2) Executioners gain Precision and 15% Critical Strike Chance. (3) Additionally, enemies bleed for X% bonus true damage over 3 seconds. (4) Bleed damage increased to X%.",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4648,6 +4672,7 @@
     "DA_18_Solar": {
       "name": "Solar",
       "apiName": "DA_18_Solar",
+      "desc": "(3) Your champions gain a 5% max Health shield and deal 8% bonus magic damage. Gain additional bonuses for each unique 3-star champion: 1 : Increase shield and magic damage by X% for each 3-star. X : X% Attack Speed and X ArmorMR X : Convert X% of the bonus magic damage to true damage. X : Every X seconds of combat, a 3-star champion ascends to 4-star.",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -4672,6 +4697,7 @@
     "DA_18_Battlemage": {
       "name": "Monolith",
       "apiName": "DA_18_Battlemage",
+      "desc": "Monoliths gain 10 Armor and Magic Resist for each enemy targeting them.",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4687,6 +4713,7 @@
     "DA_18_LuxUniqueTrait": {
       "name": "Avatar",
       "apiName": "DA_18_LuxUniqueTrait",
+      "desc": "Having an Avatar on your bench or board transforms all other Avatars in your shop to the Trait of that Avatar. An Avatar's chosen Trait is counted twice for Trait bonuses.",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4700,6 +4727,7 @@
     "DA_18_Caustic": {
       "name": "Caustic",
       "apiName": "DA_18_Caustic",
+      "desc": "Caustic damage 30% Shreds and Sunders enemies for 4 seconds. Shred: Reduce Magic Resist Sunder: Reduce Armor",
       "breakpoints": [
         {
           "minUnits": 1,
@@ -4716,6 +4744,7 @@
     "DA_18_Defender": {
       "name": "Defender",
       "apiName": "DA_18_Defender",
+      "desc": "Your team gains X Armor and Magic Resist. Defenders gain more. (2) X (4) X (6) X",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4752,6 +4781,7 @@
     "DA_18_Sprykin": {
       "name": "Sprykin",
       "apiName": "DA_18_Sprykin",
+      "desc": "Gain the Big Furry Friend. Drop a Sprykin on the BFF to pick its Rider. (3) The Rider gains 15% Health and 15% Attack Speed (5) 40% Health 35% Attack Speed, and X% of the BFF's Ability applies to your Sprykin champions. (7) 45% Health 45% Attack Speed, and X% of the BFF's Ability applies to your Sprykin champions.",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -4790,6 +4820,7 @@
     "DA_18_Fae": {
       "name": "Fae",
       "apiName": "DA_18_Fae",
+      "desc": "Your team's damage, healing, and shielding attracts Pixies. Each Pixie grants Fae champions Attack Damage and Ability Power, and after they fall below 50% Health, they heal for each Pixie. (2) 4.5% and 2.5% Heal. (4) 7% and 4% Heal. After attracting 7 Pixies, start attracting Golden Pixies instead which grant gold.",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4818,6 +4849,7 @@
     "DA_18_Vanguard": {
       "name": "Vanguard",
       "apiName": "DA_18_Vanguard",
+      "desc": "At Combat Start and after dropping below 50% Health, Vanguards gain a max Health Shield for 10 seconds. (2) 18% max Health (4) 30% max Health (6) 40% max Health. Gain X% Durability while Shielded.",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4858,6 +4890,7 @@
     "DA_18_Inferno": {
       "name": "Inferno",
       "apiName": "DA_18_Inferno",
+      "desc": "Inferno damage Burns and Wounds enemies for 3 seconds. Inferno Burns stack with other Burns. (2) X% Burn, 33% Wound (3) After combat, X of your shop slots without an Inferno champion ignites, rolling a champion one tier higher (5) Ignite X shop slots, X% Burn (7) Ignite X shop slots, X% Burn",
       "breakpoints": [
         {
           "minUnits": 2,
@@ -4907,6 +4940,7 @@
     "DA_18_Blossom": {
       "name": "Blossom",
       "apiName": "DA_18_Blossom",
+      "desc": "After combat, your Wisps are empowered. Blossom champions gain Attack Damage, Ability Power, and 10% max Health. (3) Wisps are upgraded, 12% ADAP (5) Wisps are in every shop, 30% ADAP (7) Gain X gold after buying a Wisp, 50% ADAP (9) You can buy 2 Wisps per round, 55% ADAP (11) Wisps overflow with power, 100% ADAP",
       "breakpoints": [
         {
           "minUnits": 3,
@@ -4974,6 +5008,7 @@
     "DA_Juggernaut18": {
       "name": "Juggernaut",
       "apiName": "DA_Juggernaut18",
+      "desc": "Your team gains Durability. Juggernauts gain more. (2) X% or X% (4) X% or X% (6) X% or X%",
       "breakpoints": [
         {
           "minUnits": 2,
