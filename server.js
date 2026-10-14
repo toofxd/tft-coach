@@ -659,6 +659,26 @@ function fmtAcademyAggregate(ta) {
 // Gemini API call
 // ---------------------------------------------------------------------------
 
+// Gemini failures (billing/quota/outage) reject with the real error so callers fall back
+// to Groq. After a billing or quota error, skip Gemini for 10 min instead of paying the
+// round-trip on every request.
+let geminiDownUntil = 0;
+const geminiAvailable = () => GEMINI_API_KEY && Date.now() >= geminiDownUntil;
+function geminiFailure(json, label) {
+  const err = json.error;
+  if (err) {
+    if ([402, 403, 429].includes(err.code) || err.status === "RESOURCE_EXHAUSTED") {
+      geminiDownUntil = Date.now() + 10 * 60 * 1000;
+    }
+    console.error(`${label} error ${err.code} ${err.status}: ${(err.message || "").slice(0, 200)}`);
+    return new Error(`Gemini ${err.code}: ${err.message || err.status}`);
+  }
+  const reason = json.candidates?.[0]?.finishReason || "unknown";
+  const blocked = json.promptFeedback?.blockReason;
+  console.error(`${label} empty response — finishReason:`, reason, "| blockReason:", blocked, "| raw:", JSON.stringify(json).slice(0, 400));
+  return new Error(`Gemini returned no text — reason: ${blocked || reason}`);
+}
+
 function callGemini(prompt) {
   return new Promise((resolve, reject) => {
     const body = JSON.stringify({
@@ -682,11 +702,7 @@ function callGemini(prompt) {
             const parts = json.candidates?.[0]?.content?.parts || [];
             const text = parts.find(p => !p.thought && p.text)?.text;
             if (text) return resolve(text);
-            // Log the full response so we can see what Gemini actually returned
-            const reason = json.candidates?.[0]?.finishReason || "unknown";
-            const blocked = json.promptFeedback?.blockReason;
-            console.error("Gemini empty response — finishReason:", reason, "| blockReason:", blocked, "| raw:", JSON.stringify(json).slice(0, 400));
-            resolve(`(Gemini returned no text — reason: ${blocked || reason})`);
+            reject(geminiFailure(json, "Gemini"));
           } catch (e) { reject(new Error("Failed to parse Gemini response: " + e.message)); }
         });
       }
@@ -726,10 +742,7 @@ function callGeminiWithSearch(prompt) {
             const parts = json.candidates?.[0]?.content?.parts || [];
             const text = parts.map(p => p.text || "").join("").trim();
             if (text) return resolve(text);
-            const reason = json.candidates?.[0]?.finishReason || "unknown";
-            const blocked = json.promptFeedback?.blockReason;
-            console.error("Gemini+Search empty response — finishReason:", reason, "| blockReason:", blocked, "| raw:", JSON.stringify(json).slice(0, 400));
-            resolve(`(Gemini returned no text — reason: ${blocked || reason})`);
+            reject(geminiFailure(json, "Gemini+Search"));
           } catch (e) { reject(new Error("Failed to parse Gemini+Search response: " + e.message)); }
         });
       }
@@ -792,11 +805,11 @@ function callGroq(prompt, maxTokens = 400) {
 // ---------------------------------------------------------------------------
 
 async function callAI(prompt, maxTokens = 600) {
-  // Try Gemini first if configured
-  if (GEMINI_API_KEY) {
+  // Try Gemini first if configured (and not in a billing/quota cool-down)
+  if (geminiAvailable()) {
     try {
       const result = await callGemini(prompt);
-      // callGemini resolves with "(Gemini returned no text..." on failure — detect that
+      // Defensive: older code paths returned "(Gemini …)" strings instead of rejecting
       if (result && !result.startsWith("(Gemini")) return result;
       console.warn("Gemini empty/error response — falling back to Groq");
     } catch (e) {
@@ -970,7 +983,7 @@ ${banditFocus ? banditFocus + "\n\n" : ""}FOCUS AREAS — address at least two o
   try {
     // Use Gemini with Google Search grounding for patch-aware coaching, fall back to Groq
     const coaching = GEMINI_API_KEY
-      ? await callGeminiWithSearch(prompt).catch(() => callAI(prompt, 700))
+      ? await (geminiAvailable() ? callGeminiWithSearch(prompt) : Promise.reject()).catch(() => callAI(prompt, 700))
       : await callAI(prompt, 700);
     res.json({ coaching, banditArm, banditLabel });
   } catch (e) {
@@ -1145,7 +1158,7 @@ Write 3–5 concise, specific coaching suggestions. Be direct and actionable. Us
     let coachingText = "(No AI API keys configured)";
     if (GEMINI_API_KEY || GROQ_API_KEY) {
       coachingText = GEMINI_API_KEY
-        ? await callGeminiWithSearch(prompt).catch(() => callAI(prompt, 500))
+        ? await (geminiAvailable() ? callGeminiWithSearch(prompt) : Promise.reject()).catch(() => callAI(prompt, 500))
         : await callAI(prompt, 500);
     }
 
@@ -1316,7 +1329,7 @@ Question: ${question}`;
   if (!GEMINI_API_KEY && !GROQ_API_KEY) return res.json({ answer: "(No AI API keys configured)" });
 
   // Try Gemini with Google Search grounding first — verifies answers against live web results
-  if (GEMINI_API_KEY) {
+  if (geminiAvailable()) {
     try {
       const answer = await callGeminiWithSearch(prompt);
       if (answer && !answer.startsWith("(Gemini")) return res.json({ answer });
@@ -1595,7 +1608,7 @@ Keep every bullet to 1–2 sentences. Name specific units, items, and augments.`
 
       let tips;
       try {
-        tips = await callGemini(prompt);
+        tips = await callAI(prompt, 600);   // Gemini → Groq fallback
       } catch (e) {
         tips = `(AI error: ${e.message})`;
       }
