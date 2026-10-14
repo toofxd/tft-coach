@@ -318,9 +318,25 @@ function riotGet(hostname, path) {
   });
 }
 
+// Finished matches never change, so cache them: repeat analyses (same player, or friends
+// who shared lobbies) cost no Riot requests. Locally, also reuse collect_pro.py's file cache.
+const matchCache = new Map();
+const MATCH_CACHE_MAX = 2000;
 async function getMatchDetails(matchId) {
-  return riotGet("americas.api.riotgames.com", `/tft/match/v1/matches/${matchId}`);
+  if (matchCache.has(matchId)) return matchCache.get(matchId);
+  let match = null;
+  if (!process.env.VERCEL) {
+    const f = path.join(__dirname, "data", "raw", "matches", `${path.basename(matchId)}.json`);
+    if (fs.existsSync(f)) { try { match = JSON.parse(fs.readFileSync(f, "utf8")); } catch {} }
+  }
+  if (!match) match = await riotGet("americas.api.riotgames.com", `/tft/match/v1/matches/${matchId}`);
+  if (matchCache.size >= MATCH_CACHE_MAX) matchCache.delete(matchCache.keys().next().value);
+  matchCache.set(matchId, match);
+  return match;
 }
+
+const isRateLimit = e => /Riot API 429/.test(e?.message || "");
+const RATE_LIMIT_MSG = "Riot's API limit was hit (dev keys allow 100 requests per 2 minutes). Wait 2 minutes and try again.";
 
 async function getRecentMatches(puuid, count = 5, start = 0) {
   const params = `count=${Math.min(count, 200)}&start=${start}&queue=1100`;
@@ -331,10 +347,12 @@ async function getRecentMatches(puuid, count = 5, start = 0) {
 // (20 req/sec, 100 req/2min — a burst of 200 simultaneous calls kills almost all of them)
 async function batchMatchDetails(matchIds, batchSize = 10, delayMs = 1100) {
   const results = [];
+  let rateLimited = 0;
   for (let i = 0; i < matchIds.length; i += batchSize) {
     const batch = matchIds.slice(i, i + batchSize);
     const batchResults = await Promise.all(
       batch.map(id => getMatchDetails(id).catch(e => {
+        if (isRateLimit(e)) rateLimited++;
         console.warn(`Match detail fetch failed (${id}):`, e.message);
         return null;
       }))
@@ -343,6 +361,11 @@ async function batchMatchDetails(matchIds, batchSize = 10, delayMs = 1100) {
     if (i + batchSize < matchIds.length) {
       await new Promise(r => setTimeout(r, delayMs));
     }
+  }
+  // Mostly rate-limited → surface it instead of silently analyzing almost no games
+  if (rateLimited && rateLimited >= matchIds.length / 2) {
+    const err = new Error("Riot API 429: too many match fetches were rate limited");
+    throw err;
   }
   return results;
 }
@@ -819,10 +842,10 @@ app.get("/api/profile", async (req, res) => {
     let rankInfo = null;
     try { rankInfo = await getRankInfo(puuid); } catch {}
 
-    // Fetch enough matches for all-Set-17 banner (capped at 50 to respect dev key rate limits)
-    // Promise.all with 200+ simultaneous Riot API calls causes most to 429-fail silently.
+    // Fetch enough matches for the all-set banner. Capped at 30: one analysis then costs
+    // ~33 Riot requests, so a dev key (100 per 2 min) handles ~3 fresh analyses per window.
     const count = Math.min(parseInt(req.query.count) || 20, 20);
-    const allCount = 50;
+    const allCount = 30;
     const fetchCount = Math.max(count, allCount);
     const matchIds = await getRecentMatches(puuid, fetchCount);
     // Fetch in batches of 10 with ~1s gaps to stay within 20 req/sec dev-key limit
@@ -860,6 +883,9 @@ app.get("/api/profile", async (req, res) => {
     };
 
     const allGames = allMatchesForSet.map(buildGame).filter(Boolean);
+    if (!allGames.length) {
+      return res.status(404).json({ error: "No ranked TFT games found for this Riot ID. Only ranked games are analyzed — play a ranked game this set, then try again." });
+    }
     const recentGames = allGames.slice(0, count);
 
     // Compute separate stat sets
@@ -872,7 +898,7 @@ app.get("/api/profile", async (req, res) => {
     res.json({
       puuid, rankInfo,
       games: recentGames,
-      // all-set-17 aggregates (for top banner)
+      // all-games-this-set aggregates (for top banner)
       allStats,
       // recent-games aggregates (for bottom banner + coaching)
       recentStats,
@@ -881,6 +907,7 @@ app.get("/api/profile", async (req, res) => {
       synergies, avgLevel, avgGoldLeft, avgLevelEff, topComps, goldWastedGames, avgBot4LevelEff
     });
   } catch (e) {
+    if (isRateLimit(e)) return res.status(429).json({ error: RATE_LIMIT_MSG });
     res.status(500).json({ error: e.message });
   }
 });
