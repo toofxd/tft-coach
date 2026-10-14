@@ -6,6 +6,7 @@ Train all TFT coaching models:
 """
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -30,43 +31,46 @@ print(f"Using device: {DEVICE}")
 # Shared preprocessing
 # ---------------------------------------------------------------------------
 
+# Only end-of-game state the player controls. Deliberately excluded:
+#   last_round, level_efficiency — when you were eliminated *is* your placement, so the
+#     model leans on them and counterfactuals on everything else go to ~0 (measured:
+#     fixing gold or stars moved predicted placement by 0.01–0.02 places).
+#   damage_to_players, players_eliminated — always 0 in Set 18 match data.
 NUMERIC_COLS = [
-    "level", "gold_left", "last_round", "level_efficiency",
-    "active_trait_count", "unit_star_avg",
-    "unit_count", "item_concentration", "damage_to_players", "players_eliminated",
+    "level", "gold_left", "active_trait_count", "unit_star_avg",
+    "unit_count", "item_concentration",
 ]
 CATEGORICAL_COLS = ["top_trait"]
 
+# Features the coach nudges to the Challenger/GM top-4 median, and which direction is "better"
+COUNTERFACTUAL_FEATURES = {"gold_left": "lower", "level": "higher", "unit_star_avg": "higher"}
 
-def load_and_prep(path: Path) -> tuple[np.ndarray, np.ndarray, dict]:
+
+def load_and_prep(path: Path) -> tuple[np.ndarray, np.ndarray, dict, pd.DataFrame]:
     """
-    Load match_features.csv, encode categoricals, scale numerics.
-    Returns (X, y, encoders) where y is placement (1–8).
+    Load match_features.csv, one-hot the top trait, scale numerics.
+    Returns (X, y, encoders, df) where y is placement 0–7.
     """
     df = pd.read_csv(path).dropna(subset=["placement"])
+    df["top_trait"] = df["top_trait"].fillna("unknown").astype(str)
 
-    encoders: dict = {}
+    # One-hot, not label-encoded: trait IDs have no order, and a single integer column
+    # made the model treat e.g. Rival as "between" two unrelated traits.
+    traits = sorted(df["top_trait"].unique())
+    trait_oh = (df["top_trait"].to_numpy(dtype=object)[:, None] == np.array(traits, dtype=object)[None, :]).astype(np.float32)
 
-    # Encode categoricals as integer IDs
-    cat_arrays = []
-    for col in CATEGORICAL_COLS:
-        le = LabelEncoder()
-        df[col] = df[col].fillna("unknown").astype(str)
-        encoded = le.fit_transform(df[col])
-        encoders[f"le_{col}"] = le
-        cat_arrays.append(encoded.reshape(-1, 1))
-
-    # Scale numerics
     scaler = StandardScaler()
     num_arr = scaler.fit_transform(df[NUMERIC_COLS].fillna(0))
-    encoders["scaler"] = scaler
-    encoders["numeric_cols"] = NUMERIC_COLS
-    encoders["categorical_cols"] = CATEGORICAL_COLS
 
-    X = np.hstack([num_arr] + cat_arrays).astype(np.float32)
+    encoders = {
+        "scaler": scaler,
+        "numeric_cols": NUMERIC_COLS,
+        "categorical_cols": CATEGORICAL_COLS,
+        "traits": traits,
+    }
+    X = np.hstack([num_arr, trait_oh]).astype(np.float32)
     y = df["placement"].values.astype(np.int64) - 1  # 0-indexed for CrossEntropy
-
-    return X, y, encoders
+    return X, y, encoders, df
 
 
 # ---------------------------------------------------------------------------
@@ -90,9 +94,16 @@ class PlacementMLP(nn.Module):
         return self.net(x)
 
 
-def train_mlp(df_path: Path, epochs: int = 50, lr: float = 1e-3) -> None:
+def expected_placement(logits: torch.Tensor) -> torch.Tensor:
+    """Probability-weighted placement (1–8) — smoother than argmax, so small nudges register."""
+    ranks = torch.arange(1, 9, dtype=torch.float32, device=logits.device)
+    return (torch.softmax(logits, dim=1) * ranks).sum(dim=1)
+
+
+def train_mlp(df_path: Path, epochs: int = 20, lr: float = 1e-3, batch_size: int = 512) -> None:
     print("\n=== Model A: MLP Placement Predictor ===")
-    X, y, encoders = load_and_prep(df_path)
+    torch.manual_seed(42)
+    X, y, encoders, df = load_and_prep(df_path)
 
     X_train, X_val, y_train, y_val = train_test_split(
         X, y, test_size=0.2, random_state=42, stratify=y
@@ -107,30 +118,66 @@ def train_mlp(df_path: Path, epochs: int = 50, lr: float = 1e-3) -> None:
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     criterion = nn.CrossEntropyLoss()
 
-    best_val_loss = float("inf")
+    best_val_loss, best_mae = float("inf"), None
     for epoch in range(epochs):
         model.train()
-        optimizer.zero_grad()
-        loss = criterion(model(X_tr), y_tr)
-        loss.backward()
-        optimizer.step()
+        perm = torch.randperm(len(X_tr), device=DEVICE)
+        for i in range(0, len(X_tr), batch_size):
+            idx = perm[i:i + batch_size]
+            optimizer.zero_grad()
+            criterion(model(X_tr[idx]), y_tr[idx]).backward()
+            optimizer.step()
 
-        if (epoch + 1) % 10 == 0:
-            model.eval()
-            with torch.no_grad():
-                val_loss = criterion(model(X_vl), y_vl).item()
-                preds = model(X_vl).argmax(dim=1).cpu().numpy()
-                acc = accuracy_score(y_val, preds)
-                mae = mean_absolute_error(y_val, preds)
-            print(f"  Epoch {epoch+1:3d} | val_loss={val_loss:.4f} | acc={acc:.3f} | MAE={mae:.2f}")
-            if val_loss < best_val_loss:
-                best_val_loss = val_loss
-                torch.save(model.state_dict(), MODELS_DIR / "mlp_best.pt")
+        model.eval()
+        with torch.no_grad():
+            logits = model(X_vl)
+            val_loss = criterion(logits, y_vl).item()
+            acc = accuracy_score(y_val, logits.argmax(dim=1).cpu().numpy())
+            mae = (expected_placement(logits) - (y_vl + 1)).abs().mean().item()
+        print(f"  Epoch {epoch+1:3d} | val_loss={val_loss:.4f} | acc={acc:.3f} | MAE(expected)={mae:.2f}")
+        if val_loss < best_val_loss:
+            best_val_loss, best_mae = val_loss, mae
+            torch.save(model.state_dict(), MODELS_DIR / "mlp_best.pt")
 
     # Save encoders alongside the model
     with open(MODELS_DIR / "mlp_encoders.pkl", "wb") as f:
         pickle.dump({**encoders, "input_dim": X.shape[1]}, f)
-    print(f"  Best val_loss={best_val_loss:.4f} | Model saved.")
+    print(f"  Best val_loss={best_val_loss:.4f} | MAE={best_mae:.2f} | Model saved.")
+
+    export_mlp_json(df, val_mae=best_mae)
+
+
+def export_mlp_json(df: pd.DataFrame, val_mae: float | None = None) -> None:
+    """
+    Write models/mlp_weights.json so server.js can run the MLP without Python.
+    Includes the scaler, trait vocabulary, and the Challenger/GM top-4 medians the coach
+    nudges each counterfactual feature toward.
+    """
+    with open(MODELS_DIR / "mlp_encoders.pkl", "rb") as f:
+        enc = pickle.load(f)
+    state = torch.load(MODELS_DIR / "mlp_best.pt", map_location="cpu")
+    linear_keys = sorted({k.rsplit(".", 1)[0] for k in state}, key=lambda k: int(k.split(".")[1]))
+    r = lambda a: np.round(a.astype(np.float64), 6).tolist()
+
+    top4 = df[df["placement"] <= 4]
+    targets = {
+        f: {"value": float(top4[f].median()), "better": better}
+        for f, better in COUNTERFACTUAL_FEATURES.items()
+    }
+    out = {
+        "trained_on": int(len(df)),
+        "val_mae": None if val_mae is None else round(val_mae, 3),
+        "numeric_cols": enc["numeric_cols"],
+        "scaler_mean": r(enc["scaler"].mean_),
+        "scaler_scale": r(enc["scaler"].scale_),
+        "traits": enc["traits"],
+        "layers": [{"W": r(state[f"{k}.weight"].numpy()), "b": r(state[f"{k}.bias"].numpy())} for k in linear_keys],
+        "counterfactual_targets": targets,
+    }
+    path = MODELS_DIR / "mlp_weights.json"
+    path.write_text(json.dumps(out, separators=(",", ":")))
+    print(f"  Exported {path.name} ({path.stat().st_size // 1024} KB) | targets: "
+          + ", ".join(f"{f}={t['value']:.3f}" for f, t in targets.items()))
 
 
 # ---------------------------------------------------------------------------
@@ -298,9 +345,15 @@ if __name__ == "__main__":
     features_path = PROCESSED_DIR / "match_features.csv"
     live_dir = Path(__file__).parent.parent / "data" / "live"
 
+    # python src/train.py           → all models
+    # python src/train.py mlp       → just the placement MLP (+ mlp_weights.json export)
+    only = set(sys.argv[1:])
     if not features_path.exists():
         print("No feature file found. Run: python src/features.py first.")
     else:
-        train_mlp(features_path)
-        train_clustering(features_path)
-        train_lstm(live_dir)
+        if not only or "mlp" in only:
+            train_mlp(features_path)
+        if not only or "kmeans" in only:
+            train_clustering(features_path)
+        if not only or "lstm" in only:
+            train_lstm(live_dir)

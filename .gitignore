@@ -2,7 +2,9 @@
 data/raw/
 data/live/
 data/my_matches/
-models/
+models/*
+# Exported MLP weights are read by server.js at runtime (counterfactual coaching), so they ship
+!models/mlp_weights.json
 __pycache__/
 *.pyc
 .ipynb_checkpoints/

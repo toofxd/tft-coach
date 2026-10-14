@@ -1819,7 +1819,7 @@ async function analyzeMatches() {
 
     // Step 2: send flat stats to coaching endpoint (same shape as the old loadProfile flow)
     const { avgPlacement, top4Count, wins, avgLevel, avgGoldLeft, avgLevelEff,
-            goldWastedGames, avgBot4LevelEff, topComps, synergies, games } = profile;
+            goldWastedGames, avgBot4LevelEff, topComps, synergies, games, modelWeaknesses } = profile;
     const matchIds = (games || []).map(g => g.matchId);
 
     const coachRes = await fetch('/api/coaching', {
@@ -1829,7 +1829,7 @@ async function analyzeMatches() {
         avgPlacement, top4Count, wins, total: analyzeCount,
         avgLevel, avgGoldLeft, avgLevelEff,
         goldWastedGames, avgBot4LevelEff,
-        topComps, synergies, matchIds,
+        topComps, synergies, matchIds, modelWeaknesses,
         puuid: profile.puuid,
         handle,
       }),
@@ -1838,8 +1838,12 @@ async function analyzeMatches() {
     const coachData = await coachRes.json();
     if (coachData.error) throw new Error(coachData.error);
 
+    // modelFocus.label comes from the server's fixed FEATURE_LABELS whitelist, never raw user input
+    const mf = coachData.modelFocus;
     const focusBadge = coachData.banditLabel
       ? `<div style="margin-bottom:10px;font-size:11px;color:rgba(240,235,224,0.45);letter-spacing:0.04em;">ADAPTIVE FOCUS &mdash; <span style="color:rgba(240,235,224,0.7);">${coachData.banditLabel}</span></div>`
+      : mf && mf.placesPerGame >= 0.1
+      ? `<div style="margin-bottom:10px;font-size:11px;color:rgba(240,235,224,0.45);letter-spacing:0.04em;">BIGGEST LEAK &mdash; <span style="color:rgba(240,235,224,0.7);">${mf.label}: ~${Number(mf.placesPerGame).toFixed(1)} places per game</span></div>`
       : '';
     resp.innerHTML = focusBadge + formatCoaching(coachData.coaching || 'No analysis returned.');
   } catch (e) {

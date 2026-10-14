@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const { parse } = require("csv-parse/sync");
 const { spawn } = require("child_process");
+const placementModel = require("./src/placement_model");
 
 const app = express();
 const PORT = process.env.PORT || 30002;
@@ -115,6 +116,11 @@ const challengerBench = (() => {
   const top4Rate    = w / all.length;
   return { avgLevelEff, avgGoldLeft, avgLevel, top4Rate, games: all.length, winnerGames: w };
 })();
+
+// Placement MLP (src/train.py → models/mlp_weights.json) for counterfactual coaching.
+// Missing file → coaching falls back to the static FOCUS AREAS.
+const mlp = placementModel.loadModel();
+console.log(mlp ? `Placement model: ${mlp.trained_on} games, val MAE ${mlp.val_mae}` : "Placement model: not found (run python src/train.py mlp)");
 
 // Pre-compute meta insights from the full Challenger/GM dataset.
 // Used by /api/meta-insights — no Riot API dependency.
@@ -900,6 +906,16 @@ app.get("/api/profile", async (req, res) => {
         traits,
         units,
         levelEfficiency: feats.levelEfficiency,
+        // Same columns as match_features.csv — input to the placement MLP, stripped before responding
+        modelFeatures: {
+          level: p.level || 1,
+          gold_left: p.gold_left || 0,
+          active_trait_count: feats.activeTraitCount,
+          unit_star_avg: feats.unitStarAvg,
+          unit_count: units.length,
+          item_concentration: feats.itemConcentration,
+          top_trait: feats.topTrait,
+        },
       };
     };
 
@@ -908,6 +924,16 @@ app.get("/api/profile", async (req, res) => {
       return res.status(404).json({ error: "No ranked TFT games found for this Riot ID. Only ranked games are analyzed — play a ranked game this set, then try again." });
     }
     const recentGames = allGames.slice(0, count);
+
+    // Counterfactual weaknesses: re-predict each game with one habit fixed to the
+    // Challenger value; the biggest predicted-placement gain is the biggest weakness.
+    let modelWeaknesses = null;
+    if (mlp) {
+      const { predicted, weaknesses } = placementModel.counterfactuals(mlp, recentGames.map(g => g.modelFeatures));
+      recentGames.forEach((g, i) => { g.predictedPlacement = predicted[i]; });
+      modelWeaknesses = weaknesses;
+    }
+    allGames.forEach(g => { delete g.modelFeatures; });
 
     // Compute separate stat sets
     const allStats = computeStats(allGames);
@@ -925,7 +951,8 @@ app.get("/api/profile", async (req, res) => {
       recentStats,
       // backwards compat flat fields
       avgPlacement, top4Count, wins, total: recentGames.length,
-      synergies, avgLevel, avgGoldLeft, avgLevelEff, topComps, goldWastedGames, avgBot4LevelEff
+      synergies, avgLevel, avgGoldLeft, avgLevelEff, topComps, goldWastedGames, avgBot4LevelEff,
+      modelWeaknesses,
     });
   } catch (e) {
     if (isRateLimit(e)) return res.status(429).json({ error: RATE_LIMIT_MSG });
@@ -966,6 +993,32 @@ HOW TO READ THESE METRICS:
   const banditArm = null;
   const banditLabel = null;
 
+  // Model-ranked weaknesses from /api/profile. Client-supplied, so keep only known
+  // features with finite numbers and rebuild the wording server-side.
+  const num = v => (typeof v === "number" && Number.isFinite(v) ? v : null);
+  const weaknesses = (Array.isArray(req.body.modelWeaknesses) ? req.body.modelWeaknesses : [])
+    .filter(w => w && placementModel.FEATURE_LABELS[w.feature])
+    .map(w => ({ ...placementModel.FEATURE_LABELS[w.feature], playerAvg: num(w.playerAvg), target: num(w.target),
+                 placesPerGame: num(w.placesPerGame), gamesAffected: num(w.gamesAffected), games: num(w.games) }))
+    .filter(w => w.playerAvg !== null && w.target !== null && w.placesPerGame !== null)
+    // Drop fixes the model says don't help. Gold left usually lands here: removing gold
+    // without buying anything with it doesn't improve a board — its real cost shows up
+    // as the level and star upgrades the player didn't buy.
+    .filter(w => w.placesPerGame >= 0.05)
+    .slice(0, 3);
+  const focusBlock = weaknesses.length ? `MODEL-RANKED WEAKNESSES — a placement model trained on ${mlp ? mlp.trained_on.toLocaleString() : "thousands of"} Challenger/GM games predicted each of this player's games, then re-predicted with one habit fixed to the Challenger top-4 value. Estimated placements gained per game, biggest first:
+${weaknesses.map((w, i) => `${i + 1}. ${w.label}: player avg ${w.playerAvg}${w.unit} vs Challenger ${w.target}${w.unit} → ~${w.placesPerGame.toFixed(1)} places per game${w.gamesAffected !== null && w.games ? ` (fix applies in ${w.gamesAffected}/${w.games} games)` : ""}`).join("\n")}
+
+FOCUS — build the coaching around this ranking:
+- Insight 1 must address weakness #1 with concrete in-game actions, and say roughly how many placements it is costing them. Name timings in TFT stage-round notation (e.g. "level to 8 at 4-1"), never "round 7".
+- Give each weakness attention in proportion to its estimated cost. A weakness worth under 0.1 places is not worth more than a sentence.
+- These are model estimates from end-of-game state: say "about" or "roughly", never present them as exact.
+- Also cover current patch context: use search to check what comps/augments/items are strong right now and whether this player's tendencies align or fight the meta.` : `FOCUS AREAS — address at least two of these if the data supports it:
+- Gold economy: Is this player hoarding (too much gold left) or panic-spending (too little)? What should they do at specific round intervals?
+- Leveling: Their level efficiency vs Challenger/GM tells a story. What is that story and what should change?
+- Comp consistency and when to pivot vs commit.
+- Current patch context: use search to check what comps/augments/items are strong right now and whether this player's tendencies align or fight the meta.`;
+
   const prompt = `You are an expert TFT (Teamfight Tactics) coach. Below is a player's data for their last ${total} games. Use it to write 4–6 coaching insights.
 
 FORMAT RULES — follow exactly:
@@ -981,11 +1034,7 @@ PLAYER DATA (last ${total} games, for your reference only — do not echo these 
 - Most-played comps: ${compSummary || "N/A"}
 - Best comps by placement: ${synSummary || "N/A"}
 ${benchBlock}
-${banditFocus ? banditFocus + "\n\n" : ""}FOCUS AREAS — address at least two of these if the data supports it:
-- Gold economy: Is this player hoarding (too much gold left) or panic-spending (too little)? What should they do at specific round intervals?
-- Leveling: Their level efficiency vs Challenger/GM tells a story. What is that story and what should change?
-- Comp consistency and when to pivot vs commit.
-- Current patch context: use search to check what comps/augments/items are strong right now and whether this player's tendencies align or fight the meta.`;
+${banditFocus ? banditFocus + "\n\n" : ""}${focusBlock}`;
 
   if (!GEMINI_API_KEY && !GROQ_API_KEY) return res.json({ coaching: "(No AI API keys configured)" });
   try {
@@ -993,7 +1042,7 @@ ${banditFocus ? banditFocus + "\n\n" : ""}FOCUS AREAS — address at least two o
     const coaching = GEMINI_API_KEY
       ? await (geminiAvailable() ? callGeminiWithSearch(prompt) : Promise.reject()).catch(() => callAI(prompt, 700))
       : await callAI(prompt, 700);
-    res.json({ coaching, banditArm, banditLabel });
+    res.json({ coaching, banditArm, banditLabel, modelFocus: weaknesses[0] || null });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

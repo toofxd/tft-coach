@@ -10,6 +10,7 @@
           "data/processed/item_winrates.csv",
           "data/static/calculator_data.json",
           "data/archive/**",
+          "models/mlp_weights.json",
           "public/**"
         ],
         "maxDuration": 60
