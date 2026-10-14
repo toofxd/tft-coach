@@ -357,7 +357,7 @@ The Groq prompt for champion tips enforces a specific output format — **do not
 
 Current set: **Stat Calculator** + **TFT Coach** (`public/calculator.html`), **Traits** (`public/traits.html`, data from `/api/trait-stats`; plain-language `BLURBS` are hand-written per set), plus `public/about.html`.
 
-**Hand-maintained per set (re-check every new set):** `ODDS_DATA` (shop odds) and `LEVELING_DATA` in `public/calculator.html`, takeaways copy in `loadMetaInsights()`, `BLURBS` in `public/traits.html`, `SET_PATCH` in `server.js`.
+**Hand-maintained per set (re-check every new set):** `ODDS_DATA` (shop odds) and `LEVELING_DATA` in `public/calculator.html`, takeaways copy in `loadMetaInsights()`, `BLURBS` in `public/traits.html`, `SET_PATCH` and `HIDDEN_TRAITS` (unlock rules the AI needs, e.g. Eclipse) in `server.js`.
 
 **Set 17 archive** lives in `public/17/` (`calculator.html`, `gods.html`) with frozen data in
 `data/archive/17/` (`item_winrates.csv`, `calculator_data.json`). Archive pages call the API with

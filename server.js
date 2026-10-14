@@ -235,21 +235,29 @@ const champSheet = calcData
       .join("\n")
   : null;
 
+// Hidden traits: no champion carries them and they have no unit-count breakpoints, so the
+// sheet below can't express how to unlock them. Update per set (hand-maintained).
+const HIDDEN_TRAITS = {
+  Eclipse: "hidden trait, no champion has it — turns on automatically with 3 Solar + 3 Lunar champions on the board; after 8 seconds of combat it kills the lowest-HP enemy, repeating about every 3.5 seconds",
+};
+
 // Compact trait sheet: name + valid breakpoints only. Deduplicate by name (keep the entry
 // with the most breakpoints when there are multiple under the same display name).
 const traitSheet = calcData
   ? (() => {
       const seen = {};
       for (const t of Object.values(calcData.traits)) {
-        if (!t.breakpoints.length) continue; // skip empty (e.g. Choose Trait)
-        if (!seen[t.name] || t.breakpoints.length > seen[t.name].breakpoints.length) {
-          seen[t.name] = t;
-        }
+        const bps = t.breakpoints.map(b => b.minUnits).filter(n => n != null);
+        if (!bps.length) continue; // skip empty (e.g. Choose Trait) and hidden traits (listed below)
+        if (!seen[t.name] || bps.length > seen[t.name].bps.length) seen[t.name] = { name: t.name, bps };
       }
-      return Object.values(seen)
+      const sheet = Object.values(seen)
         .sort((a, b) => a.name.localeCompare(b.name))
-        .map(t => `${t.name} (${t.breakpoints.map(b => b.minUnits).join("/")}`)
-        .join("), ") + ")";
+        .map(t => `${t.name} (${t.bps.join("/")})`)
+        .join(", ");
+      const hidden = Object.entries(HIDDEN_TRAITS).map(([n, how]) => `${n}: ${how}`).join("; ");
+      return hidden ? `${sheet}
+Hidden traits — ${hidden}` : sheet;
     })()
   : null;
 
