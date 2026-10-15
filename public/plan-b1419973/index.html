@@ -349,6 +349,10 @@ a { color: inherit; }
 .it.on { background: rgba(174,145,66,0.12); color: var(--text); }
 .it.on .w { color: var(--gold-light); }
 @media (max-width: 640px) { .it { grid-template-columns: 1fr; gap: 2px; } }
+.type-card .go { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.type-card .go b { color: var(--gold-light); font-weight: 800; }
+.aug-pick { cursor: pointer; font-family: inherit; }
+.aug-pick:hover { border-color: rgba(174,145,66,0.6); color: var(--text); }
 .loading { font-size: 13px; color: var(--text-50); padding: 10px 0; }
 .err { font-size: 13px; color: #ff8a80; padding: 8px 0; }
 .model { font-size: 11px; color: var(--text-30); margin-top: 8px; }
@@ -701,25 +705,12 @@ function nodeStage(comp, stage, i) {
     return node(n, { title, choice: `${esc(taken)}${a?.tier ? ` <span class="t-${esc(a.tier)}" style="font-size:11px">${esc(a.tier)}</span>` : ""}`, done: true,
       change: `stage:${stage}`, body: roll });
   }
-  const tab = S.tab[stage] || "aim";
-  const tabs = `<div class="tabs"><button class="${tab === "aim" ? "on" : ""}" data-act="tab" data-st="${stage}" data-v="aim">What to aim for</button>
-    <button class="${tab === "offers" ? "on" : ""}" data-act="tab" data-st="${stage}" data-v="offers">Rank my 3 offers</button></div>`;
-  const listId = `augs-${stage}`;
-  const legal = DATA.augments.filter(a => a.stages.includes(stage) && !Object.values(S.augs).includes(a.name));
-  const datalist = `<datalist id="${listId}">${legal.map(a => `<option value="${esc(a.name)}">`).join("")}</datalist>`;
-  let body = roll + tabs + datalist;
-  if (tab === "offers") {
-    const offers = S.offers[stage] || ["", "", ""];
-    body += `<div class="offer-row">${[0, 1, 2].map(k => `<input class="aug-in" list="${listId}" data-offer="${stage}" data-k="${k}" placeholder="Offer ${k + 1}" value="${esc(offers[k] || "")}">`).join("")}
-      <button class="btn" data-act="rank" data-st="${stage}">Rank</button></div>`;
-  }
-  body += `<div style="margin-top:10px">${rulesHtml(comp, stage)}</div>
-
-    <div class="lbl" style="margin-top:14px">Search any augment</div>
-    <div class="offer-row"><input class="aug-in" type="search" autocomplete="off" data-search="aug" data-st="${stage}"
-      placeholder="Type an augment to see how it fits and lock it in" value="${esc((S.augQuery || {})[stage] || "")}"></div>
-    <div id="augMatches-${stage}" style="margin-top:8px">${augMatchesHtml(comp, stage)}</div>`;
-  return node(n, { title, sub: "Pick one to continue the tree", body });
+  const body = `<div class="offer-row"><input class="aug-in" type="search" autocomplete="off" data-search="aug" data-st="${stage}"
+      placeholder="Type the augment you took" value="${esc((S.augQuery || {})[stage] || "")}"></div>
+    <div id="augMatches-${stage}" style="margin-top:6px">${augMatchesHtml(comp, stage)}</div>
+    ${augTypeCard(comp, stage)}
+    <div style="margin-top:10px">${roll}</div>`;
+  return node(n, { title, sub: "Log what you took to continue", body });
 }
 
 function nodeLate(comp) {
@@ -827,30 +818,61 @@ function augMatchesHtml(comp, stage) {
   if (!q) return "";
   const chosen = chosenBefore(stage);
   const hits = DATA.augments.filter(a => a.stages.includes(stage) && !chosen.includes(a.name) && norm(a.name).includes(q))
-    .map(a => ({ ...a, ...ruleScore(a, comp, stage, chosen) }))
-    .sort((x, y) => (norm(y.name).startsWith(q) - norm(x.name).startsWith(q)) || y.score - x.score).slice(0, 5);
+    .sort((x, y) => norm(y.name).startsWith(q) - norm(x.name).startsWith(q) || x.name.localeCompare(y.name)).slice(0, 8);
   if (!hits.length) return `<div class="muted">No ${stage} augment matches that.</div>`;
-  const verdict = sc => sc >= 8 ? "Great fit" : sc >= 3 ? "Good fit" : sc >= 0 ? "Neutral" : "Bad fit";
-  return `<div class="picks">${hits.map((a, i) => pickHtml({ name: a.name, tier: a.tier, icon: a.icon, desc: a.desc, stage,
-    why: `${verdict(a.score)}${a.why.length ? " — " + a.why.slice(0, 2).join(" · ") : ""}` }, i)).join("")}</div>`;
+  return `<div class="chips">${hits.map(a => `<button class="chip aug-pick" data-act="took" data-st="${stage}" data-v="${esc(a.name)}">${esc(a.name)}</button>`).join("")}</div>`;
+}
+
+const AUG_TYPES = { Econ: "econ", Items: "items", Combat: "combat", Emblem: "trait" };
+
+function augTypeVerdict(comp, stage, chosen) {
+  const score = { Econ: 0, Items: 0, Combat: 0, Emblem: 0 }, why = { Econ: [], Items: [], Combat: [], Emblem: [] };
+  const add = (t, pts, reason) => { score[t] += pts; if (reason) why[t].push([pts, reason]); };
+  comp.augmentTypes.forEach((t, i) => { if (t in score) add(t, 3 - i, i === 0 ? `TFT Academy's top priority for ${comp.short}` : ""); });
+  const prev = chosen.map(augByName).filter(Boolean);
+  const took = tag => prev.some(p => (p.tags || []).includes(tag));
+  const hp = +S.hp || 0, fast9 = comp.strategy === "fast9", reroll = comp.strategy.startsWith("reroll");
+  if (stage === "2-1") {
+    if (S.streak === "lose") add("Econ", 3, "You're lose streaking — econ pays off most now");
+    if (S.streak === "win") { add("Items", 2, "Items keep your win streak going"); add("Combat", 1, ""); }
+    if (fast9) add("Econ", 1, "Fast 9 needs gold to level");
+    if (reroll) add("Items", 1, "Reroll carries spike on early items");
+  } else {
+    if (took("econ")) { add("Econ", -3, ""); add("Items", 2, "You already took econ — cash it in on items"); add("Combat", 1, ""); }
+    if (hp && hp < 50) { add("Combat", 3, `At ${hp} HP you need board strength now`); add("Econ", -3, ""); }
+    if (stage === "3-2" && fast9 && (!hp || hp >= 60) && !took("econ")) add("Econ", 1, "Healthy fast 9 can still greed");
+    if (stage === "4-2") {
+      add("Combat", 2, "Stage 4 is decided by board strength");
+      if (!fast9) add("Econ", -2, "");
+    }
+    if (took("trait")) add("Emblem", 2, "Double down on your earlier trait augment");
+  }
+  const ranked = Object.keys(score).sort((a, b) => score[b] - score[a]);
+  const pick = ranked[0];
+  const reasons = why[pick].sort((a, b) => b[0] - a[0]).map(w => w[1]);
+  return { type: pick, next: ranked[1], reasons };
+}
+
+function augTypeCard(comp, stage) {
+  const chosen = chosenBefore(stage);
+  const v = augTypeVerdict(comp, stage, chosen);
+  const ideal = type => DATA.augments
+    .filter(a => a.stages.includes(stage) && !chosen.includes(a.name) && (a.tags || []).includes(AUG_TYPES[type])
+      && (type === "Econ" || !(a.tags || []).includes("econ")))
+    .map(a => ({ a, sc: ruleScore(a, comp, stage, chosen).score }))
+    .filter(x => x.sc > 0).sort((x, y) => y.sc - x.sc).slice(0, 4).map(x => x.a.name);
+  const names = ideal(v.type);
+  return `<div class="card type-card">
+    <div class="lbl">Augment to take</div>
+    <div class="go">Go <b>${esc(v.type)}</b></div>
+    ${v.reasons.length ? `<div class="items-list">${esc(v.reasons.slice(0, 2).join(" · "))}</div>` : ""}
+    ${names.length ? `<div class="chips" style="margin-top:8px">${names.map(n => `<span class="chip gold">${esc(n)}</span>`).join("")}</div>` : ""}
+    <div class="muted" style="margin-top:8px">If none show up: ${esc(v.next)}</div>
+  </div>`;
 }
 
 function chosenBefore(stage) {
   return STAGES.slice(0, STAGES.indexOf(stage)).map(st => S.augs[st]).filter(Boolean);
-}
-
-function rulesHtml(comp, stage) {
-  const chosen = chosenBefore(stage);
-  const offers = S.tab[stage] === "offers" ? (S.offers[stage] || []).map(augByName).filter(Boolean) : null;
-  if (offers && !offers.length) return `<div class="muted">Type the 3 augments you were offered, then Rank.</div>`;
-  const pool = offers || DATA.augments.filter(a => a.stages.includes(stage) && !chosen.includes(a.name));
-  let ranked = pool.map(a => ({ ...a, ...ruleScore(a, comp, stage, chosen) }))
-    .sort((x, y) => y.score - x.score);
-  if (!offers) ranked = ranked.filter(a => a.score > 2).slice(0, 6);
-  if (!ranked.length) return `<div class="muted">No strong rule-based targets here — take whatever makes your board stronger right now.</div>`;
-  const row = (a, i) => pickHtml({ name: a.name, tier: a.tier, icon: a.icon, desc: a.desc, stage,
-    why: a.why.slice(0, 2).join(" · ") || (a.score < 0 ? "Doesn't fit this comp" : "Generic pick") }, i);
-  return `<div class="lbl">${offers ? "Your offers, ranked" : "Shoot for these"}</div><div class="picks">${ranked.map(row).join("")}</div>`;
 }
 
 // ── AI picks (only when asked) ───────────────────────────────────────
