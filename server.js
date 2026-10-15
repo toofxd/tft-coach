@@ -1410,6 +1410,204 @@ Question: ${question}`;
 });
 
 // ---------------------------------------------------------------------------
+// Game Plan tree (public/gameplan.html): opener → comp → augments at 2-1/3-2/4-2
+// + roll/level timing. Data from src/build_gameplan_data.py (bunnymuffins.lol
+// guides + tactics.tools augment list) and gameplan_notes.json (distilled from
+// coaching video transcripts). The guide text grounds the AI only — the page gets
+// structured facts.
+// ---------------------------------------------------------------------------
+
+const readStaticJson = (name) => {
+  const p = path.join(__dirname, "data", "static", name);
+  return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : null;
+};
+const gameplanData = readStaticJson("gameplan_data.json");
+const gameplanNotes = readStaticJson("gameplan_notes.json");
+const GP_STAGES = ["2-1", "3-2", "4-2"];
+const gpKey = (s) => String(s).toLowerCase().replace(/[^a-z0-9+]/g, "");
+const gpAugByName = new Map(
+  Object.values(gameplanData?.augments || {}).map(a => [gpKey(a.name), a])
+);
+
+// Hidden page (public/plan-*/ has a noindex meta): keep its data API out of search engines too
+app.use(["/api/gameplan", "/api/gameplan-augments"], (_req, res, next) => {
+  res.set("X-Robots-Tag", "noindex, nofollow");
+  next();
+});
+
+app.get("/api/gameplan", (_req, res) => {
+  if (!gameplanData) return res.status(503).json({ error: "Game plan data not built — run src/build_gameplan_data.py" });
+  const comps = gameplanData.comps.map(c => ({
+    id: c.id, name: c.name, short: c.short.trim(), tier: c.tier, style: c.style, strategy: c.strategy,
+    difficulty: c.difficulty, mainChampion: c.mainChampion, traits: c.traits, augments: c.augments, augmentTypes: c.augmentTypes,
+    carousel: c.carousel, earlyComp: c.earlyComp, finalComp: c.finalComp, url: c.url,
+    leveling: c.leveling, levelingNotes: c.levelingNotes,
+    bm: c.bm && { name: c.bm.name, conditions: c.bm.conditions, itemHolders: c.bm.itemHolders, bis: c.bm.augments?.bis || [],
+                  teamCode: c.bm.teamCode, builderUrl: c.bm.builderUrl },
+  }));
+  const augments = Object.values(gameplanData.augments)
+    .filter(a => a.stages.length)
+    .map(a => ({ name: a.name, tier: a.tier, stages: a.stages, desc: a.desc, icon: a.icon, tags: a.tags, traits: a.traits }));
+  res.json({
+    patch: gameplanData.patch, updated: gameplanData.updated, comps, augments,
+    bmCompToTfta: gameplanData.bmCompToTfta,
+    openerRules: gameplanData.openerGuide.rules, hardForce: gameplanData.openerGuide.hardForce,
+  });
+});
+
+// Simple per-IP limiter: each call can hit Gemini+Search (5,000 free/month)
+const gpHits = new Map();
+function gpRateLimited(ip, limit = 20, windowMs = 60_000) {
+  const now = Date.now();
+  const hits = (gpHits.get(ip) || []).filter(t => now - t < windowMs);
+  hits.push(now);
+  gpHits.set(ip, hits);
+  return hits.length > limit;
+}
+
+const gpCache = new Map(); // key → { at, body }
+const GP_CACHE_MS = 6 * 60 * 60 * 1000;
+
+// Shortlist the augments worth showing the AI — Groq's free tier caps a request at
+// 8k tokens, and 150+ augments with descriptions blow past that.
+const GP_STRAT_WORDS = {
+  fast9: /fast 9|fast 8\/9|level 9|econ|5 cost/i, fast8: /fast 8|fast 8\/9|econ|4 cost/i,
+  reroll1: /reroll|1 cost|1-cost|1-3 cost/i, reroll2: /reroll|2 cost|1\/2 cost/i, reroll3: /reroll|3 cost|1-3 cost/i,
+};
+const GP_TYPE_WORDS = { Econ: /econ|gold|interest|xp/i, Items: /item|component|anvil|forge/i,
+  Combat: /combat|tank|carry|frontline/i, Emblems: /emblem|trait/i, Trait: /emblem|trait/i, Reroll: /reroll/i };
+function gpShortlist(comp, candidates, max = 40) {
+  const recommended = new Set(comp.augments.map(gpKey));
+  (comp.bm?.augments?.bis || []).forEach(a => recommended.add(gpKey(a)));
+  const words = comp.short.toLowerCase().split(/\W+/).filter(w => w.length > 3);
+  const stratRe = GP_STRAT_WORDS[comp.strategy];
+  const types = comp.augmentTypes.map(t => GP_TYPE_WORDS[t]).filter(Boolean);
+  const score = (a) => {
+    const g = `${a.guide || ""} ${a.name}`;
+    let s = recommended.has(gpKey(a.name)) ? 20 : 0;
+    if (stratRe?.test(g)) s += 4;
+    if (words.some(w => g.toLowerCase().includes(w))) s += 4;
+    types.forEach((re, i) => { if (re.test(g)) s += 3 - i; });
+    if (/generic/i.test(g)) s += 1;
+    if (!a.guide) s -= 1;
+    return s;
+  };
+  return candidates.map(a => [score(a), a]).sort((x, y) => y[0] - x[0]).slice(0, max).map(x => x[1]);
+}
+
+function gpNotesFor(comp, stage, candidateNames) {
+  const n = gameplanNotes;
+  if (!n) return "";
+  const lower = new Set(candidateNames.map(gpKey));
+  const words = comp.short.toLowerCase().split(/\W+/).filter(w => w.length > 3 && !/reroll|fast|flex/.test(w));
+  const list = (arr, max) => (arr || []).slice(0, max).map(s => `- ${s}`).join("\n");
+  return [
+    stage === "2-1" && `Early game:\n${list(n.earlyGame, 8)}`,
+    `Augment principles:\n${list(n.augmentPrinciples, 8)}`,
+    `Augment notes:\n${(n.augmentSpecific || [])
+      .filter(a => lower.has(gpKey(a.augment || "")))
+      .slice(0, 10).map(a => `- ${a.augment}: ${a.advice}`).join("\n")}`,
+    `Leveling/rolling:\n${list([...(n.levelingRolling?.[comp.strategy] || []), ...(n.levelingRolling?.general || []).slice(0, 4)], 10)}`,
+    `Comp notes:\n${(n.comps || [])
+      .filter(c => words.some(w => (c.comp || "").toLowerCase().includes(w)))
+      .slice(0, 3).map(c => `- ${c.comp}: ${c.advice}`).join("\n")}`,
+  ].filter(s => s && !/:\n$/.test(s)).join("\n");
+}
+
+function gpParseJson(text) {
+  const m = text.match(/\{[\s\S]*\}/);
+  if (!m) return null;
+  try { return JSON.parse(m[0]); } catch { return null; }
+}
+
+// POST /api/gameplan-augments
+// { compId, stage: "2-1"|"3-2"|"4-2", chosen: [augment names], offered?: [3 names],
+//   streak?: "win"|"lose"|"mixed", hp?: number }
+// Off until the if-then tree is settled — set GAMEPLAN_AI=1 to enable
+app.post("/api/gameplan-augments", async (req, res) => {
+  if (process.env.GAMEPLAN_AI !== "1") return res.status(404).json({ error: "Not found" });
+  if (!gameplanData) return res.status(503).json({ error: "Game plan data not built" });
+  if (gpRateLimited(req.ip)) return res.status(429).json({ error: "Too many requests — wait a minute." });
+
+  const { compId, stage } = req.body || {};
+  const comp = gameplanData.comps.find(c => c.id === compId);
+  if (!comp) return res.status(400).json({ error: "Unknown comp" });
+  if (!GP_STAGES.includes(stage)) return res.status(400).json({ error: "stage must be 2-1, 3-2 or 4-2" });
+  const toAugs = (arr, max) => (Array.isArray(arr) ? arr : []).slice(0, max)
+    .map(s => gpAugByName.get(gpKey(s))).filter(Boolean);
+  const chosen = toAugs(req.body.chosen, 2);
+  const offered = toAugs(req.body.offered, 4).filter(a => a.stages.includes(stage));
+  const streak = ["win", "lose", "mixed"].includes(req.body.streak) ? req.body.streak : null;
+  const hp = Number.isFinite(+req.body.hp) && +req.body.hp > 0 ? Math.min(100, Math.round(+req.body.hp)) : null;
+
+  const key = JSON.stringify([comp.id, stage, chosen.map(a => a.name), offered.map(a => a.name).sort(), streak, hp && Math.round(hp / 20)]);
+  const hit = gpCache.get(key);
+  if (hit && Date.now() - hit.at < GP_CACHE_MS) return res.json({ ...hit.body, cached: true });
+
+  const taken = new Set(chosen.map(a => a.name));
+  const candidates = offered.length ? offered
+    : gpShortlist(comp, Object.values(gameplanData.augments).filter(a => a.stages.includes(stage) && !taken.has(a.name)));
+  const augLine = (a) => `${a.name} [${a.tier || "?"}]: ${a.guide || (a.desc || "").slice(0, 90)}`;
+  const stageNo = stage[0];
+  const tips = comp.tips.filter(t => (t.stage || "").includes(stageNo) || (stage === "4-2" && /5|late/i.test(t.stage || "")));
+  const bm = comp.bm;
+  const bmStage = bm?.plan?.[{ "2-1": "stage2", "3-2": "stage3", "4-2": "stage4" }[stage]];
+  const nextStage = GP_STAGES[GP_STAGES.indexOf(stage) + 1];
+  const table = comp.leveling.map(r => `${r.label}: ${r.steps.map(s => `${s.round}→L${s.level}`).join(", ")}`).join("\n");
+
+  const prompt = `You are a Challenger TFT coach for Set ${CURRENT_SET} (patch ${gameplanData.patch || SET_PATCH[CURRENT_SET]}). The player is weak at early game and augment choice. Recommend augments for the ${stage} augment round.
+
+COMP: ${comp.name} — ${comp.style}, tier ${comp.tier}, carry ${comp.mainChampion}
+Final board: ${comp.finalComp.map(u => `${u.name}${u.stars > 1 ? ` ${u.stars}*` : ""}${u.items.length ? ` (${u.items.join(", ")})` : ""}`).join("; ")}
+TFT Academy recommended augments: ${comp.augments.join(", ")}
+Augment type priority: ${comp.augmentTypes.join(" > ")}${comp.augmentsTip ? `\nAugment tip: ${comp.augmentsTip}` : ""}
+${tips.map(t => `${t.stage}: ${t.tip}`).join("\n")}${bm ? `\nPlay it if: ${bm.conditions.join("; ")}${bmStage ? `\nThis stage: ${bmStage}` : ""}` : ""}
+Leveling: ${table || comp.levelingNotes.slice(0, 3).join(" ")}
+
+PLAYER: taken so far: ${chosen.length ? chosen.map(a => a.name).join(", ") : "none"}${streak ? `; ${streak} streak` : ""}${hp ? `; ${hp} HP` : ""}
+${(gameplanData.augmentPrinciples || []).join(" ")}
+${gpNotesFor(comp, stage, candidates.map(a => a.name))}
+
+${offered.length ? "OFFERED (rank all of them):" : `CHOICES at ${stage} (only these are valid):`}
+${candidates.map(augLine).join("\n")}
+
+Rules: name only augments from the list above, spelled exactly. Account for augments already taken and what the comp needs at ${nextStage || "the end of the game"}. Use search only to check whether an augment is over/under-performing this patch. Each "why" is one concrete sentence, max 20 words.
+Reply with ONLY this JSON:
+{"picks":[{"name":"","why":""}],"avoid":[{"name":"","why":""}],"roll":"1-2 sentences: what to do with gold and levels from ${stage} to ${nextStage || "the end"}${streak ? ` on a ${streak} streak` : ""}","nextStage":"${nextStage ? `1 sentence: what kind of augment to want at ${nextStage}` : ""}"}
+${offered.length ? "picks = every offered augment, best first." : "picks = 6 best, best first; avoid = up to 3 tempting traps for this comp."}`;
+
+  console.log(`[gameplan] ${comp.id} ${stage} — prompt ${prompt.length} chars`);
+  let raw = null, model = null;
+  if (geminiAvailable()) {
+    try { raw = await callGeminiWithSearch(prompt); model = "gemini"; }
+    catch (e) { console.warn("gameplan Gemini failed — falling back to Groq:", e.message); }
+  }
+  let parsed = raw && gpParseJson(raw);
+  if (!parsed && GROQ_API_KEY) {
+    try { raw = await callGroq(prompt, 700); model = "groq"; parsed = gpParseJson(raw); }
+    catch (e) { console.error("gameplan Groq failed:", e.message); }
+  }
+  if (!parsed) return res.status(502).json({ error: "AI services unavailable — try again in a minute." });
+
+  // Keep only real, stage-legal augments
+  const legal = new Map(candidates.map(a => [gpKey(a.name), a]));
+  const clean = (arr) => (Array.isArray(arr) ? arr : [])
+    .map(p => ({ aug: legal.get(gpKey(p?.name || "")), why: String(p?.why || "").slice(0, 200) }))
+    .filter(p => p.aug)
+    .map(p => ({ name: p.aug.name, tier: p.aug.tier, icon: p.aug.icon, desc: p.aug.desc, why: p.why }));
+  const body = {
+    picks: clean(parsed.picks).slice(0, offered.length || 6),
+    avoid: clean(parsed.avoid).slice(0, 3),
+    roll: String(parsed.roll || "").slice(0, 400),
+    nextStage: String(parsed.nextStage || "").slice(0, 300),
+    model,
+  };
+  if (!body.picks.length) return res.status(502).json({ error: "AI returned no valid augments — try again." });
+  gpCache.set(key, { at: Date.now(), body });
+  res.json(body);
+});
+
+// ---------------------------------------------------------------------------
 // /api/local-coach — reads TFTAcademy's local SQLite DB and coaches on your
 // actual games (item redundancy, augment decisions, missed synergies).
 // Only works when the server is running on the same machine as TFTAcademy.

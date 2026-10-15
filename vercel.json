@@ -9,6 +9,8 @@
           "data/processed/match_features_slim.csv",
           "data/processed/item_winrates.csv",
           "data/static/calculator_data.json",
+          "data/static/gameplan_data.json",
+          "data/static/gameplan_notes.json",
           "data/archive/**",
           "models/mlp_weights.json",
           "public/**"

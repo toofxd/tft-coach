@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TFT Set 18 — Game Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:      #0c2340;
+  --navy-card: #0e2850;
+  --navy-deep: #071830;
+  --gold:      #ae9142;
+  --gold-light:#c9a84c;
+  --text:      #f0ebe0;
+  --text-70:   rgba(240,235,224,0.7);
+  --text-50:   rgba(240,235,224,0.5);
+  --text-30:   rgba(240,235,224,0.3);
+  --border:    rgba(255,255,255,0.09);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  padding: 80px 20px 20px; /* 80px top clears the fixed nav */
+  min-height: 100vh;
+}
+a { color: inherit; }
+
+/* ── Sticky nav ────────────────────────────────────────────── */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.site-nav.scrolled {
+  background: rgba(12, 35, 64, 0.92);
+  border-color: var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ── Shimmer title (matches tiffanygaming.com "Featured Work" style) ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.nav-title {
+  font-family: 'Cinzel', serif;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-title-main {
+  color: #c9a84c;
+  -webkit-text-fill-color: #c9a84c;
+}
+.nav-title-by {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-30);
+  -webkit-text-fill-color: var(--text-30);
+}
+
+/* ── Right-side nav group ───────────────────────────────────── */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Tab buttons */
+.tab-btn {
+  padding: 8px 15px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-30);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+  transition: color 0.15s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  height: 62px;
+}
+.tab-btn:hover { color: var(--text-70); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* Vertical divider */
+.nav-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.18);
+  margin: 0 8px;
+  flex-shrink: 0;
+}
+
+/* Icon buttons (LinkedIn / Email) */
+.icon-btn {
+  width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  color: var(--text-50);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.icon-btn:hover {
+  background: rgba(174,145,66,0.18);
+  color: var(--gold-light);
+}
+
+/* ── Mobile hamburger ── */
+.hamburger-btn {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  padding: 8px; color: var(--text-50);
+  flex-direction: column; gap: 5px; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hamburger-btn span {
+  display: block; width: 22px; height: 2px;
+  background: currentColor; border-radius: 2px;
+}
+.mobile-menu {
+  display: none;
+  background: rgba(7,24,48,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-direction: column;
+  padding: 6px 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 13px 24px;
+  color: var(--text-50); text-decoration: none;
+  font-size: 14px; font-weight: 600; font-family: inherit;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a.active { color: var(--gold); }
+@media (max-width: 640px) {
+  .nav-right { display: none; }
+  .hamburger-btn { display: flex; }
+}
+
+/* ── Page header (below sticky nav) ──────────────────────────── */
+.page-header {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 20px;
+}
+.page-title { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: 0.01em; }
+.page-sub { font-size: 12px; color: var(--text-30); }
+
+
+/* ── Game plan tree ────────────────────────────────────────────── */
+.wrap { max-width: 900px; margin: 0 auto; }
+.tree { list-style: none; position: relative; }
+.node { position: relative; padding: 0 0 22px 34px; }
+.node::before { /* connector line */
+  content: ""; position: absolute; left: 11px; top: 26px; bottom: 0; width: 2px; background: rgba(174,145,66,0.25);
+}
+.node:last-child::before { display: none; }
+.node .dot {
+  position: absolute; left: 0; top: 2px; width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid rgba(174,145,66,0.5); background: var(--navy-deep);
+  display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--gold);
+}
+.node.done .dot { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.node.locked { opacity: 0.35; pointer-events: none; }
+.node-head { display: flex; align-items: baseline; gap: 10px; min-height: 28px; }
+.node-title { font-size: 15px; font-weight: 700; }
+.node-sub { font-size: 12px; color: var(--text-50); }
+.node-choice { font-size: 13px; color: var(--gold-light); font-weight: 600; }
+.change { margin-left: auto; font: 600 12px/1 inherit; font-family: inherit; color: var(--text-50); background: none;
+  border: 1px solid var(--border); border-radius: 6px; padding: 5px 9px; cursor: pointer; }
+.change:hover { color: var(--text); border-color: rgba(174,145,66,0.5); }
+.node-body { margin-top: 10px; }
+.card { background: var(--navy-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+.lbl { font-size: 10px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.muted { color: var(--text-50); font-size: 12px; }
+
+/* Opener grid */
+.op-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.op {
+  position: relative; background: #111017; border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  cursor: pointer; padding: 0; font-family: inherit; color: var(--text); text-align: left;
+}
+.op:hover, .op:focus-visible { border-color: rgba(174,145,66,0.7); outline: none; }
+.op .img { height: 120px; display: flex; align-items: center; justify-content: center; background: #111017; }
+.op img { max-width: 100%; max-height: 120px; display: block; }
+.op .nm { padding: 7px 9px; font-size: 12px; font-weight: 600; border-top: 1px solid var(--border); }
+.op .units { font-size: 11px; font-weight: 400; color: var(--text-50); margin-top: 2px; }
+.tier-tag {
+  display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 5px; flex-shrink: 0;
+  font: 900 13px/1 'Cinzel', serif; color: #0c2340;
+}
+.op .tier-tag { position: absolute; top: 6px; left: 6px; }
+.tier-tag.S { background: #FE454B; } .tier-tag.A { background: #FF9C00; }
+.tier-tag.B { background: #FEEA33; } .tier-tag.C { background: #A7F238; } .tier-tag.Special { background: #b39ddb; font-size: 10px; }
+.skip { margin-top: 10px; }
+.btn {
+  font: 600 13px/1 inherit; font-family: inherit; color: var(--text); background: rgba(174,145,66,0.15);
+  border: 1px solid rgba(174,145,66,0.5); border-radius: 7px; padding: 8px 12px; cursor: pointer;
+}
+.btn:hover { background: rgba(174,145,66,0.28); }
+.btn.ghost { background: none; border-color: var(--border); color: var(--text-70); }
+.btn.ghost:hover { border-color: rgba(174,145,66,0.5); color: var(--text); }
+.rules { margin-top: 14px; }
+.rule { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12.5px; padding: 4px 0; color: var(--text-70); }
+.rule .if { color: var(--text); font-weight: 600; }
+
+/* Comp chooser */
+.comp-group { margin-bottom: 12px; }
+.comp-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.comp-btn {
+  display: inline-flex; align-items: center; gap: 8px; font: 600 13px/1.2 inherit; font-family: inherit; color: var(--text);
+  background: var(--navy-card); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px 6px 6px; cursor: pointer;
+}
+.comp-btn:hover { border-color: rgba(174,145,66,0.7); }
+.comp-wrap { display: inline-flex; align-items: stretch; }
+.comp-wrap .comp-btn { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.fav { font-size: 15px; line-height: 1; color: var(--text-30); background: var(--navy-card); border: 1px solid var(--border);
+  border-left: none; border-radius: 0 8px 8px 0; padding: 0 9px; cursor: pointer; font-family: inherit; }
+.node-choice .fav { border: none; background: none; padding: 0 4px; }
+.fav:hover { color: var(--gold-light); }
+.fav.on { color: var(--gold-light); }
+.comp-btn .strat { font-size: 11px; font-weight: 500; color: var(--text-50); }
+.aug-chip { display: inline-flex; align-items: center; gap: 5px; padding-left: 4px; }
+.aug-chip img { width: 18px; height: 18px; border-radius: 4px; }
+
+/* Comp detail */
+.comp-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.comp-detail .full { grid-column: 1 / -1; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 12px; padding: 3px 9px; color: var(--text-70); }
+.chip.gold { color: var(--gold-light); border-color: rgba(174,145,66,0.45); background: rgba(174,145,66,0.1); }
+.items-list { font-size: 12.5px; color: var(--text-70); line-height: 1.6; }
+.items-list b { color: var(--text); font-weight: 600; }
+.code { display: inline-flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.code code { font-size: 11px; color: var(--text-50); background: var(--navy-deep); padding: 4px 6px; border-radius: 4px; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Spot */
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.seg button { font: 600 13px/1 inherit; font-family: inherit; color: var(--text-70); background: none; border: none; padding: 8px 12px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--border); }
+.seg button.on { background: rgba(174,145,66,0.25); color: var(--gold-light); }
+.hp { width: 76px; font: 500 13px/1 inherit; font-family: inherit; color: var(--text); background: var(--navy-deep);
+  border: 1px solid var(--border); border-radius: 7px; padding: 7px 9px; margin-left: 8px; }
+.spot-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* Stage nodes */
+.timeline { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.step { display: inline-flex; align-items: center; gap: 6px; background: var(--navy-deep); border: 1px solid var(--border);
+  border-radius: 7px; padding: 5px 9px; font-size: 12.5px; }
+.step .r { color: var(--text-50); }
+.step .l { color: var(--gold-light); font-weight: 700; }
+.notes { margin: 6px 0 0 16px; font-size: 12.5px; color: var(--text-70); line-height: 1.55; }
+.ai-roll { margin-top: 8px; font-size: 13px; line-height: 1.5; border-left: 3px solid var(--gold); padding-left: 10px; }
+.tabs { display: flex; gap: 4px; margin: 14px 0 10px; }
+.tabs button { font: 600 12.5px/1 inherit; font-family: inherit; color: var(--text-50); background: none; border: 1px solid transparent;
+  border-radius: 7px; padding: 7px 10px; cursor: pointer; }
+.tabs button.on { color: var(--gold-light); border-color: rgba(174,145,66,0.5); background: rgba(174,145,66,0.1); }
+.picks { display: grid; gap: 8px; }
+.pick { display: grid; grid-template-columns: 40px 1fr auto; gap: 10px; align-items: center; background: var(--navy-deep);
+  border: 1px solid var(--border); border-radius: 9px; padding: 8px 10px; }
+.pick.avoid { opacity: 0.8; border-style: dashed; }
+.pick img, .pick .noimg { width: 40px; height: 40px; border-radius: 8px; background: #111017; object-fit: cover; }
+.pick .pn { font-size: 13.5px; font-weight: 700; }
+.pick .why { font-size: 12.5px; color: var(--text-70); margin-top: 2px; line-height: 1.4; }
+.pick .desc { font-size: 11.5px; color: var(--text-30); margin-top: 3px; line-height: 1.35; }
+.rank { font-size: 11px; color: var(--text-30); margin-right: 4px; }
+.t-silver { color: #c0c8d0; } .t-gold { color: #e8c35a; } .t-prismatic { color: #d59cff; }
+.took { white-space: nowrap; }
+.offer-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.aug-in { flex: 1 1 200px; min-width: 0; font: 500 13px/1.2 inherit; font-family: inherit; color: var(--text); background: var(--navy-deep);
+  border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px; }
+.aug-in:focus { outline: none; border-color: rgba(174,145,66,0.6); }
+.next-hint { margin-top: 10px; font-size: 12.5px; color: var(--text-70); }
+.next-hint b { color: var(--gold-light); }
+.ifthen { display: grid; gap: 4px; }
+.it { display: grid; grid-template-columns: minmax(120px, 34%) 1fr; gap: 10px; font-size: 12.5px; line-height: 1.45;
+  padding: 6px 8px; border-radius: 6px; color: var(--text-50); }
+.it .w { font-weight: 600; }
+.it.on { background: rgba(174,145,66,0.12); color: var(--text); }
+.it.on .w { color: var(--gold-light); }
+@media (max-width: 640px) { .it { grid-template-columns: 1fr; gap: 2px; } }
+.loading { font-size: 13px; color: var(--text-50); padding: 10px 0; }
+.err { font-size: 13px; color: #ff8a80; padding: 8px 0; }
+.model { font-size: 11px; color: var(--text-30); margin-top: 8px; }
+.disclaimer {
+  margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border);
+  text-align: center; font-size: 11px; color: var(--text-30); line-height: 1.7;
+}
+.disclaimer a { color: var(--text-50); text-decoration: none; }
+@media (max-width: 640px) {
+  .comp-detail { grid-template-columns: 1fr; }
+  .node { padding-left: 30px; }
+  .pick { grid-template-columns: 34px 1fr; }
+  .pick img, .pick .noimg { width: 34px; height: 34px; }
+  .pick .took { grid-column: 1 / -1; }
+}
+</style>
+</head>
+<body>
+<header class="site-nav" id="siteNav">
+  <div class="nav-inner">
+
+    <!-- Left: big glowing title -->
+    <a href="https://tiffanygaming.com" class="nav-title">
+      <span class="nav-title-main">Tactician's Fundamentals</span><span class="nav-title-by">by Tiffany</span>
+    </a>
+
+    <!-- Right: tabs + social icons -->
+    <nav class="nav-right">
+      <a href="/about.html" class="tab-btn">About</a>
+      <a href="/calculator.html#coach" class="tab-btn">TFT Coach</a>
+      <a href="/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
+      <a href="/traits.html" class="tab-btn">Tier List</a>
+      <a href="/openers/" class="tab-btn">Openers</a>
+
+      <span class="nav-divider"></span>
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/tsangtiffany" target="_blank" rel="noopener noreferrer"
+         class="icon-btn" aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+
+      <!-- Email -->
+      <a href="mailto:ttsang@alumni.nd.edu" class="icon-btn" aria-label="Email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+      </a>
+    </nav>
+
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open navigation menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/about.html">About</a>
+    <a href="/calculator.html#coach">TFT Coach</a>
+    <a href="/calculator.html#calculator">Stat Calculator</a>
+    <a href="/traits.html">Tier List</a>
+    <a href="/openers/">Openers</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="page-title">Game Plan</div>
+    <div class="page-sub">Opener → comp → augments at 2-1, 3-2, 4-2 → when to roll and level</div>
+  </div>
+  <ol class="tree" id="tree"><li class="loading">Loading…</li></ol>
+  <div class="disclaimer">
+    <p style="margin-bottom:6px;"><strong style="color:#8a9aaa;">Source:</strong> comp tier list and recommended augments from <a href="https://tftacademy.com/tierlist/comps" target="_blank" rel="noopener">TFT Academy</a><span id="patchNote"></span>; leveling patterns, conditions and augment notes adapted from <a href="https://bunnymuffins.lol/meta/" target="_blank" rel="noopener">BunnyMuffins</a>; augment list from <a href="https://tactics.tools/augments" target="_blank" rel="noopener">tactics.tools</a>. Augment picks and roll/level advice come from fixed if-then rules (comp picks, strategy, streak, HP, earlier augments) — no AI.</p>
+    <p style="font-size:11px;color:#556070;line-height:1.6;max-width:760px;margin:0 auto 8px;">This tool isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
+    <p>Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener">Tiffany Tsang</a></p>
+  </div>
+</div>
+
+<script>
+const ESC_MAP = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ESC_MAP[c]);
+const norm = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, "");
+const STAGES = ["2-1", "3-2", "4-2"];
+const STRAT_LABEL = { fast9: "Fast 8/9", fast8: "Fast 8", reroll1: "1-cost reroll", reroll2: "2-cost reroll",
+  reroll3: "3-cost reroll", reroll12: "1+2-cost reroll", standard: "Standard" };
+const STORE_KEY = "gameplan.v1";
+
+let DATA = null, OPENERS = [];
+let S = { opener: null, skipOpener: false, comp: null, streak: "mixed", hp: "", augs: {}, offers: {}, tab: {}, favs: [] };
+const aiCache = {}; // request key → response | Promise | {error}
+
+function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch {} }
+function load() {
+  try { const s = JSON.parse(localStorage.getItem(STORE_KEY) || "null"); if (s) S = { ...S, ...s }; } catch {}
+}
+
+const compById = id => DATA.comps.find(c => c.id === id);
+// Opener/rule comp names are BunnyMuffins names — map them to TFT Academy comps
+const compByName = name => compById(DATA.bmCompToTfta[name] || "") ||
+  DATA.comps.find(c => norm(c.short) === norm(name) || norm(c.name) === norm(name));
+const uniqComps = names => [...new Map(names.map(compByName).filter(Boolean).map(c => [c.id, c])).values()];
+const augByName = name => DATA.augments.find(a => a.name.toLowerCase() === String(name).toLowerCase());
+
+// Reset everything after a node when an earlier choice changes
+function resetFrom(step) {
+  if (step <= 1) { S.comp = null; }
+  if (step <= 3) { S.augs = {}; S.offers = {}; }
+}
+function resetStage(stage) {
+  STAGES.slice(STAGES.indexOf(stage)).forEach(st => { delete S.augs[st]; });
+}
+
+// ── Render ───────────────────────────────────────────────────────────
+function render() {
+  const comp = S.comp && compById(S.comp);
+  const nodes = [];
+  nodes.push(nodeOpener());
+  nodes.push(nodeComp());
+  nodes.push(nodeSpot(comp));
+  STAGES.forEach((st, i) => nodes.push(nodeStage(comp, st, i)));
+  nodes.push(nodeLate(comp));
+  document.getElementById("tree").innerHTML = nodes.join("");
+  save();
+}
+
+function node(n, { title, sub = "", choice = "", done = false, locked = false, change = "", body = "" }) {
+  return `<li class="node${done ? " done" : ""}${locked ? " locked" : ""}">
+    <div class="dot">${done ? "✓" : n}</div>
+    <div class="node-head"><span class="node-title">${title}</span>${choice ? `<span class="node-choice">${choice}</span>` : `<span class="node-sub">${sub}</span>`}
+      ${change ? `<button class="change" data-act="${change}">Change</button>` : ""}</div>
+    ${body ? `<div class="node-body">${body}</div>` : ""}
+  </li>`;
+}
+
+function nodeOpener() {
+  const op = S.opener && OPENERS.find(o => o.name === S.opener);
+  if (op || S.skipOpener) {
+    return node(1, { title: "Opener", choice: op ? esc(op.name) : "Skipped", done: true, change: "opener" });
+  }
+  const units = [...new Set([...OPENERS.flatMap(o => o.champions), ...DATA.comps.flatMap(c => c.earlyComp.map(u => u.name))])].sort();
+  const rules = DATA.openerRules.map(r => `<div class="rule"><span class="if">${esc(r.if)}?</span> →
+      ${r.play.map(p => { const c = compByName(p); return c ? `<button class="chip gold" data-act="pick-comp-direct" data-v="${esc(c.id)}" style="cursor:pointer">${esc(p)}</button>` : `<span class="chip">${esc(p)}</span>`; }).join("")}</div>`).join("");
+  return node(1, { title: "Opener", sub: "What does your stage 1–2 board look like?", body: `
+    <div class="offer-row" style="margin-bottom:10px">
+      <input class="aug-in" id="unitSearch" type="search" list="unitList" autocomplete="off"
+             placeholder="Search a unit in your opener (e.g. Gromp)" value="${esc(S.unitQuery || "")}">
+      <datalist id="unitList">${units.map(u => `<option value="${esc(u)}">`).join("")}</datalist>
+    </div>
+    <div id="opMatches">${openerMatchesHtml()}</div>
+    <div class="skip"><button class="btn ghost" data-act="skip-opener">Skip — I already know my comp</button></div>
+    <div class="card rules"><div class="lbl">Got one of these? Play this</div>${rules}</div>` });
+}
+
+// Opener boards (and TFT Academy early boards) that use the searched unit
+function openerMatchesHtml() {
+  const q = norm(S.unitQuery || "");
+  const hit = name => norm(name).includes(q);
+  const ops = q ? OPENERS.filter(o => o.champions.some(hit)) : OPENERS;
+  const cards = ops.map(o => `<button class="op" data-act="pick-opener" data-v="${esc(o.name)}">
+      ${o.tier ? `<span class="tier-tag ${esc(o.tier)}">${esc(o.tier)}</span>` : ""}
+      <div class="img"><img src="${esc(o.img)}" alt="" loading="lazy"></div>
+      <div class="nm">${esc(o.name)}<div class="units">${esc(o.champions.join(", "))}</div></div></button>`).join("");
+  const comps = q ? DATA.comps.filter(c => c.earlyComp.some(u => hit(u.name))) : [];
+  return `${ops.length ? `<div class="op-grid">${cards}</div>` : `<div class="muted">No opener board uses that unit.</div>`}
+    ${comps.length ? `<div class="comp-group" style="margin-top:12px"><div class="lbl">TFT Academy comps that open with it</div>
+      <div class="comp-list">${comps.map(c => compBtn(c, "pick-comp-direct")).join("")}</div></div>` : ""}`;
+}
+
+const isFav = id => (S.favs || []).includes(id);
+function favBtn(c) {
+  const on = isFav(c.id);
+  return `<button class="fav${on ? " on" : ""}" data-act="fav" data-v="${esc(c.id)}" title="${on ? "Remove from favorites" : "Add to favorites"}" aria-pressed="${on}">${on ? "★" : "☆"}</button>`;
+}
+
+function compBtn(c, act = "pick-comp") {
+  return `<span class="comp-wrap">${compBtnInner(c, act)}${favBtn(c)}</span>`;
+}
+
+function compBtnInner(c, act) {
+  return `<button class="comp-btn" data-act="${act}" data-v="${esc(c.id)}">
+    <span class="tier-tag ${esc(c.tier)}" ${c.tier === "Special" ? 'title="Needs a specific augment or emblem"' : ""}>${c.tier === "Special" ? "SP" : esc(c.tier)}</span>${esc(c.short)}
+    <span class="strat">${esc(c.style || STRAT_LABEL[c.strategy])}</span></button>`;
+}
+
+function nodeComp() {
+  const ready = S.opener || S.skipOpener;
+  const comp = S.comp && compById(S.comp);
+  if (!ready) return node(2, { title: "Comp", sub: "Pick an opener first", locked: true });
+  if (comp) {
+    return node(2, { title: "Comp", choice: `${esc(comp.short)} · ${esc(comp.style || "")} ${favBtn(comp)}`, done: true, change: "comp", body: compDetail(comp) });
+  }
+  const search = `<div class="offer-row" style="margin-bottom:10px"><input class="aug-in" type="search" autocomplete="off"
+    data-search="comp" placeholder="Search a comp, champion, trait or style (e.g. Draven, Riftbeast, reroll)" value="${esc(S.compQuery || "")}"></div>`;
+  return node(2, { title: "Comp", sub: "Which comp are you locking in?", body: `${search}<div id="compMatches">${compMatchesHtml()}</div>` });
+}
+
+function compMatchesHtml() {
+  const q = (S.compQuery || "").toLowerCase().trim();
+  if (q) {
+    const words = q.split(/\s+/);
+    const hay = c => [c.name, c.short, c.style, c.mainChampion, ...c.traits, ...c.finalComp.map(u => u.name), ...c.earlyComp.map(u => u.name)].join(" ").toLowerCase();
+    const hits = DATA.comps.filter(c => words.every(w => hay(c).includes(w)));
+    return hits.length ? `<div class="comp-list">${hits.map(c => compBtn(c)).join("")}</div>` : `<div class="muted">No comp matches “${esc(q)}”.</div>`;
+  }
+  const op = S.opener && OPENERS.find(o => o.name === S.opener);
+  let body = "";
+  if (op) {
+    const direct = uniqComps(op.comps.S);
+    const other = uniqComps(op.comps.A).filter(c => !direct.includes(c));
+    if (direct.length) body += `<div class="comp-group"><div class="lbl">Direct comps from this opener</div><div class="comp-list">${direct.map(c => compBtn(c)).join("")}</div></div>`;
+    if (other.length) body += `<div class="comp-group"><div class="lbl">Also playable</div><div class="comp-list">${other.map(c => compBtn(c)).join("")}</div></div>`;
+    if (op.tip) body += `<p class="muted" style="margin-bottom:12px">${esc(op.tip)}</p>`;
+  }
+  const favs = (S.favs || []).map(compById).filter(Boolean);
+  body += `<div class="comp-group"><div class="lbl">Your favorites</div>${favs.length
+    ? `<div class="comp-list">${favs.map(c => compBtn(c)).join("")}</div>`
+    : `<div class="muted">Tap ☆ on any comp to keep it here.</div>`}</div>`;
+  const tiers = ["S", "A", "B", "C", "Special"];
+  body += `<details ${op || favs.length ? "" : "open"}><summary class="muted" style="cursor:pointer;margin-bottom:8px">All comps by tier</summary>${tiers.map(t => {
+    const cs = DATA.comps.filter(c => c.tier === t);
+    return cs.length ? `<div class="comp-group"><div class="comp-list">${cs.map(c => compBtn(c)).join("")}</div></div>` : "";
+  }).join("")}</details>`;
+  return body;
+}
+
+function augChip(name) {
+  const a = augByName(name);
+  return `<span class="chip gold aug-chip">${a?.icon ? `<img src="${esc(a.icon)}" alt="" loading="lazy">` : ""}${esc(name)}</span>`;
+}
+
+function compDetail(c) {
+  const stars = n => n > 1 ? ` <span class="t-gold">${"★".repeat(n)}</span>` : "";
+  const board = c.finalComp.map(u => `<div><b>${esc(u.name)}</b>${stars(u.stars)}${u.items.length ? ` — ${esc(u.items.join(", "))}` : ""}</div>`).join("");
+  const early = c.earlyComp.map(u => esc(u.name)).join(", ");
+  const bm = c.bm;
+  return `<div class="card comp-detail">
+    <div><div class="lbl">Recommended augments</div><div class="chips">${c.augments.map(augChip).join("") || '<span class="muted">—</span>'}</div>
+      ${c.augmentTypes.length ? `<div class="items-list" style="margin-top:8px">Priority: <b>${esc(c.augmentTypes.join(" > "))}</b></div>` : ""}</div>
+    <div><div class="lbl">Final board</div><div class="items-list">${board}</div></div>
+    <div><div class="lbl">Early board</div><div class="items-list">${early || "—"}</div>
+      ${c.carousel.length ? `<div class="lbl" style="margin-top:12px">Carousel</div><div class="items-list">${esc(c.carousel.join(" > "))}</div>` : ""}
+      <div class="items-list" style="margin-top:12px">Difficulty: <b>${esc(c.difficulty || "—")}</b> · <a href="${esc(c.url)}" target="_blank" rel="noopener" style="color:var(--gold-light)">TFT Academy guide ↗</a></div></div>
+    <div>${bm?.conditions?.length ? `<div class="lbl">Play it if you have</div><div class="chips">${bm.conditions.map(x => `<span class="chip">${esc(x)}</span>`).join("")}</div>` : ""}
+      ${bm?.itemHolders ? `<div class="lbl" style="margin-top:12px">Early item holders</div><div class="items-list">${esc(bm.itemHolders)}</div>` : ""}
+      ${bm?.teamCode ? `<div class="lbl" style="margin-top:12px">Team code</div><div class="code"><code>${esc(bm.teamCode)}</code>
+        <button class="btn ghost" data-act="copy" data-v="${esc(bm.teamCode)}">Copy</button></div>` : ""}
+    </div>
+  </div>`;
+}
+
+function nodeSpot(comp) {
+  if (!comp) return node(3, { title: "Your spot", sub: "Pick a comp first", locked: true });
+  const seg = ["win", "mixed", "lose"].map(s => `<button class="${S.streak === s ? "on" : ""}" data-act="streak" data-v="${s}">${s[0].toUpperCase() + s.slice(1)} streak</button>`).join("");
+  return node(3, { title: "Your spot", choice: "", done: true, body: `<div class="spot-row">
+    <div class="seg">${seg}</div>
+    <label class="muted">HP <input class="hp" id="hpIn" type="number" min="1" max="100" placeholder="optional" value="${esc(S.hp)}"></label>
+  </div>` });
+}
+
+// Leveling row for the streak: fast comps have Win/Lose/Mixed, rerolls Lose/Other
+function levelRow(comp) {
+  const want = { win: ["win streak", "other", "standard"], lose: ["lose streak"], mixed: ["mixed streak", "normal/mixed", "other", "standard"] }[S.streak];
+  for (const w of want) {
+    const r = comp.leveling.find(r => r.label.toLowerCase().startsWith(w));
+    if (r) return r;
+  }
+  return comp.leveling[0];
+}
+const stageNum = round => parseInt(String(round), 10);
+
+function rollLevelBlock(comp, stage, late = false) {
+  const row = levelRow(comp);
+  const n = late ? 5 : stageNum(stage);
+  const steps = row ? row.steps.filter(s => late ? stageNum(s.round) >= 5 : stageNum(s.round) === n) : [];
+  const notes = comp.levelingNotes.filter(t => late ? /\b[56]-\d|stage 5|level 8|level 9/i.test(t) : new RegExp(`\\b${n}-\\d`).test(t));
+  if (!steps.length && !notes.length) {
+    const nextUp = row?.steps.find(s => stageNum(s.round) > n);
+    return `<div class="muted">No level-up this stage${nextUp ? ` — next: level ${esc(nextUp.level)} at ${esc(nextUp.round)}` : ""}. Save to interest (10 / 20 / 30 / 40 / 50 gold).</div>`;
+  }
+  return `${steps.length ? `<div class="timeline">${steps.map(s => `<span class="step"><span class="r">${esc(s.round)}</span><span class="l">Lv ${esc(s.level)}</span></span>`).join("")}</div>` : ""}
+    ${row ? `<div class="muted">${esc(row.label)} · ${esc(comp.style || "")}</div>` : ""}
+    ${notes.length ? `<ul class="notes">${notes.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}`;
+}
+
+const stageOpen = st => S.comp && STAGES.slice(0, STAGES.indexOf(st)).every(p => S.augs[p]);
+
+function nodeStage(comp, stage, i) {
+  const n = 4 + i;
+  const title = `Stage ${stage[0]} · ${stage} augment`;
+  if (!comp) return node(n, { title, sub: "", locked: true });
+  if (!stageOpen(stage)) return node(n, { title, sub: `Pick your ${STAGES[i - 1]} augment first`, locked: true });
+  const taken = S.augs[stage];
+  const roll = `<div class="card"><div class="lbl">Roll / level — stage ${stage[0]}</div>${rollLevelBlock(comp, stage)}${ifThenHtml(comp, stage)}</div>`;
+  if (taken) {
+    const a = augByName(taken);
+    return node(n, { title, choice: `${esc(taken)}${a?.tier ? ` <span class="t-${esc(a.tier)}" style="font-size:11px">${esc(a.tier)}</span>` : ""}`, done: true,
+      change: `stage:${stage}`, body: roll });
+  }
+  const tab = S.tab[stage] || "aim";
+  const tabs = `<div class="tabs"><button class="${tab === "aim" ? "on" : ""}" data-act="tab" data-st="${stage}" data-v="aim">What to aim for</button>
+    <button class="${tab === "offers" ? "on" : ""}" data-act="tab" data-st="${stage}" data-v="offers">Rank my 3 offers</button></div>`;
+  const listId = `augs-${stage}`;
+  const legal = DATA.augments.filter(a => a.stages.includes(stage) && !Object.values(S.augs).includes(a.name));
+  const datalist = `<datalist id="${listId}">${legal.map(a => `<option value="${esc(a.name)}">`).join("")}</datalist>`;
+  let body = roll + tabs + datalist;
+  if (tab === "offers") {
+    const offers = S.offers[stage] || ["", "", ""];
+    body += `<div class="offer-row">${[0, 1, 2].map(k => `<input class="aug-in" list="${listId}" data-offer="${stage}" data-k="${k}" placeholder="Offer ${k + 1}" value="${esc(offers[k] || "")}">`).join("")}
+      <button class="btn" data-act="rank" data-st="${stage}">Rank</button></div>`;
+  }
+  body += `<div style="margin-top:10px">${rulesHtml(comp, stage)}</div>
+
+    <div class="lbl" style="margin-top:14px">Search any augment</div>
+    <div class="offer-row"><input class="aug-in" type="search" autocomplete="off" data-search="aug" data-st="${stage}"
+      placeholder="Type an augment to see how it fits and lock it in" value="${esc((S.augQuery || {})[stage] || "")}"></div>
+    <div id="augMatches-${stage}" style="margin-top:8px">${augMatchesHtml(comp, stage)}</div>`;
+  return node(n, { title, sub: "Pick one to continue the tree", body });
+}
+
+function nodeLate(comp) {
+  if (!comp || !STAGES.every(st => S.augs[st])) return node(7, { title: "Stage 5+", sub: "Finish your augments first", locked: true });
+  return node(7, { title: "Stage 5+", choice: "Cap your board", done: true,
+    body: `<div class="card"><div class="lbl">Roll / level — late game</div>${rollLevelBlock(comp, "5", true)}${ifThenHtml(comp, "5")}</div>` });
+}
+
+// ── If-then roll/level rules (matching rows light up for your spot) ──
+function ifThenRules(comp, stage) {
+  const fast = isFast(comp), cost = +(comp.strategy.match(/reroll(\d)/)?.[1] || 0);
+  const R = (when, then, on) => ({ when, then, on });
+  const hp = +S.hp || 0, streak = S.streak;
+  if (stage === "2-1") return [
+    R("Win streak", "Level 4 at 2-1 and 5 at 2-5 to keep the streak alive.", streak === "win"),
+    R("Lose streak", "Don't level or roll. Bank 30g by 3-1 and lean econ on this augment.", streak === "lose"),
+    R("Mixed", "Protect HP: only level if it wins the next fight; otherwise sit on interest.", streak === "mixed"),
+    R("Strong opener + a slammable item", "Slam it now — early items win stage 2 rounds.", false),
+  ];
+  if (stage === "3-2") {
+    const rows = [];
+    if (cost === 1) rows.push(R("1-cost reroll", "Stay level 4–5. Roll at 3-1 down to ~32g, then slow roll above 50g until your 3★.", true));
+    else if (cost === 2) rows.push(R("2-cost reroll", "Level 6 at 3-2, then slow roll above 50g for your 3★ 2-costs.", true));
+    else if (cost === 3) rows.push(R("3-cost reroll", "Level 6 at 3-2. Level 7 at 3-5 with an econ augment, otherwise 4-1. Save to 50g.", true));
+    else rows.push(R(comp.style, "Don't roll in stage 3 — push XP: level 7 at 3-5 (with 40g+ if losing).", fast));
+    rows.push(R("Bench full of pairs", "Spend a few rolls to finish them — upgrades save HP.", false));
+    rows.push(R("HP under 50", "Roll to stabilize now; skip the next econ step.", hp > 0 && hp < 50));
+    rows.push(R("Healthy and strong", "Don't roll. Make interest and level on curve.", hp >= 70));
+    return rows;
+  }
+  if (stage === "4-2") {
+    const rows = [];
+    if (comp.strategy === "fast8") rows.push(R("4-cost fast 8", "Level 8 at 4-1/4-2 and roll down for your 4-cost carry 2★. Stop at ~10–20g once stable.", true));
+    else if (comp.strategy === "fast9") rows.push(R("Fast 9", "Level 8 at 4-2 and roll only enough to save HP. Go 9 at 5-1/5-2 with 50g+.", true));
+    else rows.push(R(`${cost}-cost reroll`, "Roll on 4-1 for your 2★ carry if you haven't hit; once 3★, stop rolling and level for traits.", true));
+    rows.push(R("HP under 30", "All-in roll now — you can't afford another loss.", hp > 0 && hp < 30));
+    rows.push(R("Losing streak into stage 4", "Roll a turn early (4-1) and try to win every fight this stage.", streak === "lose"));
+    return rows;
+  }
+  // stage 5+
+  return [
+    R("Board is 2★ and stable", fast ? "Level 9 and roll for 5-costs; keep 2★ upgrades over 1★ legendaries." : "Level for extra traits; keep 50g and slow roll the last 3★.", true),
+    R("Lost the last two fights", "Roll down now for upgrades instead of leveling.", hp > 0 && hp < 40),
+    R("Rich (70g+) and healthy", "Level first, then roll — the higher shop odds pay for themselves.", false),
+  ];
+}
+
+function ifThenHtml(comp, stage) {
+  const rows = ifThenRules(comp, stage);
+  return `<div class="lbl" style="margin-top:12px">If → then</div><div class="ifthen">${rows.map(r =>
+    `<div class="it${r.on ? " on" : ""}"><span class="w">If ${esc(r.when)}</span><span class="t">→ ${esc(r.then)}</span></div>`).join("")}</div>`;
+}
+
+// ── Rule picks (if X then Y — no API call) ───────────────────────────
+const TYPE_TAG = { items: "items", econ: "econ", combat: "combat", emblems: "trait", emblem: "trait", trait: "trait", traits: "trait", reroll: "reroll" };
+const isFast = c => c.strategy === "fast8" || c.strategy === "fast9";
+
+function ruleScore(a, comp, stage, chosen) {
+  const tags = new Set(a.tags || []), why = [];
+  let s = 0;
+  const add = (pts, reason) => { s += pts; if (reason) why.push([pts, reason]); };
+  const k = norm(a.name);
+  if (comp.augments.some(n => norm(n) === k)) add(10, `TFT Academy pick for ${comp.short}`);
+  if ((comp.bm?.bis || []).some(n => norm(n) === k)) add(8, "BunnyMuffins best-in-slot for this comp");
+  // Trait augments: only for the traits this comp actually runs
+  const shared = (a.traits || []).filter(t => comp.traits.includes(t));
+  if (shared.length) add(6, `${shared[0]} augment — your comp runs ${shared[0]}`);
+  else if ((a.traits || []).length) add(-5, `For ${a.traits[0]}, which this comp doesn't play`);
+  // Strategy fit
+  if (isFast(comp) && (tags.has("fast9") || tags.has("fast8"))) add(4, `Fits a ${comp.style} curve`);
+  if (comp.strategy.startsWith("reroll") && tags.has("reroll")) add(4, "Reroll augment for a reroll comp");
+  if (isFast(comp) && tags.has("reroll") && !tags.has("fast9")) add(-4, "Reroll augment — you're leveling, not rolling");
+  if (comp.strategy.startsWith("reroll") && (tags.has("fast9") || tags.has("fast8")) && !tags.has("reroll")) add(-4, "Built for fast 8/9 — this comp rolls low");
+  // Comp's augment-type priority (e.g. Items > Econ > Combat)
+  comp.augmentTypes.forEach((t, i) => {
+    const tag = TYPE_TAG[t.toLowerCase()];
+    if (tag && tags.has(tag)) add(3 - i, i === 0 ? `${t} — this comp's top augment priority` : "");
+  });
+  // Your spot
+  const hp = +S.hp || 0, late = stage !== "2-1";
+  if (S.streak === "lose" && stage === "2-1" && (tags.has("econ") || tags.has("losestreak"))) add(3, "Econ pays off on a lose streak");
+  if (S.streak === "lose" && tags.has("tempo")) add(-3, "Wants a win streak — you're losing");
+  if (S.streak === "win" && (tags.has("tempo") || tags.has("combat") || tags.has("items"))) add(2, "Keeps your win streak going");
+  if (S.streak === "win" && tags.has("losestreak")) add(-4, "Lose-streak augment — you're winning");
+  if (hp && hp < 40 && late) {
+    if (tags.has("combat") || tags.has("items")) add(2, `At ${hp} HP you need board strength now`);
+    if (tags.has("econ")) add(-3, `Econ is too slow at ${hp} HP`);
+    if (tags.has("gamble")) add(-2, "No HP to gamble with");
+  }
+  // Earlier picks
+  const prev = chosen.map(augByName).filter(Boolean);
+  const econTaken = prev.filter(p => (p.tags || []).includes("econ")).length;
+  if (tags.has("econ") && econTaken) add(econTaken >= 2 ? -4 : -2, "You already took econ — cash it in");
+  const prevTraits = prev.flatMap(p => p.traits || []);
+  const doubled = (a.traits || []).find(t => prevTraits.includes(t));
+  if (doubled) add(3, `Stacks with your earlier ${doubled} augment`);
+  if (stage === "4-2" && tags.has("econ") && comp.strategy !== "fast9") add(-2, "Late econ only pays off if you're going 9");
+  if (tags.has("gamble")) add(-1, "");
+  why.sort((x, y) => Math.abs(y[0]) - Math.abs(x[0]));
+  return { score: s, why: why.map(w => w[1]) };
+}
+
+function augMatchesHtml(comp, stage) {
+  const q = norm((S.augQuery || {})[stage] || "");
+  if (!q) return "";
+  const chosen = chosenBefore(stage);
+  const hits = DATA.augments.filter(a => a.stages.includes(stage) && !chosen.includes(a.name) && norm(a.name).includes(q))
+    .map(a => ({ ...a, ...ruleScore(a, comp, stage, chosen) }))
+    .sort((x, y) => (norm(y.name).startsWith(q) - norm(x.name).startsWith(q)) || y.score - x.score).slice(0, 5);
+  if (!hits.length) return `<div class="muted">No ${stage} augment matches that.</div>`;
+  const verdict = sc => sc >= 8 ? "Great fit" : sc >= 3 ? "Good fit" : sc >= 0 ? "Neutral" : "Bad fit";
+  return `<div class="picks">${hits.map((a, i) => pickHtml({ name: a.name, tier: a.tier, icon: a.icon, desc: a.desc, stage,
+    why: `${verdict(a.score)}${a.why.length ? " — " + a.why.slice(0, 2).join(" · ") : ""}` }, i)).join("")}</div>`;
+}
+
+function chosenBefore(stage) {
+  return STAGES.slice(0, STAGES.indexOf(stage)).map(st => S.augs[st]).filter(Boolean);
+}
+
+function rulesHtml(comp, stage) {
+  const chosen = chosenBefore(stage);
+  const offers = S.tab[stage] === "offers" ? (S.offers[stage] || []).map(augByName).filter(Boolean) : null;
+  if (offers && !offers.length) return `<div class="muted">Type the 3 augments you were offered, then Rank.</div>`;
+  const pool = offers || DATA.augments.filter(a => a.stages.includes(stage) && !chosen.includes(a.name));
+  let ranked = pool.map(a => ({ ...a, ...ruleScore(a, comp, stage, chosen) }))
+    .sort((x, y) => y.score - x.score);
+  if (!offers) ranked = ranked.filter(a => a.score > 2).slice(0, 6);
+  if (!ranked.length) return `<div class="muted">No strong rule-based targets here — take whatever makes your board stronger right now.</div>`;
+  const row = (a, i) => pickHtml({ name: a.name, tier: a.tier, icon: a.icon, desc: a.desc, stage,
+    why: a.why.slice(0, 2).join(" · ") || (a.score < 0 ? "Doesn't fit this comp" : "Generic pick") }, i);
+  return `<div class="lbl">${offers ? "Your offers, ranked" : "Shoot for these"}</div><div class="picks">${ranked.map(row).join("")}</div>`;
+}
+
+// ── AI picks (only when asked) ───────────────────────────────────────
+function reqFor(comp, stage) {
+  const chosen = STAGES.slice(0, STAGES.indexOf(stage)).map(st => S.augs[st]).filter(Boolean);
+  const offered = (S.tab[stage] === "offers" ? (S.offers[stage] || []) : []).filter(x => augByName(x));
+  const body = { compId: comp.id, stage, chosen, streak: S.streak };
+  if (+S.hp > 0) body.hp = +S.hp;
+  if (offered.length) body.offered = offered;
+  return { key: JSON.stringify(body), body };
+}
+
+function ensureAI(comp, stage, force = false) {
+  const { key, body } = reqFor(comp, stage);
+  if (aiCache[key] && !force) return;
+  aiCache[key] = fetch("/api/gameplan-augments", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body),
+  }).then(async r => {
+    const j = await r.json().catch(() => ({}));
+    aiCache[key] = r.ok ? j : { error: j.error || `Request failed (${r.status})` };
+  }).catch(() => { aiCache[key] = { error: "Network error — is the server running?" }; })
+    .finally(() => { if (S.comp === comp.id) render(); });
+}
+
+function aiState(comp, stage) {
+  const v = aiCache[reqFor(comp, stage).key];
+  return v instanceof Promise ? "loading" : v;
+}
+
+function aiRollHtml(comp, stage) {
+  const v = aiState(comp, stage);
+  return v && v !== "loading" && v.roll ? `<div class="ai-roll">${esc(v.roll)}</div>` : "";
+}
+
+function pickHtml(p, i, avoid = false) {
+  const tierCls = p.tier ? `t-${esc(p.tier)}` : "";
+  return `<div class="pick${avoid ? " avoid" : ""}">
+    ${p.icon ? `<img src="${esc(p.icon)}" alt="" loading="lazy">` : `<div class="noimg"></div>`}
+    <div><div class="pn">${avoid ? "" : `<span class="rank">#${i + 1}</span>`}${esc(p.name)} <span class="${tierCls}" style="font-size:11px;font-weight:600">${esc(p.tier || "")}</span></div>
+      <div class="why">${avoid ? "Avoid: " : ""}${esc(p.why)}</div>${p.desc ? `<div class="desc">${esc(p.desc)}</div>` : ""}</div>
+    ${avoid ? "" : `<button class="btn took" data-act="took" data-st="${esc(p.stage)}" data-v="${esc(p.name)}">I took this</button>`}
+  </div>`;
+}
+
+function aiHtml(comp, stage) {
+  if (S.tab[stage] === "offers" && !(S.offers[stage] || []).some(x => augByName(x))) return "";
+  const v = aiState(comp, stage);
+  if (!v) return `<button class="btn ghost" data-act="ask-ai" data-st="${stage}">Ask the AI coach for a second opinion</button>`;
+  if (v === "loading") return `<div class="loading">Asking the coach…</div>`;
+  if (v.error) return `<div class="err">${esc(v.error)}</div><button class="btn ghost" data-act="retry" data-st="${stage}">Retry</button>`;
+  const picks = v.picks.map((p, i) => pickHtml({ ...p, stage }, i)).join("");
+  const avoid = (v.avoid || []).map(p => pickHtml({ ...p, stage }, 0, true)).join("");
+  return `<div class="lbl">AI coach</div><div class="picks">${picks}</div>
+    ${avoid ? `<div class="lbl" style="margin-top:14px">Traps for this comp</div><div class="picks">${avoid}</div>` : ""}
+    ${v.nextStage ? `<div class="next-hint"><b>Next:</b> ${esc(v.nextStage)}</div>` : ""}
+    <div class="model">${v.model === "gemini" ? "Gemini + search" : "Groq (no web search)"}${v.cached ? " · cached" : ""} · <a href="#" data-act="retry" data-st="${stage}" style="color:inherit">refresh</a></div>`;
+}
+
+// ── Events ───────────────────────────────────────────────────────────
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-act]");
+  if (!el) return;
+  const act = el.dataset.act, v = el.dataset.v, st = el.dataset.st;
+  const comp = S.comp && compById(S.comp);
+  if (act === "pick-opener") { S.opener = v; S.skipOpener = false; resetFrom(1); }
+  else if (act === "skip-opener") { S.skipOpener = true; S.opener = null; resetFrom(1); }
+  else if (act === "pick-comp-direct") { S.skipOpener = true; S.opener = null; S.comp = v; resetFrom(3); }
+  else if (act === "pick-comp") { S.comp = v; resetFrom(3); }
+  else if (act === "opener") { S.opener = null; S.skipOpener = false; resetFrom(1); }
+  else if (act === "comp") { S.comp = null; resetFrom(3); }
+  else if (act === "streak") { S.streak = v; }  // your spot changes mid-game; keep picks
+  else if (act.startsWith("stage:")) { resetStage(act.slice(6)); }
+  else if (act === "tab") { S.tab[st] = v; }
+  else if (act === "took") { S.augs[st] = v; if (S.augQuery) delete S.augQuery[st]; }
+  else if (act === "took-typed") {
+    const a = augByName(document.getElementById(`took-${st}`).value.trim());
+    if (!a) { alert("Not an augment that can appear at " + st); return; }
+    S.augs[st] = a.name;
+  }
+  else if (act === "rank") { /* rule ranking re-renders below */ }
+  else if (act === "ask-ai" && comp) { ensureAI(comp, st, true); }
+  else if (act === "retry" && comp) { e.preventDefault(); ensureAI(comp, st, true); }
+  else if (act === "fav") {
+    S.favs = isFav(v) ? S.favs.filter(x => x !== v) : [...(S.favs || []), v];
+  }
+  else if (act === "copy") { navigator.clipboard?.writeText(v); el.textContent = "Copied"; return; }
+  render();
+  if (act.startsWith("pick") || act === "took" || act === "took-typed") {
+    const next = document.querySelector(".node:not(.done):not(.locked)");
+    next?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+});
+
+// Live search boxes: redraw only the results so the input keeps focus
+document.addEventListener("input", e => {
+  const t = e.target;
+  if (t.id === "unitSearch") {
+    S.unitQuery = t.value;
+    document.getElementById("opMatches").innerHTML = openerMatchesHtml();
+  } else if (t.dataset.search === "comp") {
+    S.compQuery = t.value;
+    document.getElementById("compMatches").innerHTML = compMatchesHtml();
+  } else if (t.dataset.search === "aug") {
+    const comp = S.comp && compById(S.comp);
+    S.augQuery = { ...(S.augQuery || {}), [t.dataset.st]: t.value };
+    if (comp) document.getElementById(`augMatches-${t.dataset.st}`).innerHTML = augMatchesHtml(comp, t.dataset.st);
+  } else return;
+  save();
+});
+
+document.addEventListener("change", e => {
+  if (e.target.id === "hpIn") {
+    const hp = Math.round(+e.target.value);
+    S.hp = hp > 0 && hp <= 100 ? String(hp) : "";
+    render();
+  } else if (e.target.dataset.offer) {
+    const st = e.target.dataset.offer;
+    S.offers[st] = S.offers[st] || ["", "", ""];
+    S.offers[st][+e.target.dataset.k] = e.target.value.trim();
+    save();
+  }
+});
+
+Promise.all([
+  fetch("/api/gameplan").then(r => { if (!r.ok) throw new Error(); return r.json(); }),
+  fetch("/openers/openers.json").then(r => r.json()).catch(() => ({ openers: [] })),
+]).then(([d, o]) => {
+  DATA = d;
+  OPENERS = o.openers.map(x => ({ ...x, img: "/openers/" + x.img }));
+  if (d.patch) document.getElementById("patchNote").textContent = ` (patch ${d.patch})`;
+  load();
+  S.favs = (S.favs || []).filter(id => compById(id));
+  if (S.comp && !compById(S.comp)) resetFrom(1);
+  if (S.opener && !OPENERS.some(x => x.name === S.opener)) S.opener = null;
+  render();
+}).catch(() => {
+  document.getElementById("tree").innerHTML = '<li class="err">Could not load game plan data.</li>';
+});
+
+(function () {
+  const nav = document.getElementById("siteNav");
+  function onScroll() { nav.classList.toggle("scrolled", window.scrollY > 30); }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+function toggleMobileMenu() {
+  document.getElementById("mobileMenu").classList.toggle("open");
+}
+</script>
+</body>
+</html>
