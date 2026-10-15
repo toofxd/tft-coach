@@ -1819,7 +1819,7 @@ async function analyzeMatches() {
 
     // Step 2: send flat stats to coaching endpoint (same shape as the old loadProfile flow)
     const { avgPlacement, top4Count, wins, avgLevel, avgGoldLeft, avgLevelEff,
-            goldWastedGames, avgBot4LevelEff, topComps, synergies, games, modelWeaknesses } = profile;
+            goldWastedGames, avgBot4LevelEff, topComps, synergies, games, modelWeaknesses, archetypeSummary } = profile;
     const matchIds = (games || []).map(g => g.matchId);
 
     const coachRes = await fetch('/api/coaching', {
@@ -1829,7 +1829,7 @@ async function analyzeMatches() {
         avgPlacement, top4Count, wins, total: analyzeCount,
         avgLevel, avgGoldLeft, avgLevelEff,
         goldWastedGames, avgBot4LevelEff,
-        topComps, synergies, matchIds, modelWeaknesses,
+        topComps, synergies, matchIds, modelWeaknesses, archetypeSummary,
         puuid: profile.puuid,
         handle,
       }),

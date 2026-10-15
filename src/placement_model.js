@@ -61,22 +61,27 @@ function predictPlacement(model, feats) {
 /**
  * @param games  [{ level, gold_left, active_trait_count, unit_star_avg, unit_count,
  *                  item_concentration, top_trait }]
+ * @param targetsFor  optional (gameIndex) → { feature: value } overriding the overall
+ *          Challenger target for that game (e.g. its archetype's top-4 benchmarks)
  * @returns { predicted: number[], weaknesses: [...] } — weaknesses sorted by placements
  *          gained per game, biggest first. A game only counts toward a feature when the
  *          player was on the wrong side of the Challenger value.
  */
-function counterfactuals(model, games) {
+function counterfactuals(model, games, targetsFor = () => ({})) {
   const predicted = games.map(g => predictPlacement(model, g));
-  const weaknesses = Object.entries(model.counterfactual_targets).map(([feature, { value, better }]) => {
-    let totalGain = 0, affected = 0, playerSum = 0;
+  const weaknesses = Object.entries(model.counterfactual_targets).map(([feature, { value: overall, better }]) => {
+    let totalGain = 0, affected = 0, playerSum = 0, targetSum = 0;
     games.forEach((g, i) => {
       const v = g[feature] ?? 0;
+      const value = targetsFor(i)[feature] ?? overall;
       playerSum += v;
+      targetSum += value;
       const worse = better === "lower" ? v > value : v < value;
       if (!worse) return;
       affected++;
       totalGain += predicted[i] - predictPlacement(model, { ...g, [feature]: value });
     });
+    const value = targetSum / games.length;  // average target across games (varies by archetype)
     const meta = FEATURE_LABELS[feature] || { label: feature, unit: "", digits: 2 };
     return {
       feature,

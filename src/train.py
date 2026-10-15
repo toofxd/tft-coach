@@ -16,7 +16,7 @@ import torch.nn as nn
 from sklearn.cluster import KMeans
 from sklearn.metrics import accuracy_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.preprocessing import StandardScaler
 import pickle
 
 PROCESSED_DIR = Path(__file__).parent.parent / "data" / "processed"
@@ -302,39 +302,85 @@ def train_lstm(live_dir: Path, epochs: int = 80, lr: float = 1e-3) -> None:
 # Model C: K-Means comp clustering
 # ---------------------------------------------------------------------------
 
-def train_clustering(df_path: Path, n_clusters: int = 12) -> None:
-    print("\n=== Model C: K-Means Comp Clustering ===")
-    df = pd.read_csv(df_path).dropna(subset=["top_trait"])
+CALC_DATA = Path(__file__).parent.parent / "data" / "static" / "calculator_data.json"
 
-    le = LabelEncoder()
-    trait_encoded = le.fit_transform(df["top_trait"].fillna("unknown"))
+# Board shape only. Final level is deliberately left out: it tracks how long you survived,
+# so with it the clusters split winners from losers (avg place 3.4 vs 5.6) instead of
+# reroll from fast-9. With cost + stars only, every archetype averages ~4.3–4.6.
+ARCHETYPE_FEATURES = ["avg_unit_cost", "unit_star_avg"]
+# Clusters are named by centroid cost, cheapest first
+ARCHETYPE_NAMES = [
+    ("reroll", "Reroll", "low-cost units 3-starred at a lower level"),
+    ("flex",   "Flex",   "standard fast-8 boards of 3- and 4-costs"),
+    ("fast9",  "Fast 9", "high-cost boards that level to 9 for 4- and 5-costs"),
+]
+
+
+def unit_costs() -> dict[str, int]:
+    """Riot character_id (DA_*) → shop cost, from calculator_data.json."""
+    calc = json.loads(CALC_DATA.read_text(encoding="utf-8"))
+    return {u["cdId"]: u["cost"] for u in calc["units"].values() if u.get("cdId") and u.get("cost")}
+
+
+def train_clustering(df_path: Path, n_clusters: int = 3) -> None:
+    print("\n=== Model C: K-Means Comp Archetypes ===")
+    costs = unit_costs()
+    df = pd.read_csv(df_path).dropna(subset=["placement"])
+
+    # _unit_items is {character_id: [items]}; units without a known cost (summons) are skipped
+    def avg_cost(blob: str) -> float:
+        known = [costs[c] for c in json.loads(blob) if c in costs]
+        return float(np.mean(known)) if known else np.nan
+    df["avg_unit_cost"] = df["_unit_items"].map(avg_cost)
+    df = df.dropna(subset=ARCHETYPE_FEATURES)
 
     scaler = StandardScaler()
-    numeric = scaler.fit_transform(df[["level_efficiency", "unit_star_avg", "active_trait_count"]].fillna(0))
-
-    X_cluster = np.hstack([numeric, trait_encoded.reshape(-1, 1)])
-
+    X = scaler.fit_transform(df[ARCHETYPE_FEATURES])
     kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
-    labels = kmeans.fit_predict(X_cluster)
+    df["cluster"] = kmeans.fit_predict(X)
 
-    df["cluster"] = labels
-
-    # Print cluster profiles
-    print("\n  Cluster profiles (top trait + avg placement):")
-    for c in range(n_clusters):
-        subset = df[df["cluster"] == c]
-        top = subset["top_trait"].value_counts().index[0] if len(subset) else "?"
-        avg_place = subset["placement"].mean()
-        print(f"  Cluster {c:2d}: {top:30s}  n={len(subset):4d}  avg_placement={avg_place:.2f}")
+    # Name clusters by centroid cost so labels survive retraining
+    cost_order = np.argsort(scaler.inverse_transform(kmeans.cluster_centers_)[:, 0])
+    archetypes = []
+    for rank, c in enumerate(cost_order):
+        key, label, desc = ARCHETYPE_NAMES[rank]
+        rows = df[df["cluster"] == c]
+        win = rows[rows["placement"] <= 4]
+        bench = {
+            "games": int(len(rows)),
+            "avg_placement": round(float(rows["placement"].mean()), 2),
+            "top4_rate": round(float((rows["placement"] <= 4).mean()), 3),
+            # What winning looks like in this archetype (top-4 games only, like challengerBench)
+            "level": float(win["level"].median()),
+            "unit_star_avg": round(float(win["unit_star_avg"].median()), 3),
+            "gold_left": float(win["gold_left"].median()),
+            "level_efficiency": round(float(win["level_efficiency"].mean()), 3),
+            "avg_unit_cost": round(float(rows["avg_unit_cost"].mean()), 2),
+        }
+        top = rows["top_trait"].value_counts().head(4).index.tolist()
+        archetypes.append({"key": key, "label": label, "description": desc,
+                           "centroid": [round(float(v), 6) for v in kmeans.cluster_centers_[c]],
+                           "benchmarks": bench, "top_traits": top})
+        print(f"  {label:7s} n={bench['games']:6d}  cost={bench['avg_unit_cost']:.2f}  "
+              f"top-4: level {bench['level']:.0f}, stars {bench['unit_star_avg']:.2f}, gold {bench['gold_left']:.0f}  "
+              f"| avg place {bench['avg_placement']:.2f} | {', '.join(top)}")
 
     with open(MODELS_DIR / "kmeans.pkl", "wb") as f:
-        pickle.dump({
-            "kmeans": kmeans,
-            "scaler": scaler,
-            "le_trait": le,
-            "n_clusters": n_clusters,
-        }, f)
-    print(f"\n  K-Means saved (k={n_clusters}).")
+        pickle.dump({"kmeans": kmeans, "scaler": scaler, "features": ARCHETYPE_FEATURES,
+                     "names": {int(c): ARCHETYPE_NAMES[r][0] for r, c in enumerate(cost_order)}}, f)
+
+    # server.js classifies games from this file (nearest centroid in scaled space)
+    out = {
+        "trained_on": int(len(df)),
+        "features": ARCHETYPE_FEATURES,
+        "scaler_mean": [round(float(v), 6) for v in scaler.mean_],
+        "scaler_scale": [round(float(v), 6) for v in scaler.scale_],
+        "unit_costs": costs,
+        "archetypes": archetypes,
+    }
+    path = MODELS_DIR / "archetypes.json"
+    path.write_text(json.dumps(out, separators=(",", ":")))
+    print(f"  Exported {path.name} ({path.stat().st_size // 1024} KB)")
 
 
 # ---------------------------------------------------------------------------

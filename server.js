@@ -6,6 +6,7 @@ const path = require("path");
 const { parse } = require("csv-parse/sync");
 const { spawn } = require("child_process");
 const placementModel = require("./src/placement_model");
+const archetypes = require("./src/archetypes");
 
 const app = express();
 const PORT = process.env.PORT || 30002;
@@ -121,6 +122,11 @@ const challengerBench = (() => {
 // Missing file → coaching falls back to the static FOCUS AREAS.
 const mlp = placementModel.loadModel();
 console.log(mlp ? `Placement model: ${mlp.trained_on} games, val MAE ${mlp.val_mae}` : "Placement model: not found (run python src/train.py mlp)");
+
+// Comp archetypes (src/train.py kmeans → models/archetypes.json): reroll / flex / fast 9,
+// each with its own Challenger top-4 benchmarks.
+const archetypeModel = archetypes.loadArchetypes();
+console.log(archetypeModel ? `Archetypes: ${archetypeModel.archetypes.map(a => a.label).join(" / ")}` : "Archetypes: not found (run python src/train.py kmeans)");
 
 // Pre-compute meta insights from the full Challenger/GM dataset.
 // Used by /api/meta-insights — no Riot API dependency.
@@ -894,8 +900,14 @@ app.get("/api/profile", async (req, res) => {
       const units = (p.units || [])
         .sort((a, b) => (b.tier || 0) - (a.tier || 0))
         .map(u => ({ id: champName(u.character_id), tier: u.tier, items: (u.itemNames || []).map(itemName) }));
+      const arch = archetypeModel && archetypes.classify(archetypeModel, {
+        avg_unit_cost: archetypes.avgUnitCost(archetypeModel, p.units), unit_star_avg: feats.unitStarAvg,
+      });
       return {
         matchId: m.metadata.match_id,
+        archetype: arch ? arch.key : null,
+        archetypeLabel: arch ? arch.label : null,
+        unitStarAvg: +feats.unitStarAvg.toFixed(2),
         placement: p.placement,
         lastRound: p.last_round,
         gameLength: Math.round(m.info.game_length || 0),
@@ -927,13 +939,19 @@ app.get("/api/profile", async (req, res) => {
 
     // Counterfactual weaknesses: re-predict each game with one habit fixed to the
     // Challenger value; the biggest predicted-placement gain is the biggest weakness.
+    // Targets come from the game's own archetype, so reroll games aren't pushed to level 9.
     let modelWeaknesses = null;
     if (mlp) {
-      const { predicted, weaknesses } = placementModel.counterfactuals(mlp, recentGames.map(g => g.modelFeatures));
+      const targetsFor = i => {
+        const a = archetypeModel?.byKey[recentGames[i].archetype];
+        return a ? { level: a.benchmarks.level, unit_star_avg: a.benchmarks.unit_star_avg, gold_left: a.benchmarks.gold_left } : {};
+      };
+      const { predicted, weaknesses } = placementModel.counterfactuals(mlp, recentGames.map(g => g.modelFeatures), targetsFor);
       recentGames.forEach((g, i) => { g.predictedPlacement = predicted[i]; });
       modelWeaknesses = weaknesses;
     }
     allGames.forEach(g => { delete g.modelFeatures; });
+    const archetypeSummary = archetypeModel ? archetypes.summarize(archetypeModel, recentGames.filter(g => g.archetype)) : null;
 
     // Compute separate stat sets
     const allStats = computeStats(allGames);
@@ -952,7 +970,7 @@ app.get("/api/profile", async (req, res) => {
       // backwards compat flat fields
       avgPlacement, top4Count, wins, total: recentGames.length,
       synergies, avgLevel, avgGoldLeft, avgLevelEff, topComps, goldWastedGames, avgBot4LevelEff,
-      modelWeaknesses,
+      modelWeaknesses, archetypeSummary,
     });
   } catch (e) {
     if (isRateLimit(e)) return res.status(429).json({ error: RATE_LIMIT_MSG });
@@ -1006,8 +1024,23 @@ HOW TO READ THESE METRICS:
     // as the level and star upgrades the player didn't buy.
     .filter(w => w.placesPerGame >= 0.05)
     .slice(0, 3);
-  const focusBlock = weaknesses.length ? `MODEL-RANKED WEAKNESSES — a placement model trained on ${mlp ? mlp.trained_on.toLocaleString() : "thousands of"} Challenger/GM games predicted each of this player's games, then re-predicted with one habit fixed to the Challenger top-4 value. Estimated placements gained per game, biggest first:
-${weaknesses.map((w, i) => `${i + 1}. ${w.label}: player avg ${w.playerAvg}${w.unit} vs Challenger ${w.target}${w.unit} → ~${w.placesPerGame.toFixed(1)} places per game${w.gamesAffected !== null && w.games ? ` (fix applies in ${w.gamesAffected}/${w.games} games)` : ""}`).join("\n")}
+
+  // Player's games grouped by comp archetype. Only the player's own numbers come from the
+  // client; pro benchmarks are looked up server-side by archetype key.
+  const archRows = (Array.isArray(req.body.archetypeSummary) ? req.body.archetypeSummary : [])
+    .map(r => {
+      const a = archetypeModel?.byKey[r?.key];
+      if (!a || !num(r.games)) return null;
+      return { a, games: num(r.games), avgPlacement: num(r.avgPlacement),
+               level: num(r.you?.level), stars: num(r.you?.unitStarAvg), gold: num(r.you?.goldLeft) };
+    })
+    .filter(Boolean);
+  const archBlock = archRows.length ? `
+BY COMP ARCHETYPE — each of the player's games was classified from its final board (avg unit cost + star level). Judge each group against pros playing the SAME archetype (their top-4 boards), not the overall Challenger averages above, which mix all styles — e.g. never tell a reroll player to hit level 9.
+${archRows.map(r => `- ${r.a.label} (${r.a.description}): ${r.games} game${r.games === 1 ? "" : "s"}, avg #${r.avgPlacement} | player median level ${r.level}, ${r.stars}★ avg, median ${r.gold}g left | pro top-4: level ${r.a.benchmarks.level}, ${r.a.benchmarks.unit_star_avg}★, ${r.a.benchmarks.gold_left}g left`).join("\n")}
+` : "";
+  const focusBlock = weaknesses.length ? `MODEL-RANKED WEAKNESSES — a placement model trained on ${mlp ? mlp.trained_on.toLocaleString() : "thousands of"} Challenger/GM games predicted each of this player's games, then re-predicted with one habit fixed to the top-4 value for that game's comp archetype. Estimated placements gained per game, biggest first:
+${weaknesses.map((w, i) => `${i + 1}. ${w.label}: player avg ${w.playerAvg}${w.unit} vs Challenger ${w.target}${w.unit} (archetype-matched avg) → ~${w.placesPerGame.toFixed(1)} places per game${w.gamesAffected !== null && w.games ? ` (fix applies in ${w.gamesAffected}/${w.games} games)` : ""}`).join("\n")}
 
 FOCUS — build the coaching around this ranking:
 - Insight 1 must address weakness #1 with concrete in-game actions, and say roughly how many placements it is costing them. Name timings in TFT stage-round notation (e.g. "level to 8 at 4-1"), never "round 7".
@@ -1033,7 +1066,7 @@ PLAYER DATA (last ${total} games, for your reference only — do not echo these 
 - Level efficiency (final level ÷ rounds played): ${avgLevelEff} | Same stat in losing games only: ${avgBot4LevelEff ?? "N/A"}
 - Most-played comps: ${compSummary || "N/A"}
 - Best comps by placement: ${synSummary || "N/A"}
-${benchBlock}
+${benchBlock}${archBlock}
 ${banditFocus ? banditFocus + "\n\n" : ""}${focusBlock}`;
 
   if (!GEMINI_API_KEY && !GROQ_API_KEY) return res.json({ coaching: "(No AI API keys configured)" });
@@ -1194,6 +1227,10 @@ app.post("/api/coach", async (req, res) => {
     const feats = extractFeatures(me);
     const pro = proStats(feats.topTrait);
     const itemIssues = analyzeItems(feats);
+    const arch = archetypeModel && archetypes.classify(archetypeModel, {
+      avg_unit_cost: archetypes.avgUnitCost(archetypeModel, me.units), unit_star_avg: feats.unitStarAvg,
+    });
+    const ab = arch?.benchmarks;
 
     // Build Gemini prompt
     const bench = challengerBench;
@@ -1206,6 +1243,7 @@ Level: ${feats.level} | Gold left: ${feats.goldLeft} | Eliminated round: ${feats
 Level efficiency: ${feats.levelEfficiency.toFixed(2)} ${pro ? `(Challenger avg for this comp: ${pro.avgLevelEff.toFixed(2)}, overall Challenger avg: ${bench ? bench.avgLevelEff.toFixed(2) : "N/A"})` : bench ? `(overall Challenger avg: ${bench.avgLevelEff.toFixed(2)})` : ""}
 Gold left: ${feats.goldLeft} ${pro ? `(Challenger avg for this comp: ${pro.avgGoldLeft.toFixed(1)}, overall Challenger avg: ${bench ? bench.avgGoldLeft.toFixed(1) : "N/A"})` : bench ? `(overall Challenger avg: ${bench.avgGoldLeft.toFixed(1)})` : ""}
 ${pro ? `This comp has ${(pro.top4Rate * 100).toFixed(0)}% top-4 rate in Challenger across ${pro.games} games.` : ""}
+${arch ? `Comp archetype: ${arch.label} (${arch.description}). Challenger top-4 ${arch.label} boards: level ${ab.level}, ${ab.unit_star_avg}★ avg, ${ab.gold_left}g left (player: level ${feats.level}, ${feats.unitStarAvg.toFixed(2)}★). Judge leveling and economy against these archetype numbers, not the overall averages.` : ""}
 
 Item issues (based on Challenger item win rates):
 ${itemIssues.length ? itemIssues.join("\n") : "None detected."}
@@ -1228,6 +1266,7 @@ Write 3–5 concise, specific coaching suggestions. Be direct and actionable. Us
       levelEfficiency: feats.levelEfficiency.toFixed(2),
       proLevelEfficiency: pro ? pro.avgLevelEff.toFixed(2) : null,
       proTop4Rate: pro ? (pro.top4Rate * 100).toFixed(0) + "%" : null,
+      archetype: arch ? arch.key : null,
       itemIssues,
       coaching: coachingText,
     });

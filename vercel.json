@@ -13,6 +13,7 @@
           "data/static/gameplan_notes.json",
           "data/archive/**",
           "models/mlp_weights.json",
+          "models/archetypes.json",
           "public/**"
         ],
         "maxDuration": 60
