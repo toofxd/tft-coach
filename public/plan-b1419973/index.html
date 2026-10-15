@@ -434,7 +434,7 @@ const ESC_MAP = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ESC_MAP[c]);
 const norm = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, "");
 const STAGES = ["2-1", "3-2", "4-2"];
-const COIN = n => `<span class="coin-cell"><img class="coin" src="/img/gold.webp" alt="gold">${n}</span>`;
+const COIN = n => `<span class="coin-cell">${n}<img class="coin" src="/img/gold.webp" alt="gold"></span>`;  // number, then coin
 function costify(text) {
   return esc(text)
     .replace(/(\d)\+(\d)-cost/gi, (_, a, b) => `${COIN(a)}+${COIN(b)}`)
