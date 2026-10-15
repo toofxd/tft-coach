@@ -275,9 +275,7 @@ a { color: inherit; }
 .lean-sm.AD { color: #ff8a7a; } .lean-sm.AP { color: #8ab4ff; } .lean-sm.Mixed { color: #c3a8ff; }
 .prio { display: inline-flex; align-items: center; gap: 3px; }
 .prio .pi { display: inline-flex; align-items: center; gap: 4px; }
-.prio { flex-wrap: wrap; }
-.prio img { width: 15px; height: 15px; border-radius: 3px; }
-.prio .pi { color: var(--text); font-size: 11.5px; gap: 3px; }
+.prio img { width: 18px; height: 18px; border-radius: 3px; }
 .prio.big img { width: 26px; height: 26px; }
 .prio.big .pi { font-size: 12.5px; color: var(--text); background: var(--navy-deep); border: 1px solid var(--border); border-radius: 6px; padding: 3px 7px 3px 3px; }
 .prio .arr { color: var(--text-30); font-size: 13px; }
@@ -541,7 +539,7 @@ function leanBadge(lean) {
 function itemPrioHtml(c, big = false) {
   if (!c.itemPriority?.length) return "";
   return `<span class="prio${big ? " big" : ""}">${c.itemPriority.map(it =>
-    `<span class="pi" title="${esc(it.name)}">${it.icon ? `<img src="${esc(it.icon)}" alt="">` : ""}${esc(shortItem(it.name))}</span>`).join('<span class="arr">›</span>')}</span>`;
+    `<span class="pi" title="${esc(it.name)}">${it.icon ? `<img src="${esc(it.icon)}" alt="">` : ""}${big ? esc(shortItem(it.name)) : ""}</span>`).join('<span class="arr">›</span>')}</span>`;
 }
 
 function unitIcons(c) {
