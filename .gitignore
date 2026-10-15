@@ -21,3 +21,23 @@ server.log
 server_err.log
 server.err
 logs/
+
+# Local-only files
+# Banner / cover art and the scripts + font that make them (root only — public/ images stay tracked)
+/*.jpg
+/*.jpeg
+/*.png
+/*.webp
+/*.ttf
+/make_cover.py
+/make_linkedin_banner.py
+# Logs and scratch notes
+/server_*.txt
+/features_log.txt
+/instructions.txt
+# Coaching video transcripts (distilled into data/static/gameplan_notes.json)
+notebooks/*.txt
+# Per-player files from the disabled bandit learner
+data/bandits/
+# Local Claude Code / preview config
+.claude/
