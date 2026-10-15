@@ -269,6 +269,8 @@ a { color: inherit; }
 .cc-line { color: var(--text-70); }
 .role { display: inline-block; width: 52px; flex-shrink: 0; font-size: 10px; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.06em; color: var(--gold); }
+.coin-cell { display: inline-flex; align-items: center; gap: 2px; white-space: nowrap; }
+.coin { width: 12px; height: 12px; }
 .lean { font-size: 10px; font-weight: 800; letter-spacing: 0.04em; padding: 2px 6px; border-radius: 4px; color: #fff; }
 .lean.AD { background: #c0392b; } .lean.AP { background: #2f6fd6; } .lean.Mixed { background: #7b5cc4; }
 .lean-sm { font-size: 10px; font-weight: 700; }
@@ -432,6 +434,15 @@ const ESC_MAP = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ESC_MAP[c]);
 const norm = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, "");
 const STAGES = ["2-1", "3-2", "4-2"];
+const COIN = n => `<span class="coin-cell"><img class="coin" src="/img/gold.webp" alt="gold">${n}</span>`;
+function costify(text) {
+  return esc(text)
+    .replace(/(\d)\+(\d)-cost/gi, (_, a, b) => `${COIN(a)}+${COIN(b)}`)
+    .replace(/(\d+)-costs\b/gi, (_, n) => `${COIN(n)} units`)
+    .replace(/(\d+)-cost\b/gi, (_, n) => COIN(n))
+    .replace(/(\d+)g\b/g, (_, n) => COIN(n));
+}
+
 const STRAT_LABEL = { fast9: "Fast 8/9", fast8: "Fast 8", reroll1: "1-cost reroll", reroll2: "2-cost reroll",
   reroll3: "3-cost reroll", reroll12: "1+2-cost reroll", standard: "Standard" };
 const STORE_KEY = "gameplan.v1";
@@ -553,7 +564,7 @@ function compBtnInner(c, act) {
   const carries = (c.carries || []).map(x => `<b>${esc(x.name)}</b> <span class="lean-sm ${esc(x.lean)}">${esc(x.lean)}</span>`).join(" · ");
   return `<button class="comp-btn card-btn" data-act="${act}" data-v="${esc(c.id)}">
     <span class="cc-top"><span class="tier-tag ${esc(c.tier)}" ${c.tier === "Special" ? 'title="Needs a specific augment or emblem"' : ""}>${c.tier === "Special" ? "SP" : esc(c.tier)}</span>
-      <span class="cc-name">${esc(c.short)}</span>${leanBadge(c.lean)}<span class="strat">${esc(c.style || STRAT_LABEL[c.strategy])}</span></span>
+      <span class="cc-name">${esc(c.short)}</span>${leanBadge(c.lean)}<span class="strat">${costify(c.style || STRAT_LABEL[c.strategy])}</span></span>
     ${carries ? `<span class="cc-line"><span class="role">Carry</span>${carries}</span>` : ""}
     ${c.tanks?.length ? `<span class="cc-line"><span class="role">Tank</span>${esc(c.tanks.join(" · "))}</span>` : ""}
     ${c.support?.length ? `<span class="cc-line"><span class="role">Support</span>${esc(c.support.join(" · "))}</span>` : ""}
@@ -566,7 +577,7 @@ function nodeComp() {
   const comp = S.comp && compById(S.comp);
   if (!ready) return node(2, { title: "Comp", sub: "Pick an opener first", locked: true });
   if (comp) {
-    return node(2, { title: "Comp", choice: `${esc(comp.short)} ${leanBadge(comp.lean)} · ${esc(comp.style || "")} ${favBtn(comp)}`, done: true, change: "comp", body: compDetail(comp) });
+    return node(2, { title: "Comp", choice: `${esc(comp.short)} ${leanBadge(comp.lean)} · ${costify(comp.style || "")} ${favBtn(comp)}`, done: true, change: "comp", body: compDetail(comp) });
   }
   const search = `<div class="offer-row" style="margin-bottom:10px"><input class="aug-in" type="search" autocomplete="off"
     data-search="comp" placeholder="Search a comp, champion, trait or style (e.g. Draven, Riftbeast, reroll)" value="${esc(S.compQuery || "")}"></div>`;
@@ -665,9 +676,9 @@ function rollLevelBlock(comp, stage, late = false) {
     const nextUp = row?.steps.find(s => stageNum(s.round) > n);
     return `<div class="muted">No level-up this stage${nextUp ? ` — next: level ${esc(nextUp.level)} at ${esc(nextUp.round)}` : ""}. Save to interest (10 / 20 / 30 / 40 / 50 gold).</div>`;
   }
-  return `${steps.length ? `<div class="timeline">${steps.map(s => `<span class="step"><span class="r">${esc(s.round)}</span><span class="l">Lv ${esc(s.level)}</span></span>`).join("")}</div>` : ""}
-    ${row ? `<div class="muted">${esc(row.label)} · ${esc(comp.style || "")}</div>` : ""}
-    ${notes.length ? `<ul class="notes">${notes.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}`;
+  return `${steps.length ? `<div class="timeline">${steps.map(s => `<span class="step"><span class="r">${costify(s.round)}</span><span class="l">Lv ${esc(s.level)}</span></span>`).join("")}</div>` : ""}
+    ${row ? `<div class="muted">${esc(row.label)} · ${costify(comp.style || "")}</div>` : ""}
+    ${notes.length ? `<ul class="notes">${notes.map(t => `<li>${costify(t)}</li>`).join("")}</ul>` : ""}`;
 }
 
 const stageOpen = st => S.comp && STAGES.slice(0, STAGES.indexOf(st)).every(p => S.augs[p]);
@@ -753,7 +764,7 @@ function ifThenRules(comp, stage) {
 function ifThenHtml(comp, stage) {
   const rows = ifThenRules(comp, stage);
   return `<div class="lbl" style="margin-top:12px">If → then</div><div class="ifthen">${rows.map(r =>
-    `<div class="it${r.on ? " on" : ""}"><span class="w">If ${esc(r.when)}</span><span class="t">→ ${esc(r.then)}</span></div>`).join("")}</div>`;
+    `<div class="it${r.on ? " on" : ""}"><span class="w">If ${costify(r.when)}</span><span class="t">→ ${costify(r.then)}</span></div>`).join("")}</div>`;
 }
 
 // ── Rule picks (if X then Y — no API call) ───────────────────────────
@@ -873,7 +884,7 @@ function pickHtml(p, i, avoid = false) {
   return `<div class="pick${avoid ? " avoid" : ""}">
     ${p.icon ? `<img src="${esc(p.icon)}" alt="" loading="lazy">` : `<div class="noimg"></div>`}
     <div><div class="pn">${avoid ? "" : `<span class="rank">#${i + 1}</span>`}${esc(p.name)} <span class="${tierCls}" style="font-size:11px;font-weight:600">${esc(p.tier || "")}</span></div>
-      <div class="why">${avoid ? "Avoid: " : ""}${esc(p.why)}</div>${p.desc ? `<div class="desc">${esc(p.desc)}</div>` : ""}</div>
+      <div class="why">${avoid ? "Avoid: " : ""}${costify(p.why)}</div>${p.desc ? `<div class="desc">${esc(p.desc)}</div>` : ""}</div>
     ${avoid ? "" : `<button class="btn took" data-act="took" data-st="${esc(p.stage)}" data-v="${esc(p.name)}">I took this</button>`}
   </div>`;
 }
