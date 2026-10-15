@@ -567,7 +567,7 @@ function unitIcons(c) {
 }
 
 function compBtnInner(c, act) {
-  const carries = (c.carries || []).map(x => `<b>${esc(x.name)}</b>${leanBadge(x.lean)}`).join(" · ");
+  const carries = (c.carries || []).map(x => `<b>${esc(x.name)}</b>`).join(" · ");
   return `<button class="comp-btn card-btn" data-act="${act}" data-v="${esc(c.id)}">
     <span class="cc-top"><span class="tier-tag ${esc(c.tier)}" ${c.tier === "Special" ? 'title="Needs a specific augment or emblem"' : ""}>${c.tier === "Special" ? "SP" : esc(c.tier)}</span>
       <span class="cc-name">${esc(c.short)}</span>${leanBadge(c.lean)}<span class="strat">${costify(c.style || STRAT_LABEL[c.strategy])}</span></span>
@@ -633,7 +633,7 @@ function compDetail(c) {
   const bm = c.bm;
   return `<div class="card comp-detail">
     <div class="full"><div class="lbl">Item priority (TFT Academy)</div>${itemPrioHtml(c, true) || '<span class="muted">—</span>'}
-      <div class="items-list" style="margin-top:8px">${(c.carries || []).map(x => `<div><b>${esc(x.name)}</b> ${leanBadge(x.lean)} — ${esc(x.items.join(" › "))}</div>`).join("")}</div>
+      <div class="items-list" style="margin-top:8px">${(c.carries || []).map(x => `<div><b>${esc(x.name)}</b> — ${esc(x.items.join(" › "))}</div>`).join("")}</div>
       ${c.wants?.carry?.length ? `<div class="items-list" style="margin-top:6px">Hold for carries: <b>${esc(c.wants.carry.map(w => `${shortItem(w.name)} ×${w.count}`).join(" · "))}</b>${c.wants.tank?.length ? ` &nbsp;|&nbsp; tanks: <b>${esc(c.wants.tank.map(w => `${shortItem(w.name)} ×${w.count}`).join(" · "))}</b>` : ""}</div>` : ""}</div>
     <div><div class="lbl">Recommended augments</div><div class="chips">${c.augments.map(augChip).join("") || '<span class="muted">—</span>'}</div>
       ${c.augmentTypes.length ? `<div class="items-list" style="margin-top:8px">Priority: <b>${esc(c.augmentTypes.join(" > "))}</b></div>` : ""}</div>
