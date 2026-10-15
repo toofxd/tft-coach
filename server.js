@@ -1479,7 +1479,8 @@ app.get("/api/gameplan", (_req, res) => {
   const comps = gameplanData.comps.map(c => ({
     id: c.id, name: c.name, short: c.short.trim(), tier: c.tier, style: c.style, strategy: c.strategy,
     difficulty: c.difficulty, mainChampion: c.mainChampion, traits: c.traits, augments: c.augments, augmentTypes: c.augmentTypes,
-    carousel: c.carousel, earlyComp: c.earlyComp, finalComp: c.finalComp, url: c.url,
+    itemPriority: c.itemPriority, earlyComp: c.earlyComp, finalComp: c.finalComp, url: c.url,
+    carries: c.carries, lean: c.lean, wants: c.wants,
     leveling: c.leveling, levelingNotes: c.levelingNotes,
     bm: c.bm && { name: c.bm.name, conditions: c.bm.conditions, itemHolders: c.bm.itemHolders, bis: c.bm.augments?.bis || [],
                   teamCode: c.bm.teamCode, builderUrl: c.bm.builderUrl },

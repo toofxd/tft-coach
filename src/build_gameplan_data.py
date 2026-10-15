@@ -270,12 +270,13 @@ def fetch_cdragon():
     data = r.json()
     s18 = next(s for s in data["setData"] if s.get("mutator") == "TFTSet18")
     aug_ids = set(s18.get("augments") or [])
-    names, augs = {}, {}
+    names, augs, icons = {}, {}, {}
     for it in data["items"]:
         api, name = it.get("apiName"), it.get("name")
         if not api or not name:
             continue
         names[api] = name
+        icons[api] = cd_png(it.get("icon"))
         if api in aug_ids or "_Augment_" in api:
             # Set 18 ids win over older copies of the same augment
             if api in aug_ids or norm(name) not in augs:
@@ -283,7 +284,7 @@ def fetch_cdragon():
     for c in s18.get("champions") or []:
         if c.get("apiName") and c.get("name"):
             names[c["apiName"]] = c["name"]
-    return augs, names
+    return augs, names, icons
 
 
 def build_augments(tt, guide, cd):
@@ -336,6 +337,50 @@ def tag_augments(augments, trait_names):
         if (a.get("desc") or "") and re.search(r"\bgold\b|\bxp\b|interest", a["desc"].lower()) and "econ" not in a["tags"]:
             a["tags"].append("econ")
         a["traits"] = sorted({traits_by_low[w] for w in traits_by_low if re.search(rf"\b{re.escape(w)}\b", text)})
+
+
+# ── Comp damage lean + component wants (from the carries' items) ──────────────
+
+COMPONENTS = {1: "BF Sword", 2: "Recurve Bow", 3: "Rod", 4: "Tear", 5: "Chain Vest",
+              6: "Negatron Cloak", 7: "Giant's Belt", 8: "Sparring Gloves", 9: "Spatula", 10: "Frying Pan"}
+TANK_PARTS = {5, 6, 7}
+# Item stats are hybrid this set (most give AD% *and* AP), so lean comes from what the
+# item is built for. Attack-speed / mana items that both sides use count for neither.
+AD_ITEMS = {"Infinity Edge", "Deathblade", "Last Whisper", "Kraken's Fury", "Sterak's Gage", "Giant Slayer",
+            "Edge of Night", "Bloodthirster", "Red Buff", "Titan's Resolve", "Runaan's Hurricane", "Striker's Flail"}
+AP_ITEMS = {"Rabadon's Deathcap", "Jeweled Gauntlet", "Archangel's Staff", "Morellonomicon", "Void Staff",
+            "Nashor's Tooth", "Ionic Spark", "Hextech Gunblade", "Blue Buff"}
+
+
+def comp_shape(final_comp, items_by_name, main_champion=None):
+    """→ carries (each with its own AD/AP lean), the comp's overall lean, and the components
+    its carries and tanks want."""
+    carries, carry_parts, tank_parts = [], {}, {}
+    for u in final_comp:
+        parts = [c for it in u["items"] for c in (items_by_name.get(it, {}).get("from") or [])]
+        if not parts:
+            continue
+        is_tank = sum(c in TANK_PARTS for c in parts) > len(parts) / 2
+        bucket = tank_parts if is_tank else carry_parts
+        for c in parts:
+            if c in COMPONENTS:
+                bucket[COMPONENTS[c]] = bucket.get(COMPONENTS[c], 0) + 1
+        if is_tank or len(u["items"]) < 2:
+            continue
+        ad = sum(it in AD_ITEMS for it in u["items"])
+        ap = sum(it in AP_ITEMS for it in u["items"])
+        if ad == ap:  # no clear signal from finished items: fall back to BF Sword vs Rod
+            ad, ap = parts.count(1), parts.count(3)
+        carries.append({"name": u["name"], "items": u["items"],
+                        "lean": "AD" if ad > ap else "AP" if ap > ad else "Mixed"})
+    # The comp leans the way its main carry does; otherwise the carries' majority
+    main = next((c for c in carries if c["name"] == main_champion and c["lean"] != "Mixed"), None)
+    votes = [c["lean"] for c in carries if c["lean"] != "Mixed"]
+    lean = main["lean"] if main else ("AD" if votes.count("AD") > votes.count("AP") else
+                                      "AP" if votes.count("AP") > votes.count("AD") else "Mixed")
+    carries.sort(key=lambda c: c["name"] != main_champion)  # main carry first
+    top = lambda d: [{"name": k, "count": v} for k, v in sorted(d.items(), key=lambda kv: -kv[1])][:4]
+    return {"carries": carries, "lean": lean, "wants": {"carry": top(carry_parts), "tank": top(tank_parts)}}
 
 
 def load_calc_data():
@@ -422,7 +467,7 @@ def tfta_strategy(style):
     return "fast9"  # Fast 9 / Lose Streak play the standard curve
 
 
-def build_tfta_comps(guides, names, augments_by_api):
+def build_tfta_comps(guides, names, augments_by_api, icons):
     def nm(api):
         raw = re.sub(r"^DA_(\d+_)?|\d+$", "", api or "").replace("_", " ")
         return names.get(api) or re.sub(r"(?<=[a-z])(?=[A-Z])", " ", raw).replace("Trait Augment", "").replace("  ", " ").strip()
@@ -451,7 +496,8 @@ def build_tfta_comps(guides, names, augments_by_api):
             "augmentTypes": [t.title() for t in (g.get("augmentTypes") or [])],
             "augmentsTip": g.get("augmentsTip") or "",
             "tips": [{"stage": t.get("stage"), "tip": t.get("tip")} for t in (g.get("tips") or [])],
-            "carousel": [nm(c["apiName"]) for c in (g.get("carousel") or [])],
+            # TFT Academy shows this list as "Item Priority" (finished item, then components)
+            "itemPriority": [{"name": nm(c["apiName"]), "icon": icons.get(c["apiName"])} for c in (g.get("carousel") or [])],
             "earlyComp": board(g.get("earlyComp")),
             "finalComp": board(g.get("finalComp")),
             "url": f"https://tftacademy.com/tierlist/comps/{g['compSlug']}",
@@ -496,24 +542,33 @@ def main():
     bm_comps = parse_meta(meta_raw)
     guide, aug_general = parse_augment_guide(aug_raw)
     openers = parse_openers(op_raw)
-    cd_augs, names = fetch_cdragon()
+    cd_augs, names, icons = fetch_cdragon()
     augments = build_augments(fetch_tt_augments(), guide, cd_augs)
     by_api = {a["apiName"]: a for a in augments.values() if a.get("apiName")}
 
     lvl_text = to_text(lvl_raw)
     level_tables = parse_leveling_guide(lvl_text)
     tfta_patch, tfta_guides = fetch_tfta()
-    comps = build_tfta_comps(tfta_guides, names, by_api)
+    comps = build_tfta_comps(tfta_guides, names, by_api, icons)
     bm_to_tfta = match_bm(comps, bm_comps)
     calc = load_calc_data()
     trait_names = sorted({t["name"] for t in calc["traits"].values() if t.get("name")})
     tag_augments(augments, trait_names)
     unit_traits = {u.get("name"): u.get("traits") or [] for u in calc["units"].values()}
+    units_by_name = {u.get("name"): u for u in calc["units"].values()}
+    items_by_name = {i["name"]: i for i in calc.get("items", {}).values()}
     for c in comps:
         counts = {}
         for u in c["finalComp"]:
             for t in unit_traits.get(u["name"], []):
                 counts[t] = counts.get(t, 0) + 1
+        # Champion art + cost; drop summons/props that aren't shop units
+        for board in ("finalComp", "earlyComp"):
+            for u in c[board]:
+                cu = units_by_name.get(u["name"])
+                u["cost"], u["icon"] = (cu.get("cost"), cu.get("icon")) if cu else (None, None)
+            c[board] = [u for u in c[board] if u["cost"]]
+        c.update(comp_shape(c["finalComp"], items_by_name, c["mainChampion"]))
         words = c["short"].lower()
         c["traits"] = sorted([t for t, n in counts.items() if n >= 2 or t.lower() in words], key=lambda t: -counts.get(t, 0))
     for c in comps:

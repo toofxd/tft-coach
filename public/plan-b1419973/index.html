@@ -251,7 +251,32 @@ a { color: inherit; }
   background: var(--navy-card); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px 6px 6px; cursor: pointer;
 }
 .comp-btn:hover { border-color: rgba(174,145,66,0.7); }
-.comp-wrap { display: inline-flex; align-items: stretch; }
+.comp-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 8px; }
+.comp-wrap { display: flex; align-items: stretch; min-width: 0; }
+.card-btn { flex: 1; min-width: 0; flex-direction: column; align-items: stretch; gap: 6px; padding: 8px 10px; text-align: left; }
+.cc-top { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.cc-name { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cc-top .strat { margin-left: auto; white-space: nowrap; }
+.cc-units { display: flex; flex-wrap: wrap; gap: 3px; }
+.ui { position: relative; width: 30px; height: 30px; border-radius: 5px; border: 2px solid #808080; overflow: hidden; background: #111017; }
+.ui img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.ui .un { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.ui.carry { box-shadow: 0 0 0 2px var(--gold-light); }
+.cost-1 { border-color: #9b9b9b; } .cost-2 { border-color: #11b288; } .cost-3 { border-color: #207ac7; }
+.cost-4 { border-color: #c440da; } .cost-5 { border-color: #ffb93b; }
+.cc-line { font-size: 11.5px; font-weight: 500; color: var(--text-50); display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.cc-line b { color: var(--text); font-weight: 600; }
+.lean { font-size: 10px; font-weight: 800; letter-spacing: 0.04em; padding: 2px 6px; border-radius: 4px; color: #fff; }
+.lean.AD { background: #c0392b; } .lean.AP { background: #2f6fd6; } .lean.Mixed { background: #7b5cc4; }
+.lean-sm { font-size: 10px; font-weight: 700; }
+.lean-sm.AD { color: #ff8a7a; } .lean-sm.AP { color: #8ab4ff; } .lean-sm.Mixed { color: #c3a8ff; }
+.prio { display: inline-flex; align-items: center; gap: 3px; }
+.prio .pi { display: inline-flex; align-items: center; gap: 4px; }
+.prio img { width: 18px; height: 18px; border-radius: 3px; }
+.prio.big img { width: 26px; height: 26px; }
+.prio.big .pi { font-size: 12.5px; color: var(--text); background: var(--navy-deep); border: 1px solid var(--border); border-radius: 6px; padding: 3px 7px 3px 3px; }
+.prio .arr { color: var(--text-30); font-size: 13px; }
+.comp-wrap { display: flex; }
 .comp-wrap .comp-btn { border-top-right-radius: 0; border-bottom-right-radius: 0; }
 .fav { font-size: 15px; line-height: 1; color: var(--text-30); background: var(--navy-card); border: 1px solid var(--border);
   border-left: none; border-radius: 0 8px 8px 0; padding: 0 9px; cursor: pointer; font-family: inherit; }
@@ -499,10 +524,36 @@ function compBtn(c, act = "pick-comp") {
   return `<span class="comp-wrap">${compBtnInner(c, act)}${favBtn(c)}</span>`;
 }
 
+const SHORT_ITEM = { "Needlessly Large Rod": "Rod", "B.F. Sword": "BF Sword", "Tear Of The Goddess": "Tear",
+  "Giant's Belt": "Belt", "Negatron Cloak": "Cloak", "Sparring Gloves": "Gloves", "Recurve Bow": "Bow", "Chain Vest": "Vest" };
+const shortItem = n => SHORT_ITEM[n] || n;
+
+function leanBadge(lean) {
+  return lean ? `<span class="lean ${esc(lean)}" title="${lean === "Mixed" ? "Carries split AD and AP" : `Carries want ${lean} items`}">${esc(lean)}</span>` : "";
+}
+
+function itemPrioHtml(c, big = false) {
+  if (!c.itemPriority?.length) return "";
+  return `<span class="prio${big ? " big" : ""}">${c.itemPriority.map(it =>
+    `<span class="pi" title="${esc(it.name)}">${it.icon ? `<img src="${esc(it.icon)}" alt="">` : ""}${big ? esc(shortItem(it.name)) : ""}</span>`).join('<span class="arr">›</span>')}</span>`;
+}
+
+function unitIcons(c) {
+  const carryNames = new Set((c.carries || []).map(x => x.name));
+  const units = [...c.finalComp].sort((a, b) => carryNames.has(b.name) - carryNames.has(a.name) || b.cost - a.cost);
+  return units.map(u => `<span class="ui cost-${u.cost}${carryNames.has(u.name) ? " carry" : ""}" title="${esc(u.name)}${u.items.length ? " — " + esc(u.items.join(", ")) : ""}">
+      ${u.icon ? `<img src="${esc(u.icon)}" alt="" loading="lazy">` : ""}<span class="un">${esc(u.name)}</span></span>`).join("");
+}
+
 function compBtnInner(c, act) {
-  return `<button class="comp-btn" data-act="${act}" data-v="${esc(c.id)}">
-    <span class="tier-tag ${esc(c.tier)}" ${c.tier === "Special" ? 'title="Needs a specific augment or emblem"' : ""}>${c.tier === "Special" ? "SP" : esc(c.tier)}</span>${esc(c.short)}
-    <span class="strat">${esc(c.style || STRAT_LABEL[c.strategy])}</span></button>`;
+  const carries = (c.carries || []).slice(0, 2).map(x => `<b>${esc(x.name)}</b> <span class="lean-sm ${esc(x.lean)}">${esc(x.lean)}</span>`).join(" · ");
+  return `<button class="comp-btn card-btn" data-act="${act}" data-v="${esc(c.id)}">
+    <span class="cc-top"><span class="tier-tag ${esc(c.tier)}" ${c.tier === "Special" ? 'title="Needs a specific augment or emblem"' : ""}>${c.tier === "Special" ? "SP" : esc(c.tier)}</span>
+      <span class="cc-name">${esc(c.short)}</span>${leanBadge(c.lean)}<span class="strat">${esc(c.style || STRAT_LABEL[c.strategy])}</span></span>
+    <span class="cc-units">${unitIcons(c)}</span>
+    ${carries ? `<span class="cc-line">Carry: ${carries}</span>` : ""}
+    ${c.itemPriority?.length ? `<span class="cc-line">Item priority ${itemPrioHtml(c)}</span>` : ""}
+  </button>`;
 }
 
 function nodeComp() {
@@ -510,7 +561,7 @@ function nodeComp() {
   const comp = S.comp && compById(S.comp);
   if (!ready) return node(2, { title: "Comp", sub: "Pick an opener first", locked: true });
   if (comp) {
-    return node(2, { title: "Comp", choice: `${esc(comp.short)} · ${esc(comp.style || "")} ${favBtn(comp)}`, done: true, change: "comp", body: compDetail(comp) });
+    return node(2, { title: "Comp", choice: `${esc(comp.short)} ${leanBadge(comp.lean)} · ${esc(comp.style || "")} ${favBtn(comp)}`, done: true, change: "comp", body: compDetail(comp) });
   }
   const search = `<div class="offer-row" style="margin-bottom:10px"><input class="aug-in" type="search" autocomplete="off"
     data-search="comp" placeholder="Search a comp, champion, trait or style (e.g. Draven, Riftbeast, reroll)" value="${esc(S.compQuery || "")}"></div>`;
@@ -559,11 +610,13 @@ function compDetail(c) {
   const early = c.earlyComp.map(u => esc(u.name)).join(", ");
   const bm = c.bm;
   return `<div class="card comp-detail">
+    <div class="full"><div class="lbl">Item priority (TFT Academy)</div>${itemPrioHtml(c, true) || '<span class="muted">—</span>'}
+      <div class="items-list" style="margin-top:8px">${(c.carries || []).map(x => `<div><b>${esc(x.name)}</b> ${leanBadge(x.lean)} — ${esc(x.items.join(" › "))}</div>`).join("")}</div>
+      ${c.wants?.carry?.length ? `<div class="items-list" style="margin-top:6px">Hold for carries: <b>${esc(c.wants.carry.map(w => `${shortItem(w.name)} ×${w.count}`).join(" · "))}</b>${c.wants.tank?.length ? ` &nbsp;|&nbsp; tanks: <b>${esc(c.wants.tank.map(w => `${shortItem(w.name)} ×${w.count}`).join(" · "))}</b>` : ""}</div>` : ""}</div>
     <div><div class="lbl">Recommended augments</div><div class="chips">${c.augments.map(augChip).join("") || '<span class="muted">—</span>'}</div>
       ${c.augmentTypes.length ? `<div class="items-list" style="margin-top:8px">Priority: <b>${esc(c.augmentTypes.join(" > "))}</b></div>` : ""}</div>
     <div><div class="lbl">Final board</div><div class="items-list">${board}</div></div>
     <div><div class="lbl">Early board</div><div class="items-list">${early || "—"}</div>
-      ${c.carousel.length ? `<div class="lbl" style="margin-top:12px">Carousel</div><div class="items-list">${esc(c.carousel.join(" > "))}</div>` : ""}
       <div class="items-list" style="margin-top:12px">Difficulty: <b>${esc(c.difficulty || "—")}</b> · <a href="${esc(c.url)}" target="_blank" rel="noopener" style="color:var(--gold-light)">TFT Academy guide ↗</a></div></div>
     <div>${bm?.conditions?.length ? `<div class="lbl">Play it if you have</div><div class="chips">${bm.conditions.map(x => `<span class="chip">${esc(x)}</span>`).join("")}</div>` : ""}
       ${bm?.itemHolders ? `<div class="lbl" style="margin-top:12px">Early item holders</div><div class="items-list">${esc(bm.itemHolders)}</div>` : ""}
