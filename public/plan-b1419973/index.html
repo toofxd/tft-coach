@@ -273,8 +273,9 @@ a { color: inherit; }
 .coin { width: 12px; height: 12px; }
 .lean { font-size: 10px; font-weight: 800; letter-spacing: 0.04em; padding: 2px 6px; border-radius: 4px; color: #fff; }
 .lean.AD { background: #c0392b; } .lean.AP { background: #2f6fd6; } .lean.Mixed { background: #7b5cc4; }
-.lean-sm { font-size: 10px; font-weight: 700; }
-.lean-sm.AD { color: #ff8a7a; } .lean-sm.AP { color: #8ab4ff; } .lean-sm.Mixed { color: #c3a8ff; }
+.lean-ic { display: inline-flex; gap: 1px; vertical-align: middle; flex-shrink: 0; }
+.lean-ic img { width: 15px; height: 15px; display: block; }
+.cc-top .lean-ic img { width: 17px; height: 17px; }
 .prio { display: inline-flex; align-items: center; gap: 3px; }
 .prio .pi { display: inline-flex; align-items: center; gap: 4px; }
 .prio img { width: 18px; height: 18px; border-radius: 3px; }
@@ -543,8 +544,13 @@ const SHORT_ITEM = { "Needlessly Large Rod": "Rod", "B.F. Sword": "BF Sword", "T
   "Giant's Belt": "Belt", "Negatron Cloak": "Cloak", "Sparring Gloves": "Gloves", "Recurve Bow": "Bow", "Chain Vest": "Vest" };
 const shortItem = n => SHORT_ITEM[n] || n;
 
+// AD / AP stat icons (same ones the Stat Calculator uses); Mixed shows both
+const LEAN_ICON = { AD: "https://ap.tft.tools/img/general/ad.png", AP: "https://ap.tft.tools/img/general/ap.png" };
 function leanBadge(lean) {
-  return lean ? `<span class="lean ${esc(lean)}" title="${lean === "Mixed" ? "Carries split AD and AP" : `Carries want ${lean} items`}">${esc(lean)}</span>` : "";
+  if (!lean) return "";
+  const kinds = lean === "Mixed" ? ["AD", "AP"] : [lean];
+  const title = lean === "Mixed" ? "Mixed AD and AP" : `${lean} items`;
+  return `<span class="lean-ic" title="${title}">${kinds.map(k => `<img src="${LEAN_ICON[k]}" alt="${k}">`).join("")}</span>`;
 }
 
 function itemPrioHtml(c, big = false) {
@@ -561,7 +567,7 @@ function unitIcons(c) {
 }
 
 function compBtnInner(c, act) {
-  const carries = (c.carries || []).map(x => `<b>${esc(x.name)}</b> <span class="lean-sm ${esc(x.lean)}">${esc(x.lean)}</span>`).join(" · ");
+  const carries = (c.carries || []).map(x => `<b>${esc(x.name)}</b>${leanBadge(x.lean)}`).join(" · ");
   return `<button class="comp-btn card-btn" data-act="${act}" data-v="${esc(c.id)}">
     <span class="cc-top"><span class="tier-tag ${esc(c.tier)}" ${c.tier === "Special" ? 'title="Needs a specific augment or emblem"' : ""}>${c.tier === "Special" ? "SP" : esc(c.tier)}</span>
       <span class="cc-name">${esc(c.short)}</span>${leanBadge(c.lean)}<span class="strat">${costify(c.style || STRAT_LABEL[c.strategy])}</span></span>
