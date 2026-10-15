@@ -520,8 +520,10 @@ function nodeComp() {
 function compMatchesHtml() {
   const q = (S.compQuery || "").toLowerCase().trim();
   if (q) {
-    const words = q.split(/\s+/);
-    const hay = c => [c.name, c.short, c.style, c.mainChampion, ...c.traits, ...c.finalComp.map(u => u.name), ...c.earlyComp.map(u => u.name)].join(" ").toLowerCase();
+    // Punctuation-insensitive so "khazix" finds Kha'Zix
+    const clean = t => t.toLowerCase().replace(/['’.\-]/g, "");
+    const words = clean(q).split(/\s+/).filter(Boolean);
+    const hay = c => clean([c.name, c.short, c.style, c.mainChampion, ...c.traits, ...c.finalComp.map(u => u.name), ...c.earlyComp.map(u => u.name)].join(" "));
     const hits = DATA.comps.filter(c => words.every(w => hay(c).includes(w)));
     return hits.length ? `<div class="comp-list">${hits.map(c => compBtn(c)).join("")}</div>` : `<div class="muted">No comp matches “${esc(q)}”.</div>`;
   }
