@@ -356,16 +356,23 @@ def comp_shape(final_comp, items_by_name, main_champion=None):
     """→ carries (each with its own AD/AP lean), the comp's overall lean, and the components
     its carries and tanks want."""
     carries, carry_parts, tank_parts = [], {}, {}
+    tanks, support = [], []
     for u in final_comp:
         parts = [c for it in u["items"] for c in (items_by_name.get(it, {}).get("from") or [])]
+        front = u.get("boardIndex") is not None and u["boardIndex"] < 14  # rows 0-1 of 4
         if not parts:
+            (tanks if front else support).append(u["name"])
             continue
         is_tank = sum(c in TANK_PARTS for c in parts) > len(parts) / 2
+        if is_tank:
+            tanks.append(u["name"])
+        elif len(u["items"]) < 2 and u["name"] != main_champion:
+            support.append(u["name"])
         bucket = tank_parts if is_tank else carry_parts
         for c in parts:
             if c in COMPONENTS:
                 bucket[COMPONENTS[c]] = bucket.get(COMPONENTS[c], 0) + 1
-        if is_tank or len(u["items"]) < 2:
+        if is_tank or (len(u["items"]) < 2 and u["name"] != main_champion):
             continue
         ad = sum(it in AD_ITEMS for it in u["items"])
         ap = sum(it in AP_ITEMS for it in u["items"])
@@ -380,7 +387,8 @@ def comp_shape(final_comp, items_by_name, main_champion=None):
                                       "AP" if votes.count("AP") > votes.count("AD") else "Mixed")
     carries.sort(key=lambda c: c["name"] != main_champion)  # main carry first
     top = lambda d: [{"name": k, "count": v} for k, v in sorted(d.items(), key=lambda kv: -kv[1])][:4]
-    return {"carries": carries, "lean": lean, "wants": {"carry": top(carry_parts), "tank": top(tank_parts)}}
+    return {"carries": carries, "tanks": tanks, "support": support, "lean": lean,
+            "wants": {"carry": top(carry_parts), "tank": top(tank_parts)}}
 
 
 def load_calc_data():
@@ -478,7 +486,8 @@ def build_tfta_comps(guides, names, augments_by_api, icons):
 
     def board(units):
         return [{"name": nm(u.get("apiName")), "stars": u.get("stars") or 1,
-                 "items": [nm(i) for i in (u.get("items") or [])]} for u in (units or [])]
+                 "items": [nm(i) for i in (u.get("items") or [])], "boardIndex": u.get("boardIndex")}
+                for u in (units or [])]
 
     tier_name = {"X": "Special"}
     comps = []

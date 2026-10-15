@@ -266,13 +266,18 @@ a { color: inherit; }
 .cost-4 { border-color: #c440da; } .cost-5 { border-color: #ffb93b; }
 .cc-line { font-size: 11.5px; font-weight: 500; color: var(--text-50); display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
 .cc-line b { color: var(--text); font-weight: 600; }
+.cc-line { color: var(--text-70); }
+.role { display: inline-block; width: 52px; flex-shrink: 0; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--gold); }
 .lean { font-size: 10px; font-weight: 800; letter-spacing: 0.04em; padding: 2px 6px; border-radius: 4px; color: #fff; }
 .lean.AD { background: #c0392b; } .lean.AP { background: #2f6fd6; } .lean.Mixed { background: #7b5cc4; }
 .lean-sm { font-size: 10px; font-weight: 700; }
 .lean-sm.AD { color: #ff8a7a; } .lean-sm.AP { color: #8ab4ff; } .lean-sm.Mixed { color: #c3a8ff; }
 .prio { display: inline-flex; align-items: center; gap: 3px; }
 .prio .pi { display: inline-flex; align-items: center; gap: 4px; }
-.prio img { width: 18px; height: 18px; border-radius: 3px; }
+.prio { flex-wrap: wrap; }
+.prio img { width: 15px; height: 15px; border-radius: 3px; }
+.prio .pi { color: var(--text); font-size: 11.5px; gap: 3px; }
 .prio.big img { width: 26px; height: 26px; }
 .prio.big .pi { font-size: 12.5px; color: var(--text); background: var(--navy-deep); border: 1px solid var(--border); border-radius: 6px; padding: 3px 7px 3px 3px; }
 .prio .arr { color: var(--text-30); font-size: 13px; }
@@ -525,6 +530,7 @@ function compBtn(c, act = "pick-comp") {
 }
 
 const SHORT_ITEM = { "Needlessly Large Rod": "Rod", "B.F. Sword": "BF Sword", "Tear Of The Goddess": "Tear",
+  "Gargoyle Stoneplate": "Gargoyle", "Rabadon's Deathcap": "Deathcap", "Guinsoo's Rageblade": "Guinsoo's", "Hand Of Justice": "Hand of Justice",
   "Giant's Belt": "Belt", "Negatron Cloak": "Cloak", "Sparring Gloves": "Gloves", "Recurve Bow": "Bow", "Chain Vest": "Vest" };
 const shortItem = n => SHORT_ITEM[n] || n;
 
@@ -535,7 +541,7 @@ function leanBadge(lean) {
 function itemPrioHtml(c, big = false) {
   if (!c.itemPriority?.length) return "";
   return `<span class="prio${big ? " big" : ""}">${c.itemPriority.map(it =>
-    `<span class="pi" title="${esc(it.name)}">${it.icon ? `<img src="${esc(it.icon)}" alt="">` : ""}${big ? esc(shortItem(it.name)) : ""}</span>`).join('<span class="arr">›</span>')}</span>`;
+    `<span class="pi" title="${esc(it.name)}">${it.icon ? `<img src="${esc(it.icon)}" alt="">` : ""}${esc(shortItem(it.name))}</span>`).join('<span class="arr">›</span>')}</span>`;
 }
 
 function unitIcons(c) {
@@ -546,13 +552,14 @@ function unitIcons(c) {
 }
 
 function compBtnInner(c, act) {
-  const carries = (c.carries || []).slice(0, 2).map(x => `<b>${esc(x.name)}</b> <span class="lean-sm ${esc(x.lean)}">${esc(x.lean)}</span>`).join(" · ");
+  const carries = (c.carries || []).map(x => `<b>${esc(x.name)}</b> <span class="lean-sm ${esc(x.lean)}">${esc(x.lean)}</span>`).join(" · ");
   return `<button class="comp-btn card-btn" data-act="${act}" data-v="${esc(c.id)}">
     <span class="cc-top"><span class="tier-tag ${esc(c.tier)}" ${c.tier === "Special" ? 'title="Needs a specific augment or emblem"' : ""}>${c.tier === "Special" ? "SP" : esc(c.tier)}</span>
       <span class="cc-name">${esc(c.short)}</span>${leanBadge(c.lean)}<span class="strat">${esc(c.style || STRAT_LABEL[c.strategy])}</span></span>
-    <span class="cc-units">${unitIcons(c)}</span>
-    ${carries ? `<span class="cc-line">Carry: ${carries}</span>` : ""}
-    ${c.itemPriority?.length ? `<span class="cc-line">Item priority ${itemPrioHtml(c)}</span>` : ""}
+    ${carries ? `<span class="cc-line"><span class="role">Carry</span>${carries}</span>` : ""}
+    ${c.tanks?.length ? `<span class="cc-line"><span class="role">Tank</span>${esc(c.tanks.join(" · "))}</span>` : ""}
+    ${c.support?.length ? `<span class="cc-line"><span class="role">Support</span>${esc(c.support.join(" · "))}</span>` : ""}
+    ${c.itemPriority?.length ? `<span class="cc-line"><span class="role">Items</span>${itemPrioHtml(c)}</span>` : ""}
   </button>`;
 }
 
@@ -615,7 +622,12 @@ function compDetail(c) {
       ${c.wants?.carry?.length ? `<div class="items-list" style="margin-top:6px">Hold for carries: <b>${esc(c.wants.carry.map(w => `${shortItem(w.name)} ×${w.count}`).join(" · "))}</b>${c.wants.tank?.length ? ` &nbsp;|&nbsp; tanks: <b>${esc(c.wants.tank.map(w => `${shortItem(w.name)} ×${w.count}`).join(" · "))}</b>` : ""}</div>` : ""}</div>
     <div><div class="lbl">Recommended augments</div><div class="chips">${c.augments.map(augChip).join("") || '<span class="muted">—</span>'}</div>
       ${c.augmentTypes.length ? `<div class="items-list" style="margin-top:8px">Priority: <b>${esc(c.augmentTypes.join(" > "))}</b></div>` : ""}</div>
-    <div><div class="lbl">Final board</div><div class="items-list">${board}</div></div>
+    <div><div class="lbl">Final board</div><div class="items-list">
+      ${[["Carry", (c.carries || []).map(x => x.name)], ["Tank", c.tanks || []], ["Support", c.support || []]].filter(([, n]) => n.length)
+        .map(([role, names]) => `<div style="margin-bottom:4px"><span class="role">${role}</span>${names.map(n => {
+          const u = c.finalComp.find(x => x.name === n);
+          return `<b>${esc(n)}</b>${u && u.stars > 1 ? ` <span class="t-gold">${"★".repeat(u.stars)}</span>` : ""}${u?.items.length && role !== "Carry" ? ` (${esc(u.items.join(", "))})` : ""}`;
+        }).join(" · ")}</div>`).join("")}</div></div>
     <div><div class="lbl">Early board</div><div class="items-list">${early || "—"}</div>
       <div class="items-list" style="margin-top:12px">Difficulty: <b>${esc(c.difficulty || "—")}</b> · <a href="${esc(c.url)}" target="_blank" rel="noopener" style="color:var(--gold-light)">TFT Academy guide ↗</a></div></div>
     <div>${bm?.conditions?.length ? `<div class="lbl">Play it if you have</div><div class="chips">${bm.conditions.map(x => `<span class="chip">${esc(x)}</span>`).join("")}</div>` : ""}
