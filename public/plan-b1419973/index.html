@@ -288,7 +288,10 @@ a { color: inherit; }
 .tip-comp .ui { width: 26px; height: 26px; }
 
 /* Hex board (final comp) — 4 rows × 7, odd rows shifted half a hex */
-.tr-bar { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+.tips .it { grid-template-columns: 62px 1fr; color: var(--text-70); }
+.board-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.tr-bar { display: flex; flex-wrap: wrap; gap: 5px; }
+.board-top .prio { margin-left: auto; }
 .hex-board { --hx: min(70px, calc((100vw - 90px) / 7.6)); --gap: 5px; position: relative;
   width: calc(7.5 * (var(--hx) + var(--gap))); height: calc(3 * (var(--hx) * 1.1547 * 0.75 + var(--gap)) + var(--hx) * 1.1547 + 14px);
   margin: 14px auto 4px; }
@@ -840,7 +843,7 @@ function boardTraits(units) {
 }
 
 // TFT board: 4 rows × 7 hexes, boardIndex = row * 7 + col (row 0 = front line), odd rows shifted right
-function hexBoardHtml(c) {
+function hexBoardHtml(c, corner = "") {   // corner: shown top right (item priority)
   const at = new Map(c.finalComp.filter(u => u.boardIndex != null).map(u => [u.boardIndex, u]));
   const cells = [];
   for (let i = 0; i < 28; i++) {
@@ -853,7 +856,7 @@ function hexBoardHtml(c) {
       ${u.items.length ? `<span class="hx-items">${u.items.map(n => itemIcon(n, "hx-it")).join("")}</span>` : ""}</span>`);
   }
   const placed = at.size === c.finalComp.length;
-  return `<div class="tr-bar">${boardTraits(c.finalComp).map(([t, n]) => traitChip(t, n)).join("")}</div>
+  return `<div class="board-top"><div class="tr-bar">${boardTraits(c.finalComp).map(([t, n]) => traitChip(t, n)).join("")}</div>${corner}</div>
     ${placed ? `<div class="hex-board">${cells.join("")}</div>` : `<div class="cc-units">${unitIcons(c)}</div>`}`;
 }
 
@@ -940,26 +943,28 @@ function augIcon(name) {
 }
 
 // Selected comp: the final board on a hex grid, then icon rows (hover any icon for detail)
+// Recommended augments split into Econ / Items / Combat, in the comp's own priority order.
+// An augment with several tags goes to the type this comp values most
+const AUG_GROUP_OF = { econ: "Econ", reroll: "Econ", items: "Items", combat: "Combat", trait: "Combat", tempo: "Combat" };
+function augGroups(c) {
+  const order = [...new Set([...c.augmentTypes.filter(t => ["Econ", "Items", "Combat"].includes(t)), "Items", "Econ", "Combat"])];
+  const groups = Object.fromEntries(order.map(t => [t, []]));
+  c.augments.forEach(name => {
+    const types = (augByName(name)?.tags || []).map(t => AUG_GROUP_OF[t]).filter(Boolean);
+    groups[order.find(t => types.includes(t)) || "Combat"].push(name);
+  });
+  return order.filter(t => groups[t].length).map(t => [t, groups[t]]);
+}
+
+// Selected comp: the final board on a hex grid (item priority top right), early board, augments, stage tips
 function compDetail(c) {
-  const bm = c.bm;
-  const counts = list => list.map(w => `<span class="cnt">${itemIcon(w.name)}<b>×${w.count}</b></span>`).join("");
   return `<div class="card comp-detail">
-    <div class="full">${hexBoardHtml(c)}</div>
-    <div><div class="lbl">Carry items</div>
-      ${(c.carries || []).map(x => `<div class="ic-row">${unitIcon(x.name, { comp: c })}<span class="arr">›</span>${x.items.map(n => itemIcon(n)).join("")}</div>`).join("") || '<span class="muted">—</span>'}
-      <div class="lbl" style="margin-top:12px">Item priority</div>${itemPrioHtml(c, true) || '<span class="muted">—</span>'}</div>
-    <div>${c.wants?.carry?.length ? `<div class="lbl">Hold components</div>
-        <div class="ic-row"><span class="role">Carry</span>${counts(c.wants.carry)}</div>
-        ${c.wants.tank?.length ? `<div class="ic-row"><span class="role">Tank</span>${counts(c.wants.tank)}</div>` : ""}` : ""}
-      <div class="lbl" style="margin-top:12px">Early board</div><div class="ic-row">${c.earlyComp.map(u => unitIcon(u.name, { comp: c })).join("") || '<span class="muted">—</span>'}</div></div>
-    <div><div class="lbl">Recommended augments${c.augmentTypes.length ? ` <span class="muted" style="text-transform:none;letter-spacing:0">· ${esc(c.augmentTypes.join(" > "))}</span>` : ""}</div>
-      <div class="ic-row wrap">${c.augments.map(augIcon).join("") || '<span class="muted">—</span>'}</div></div>
-    <div><div class="items-list">Difficulty: <b>${esc(c.difficulty || "—")}</b> · <a href="${esc(c.url)}" target="_blank" rel="noopener" style="color:var(--gold-light)">TFT Academy guide ↗</a></div>
-      ${bm?.conditions?.length ? `<div class="lbl" style="margin-top:12px">Play it if you have</div><div class="chips">${bm.conditions.map(x => `<span class="chip">${esc(x)}</span>`).join("")}</div>` : ""}
-      ${bm?.itemHolders ? `<div class="lbl" style="margin-top:12px">Early item holders</div><div class="items-list">${esc(bm.itemHolders)}</div>` : ""}
-      ${bm?.teamCode ? `<div class="lbl" style="margin-top:12px">Team code</div><div class="code"><code>${esc(bm.teamCode)}</code>
-        <button class="btn ghost" data-act="copy" data-v="${esc(bm.teamCode)}">Copy</button></div>` : ""}
-    </div>
+    <div class="full">${hexBoardHtml(c, itemPrioHtml(c, true))}</div>
+    <div><div class="lbl">Early board</div><div class="ic-row">${c.earlyComp.map(u => unitIcon(u.name, { comp: c })).join("") || '<span class="muted">—</span>'}</div></div>
+    <div><div class="lbl">Recommended augments</div>
+      ${augGroups(c).map(([t, names]) => `<div class="ic-row"><span class="role">${t}</span>${names.map(augIcon).join("")}</div>`).join("") || '<span class="muted">—</span>'}</div>
+    ${c.tips?.length ? `<div class="full"><div class="lbl">Tips</div><div class="ifthen tips">${c.tips.map(t =>
+      `<div class="it on"><span class="w">${esc(t.stage)}</span><span class="t">${costify(t.tip)}</span></div>`).join("")}</div></div>` : ""}
   </div>`;
 }
 
