@@ -679,6 +679,56 @@ def match_bm(tfta_comps, bm_comps):
     return bm_to_tfta
 
 
+UNIT_IMG_DIR = Path(__file__).resolve().parent.parent / "public" / "img" / "units"
+
+
+def localize_unit_icons(out, size=96):
+    """CommunityDragon champion art is 256px PNG (~55KB each, slow to hotlink ~70 at once).
+    Save a 96px WebP copy under public/img/units/ (cropped like the page's object-position 50% 20%)
+    and point every champion icon at it. Existing files are reused; delete one to refresh it."""
+    from io import BytesIO
+    from PIL import Image
+    UNIT_IMG_DIR.mkdir(parents=True, exist_ok=True)
+    local = {}
+
+    def to_local(url):
+        if not url or not url.startswith("http"):
+            return url
+        if url not in local:
+            slug = re.sub(r"[^a-z0-9_]+", "_", url.rsplit("/", 1)[-1].rsplit(".", 1)[0].lower())
+            path = UNIT_IMG_DIR / f"{slug}.webp"
+            if not path.exists():
+                try:
+                    r = requests.get(url, headers=UA, timeout=30)
+                    r.raise_for_status()
+                    im = Image.open(BytesIO(r.content)).convert("RGB")
+                    w, h = im.size
+                    side = min(w, h)
+                    top = int((h - side) * 0.2)
+                    im = im.crop(((w - side) // 2, top, (w - side) // 2 + side, top + side)).resize((size, size), Image.LANCZOS)
+                    im.save(path, "WEBP", quality=82)
+                except Exception as e:
+                    print("  champion icon download failed:", url, e)
+                    local[url] = url
+                    return url
+            local[url] = f"/img/units/{path.name}"
+        return local[url]
+
+    for u in out["unitIcons"].values():
+        u["icon"] = to_local(u.get("icon"))
+    for c in out["comps"]:
+        for board in ("finalComp", "earlyComp"):
+            for u in c[board]:
+                u["icon"] = to_local(u.get("icon"))
+    for units in out["unitPriority"].values():
+        for u in units:
+            u["icon"] = to_local(u.get("icon"))
+    units = out["utilityIcons"]["units"]
+    for name in units:
+        units[name] = to_local(units[name])
+    print(f"  {len(local)} champion icons saved to {UNIT_IMG_DIR}")
+
+
 def main():
     meta_raw, meta_mod = wp_page("meta")
     aug_raw, aug_mod = wp_page("augments")
@@ -762,6 +812,7 @@ def main():
         "openerGuideText": openers["fullText"],
         "levelingGuideText": lvl_text,
     }
+    localize_unit_icons(out)
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
 

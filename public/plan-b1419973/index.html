@@ -230,7 +230,8 @@ a { color: inherit; }
 
 /* Tier × cost grid of stage 1 units */
 .tier-grid { display: grid; grid-template-columns: 26px repeat(3, minmax(0, 1fr)); gap: 8px 14px; align-items: center; margin-bottom: 14px; }
-.tg-head { font-size: 14px; font-weight: 700; padding-bottom: 2px; border-bottom: 1px solid var(--border); }
+.tg-head { font-size: 14px; font-weight: 700; }
+.tip-rule { display: flex; align-items: center; gap: 3px; }
 .tg-cell { display: flex; flex-wrap: wrap; gap: 6px; min-height: 48px; align-items: center; }
 .up-unit.on { box-shadow: 0 0 0 3px var(--gold-light); }
 
@@ -711,15 +712,19 @@ function ruleParts(cond) {
   });
 }
 
-function ruleTile(r, i) {
-  const comps = uniqComps(r.play);
-  const parts = ruleParts(r.if);
-  const one = comps.length === 1;
-  return `<button class="rule-tile" data-act="${one ? "pick-comp-direct" : "rule-open"}" data-v="${esc(one ? comps[0].id : i)}" data-tiprule="${i}" aria-label="${esc(r.if)}">
-    ${parts.map((p, k) => (k ? '<span class="rt-plus">+</span>' : "") + (
+// The condition as icons: emblem = trait icon, champion with star badge, slam = its best items
+function ruleIconsHtml(parts) {
+  return parts.map((p, k) => (k ? '<span class="rt-plus">+</span>' : "") + (
       p.kind === "text" || (p.kind === "slam" && !p.items.length) ? `<span class="rt-txt">${esc(p.name)}</span>`
       : p.kind === "slam" ? `<span class="rt-slam">${p.items.map(it => `<span class="rt-ic k-item"><img src="${esc(it.icon)}" alt=""></span>`).join("")}<span class="rt-lbl">slam</span></span>`
-      : `<span class="rt-ic k-${p.kind}${p.cost ? ` cost-${p.cost}` : ""}"><img src="${esc(p.icon)}" alt="">${p.stars ? `<span class="rt-stars">${"★".repeat(p.stars)}</span>` : ""}</span>`)).join("")}</button>`;
+      : `<span class="rt-ic k-${p.kind}${p.cost ? ` cost-${p.cost}` : ""}"><img src="${esc(p.icon)}" alt="">${p.stars ? `<span class="rt-stars">${"★".repeat(p.stars)}</span>` : ""}</span>`)).join("");
+}
+
+function ruleTile(r, i) {
+  const comps = uniqComps(r.play);
+  const one = comps.length === 1;
+  return `<button class="rule-tile" data-act="${one ? "pick-comp-direct" : "rule-open"}" data-v="${esc(one ? comps[0].id : i)}" data-tiprule="${i}" aria-label="${esc(r.if)}">
+    ${ruleIconsHtml(ruleParts(r.if))}</button>`;
 }
 
 // Hover for a rule tile: the condition, then each comp to play (click one to pick it)
@@ -727,11 +732,13 @@ function ruleHoverHtml(i) {
   const r = DATA.openerRules[+i];
   if (!r) return "";
   const comps = uniqComps(r.play);
-  const slam = ruleParts(r.if).find(p => p.kind === "slam" && p.unit);
+  const parts = ruleParts(r.if);
+  const slam = parts.find(p => p.kind === "slam" && p.unit);
   const slamList = slam ? slamItems(slam.unit) : [];
-  return `<b>${esc(r.if)}</b>
-    ${slamList.length ? `<div class="tip-note">Slam = build a finished item now instead of holding components. Best for ${esc(slam.unit)}:</div>
-      <div class="tip-itemlist">${slamList.map(it => `<span>${itemIcon(it.name, "tip-it")}${esc(it.name)}</span>`).join("")}</div>` : ""}
+  return `<div class="tip-rule">${ruleIconsHtml(parts)}</div>
+    ${slamList.length ? `<div class="tip-sub">Slam item for ${esc(slam.unit)}</div>
+      <div class="tip-itemlist">${slamList.map(it => `<span>${itemIcon(it.name, "tip-it")}${esc(it.name)}</span>`).join("")}</div>
+      <div class="tip-note">Slam = build the full item now instead of holding components.</div>` : ""}
     <div class="tip-note">Play ${comps.length > 1 ? "one of these — click to pick" : "this"}:</div>
     <div class="tip-comps">${comps.map(c => `<button class="tip-comp" data-act="pick-comp-direct" data-v="${esc(c.id)}">
       <span class="tier-tag ${esc(c.tier)}">${c.tier === "Special" ? "SP" : esc(c.tier)}</span><span class="tc-name">${esc(c.short)}</span>
@@ -767,10 +774,9 @@ function openerMatchesHtml() {
   const q = norm(S.unitQuery || "");
   const hit = name => norm(name).includes(q);
   const ops = (q ? OPENERS.filter(o => o.champions.some(hit)) : OPENERS).filter(o => SHOW_TIERS.includes(o.tier));
-  // Hover the card for the opener's board picture; hover a champion for its details
+  // Name + champions only; hover the card for the opener's board picture; hover a champion for its details
   const cards = ops.map(o => `<button class="op" data-act="pick-opener" data-v="${esc(o.name)}" data-tipop="${esc(o.name)}">
       <span class="op-head">${o.tier ? `<span class="tier-tag ${esc(o.tier)}">${esc(o.tier)}</span>` : ""}<span class="op-name">${esc(o.name)}</span></span>
-      <span class="op-traits">${(o.traits || []).map(([t, n]) => traitChip(t, n)).join("")}</span>
       <span class="op-units">${o.champions.map(n => unitIcon(n, { cls: q && hit(n) ? "hit" : "" })).join("")}</span></button>`).join("");
   const comps = q ? DATA.comps.filter(c => c.earlyComp.some(u => hit(u.name))) : [];
   return `${ops.length ? `<div class="op-grid">${cards}</div>` : `<div class="muted">No opener board uses that unit.</div>`}
