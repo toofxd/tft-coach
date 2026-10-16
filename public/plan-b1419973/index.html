@@ -359,11 +359,7 @@ a { color: inherit; }
 .ah-box-card { padding: 10px 12px; }
 .ah-box-card.met { border-color: rgba(174,145,66,0.55); }
 .ah-box-card.skip { opacity: 0.55; }
-.ah-head { display: flex; align-items: baseline; gap: 8px; cursor: pointer; list-style: none; }
-.ah-head::-webkit-details-marker { display: none; }
-.ah-head::after { content: "▾"; margin-left: auto; color: var(--text-50); font-size: 13px; transition: transform 0.15s; }
-.ah-box-card:not([open]) .ah-head::after { transform: rotate(-90deg); }
-.ah-head:hover::after { color: var(--gold-light); }
+.ah-head { display: flex; align-items: baseline; gap: 8px; }
 .ah-need-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ff8a7a; }
 .ah-skip { font-size: 11px; color: var(--text-30); }
 .ah-box-card .ah-row { padding: 5px 7px; font-size: 12.5px; }
@@ -922,12 +918,10 @@ function utilityPanelHtml(comp) {
     const status = full ? `<span class="ah-met">✓ ${esc(full.name)}</span>`
       : partial && isNeeded ? `<span class="ah-part">Partial — keep building</span>`
       : isNeeded ? `<span class="ah-need-tag">Needed</span>` : `<span class="ah-skip">Not needed for ${esc(comp.lean)}</span>`;
-    // Collapsed by default (header + status always visible); the arrow expands it and the choice is remembered
-    const open = (S.utilOpen || {})[need] ?? false;
-    return `<details class="card ah-box-card${full ? " met" : ""}${isNeeded ? "" : " skip"}" data-need="${need}" ${open ? "open" : ""}>
-      <summary class="ah-head"><span class="ah-title">${UTILITY_NEEDS[need].title}</span>${UTILITY_NEEDS[need].lean ? leanBadge(UTILITY_NEEDS[need].lean) : ""}${status}</summary>
+    return `<div class="card ah-box-card${full ? " met" : ""}${isNeeded ? "" : " skip"}" data-need="${need}">
+      <div class="ah-head"><span class="ah-title">${UTILITY_NEEDS[need].title}</span>${UTILITY_NEEDS[need].lean ? leanBadge(UTILITY_NEEDS[need].lean) : ""}${status}</div>
       <div class="ah-what">${esc(UTILITY_NEEDS[need].what)}</div>
-      <div class="ut-tiles">${tiles}</div></details>`;
+      <div class="ut-tiles">${tiles}</div></div>`;
   }).join("");
 }
 
@@ -1218,7 +1212,7 @@ document.addEventListener("click", e => {
   }
   else if (act === "clear-all") {
     S = { opener: null, skipOpener: false, comp: null, streak: "mixed", hp: "", augs: {}, offers: {}, tab: {},
-          favs: S.favs || [], antiheal: [], utilOpen: S.utilOpen };
+          favs: S.favs || [], antiheal: [] };
     window.scrollTo(0, 0);
   }
   else if (act === "ah") {
@@ -1254,13 +1248,6 @@ document.addEventListener("mouseover", e => {
   utTip.style.top = `${below + h > innerHeight - 8 ? Math.max(8, r.top - h - 6) : below}px`;
 });
 
-// Remember which utility boxes are open across re-renders (toggle doesn't bubble: capture it)
-document.addEventListener("toggle", e => {
-  const need = e.target.dataset?.need;
-  if (!need) return;
-  S.utilOpen = { ...(S.utilOpen || {}), [need]: e.target.open };
-  save();
-}, true);
 
 // Live search boxes: redraw only the results so the input keeps focus
 document.addEventListener("input", e => {
