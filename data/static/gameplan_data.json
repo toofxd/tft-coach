@@ -6,8 +6,8 @@
  ],
  "patch": "18.4b",
  "updated": {
-  "tftacademy": "2026-10-15 17:59:19.577Z",
-  "bmMeta": "2026-10-14T22:43:58",
+  "tftacademy": "2026-10-16 04:03:52.163Z",
+  "bmMeta": "2026-10-15T17:02:55",
   "bmAugments": "2026-09-23T00:34:35",
   "bmOpeners": "2026-10-12T23:53:59",
   "bmLeveling": "2026-09-10T16:30:31"
@@ -343,11 +343,11 @@
     "Econ",
     "Combat"
    ],
-   "augmentsTip": "Ideally, Khazix gains Ravager > Executioner > Spellweaver > Rapidfire with takedowns. Can play 3rd Executioner/Lux/Ivern or another executioner before Alune. Double Hoj is bis after the buff but can play jg/deathcap instead of one of them too.",
+   "augmentsTip": "If you have HOJ first, go Executioner > Ravager. If you have AP / Mana / tempo slams, go Ravager > Executioner. Then pick Spellweaver > Rapidfire with the last evolutions. Can play 3rd Executioner/Lux/Ivern as max cap.",
    "tips": [
     {
      "stage": "Stage 2",
-     "tip": "Only play this comp with an early Kha'zix with items so you can snowball Rival. Play any upgraded frontline tank to stall for Khazix."
+     "tip": "Slam items aggressively on Kha'zix and move them later. It's okay to have Spark, Shojin, etc on Khazix early for takedowns."
     },
     {
      "stage": "Stage 3",
@@ -364,16 +364,16 @@
      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_unstableconcoction.png"
     },
     {
-     "name": "Giant's Belt",
-     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_giantsbelt.png"
+     "name": "Needlessly Large Rod",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_needlesslylargerod.png"
     },
     {
      "name": "Tear Of The Goddess",
      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_tearofthegoddess.png"
     },
     {
-     "name": "Sparring Gloves",
-     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_sparringgloves.png"
+     "name": "Giant's Belt",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_giantsbelt.png"
     }
    ],
    "earlyComp": [
@@ -496,7 +496,7 @@
     }
    ],
    "url": "https://tftacademy.com/tierlist/comps/set-18-lunarwood-khazix",
-   "updated": "2026-10-15 17:58:47.055Z",
+   "updated": "2026-10-16 04:03:52.163Z",
    "carries": [
     {
      "name": "Kha'Zix",
@@ -3425,7 +3425,7 @@
    ],
    "bm": {
     "name": "Solar Yunara",
-    "tier": "C",
+    "tier": "A",
     "conditions": [
      "Lots of econ",
      "2 Sets of carry items"
@@ -3440,6 +3440,7 @@
     "tips": [
      "You will be buying a wisp almost every turn with this comp. Blossom wisps are very strong and it's worth digging for quality wisps on most turns.",
      "LeBlanc is a very important part to this comp as its half of the econ engine for an otherwise very expensive comp. Be as strong as you can on stage 3 and early 4 to print units with LeBlanc. If you fall behind on tempo, you fall behind on printing which leads to a reverse snowball.",
+     "LeBlanc 3 is great but Karma 3 is a suitable replacement. Chase Leona 3 if you do not think you will be able to 3 star LeBlanc.",
      "Item augments are required for this comp as they are the easiest way to be strong on stage 3 and 4. If you reach 3 item Yunara and LeBlanc you will get kills which snowballs you as mentioned above.",
      "With Prismatic Ticket you can consider playing for all 8 3 stars. Prioritize the ones highlighted above first."
     ],
@@ -9703,7 +9704,7 @@
    "levelingNotes": [],
    "bm": {
     "name": "Primal Malphite",
-    "tier": "B",
+    "tier": "C",
     "conditions": [
      "2 Sets of AD items",
      "High quality tank items for Malphite"
@@ -11463,7 +11464,7 @@
    "levelingNotes": [],
    "bm": {
     "name": "Invoker Nidalee",
-    "tier": "B",
+    "tier": "C",
     "conditions": [
      "Lots of items",
      "Be willing to flex the front line"
@@ -16764,24 +16765,123 @@
   "Defender Cassiopeia": "set-18-defender-cassio",
   "Invoker Morgana and Ahri": "set-18-ahri-morgana",
   "Invoker Ahri Morgana": "set-18-ahri-morgana",
+  "Solar Yunara": "set-18-solara-yunara",
   "Elderwood Executioners": "set-18-elderwood-executioners",
   "Veigar Reroll": "set-18-veigar-consuming-flora-copy",
+  "Solar Akali Reroll": "set-18-solar-melee",
+  "Solar Akali": "set-18-solar-melee",
   "Dragon Fast 9": "set-18-dragon-princess",
   "Ashe Fast 9": "set-18-blossom-fast-9",
   "Kayle Reroll": "set-18-solar-kayle",
   "Solar Kayle": "set-18-solar-kayle",
   "Juggernaut Flex": "set-18-ashe-juggernauts",
-  "Primal Malphite": "set-18-invoker-nidalee-copy",
   "Flora Malphite": "set-18-soraka-flex",
-  "Solar Akali Reroll": "set-18-solar-melee",
-  "Solar Akali": "set-18-solar-melee",
-  "Caitlyn Reroll": "set-18-caitlyn-hunters",
   "Blossom Ahri": "set-18-ahri-morgana",
   "Adaptor Reroll": "set-18-adaptor-reroll",
   "Adaptor Master Yi Reroll": "set-18-adaptor-reroll",
+  "Caitlyn Reroll": "set-18-caitlyn-hunters",
+  "Primal Malphite": "set-18-invoker-nidalee-copy",
   "Invoker Nidalee": "set-18-adaptor-nidalee",
-  "Solar Yunara": "set-18-solara-yunara",
   "Tristana Rengar Reroll": "set-18-fae-tristana-copy"
+ },
+ "utilityIcons": {
+  "items": {
+   "Sunfire Cape": {
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_redbuff.png",
+    "from": [
+     {
+      "name": "Chain Vest",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_chainvest.png"
+     },
+     {
+      "name": "Giant's Belt",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_giantsbelt.png"
+     }
+    ]
+   },
+   "Morellonomicon": {
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_morellonomicon.png",
+    "from": [
+     {
+      "name": "Needlessly Large Rod",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_needlesslylargerod.png"
+     },
+     {
+      "name": "Giant's Belt",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_giantsbelt.png"
+     }
+    ]
+   },
+   "Red Buff": {
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rapidfirecannon.png",
+    "from": [
+     {
+      "name": "Recurve Bow",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_recurvebow.png"
+     },
+     {
+      "name": "Recurve Bow",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_recurvebow.png"
+     }
+    ]
+   },
+   "Last Whisper": {
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_lastwhisper.png",
+    "from": [
+     {
+      "name": "Recurve Bow",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_recurvebow.png"
+     },
+     {
+      "name": "Sparring Gloves",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_sparringgloves.png"
+     }
+    ]
+   },
+   "Evenshroud": {
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spectralgauntlet.png",
+    "from": [
+     {
+      "name": "Negatron Cloak",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_negatroncloak.png"
+     },
+     {
+      "name": "Giant's Belt",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_giantsbelt.png"
+     }
+    ]
+   },
+   "Void Staff": {
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_voidstaff.png",
+    "from": [
+     {
+      "name": "Recurve Bow",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_recurvebow.png"
+     },
+     {
+      "name": "Tear Of The Goddess",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_tearofthegoddess.png"
+     }
+    ]
+   },
+   "Ionic Spark": {
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_ionicspark.png",
+    "from": [
+     {
+      "name": "Needlessly Large Rod",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_needlesslylargerod.png"
+     },
+     {
+      "name": "Negatron Cloak",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_negatroncloak.png"
+     }
+    ]
+   }
+  },
+  "traits": {
+   "Caustic": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_caustic.png",
+   "Inferno": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_inferno.png"
+  }
  },
  "augments": {
   "crashtestdummies": {

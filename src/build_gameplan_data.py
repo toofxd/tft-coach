@@ -391,6 +391,30 @@ def comp_shape(final_comp, items_by_name, main_champion=None):
             "wants": {"carry": top(carry_parts), "tank": top(tank_parts)}}
 
 
+# Icons for the Game Plan's utility boxes (items show icon + recipe on hover)
+UTILITY_ITEM_API = {"Sunfire Cape": "DA_SunfireCape", "Morellonomicon": "DA_Morellonomicon", "Red Buff": "DA_RedBuff",
+                    "Last Whisper": "DA_LastWhisper", "Evenshroud": "DA_Evenshroud", "Void Staff": "DA_VoidStaff",
+                    "Ionic Spark": "DA_IonicSpark"}
+COMPONENT_API = {1: "DA_Component_BFSword", 2: "DA_Component_RecurveBow", 3: "DA_Component_NeedlesslyLargeRod",
+                 4: "DA_Component_TearOfTheGoddess", 5: "DA_Component_ChainVest", 6: "DA_Component_NegatronCloak",
+                 7: "DA_Component_GiantsBelt", 8: "DA_Component_SparringGloves"}
+UTILITY_TRAITS = ("Inferno", "Caustic")
+
+
+def utility_icons(icons, names, items_by_name, calc):
+    items = {}
+    for name, api in UTILITY_ITEM_API.items():
+        recipe = (items_by_name.get(name) or {}).get("from") or []
+        items[name] = {"icon": icons.get(api),
+                       "from": [{"name": names.get(COMPONENT_API[c], COMPONENTS.get(c)), "icon": icons.get(COMPONENT_API[c])}
+                                for c in recipe if c in COMPONENT_API]}
+    traits = {t["name"]: t.get("icon") for t in calc["traits"].values() if t.get("name") in UTILITY_TRAITS}
+    missing = [n for n, v in items.items() if not v["icon"] or not all(c["icon"] for c in v["from"])]
+    if missing:
+        print("  utility items missing an icon:", missing)
+    return {"items": items, "traits": traits}
+
+
 def load_calc_data():
     p = Path(__file__).parent.parent / "data" / "static" / "calculator_data.json"
     return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {"units": {}, "traits": {}}
@@ -599,6 +623,7 @@ def main():
         "metaSummary": to_text(meta_raw).split("Augment Guide", 1)[0].replace("Video Guides at YouTube", "").replace("Meta Snapshot Summary", "").strip(),
         "comps": comps,
         "bmCompToTfta": bm_to_tfta,
+        "utilityIcons": utility_icons(icons, names, items_by_name, calc),
         "augments": augments,
         "augmentPrinciples": aug_general,
         "openerGuide": {k: v for k, v in openers.items() if k != "fullText"},

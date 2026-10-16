@@ -372,6 +372,27 @@ a { color: inherit; }
 .ah-what { font-size: 11.5px; color: var(--text-50); margin: 4px 0 6px; line-height: 1.4; }
 .ah-group { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin: 6px 0 2px; }
 .ah-list { display: grid; gap: 4px; }
+.ut-tiles { display: flex; flex-wrap: wrap; gap: 6px; }
+.ut-tile { position: relative; width: 38px; height: 38px; padding: 0; border-radius: 7px; border: 2px solid var(--border);
+  background: var(--navy-deep); cursor: pointer; overflow: visible; }
+.ut-tile img { width: 100%; height: 100%; border-radius: 5px; display: block; }
+.ut-tile:hover { border-color: rgba(174,145,66,0.7); }
+.ut-tile.best { border-color: var(--gold-light); box-shadow: 0 0 0 2px rgba(201,168,76,0.35); }
+.ut-tile.on { border-color: var(--gold); }
+.ut-tile.done { opacity: 0.3; }
+.ut-check { position: absolute; right: -5px; top: -5px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold);
+  color: var(--navy); font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.ut-tip { position: fixed; z-index: 200; width: 240px; padding: 9px 11px; border-radius: 8px; pointer-events: none; display: none;
+  background: rgba(7,24,48,0.97); border: 1px solid rgba(174,145,66,0.5); box-shadow: 0 8px 24px rgba(0,0,0,0.5); font-size: 12.5px; }
+.ut-tip.show { display: block; }
+.tip-recipe { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+.tip-recipe span { display: inline-flex; align-items: center; gap: 4px; }
+.tip-recipe img { width: 20px; height: 20px; border-radius: 3px; }
+.tip-recipe i { color: var(--text-30); font-style: normal; }
+.tip-note { margin-top: 6px; color: var(--text-50); font-size: 12px; }
+.ah-part { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #e8c35a; }
+.page-header { align-items: center; }
+.clear-all { margin-left: auto; }
 .ah-row { display: flex; align-items: flex-start; gap: 10px; text-align: left; width: 100%; padding: 7px 9px; border-radius: 7px;
   background: var(--navy-deep); border: 1px solid var(--border); color: var(--text); font: 500 13px/1.35 inherit; font-family: inherit; cursor: pointer; }
 .ah-row:hover { border-color: rgba(174,145,66,0.5); }
@@ -456,6 +477,7 @@ a { color: inherit; }
 <div class="wrap">
   <div class="page-header">
     <div class="page-title">Game Plan</div>
+    <button class="btn ghost clear-all" data-act="clear-all">Clear all</button>
     <div class="page-sub">Opener → comp → augments at 2-1, 3-2, 4-2 → when to roll and level</div>
   </div>
   <div class="layout">
@@ -753,24 +775,30 @@ function nodeStage(comp, stage, i) {
 // Each need is covered by one full source; once it is, the other options grey out.
 const UTILITY_SOURCES = [
   // Anti-heal: Wound (−33% healing) + 1% Burn always come together
-  { id: "inferno", needs: ["antiheal"], kind: "Trait", name: "Inferno (2)", how: "2 Inferno units on board" },
-  { id: "sunfire", needs: ["antiheal"], kind: "Item", name: "Sunfire Cape", how: "Belt + Vest — on a tank", item: "Sunfire Cape" },
-  { id: "morello", needs: ["antiheal"], kind: "Item", name: "Morellonomicon", how: "Rod + Belt — on an AP caster", item: "Morellonomicon" },
-  { id: "redbuff", needs: ["antiheal"], kind: "Item", name: "Red Buff", how: "Bow + Bow — on an attack-speed carry", item: "Red Buff" },
-  { id: "cinderling", needs: ["antiheal"], kind: "Champion", name: "Cinderling", how: "Her ability — only 20% Wound", partial: true, unit: "Cinderling" },
+  { id: "inferno", needs: ["antiheal"], kind: "Trait", name: "Inferno", how: "2 Inferno units on board", trait: "Inferno" },
+  { id: "sunfire", needs: ["antiheal"], kind: "Item", name: "Sunfire Cape", how: "On a tank", item: "Sunfire Cape" },
+  { id: "morello", needs: ["antiheal"], kind: "Item", name: "Morellonomicon", how: "On an AP caster", item: "Morellonomicon" },
+  { id: "redbuff", needs: ["antiheal"], kind: "Item", name: "Red Buff", how: "On an attack-speed carry", item: "Red Buff" },
+  { id: "cinderling", needs: ["antiheal"], kind: "Champion", name: "Cinderling", how: "20% Wound + Burn — weaker, still build one", partial: true, unit: "Cinderling" },
+  { id: "brambleback", needs: ["antiheal"], kind: "Champion", name: "Brambleback", how: "Burn only, no Wound — still build one", partial: true, unit: "Brambleback" },
   { id: "aug-feed", needs: ["antiheal"], kind: "Augment", name: "Feed the Flames", how: "2-1 / 3-2 — gives a Sunfire Cape" },
   { id: "aug-pyro", needs: ["antiheal"], kind: "Augment", name: "Pyromaniac", how: "2-1 / 3-2 — gives a Red Buff" },
   { id: "aug-board", needs: ["antiheal"], kind: "Augment", name: "Sunfire Board", how: "3-2 / 4-2 — burns and wounds every enemy" },
   { id: "aug-buffs", needs: ["antiheal"], kind: "Augment", name: "One Buff, Two Buff", how: "3-2 / 4-2 — gives a Red Buff" },
   // Sunder: −30% armor (AD comps)
-  { id: "lastwhisper", needs: ["sunder"], kind: "Item", name: "Last Whisper", how: "Bow + Gloves — on your AD carry", item: "Last Whisper" },
-  { id: "evenshroud", needs: ["sunder"], kind: "Item", name: "Evenshroud", how: "Cloak + Belt — on a tank", item: "Evenshroud" },
+  { id: "lastwhisper", needs: ["sunder"], kind: "Item", name: "Last Whisper", how: "On your AD carry", item: "Last Whisper" },
+  { id: "evenshroud", needs: ["sunder"], kind: "Item", name: "Evenshroud", how: "On a tank", item: "Evenshroud" },
+  { id: "gnar", needs: ["sunder", "shred"], kind: "Champion", name: "Gnar", how: "Cuts armor and MR by 15–20 — stacks, still build one", partial: true, unit: "Gnar" },
+  { id: "xayah", needs: ["sunder"], kind: "Champion", name: "Xayah", how: "−2 armor per feather — stacks, still build one", partial: true, unit: "Xayah" },
+  { id: "mamabeak", needs: ["sunder"], kind: "Champion", name: "Mama Beak", how: "Orange Buff: −2 armor per hit — stacks, still build one", partial: true, unit: "Mama Beak" },
   // Shred: −30% magic resist (AP comps)
-  { id: "voidstaff", needs: ["shred"], kind: "Item", name: "Void Staff", how: "Bow + Tear — on your AP carry", item: "Void Staff" },
-  { id: "ionic", needs: ["shred"], kind: "Item", name: "Ionic Spark", how: "Rod + Cloak — on a tank", item: "Ionic Spark" },
-  { id: "kayle", needs: ["shred"], kind: "Champion", name: "Kayle", how: "2nd ascension — only 20% Shred", partial: true, unit: "Kayle" },
-  // Both
-  { id: "kogmaw", needs: ["sunder", "shred"], kind: "Champion", name: "Kog'Maw (Caustic)", how: "His damage applies 30% Shred and Sunder", unit: "Kog'Maw" },
+  { id: "voidstaff", needs: ["shred"], kind: "Item", name: "Void Staff", how: "On your AP carry", item: "Void Staff" },
+  { id: "ionic", needs: ["shred"], kind: "Item", name: "Ionic Spark", how: "On a tank", item: "Ionic Spark" },
+  { id: "kayle", needs: ["shred"], kind: "Champion", name: "Kayle", how: "20% Shred at 2nd ascension — stacks, still build one", partial: true, unit: "Kayle" },
+  { id: "fiddlesticks", needs: ["shred"], kind: "Champion", name: "Fiddlesticks", how: "−10 MR on the 3 nearest — stacks, still build one", partial: true, unit: "Fiddlesticks" },
+  { id: "pebbles", needs: ["shred"], kind: "Champion", name: "Pebbles", how: "−3 MR per second channeling — stacks, still build one", partial: true, unit: "Pebbles" },
+  // Both, at full strength
+  { id: "kogmaw", needs: ["sunder", "shred"], kind: "Champion", name: "Kog'Maw", how: "Caustic: 30% Shred and Sunder", unit: "Kog'Maw" },
 ];
 const UTILITY_NEEDS = {
   antiheal: { title: "Anti-heal", what: "Wound cuts enemy healing by 33% (and adds a 1% Burn). One source is enough." },
@@ -791,13 +819,13 @@ function utilityHave() {
 }
 
 function utilityFit(comp, x) {
-  if (!comp) return x.unit ? { score: -9 } : { score: x.kind === "Augment" ? -1 : 0, note: "" };
+  if (!comp) return { score: x.kind === "Augment" ? -1 : 0, note: "" };
   const holder = x.item && comp.finalComp.find(u => u.items.includes(x.item));
   const onBoard = x.unit && [...comp.finalComp, ...comp.earlyComp].some(u => u.name === x.unit);
   if (x.id === "inferno" && comp.traits.includes("Inferno")) return { score: 6, note: "This comp already runs Inferno" };
   if (holder) return { score: 5, note: `TFT Academy's board puts it on ${holder.name}` };
-  if (onBoard) return { score: 4, note: `${x.unit} is in this comp — ${x.how}` };
-  if (x.unit) return { score: -9 };                       // champion not in this comp: hide
+  if (onBoard) return { score: 4, note: `In your comp — ${x.how}` };
+  if (x.unit) return { score: x.partial ? -2 : 0, note: "" };
   let score = x.kind === "Augment" ? -1 : 0;
   if (x.id === "sunfire" || x.id === "evenshroud" || x.id === "ionic") score += 2;   // every comp has a tank to hold it
   if (x.id === "morello" && comp.lean === "AP") score += 2;
@@ -807,29 +835,47 @@ function utilityFit(comp, x) {
 }
 
 // Three permanent boxes (build them any time); boxes this comp doesn't need are dimmed
+function utilityTile(x, state) {
+  const icons = DATA.utilityIcons || { items: {}, traits: {} };
+  const icon = x.item ? icons.items[x.item]?.icon : icons.traits[x.trait];
+  const cls = ["ut-tile", state.on && "on", state.done && "done", state.best && "best"].filter(Boolean).join(" ");
+  return `<button class="${cls}" data-act="ah" data-v="${x.id}" data-tip="${x.id}" aria-label="${esc(x.name)}" ${state.auto ? "disabled" : ""}>
+    ${icon ? `<img src="${esc(icon)}" alt="">` : esc(x.name)}${state.on ? '<span class="ut-check">✓</span>' : ""}</button>`;
+}
+
+function utilityRow(x, state, full) {
+  return `<button class="ah-row${state.on ? " on" : ""}${state.done ? " done" : ""}" data-act="ah" data-v="${x.id}" ${state.auto ? "disabled" : ""}>
+    <span class="ah-box">${state.on ? "✓" : ""}</span>
+    <span class="ah-main"><b>${esc(x.name)}</b>${state.best ? ' <span class="ah-rec">Best fit</span>' : ""}
+      <span class="ah-how">${esc(state.done ? `Covered by ${full.name}` : x.note || x.how)}</span></span>
+  </button>`;
+}
+
+// Three permanent boxes (build them any time); boxes this comp doesn't need are dimmed
 function utilityPanelHtml(comp) {
   const have = utilityHave();
   const needed = comp ? utilityNeeds(comp) : ["antiheal", "sunder", "shred"];
+  const augs = Object.values(S.augs || {});
   return ["antiheal", "sunder", "shred"].map(need => {
     const full = UTILITY_SOURCES.find(x => x.needs.includes(need) && have.has(x.id) && !x.partial);
+    const partial = UTILITY_SOURCES.find(x => x.needs.includes(need) && have.has(x.id) && x.partial);
     const isNeeded = needed.includes(need);
-    const opts = UTILITY_SOURCES.filter(x => x.needs.includes(need)).map(x => ({ ...x, ...utilityFit(comp, x) })).filter(x => x.score > -9);
-    const best = full || !isNeeded ? null : opts.slice().sort((a, b) => b.score - a.score)[0];
+    const opts = UTILITY_SOURCES.filter(x => x.needs.includes(need)).map(x => ({ ...x, ...utilityFit(comp, x) }));
+    const best = full || !isNeeded ? null : opts.filter(x => !x.partial).sort((a, b) => b.score - a.score)[0];
+    const stateOf = x => {
+      const on = have.has(x.id);
+      return { on, auto: on && x.kind === "Augment" && augs.includes(x.name), done: !!full && !on, best: best?.id === x.id };
+    };
     const groups = KIND_ORDER.map(kind => {
       const rows = opts.filter(x => x.kind === kind).sort((a, b) => b.score - a.score);
       if (!rows.length) return "";
-      return `<div class="ah-group">${kind}s</div>${rows.map(x => {
-        const on = have.has(x.id);
-        const auto = on && x.kind === "Augment" && Object.values(S.augs || {}).includes(x.name);
-        const done = full && !on;
-        return `<button class="ah-row${on ? " on" : ""}${done ? " done" : ""}" data-act="ah" data-v="${x.id}" ${auto ? "disabled" : ""}>
-          <span class="ah-box">${on ? "✓" : ""}</span>
-          <span class="ah-main"><b>${esc(x.name)}</b>${best && best.id === x.id ? ' <span class="ah-rec">Best fit</span>' : ""}
-            <span class="ah-how">${esc(done ? `Covered by ${full.name}` : x.note || x.how)}</span></span>
-        </button>`;
-      }).join("")}`;
+      const tiles = kind === "Item" || kind === "Trait";
+      return `<div class="ah-group">${kind}s</div>${tiles
+        ? `<div class="ut-tiles">${rows.map(x => utilityTile(x, stateOf(x))).join("")}</div>`
+        : rows.map(x => utilityRow(x, stateOf(x), full)).join("")}`;
     }).join("");
     const status = full ? `<span class="ah-met">✓ ${esc(full.name)}</span>`
+      : partial && isNeeded ? `<span class="ah-part">Partial — keep building</span>`
       : isNeeded ? `<span class="ah-need-tag">Needed</span>` : `<span class="ah-skip">Not needed for ${esc(comp.lean)}</span>`;
     // Collapsed by default (header + status always visible); the arrow expands it and the choice is remembered
     const open = (S.utilOpen || {})[need] ?? false;
@@ -838,6 +884,18 @@ function utilityPanelHtml(comp) {
       <div class="ah-what">${esc(UTILITY_NEEDS[need].what)}</div>
       <div class="ah-list">${groups}</div></details>`;
   }).join("");
+}
+
+// Hover tooltip for item/trait tiles: name, recipe with component icons, and the fit note
+function utilityTipHtml(id) {
+  const comp = S.comp && compById(S.comp);
+  const x = UTILITY_SOURCES.find(u => u.id === id);
+  if (!x) return "";
+  const fit = utilityFit(comp, x);
+  const recipe = x.item ? (DATA.utilityIcons?.items[x.item]?.from || []) : [];
+  return `<b>${esc(x.name)}</b>
+    ${recipe.length ? `<div class="tip-recipe">${recipe.map(c => `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="">` : ""}${esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>` : ""}
+    <div class="tip-note">${esc(fit.note || x.how)}</div>`;
 }
 
 function nodeLate(comp) {
@@ -1082,6 +1140,12 @@ document.addEventListener("click", e => {
   else if (act === "rank") { /* rule ranking re-renders below */ }
   else if (act === "ask-ai" && comp) { ensureAI(comp, st, true); }
   else if (act === "retry" && comp) { e.preventDefault(); ensureAI(comp, st, true); }
+  else if (act === "clear-all") {
+    if (!confirm("Clear this game's plan? Favorites are kept.")) return;
+    S = { opener: null, skipOpener: false, comp: null, streak: "mixed", hp: "", augs: {}, offers: {}, tab: {},
+          favs: S.favs || [], antiheal: [], utilOpen: S.utilOpen };
+    window.scrollTo(0, 0);
+  }
   else if (act === "ah") {
     const cur = new Set(S.antiheal || []);
     cur.has(v) ? cur.delete(v) : cur.add(v);
@@ -1096,6 +1160,19 @@ document.addEventListener("click", e => {
     const next = document.querySelector(".node:not(.done):not(.locked)");
     next?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+});
+
+const utTip = document.createElement("div");
+utTip.className = "ut-tip";
+document.body.appendChild(utTip);
+document.addEventListener("mouseover", e => {
+  const t = e.target.closest("[data-tip]");
+  if (!t) { utTip.classList.remove("show"); return; }
+  utTip.innerHTML = utilityTipHtml(t.dataset.tip);
+  const r = t.getBoundingClientRect();
+  utTip.style.left = `${Math.min(r.left, innerWidth - 250)}px`;
+  utTip.style.top = `${r.bottom + 6}px`;
+  utTip.classList.add("show");
 });
 
 // Remember which utility boxes are open across re-renders (toggle doesn't bubble: capture it)
