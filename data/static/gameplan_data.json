@@ -17817,6 +17817,1044 @@
    "Inferno": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_inferno.png"
   }
  },
+ "unitPriority": {
+  "1": [
+   {
+    "name": "Akali",
+    "tier": "S",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_akali/skins/base/images/tft18_akali_splash_tile_2.png",
+    "traits": [
+     "Inferno",
+     "Adaptor",
+     "Ravager"
+    ],
+    "ability": "Adaptor : Throw a volley of kunai at the target, dealing 145/220/380/645 + 10/15/25/40 physical damage. If the target is Burning, deal an additional 35/52/80/135 damage. Adaptor : If the Ability kills, cast it again.",
+    "slam": [
+     {
+      "name": "Infinity Edge",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_infinityedge.png"
+     },
+     {
+      "name": "Hand Of Justice",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_unstableconcoction.png"
+     },
+     {
+      "name": "Edge of Night",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guardianangel.png"
+     }
+    ]
+   },
+   {
+    "name": "Camille",
+    "tier": "S",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_camille/skins/base/images/tft18_camille_splash_tile_2.png",
+    "traits": [
+     "Coven",
+     "Ravager"
+    ],
+    "ability": "Slice the target for 160/240/410/700 + 10/15/25/40 physical damage and gain 60/90/200/310 Shield for 2 seconds.",
+    "slam": [
+     {
+      "name": "Quicksilver",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_quicksilver.png"
+     },
+     {
+      "name": "Sterak's Gage",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_steraksgage.png"
+     },
+     {
+      "name": "Edge of Night",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guardianangel.png"
+     }
+    ]
+   },
+   {
+    "name": "Cinderling",
+    "tier": "A",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_cinderling/skins/base/images/t_18_cinderling_teamplannersplash.png",
+    "traits": [
+     "Riftbeast",
+     "Hunter"
+    ],
+    "ability": "Summon five razor-sharp leaves that converge on the current target, dealing a total of 310/465/700/1200 + 30/45/70/115 physical damage and applying 20% Wound and 1% Burn for 4 seconds. Scarlet Buff: Cinderling gains 22% Attack Damage each cast. Wound: Reduces …",
+    "slam": [
+     {
+      "name": "Hextech Gunblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
+     },
+     {
+      "name": "Giant Slayer",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_madredsbloodrazor.png"
+     },
+     {
+      "name": "Last Whisper",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_lastwhisper.png"
+     }
+    ]
+   },
+   {
+    "name": "Karma",
+    "tier": "A",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_karma/skins/base/images/tft18_karma_splash_tile_70.png",
+    "traits": [
+     "Blossom",
+     "Spellweaver"
+    ],
+    "ability": "Tether the current target, dealing 280/420/630/1070 magic damage over 1.5 seconds. Then release a burst of power around them, dealing 120/180/270/460 magic damage to all enemies in a 1 Hex radius and 30% Slowing them for 2 seconds. Slow: Reduce Attack Speed",
+    "slam": [
+     {
+      "name": "Giant Slayer",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_madredsbloodrazor.png"
+     },
+     {
+      "name": "Jeweled Gauntlet",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png"
+     },
+     {
+      "name": "Rabadon's Deathcap",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rabadonsdeathcap.png"
+     }
+    ]
+   },
+   {
+    "name": "Rakan",
+    "tier": "A",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_rakan/skins/base/images/tft18_rakan_splash_tile_9.png",
+    "traits": [
+     "Fae",
+     "Juggernaut",
+     "Vanguard"
+    ],
+    "ability": "Gain 270/320/415/490 Shield for 4 seconds. Then grant the ally who has dealt the most damage this combat 90%/100%/130%/160% decaying Attack Speed for 4 seconds.",
+    "slam": [
+     {
+      "name": "Thief's Gloves",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_thiefsgloves.png"
+     },
+     {
+      "name": "Evenshroud",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spectralgauntlet.png"
+     },
+     {
+      "name": "Sunfire Cape",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_redbuff.png"
+     }
+    ]
+   },
+   {
+    "name": "Rek'Sai",
+    "tier": "A",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_reksai/skins/base/images/tft18_reksai_splash_tile_17.png",
+    "traits": [
+     "Blackthorn",
+     "Brawler"
+    ],
+    "ability": "Passive: Restore 7/13/23/33 + 10/14/20/26 Health each second, tripled for 3 seconds after casting. Active: Lunge out of the ground, Stunning adjacent enemies for 1 second and dealing 70/105/160/270 magic damage to them.",
+    "slam": [
+     {
+      "name": "Protector's Vow",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_frozenheart.png"
+     },
+     {
+      "name": "Adaptive Helm",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_adaptivehelm.png"
+     },
+     {
+      "name": "Rabadon's Deathcap",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rabadonsdeathcap.png"
+     }
+    ]
+   },
+   {
+    "name": "Yorick",
+    "tier": "A",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_yorick/skins/base/images/tft18_yorick_splash_tile_30.png",
+    "traits": [
+     "Blossom",
+     "Juggernaut",
+     "Summoner"
+    ],
+    "ability": "Passive: On death, spawn a Spirit Walker with 200/400/750/1100 + 130/234/421/608 max Health which immediately taunts, forcing enemies to attack it. Active: Restore 280/325/435/545 Health and strike the target, dealing 150/225/340/575 physical damage.",
+    "slam": [
+     {
+      "name": "Ionic Spark",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_ionicspark.png"
+     },
+     {
+      "name": "Steadfast Heart",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_nightharvester.png"
+     },
+     {
+      "name": "Evenshroud",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spectralgauntlet.png"
+     }
+    ]
+   },
+   {
+    "name": "Kobuko",
+    "tier": "B",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_kobuko/skins/base/images/tft18_kobuko_splash_tile_2.png",
+    "traits": [
+     "Sprykin",
+     "Brawler"
+    ],
+    "ability": "Restore 49/88/159/229 + 265/315/460/575 Health over 2 seconds. The next attack is replaced with a bash that deals 70/126/226.8/327.6 + 70/105/150/0 magic damage.",
+    "slam": [
+     {
+      "name": "Gargoyle Stoneplate",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_gargoylestoneplate.png"
+     },
+     {
+      "name": "Warmog's Armor",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_warmogsarmor.png"
+     }
+    ]
+   },
+   {
+    "name": "Leona",
+    "tier": "B",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_leona/skins/base/images/tft18_leona_splash_tile_10.png",
+    "traits": [
+     "Solar",
+     "Defender"
+    ],
+    "ability": "Passive: Start combat with 60/80/100/130 bonus Armor and Magic Resist that decays over 12 seconds. Active: Bash the current target, dealing 60/108/162/320 magic damage and Stunning them for 1.5 seconds.",
+    "slam": [
+     {
+      "name": "Ionic Spark",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_ionicspark.png"
+     },
+     {
+      "name": "Sterak's Gage",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_steraksgage.png"
+     },
+     {
+      "name": "Protector's Vow",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_frozenheart.png"
+     }
+    ]
+   },
+   {
+    "name": "Ornn",
+    "tier": "B",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_ornn/skins/base/images/tft18_ornn_splash_tile_2.png",
+    "traits": [
+     "Elderwood",
+     "Defender"
+    ],
+    "ability": "Active: Gain 400/460/550/640 Shield for 4 seconds and deal 200/300/450/765 magic damage to enemies in a cone. Quest: Each player combat, Ornn stores damage blocked as Forge Power, doubled at 3-star. Gain an Artifact Anvil each time he gains enough Forge Power.",
+    "slam": [
+     {
+      "name": "Thief's Gloves",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_thiefsgloves.png"
+     },
+     {
+      "name": "Ionic Spark",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_ionicspark.png"
+     },
+     {
+      "name": "Crownguard",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_crownguard.png"
+     }
+    ]
+   },
+   {
+    "name": "Veigar",
+    "tier": "B",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_veigar/skins/base/images/tft18_veigar_splash_tile_13.png",
+    "traits": [
+     "Blackthorn",
+     "Sprykin",
+     "Spellweaver"
+    ],
+    "ability": "Launch a giant blast at the target that deals 175/265/395/670 magic damage, increased to 265/400/595/1015 if they're below 30% max Health. If they die, permanently gain 3% Ability Power.",
+    "slam": [
+     {
+      "name": "Jeweled Gauntlet",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png"
+     },
+     {
+      "name": "Blue Buff",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bluebuff.png"
+     },
+     {
+      "name": "Hextech Gunblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
+     }
+    ]
+   },
+   {
+    "name": "Pebbles",
+    "tier": "C",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_sentry/skins/base/images/t_18_sentry_teamplannersplash.png",
+    "traits": [
+     "Riftbeast",
+     "Invoker"
+    ],
+    "ability": "Begin consuming 35% max Mana per second and channeling a laser on the target. Each second while casting, deal 160/240/360/615 magic damage to them and reduce their Magic Resist by 3. Teal Buff: Gain 2 Mana Regen for every 4 seconds channeled.",
+    "slam": [
+     {
+      "name": "Blue Buff",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bluebuff.png"
+     },
+     {
+      "name": "Jeweled Gauntlet",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png"
+     },
+     {
+      "name": "Archangel's Staff",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_archangelsstaff.png"
+     }
+    ]
+   },
+   {
+    "name": "Xayah",
+    "tier": "C",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_xayah/skins/base/images/tft18_xayah_splash_tile_8.png",
+    "traits": [
+     "Elderwood",
+     "Fae",
+     "Rapidfire"
+    ],
+    "ability": "Gain 50% Attack Speed for the next 5 attacks. These attacks are replaced with feathers that deal 68/102/155/165 physical damage and reduce Armor by 2 .",
+    "slam": [
+     {
+      "name": "Kraken's Fury",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png"
+     },
+     {
+      "name": "Infinity Edge",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_infinityedge.png"
+     },
+     {
+      "name": "Giant Slayer",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_madredsbloodrazor.png"
+     }
+    ]
+   },
+   {
+    "name": "Varus",
+    "tier": "C",
+    "cost": 1,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_varus/skins/base/images/tft18_varus_splash_tile_9.png",
+    "traits": [
+     "Inferno",
+     "Rapidfire"
+    ],
+    "ability": "Wind up, then fire an arrow at the most enemies in line with the target. It deals 415/625/1000/1700 + 30/45/70/115 physical damage to enemies hit, reduced by 40% for each enemy it passes through (minimum 40%).",
+    "slam": [
+     {
+      "name": "Striker's Flail",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_powergauntlet.png"
+     },
+     {
+      "name": "Hand Of Justice",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_unstableconcoction.png"
+     },
+     {
+      "name": "Deathblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_deathblade.png"
+     }
+    ]
+   }
+  ],
+  "2": [
+   {
+    "name": "LeBlanc",
+    "tier": "S",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_leblanc/skins/base/images/tft18_leblanc_splash_tile_5.png",
+    "traits": [
+     "Elderwood",
+     "Spellweaver"
+    ],
+    "ability": "Passive: After player combat, your strongest LeBlanc has a 10%/15%/40% chance to create a copy of an ally on your board, increased by 4% per takedown. Active: Launch a mirror image at the current target, dealing 260/390/615 magic damage and 100/150/230 to adja…",
+    "slam": [
+     {
+      "name": "Blue Buff",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bluebuff.png"
+     },
+     {
+      "name": "Striker's Flail",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_powergauntlet.png"
+     },
+     {
+      "name": "Adaptive Helm",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_adaptivehelm.png"
+     }
+    ]
+   },
+   {
+    "name": "Scuttlecrab",
+    "tier": "S",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_scuttlecrab/skins/base/images/t_18_scuttlecrab_teamplannersplash.png",
+    "traits": [
+     "Riftbeast",
+     "Juggernaut"
+    ],
+    "ability": "Passive: Attacks are replaced by a dance that deals 50/75/112.5 physical damage to all adjacent enemies. Active: Burrow underground, gaining 15% Durability for 3 seconds and healing 325/400/675 over the duration. Green Buff: When allies fall below 50% Health, …",
+    "slam": [
+     {
+      "name": "Thief's Gloves",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_thiefsgloves.png"
+     },
+     {
+      "name": "Sunfire Cape",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_redbuff.png"
+     },
+     {
+      "name": "Dragon's Claw",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_dragonsclaw.png"
+     }
+    ]
+   },
+   {
+    "name": "Teemo",
+    "tier": "S",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_teemo/skins/base/images/tft18_teemo_splash_tile_0.png",
+    "traits": [
+     "Sprykin",
+     "Invoker"
+    ],
+    "ability": "Throw 2 clusters of mushrooms that deal 60/90/135 magic damage to the 3 nearest enemies. Then hurl a giant mushroom that deals 135/200/310 magic damage to the target. Each cast has a 10%/12%/15% chance to forage an extra mushroom that can be collected for bonu…",
+    "slam": [
+     {
+      "name": "Striker's Flail",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_powergauntlet.png"
+     },
+     {
+      "name": "Morellonomicon",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_morellonomicon.png"
+     },
+     {
+      "name": "Jeweled Gauntlet",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png"
+     }
+    ]
+   },
+   {
+    "name": "Caitlyn",
+    "tier": "A",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_caitlyn/skins/base/images/tft18_caitlyn_splash_tile_30.png",
+    "traits": [
+     "Coven",
+     "Hunter"
+    ],
+    "ability": "Passive: Every third attack is replaced with a Headshot that deals 190/285/470 + 20/30/45 physical damage.",
+    "slam": [
+     {
+      "name": "Hextech Gunblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
+     },
+     {
+      "name": "Guinsoo's Rageblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guinsoosrageblade.png"
+     },
+     {
+      "name": "Kraken's Fury",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png"
+     }
+    ]
+   },
+   {
+    "name": "Sejuani",
+    "tier": "A",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_sejuani/skins/base/images/tft18_sejuani_splash_tile_26.png",
+    "traits": [
+     "Solar",
+     "Juggernaut"
+    ],
+    "ability": "Gain 90/162/291.6 + 225/250/275 Shield for 4 seconds. Then cleave in a cone, dealing 90/135/205 magic damage and strike in a line, dealing 120/180/270 magic damage to enemies hit.",
+    "slam": [
+     {
+      "name": "Crownguard",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_crownguard.png"
+     },
+     {
+      "name": "Gargoyle Stoneplate",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_gargoylestoneplate.png"
+     },
+     {
+      "name": "Warmog's Armor",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_warmogsarmor.png"
+     }
+    ]
+   },
+   {
+    "name": "Elise",
+    "tier": "A",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_elise/skins/base/images/tft18_elise_splash_tile_24.png",
+    "traits": [
+     "Coven",
+     "Vanguard"
+    ],
+    "ability": "Transform into a spider and gain 375/475/725 max Health. Attacks while in Spider Form deal 35/50/80 bonus magic damage and heal for 55/90/170 . Subsequent casts grant 175% decaying Attack Speed for 4 seconds.",
+    "slam": [
+     {
+      "name": "Titan's Resolve",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_titansresolve.png"
+     },
+     {
+      "name": "Guinsoo's Rageblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guinsoosrageblade.png"
+     },
+     {
+      "name": "Gargoyle Stoneplate",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_gargoylestoneplate.png"
+     }
+    ]
+   },
+   {
+    "name": "Alistar",
+    "tier": "A",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_alistar/skins/base/images/tft18_alistar_splash_tile_40.png",
+    "traits": [
+     "Elderwood",
+     "Brawler"
+    ],
+    "ability": "Roar, restoring 76/137/246 + 200/260/320 Health, cleansing disables, and healing the two lowest percent Health allies for 80/105/130 . Then slam the current target, dealing 100/150/225 magic damage and Stunning them for 1.5 seconds.",
+    "slam": [
+     {
+      "name": "Spirit Visage",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spiritvisagerr.png"
+     },
+     {
+      "name": "Gargoyle Stoneplate",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_gargoylestoneplate.png"
+     },
+     {
+      "name": "Bramble Vest",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bramblevest.png"
+     }
+    ]
+   },
+   {
+    "name": "Murkwolf",
+    "tier": "A",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_murkwolf/skins/base/images/t_18_murkwolf_teamplannersplash.png",
+    "traits": [
+     "Riftbeast",
+     "Ravager"
+    ],
+    "ability": "Leap to the lowest Health enemy within 3 Hexes and deal 100/150/225 + 20/30/45 physical damage. The next 2 attacks gain 175% Attack Speed and deal 60/90/135 bonus physical damage. Grey Buff: Gain Precision and 25% Critical Strike Chance, increased up to 75% ba…",
+    "slam": [
+     {
+      "name": "Edge of Night",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guardianangel.png"
+     },
+     {
+      "name": "Hand Of Justice",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_unstableconcoction.png"
+     },
+     {
+      "name": "Quicksilver",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_quicksilver.png"
+     }
+    ]
+   },
+   {
+    "name": "Warwick",
+    "tier": "B",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_warwick/skins/base/images/tft18_warwick_splash_tile_35.png",
+    "traits": [
+     "Blackthorn",
+     "Ravager"
+    ],
+    "ability": "Bite the current target, dealing 215/325/500 physical damage and healing for 20% of the damage dealt. Gain 20% Attack Speed for the rest of combat.",
+    "slam": [
+     {
+      "name": "Quicksilver",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_quicksilver.png"
+     },
+     {
+      "name": "Spear of Shojin",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spearofshojin.png"
+     },
+     {
+      "name": "Titan's Resolve",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_titansresolve.png"
+     }
+    ]
+   },
+   {
+    "name": "Yunara",
+    "tier": "B",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_yunara/skins/base/images/tft18_yunara_splash_tile_0.png",
+    "traits": [
+     "Blossom",
+     "Executioner"
+    ],
+    "ability": "Dash, then launch an orb at the current target that deals 160/240/370 + 10/15/25 physical damage and splits, dealing 56/84/129.5 + 3.5/5.25/8.75 physical damage to 2 nearby enemies.",
+    "slam": [
+     {
+      "name": "Giant Slayer",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_madredsbloodrazor.png"
+     },
+     {
+      "name": "Striker's Flail",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_powergauntlet.png"
+     },
+     {
+      "name": "Spear of Shojin",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spearofshojin.png"
+     }
+    ]
+   },
+   {
+    "name": "Gromp",
+    "tier": "B",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_gromp/skins/base/images/t_18_gromp_teamplannersplash.png",
+    "traits": [
+     "Riftbeast",
+     "Adaptor"
+    ],
+    "ability": "Adaptor : Belch a noxious bubble at the current target that explodes on the first enemy hit, dealing 225/340/535 magic damage. Enemies within a 1 hex radius of the explosion take 160/240/360 magic damage over 3 seconds. Adaptor : Heavily slows the target. Purp…",
+    "slam": [
+     {
+      "name": "Void Staff",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_voidstaff.png"
+     },
+     {
+      "name": "Spear of Shojin",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spearofshojin.png"
+     },
+     {
+      "name": "Jeweled Gauntlet",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png"
+     }
+    ]
+   },
+   {
+    "name": "Shen",
+    "tier": "C",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_shen/skins/base/images/tft18_shen_splash_tile_16.png",
+    "traits": [
+     "Inferno",
+     "Defender"
+    ],
+    "ability": "Grant 350/430/550 Shield to Shen and 200/275/375 Shield to a nearby damaged ally for 4 seconds. Both of their next 3 attacks gain 40% Attack Speed and deal 35/55/80 bonus magic damage.",
+    "slam": [
+     {
+      "name": "Protector's Vow",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_frozenheart.png"
+     },
+     {
+      "name": "Thief's Gloves",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_thiefsgloves.png"
+     },
+     {
+      "name": "Dragon's Claw",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_dragonsclaw.png"
+     }
+    ]
+   },
+   {
+    "name": "Kayle",
+    "tier": "F",
+    "cost": 2,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_kayle/skins/base/images/tft18_kayle_splash_tile_42.png",
+    "traits": [
+     "Solar",
+     "Rapidfire"
+    ],
+    "ability": "Passive: Kayle ascends based on her star level, granting her stacking bonuses. 1st Ascension: Attacks deal 62/92/105 bonus magic damage. 2nd Ascension: Attacks 20% Shred enemies hit for 2 seconds. 3rd Ascension: Attacks fire waves, dealing 35 magic damage to a…",
+    "slam": [
+     {
+      "name": "Rabadon's Deathcap",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rabadonsdeathcap.png"
+     },
+     {
+      "name": "Red Buff",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rapidfirecannon.png"
+     },
+     {
+      "name": "Jeweled Gauntlet",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png"
+     }
+    ]
+   }
+  ],
+  "3": [
+   {
+    "name": "Kha'Zix",
+    "tier": "S",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_khazix/skins/base/images/tft18_khazix_splash_tile_0.png",
+    "traits": [
+     "Rival"
+    ],
+    "ability": "Leap to the farthest enemy within 3 Hexes, dealing 285/400/580 magic damage. If they have no adjacent allies, deal 310/445/660 magic damage instead and gain 10 mana.",
+    "slam": [
+     {
+      "name": "Thief's Gloves",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_thiefsgloves.png"
+     },
+     {
+      "name": "Nashor's Tooth",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_leviathan.png"
+     },
+     {
+      "name": "Hand Of Justice",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_unstableconcoction.png"
+     }
+    ]
+   },
+   {
+    "name": "Cassiopeia",
+    "tier": "A",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_cassiopeia/skins/base/images/tft18_cassiopeia_splash_tile_18.png",
+    "traits": [
+     "Coven",
+     "Spellweaver"
+    ],
+    "ability": "Poison the target and the nearest non-poisoned enemy, dealing 400/600/950 magic damage over 15 seconds. Poisons stack.",
+    "slam": [
+     {
+      "name": "Void Staff",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_voidstaff.png"
+     },
+     {
+      "name": "Hextech Gunblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
+     },
+     {
+      "name": "Blue Buff",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bluebuff.png"
+     }
+    ]
+   },
+   {
+    "name": "Diana",
+    "tier": "A",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_diana/skins/base/images/tft18_diana_splash_tile_0.png",
+    "traits": [
+     "Lunar",
+     "Ravager",
+     "Vanguard"
+    ],
+    "ability": "Gain 150/275/500 shield for 2 seconds and send out 6 moonlight orbs spread among enemies within 2 hexes, each dealing 75/115/180 magic damage.",
+    "slam": [
+     {
+      "name": "Ionic Spark",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_ionicspark.png"
+     },
+     {
+      "name": "Edge of Night",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guardianangel.png"
+     },
+     {
+      "name": "Giant Slayer",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_madredsbloodrazor.png"
+     }
+    ]
+   },
+   {
+    "name": "Krug",
+    "tier": "A",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_krug/skins/base/images/t_18_krug_teamplannersplash.png",
+    "traits": [
+     "Riftbeast",
+     "Brawler"
+    ],
+    "ability": "Passive: On death, split into two Kruglettes with 50/100/180 + 132/238/428 Health which immediately taunt, forcing enemies to attack them. Active: Gain 175/225/325 max Health, then roll into the target, dealing 135/200/335 + 88/158.4/285.12 damage. Slate Buff:…",
+    "slam": [
+     {
+      "name": "Warmog's Armor",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_warmogsarmor.png"
+     },
+     {
+      "name": "Crownguard",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_crownguard.png"
+     },
+     {
+      "name": "Gargoyle Stoneplate",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_gargoylestoneplate.png"
+     }
+    ]
+   },
+   {
+    "name": "Azir",
+    "tier": "A",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_azir/skins/base/images/tft18_azir_splash_tile_5.png",
+    "traits": [
+     "Blackthorn",
+     "Executioner",
+     "Summoner"
+    ],
+    "ability": "Gain 150% Attack Speed and summon 2 soldiers for the next 6 attacks. These attacks are replaced by commands which direct each soldier to deal 43/65/103 magic damage per attack.",
+    "slam": [
+     {
+      "name": "Rabadon's Deathcap",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rabadonsdeathcap.png"
+     },
+     {
+      "name": "Guinsoo's Rageblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guinsoosrageblade.png"
+     },
+     {
+      "name": "Hextech Gunblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
+     }
+    ]
+   },
+   {
+    "name": "Rengar",
+    "tier": "A",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_rengar/skins/base/images/tft18_rengar_splash_tile_0.png",
+    "traits": [
+     "Rival"
+    ],
+    "ability": "Jump to the lowest percent Health enemy within 3 hexes and stab them, dealing 255/385/615 physical damage. Then heal for 60/90/150 , increased to up to 120/180/300 based on their missing Health.",
+    "slam": [
+     {
+      "name": "Titan's Resolve",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_titansresolve.png"
+     },
+     {
+      "name": "Sterak's Gage",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_steraksgage.png"
+     },
+     {
+      "name": "Kraken's Fury",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png"
+     }
+    ]
+   },
+   {
+    "name": "Fiddlesticks",
+    "tier": "B",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_fiddlesticks/skins/base/images/tft18_fiddlesticks_splash_tile_46.png",
+    "traits": [
+     "Flora Fatalis",
+     "Defender",
+     "Spellweaver"
+    ],
+    "ability": "Reduce the Magic Resist of the 3 nearest enemies by 10. Then drain life from them over 2 seconds, healing for 410/485/850 Health and dealing 70/105/170 magic damage to each over the duration.",
+    "slam": [
+     {
+      "name": "Crownguard",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_crownguard.png"
+     },
+     {
+      "name": "Adaptive Helm",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_adaptivehelm.png"
+     },
+     {
+      "name": "Protector's Vow",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_frozenheart.png"
+     }
+    ]
+   },
+   {
+    "name": "Kog'Maw",
+    "tier": "B",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_kogmaw/skins/base/images/tft18_kogmaw_splash_tile_3.png",
+    "traits": [
+     "Caustic",
+     "Adaptor",
+     "Invoker"
+    ],
+    "ability": "Adaptor : Launch acid at the target and the other nearest enemy, dealing 145/220/375 + 20/30/50 physical damage. Enemies below 50% max Health take 203/308/525 + 28/42/70 physical damage instead. Adaptor : Damages enemies over time.",
+    "slam": [
+     {
+      "name": "Nashor's Tooth",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_leviathan.png"
+     },
+     {
+      "name": "Deathblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_deathblade.png"
+     },
+     {
+      "name": "Hextech Gunblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
+     }
+    ]
+   },
+   {
+    "name": "Hecarim",
+    "tier": "B",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_hecarim/skins/base/images/tft18_hecarim_splash_tile_5.png",
+    "traits": [
+     "Elderwood",
+     "Vanguard"
+    ],
+    "ability": "Gain 50 Armor and Magic Resist for 3 seconds and restore 375/475/685 Health over the duration. Launch spectral riders at the 3 nearest enemies, dealing 80/120/195 magic damage and Stunning them for 1.5/1.5/1.75 seconds.",
+    "slam": [
+     {
+      "name": "Ionic Spark",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_ionicspark.png"
+     },
+     {
+      "name": "Bramble Vest",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bramblevest.png"
+     },
+     {
+      "name": "Gargoyle Stoneplate",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_gargoylestoneplate.png"
+     }
+    ]
+   },
+   {
+    "name": "Rammus",
+    "tier": "B",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_rammus/skins/base/images/tft18_rammus_splash_tile_26.png",
+    "traits": [
+     "Sprykin",
+     "Defender"
+    ],
+    "ability": "Taunt, forcing enemies to attack this champion. For 4 seconds, gain 350/450/550 Shield and 60 Armor and Magic Resist. When the Shield breaks, deal 25/37.5/60 + 25/37.5/60 physical damage to enemies in 2 Hexes.",
+    "slam": [
+     {
+      "name": "Crownguard",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_crownguard.png"
+     },
+     {
+      "name": "Gargoyle Stoneplate",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_gargoylestoneplate.png"
+     },
+     {
+      "name": "Spirit Visage",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spiritvisagerr.png"
+     }
+    ]
+   },
+   {
+    "name": "Vi",
+    "tier": "B",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_vi/skins/base/images/tft18_vi_splash_tile_39.png",
+    "traits": [
+     "Primal",
+     "Juggernaut"
+    ],
+    "ability": "Passive: On attack, restore 22/40/71 Health. Active: Unleash a primal roar, restoring 200/265/360 Health. Then gain 85%/100%/125% Attack Speed, 15% Durability, and is Unstoppable for 3 seconds.",
+    "slam": [
+     {
+      "name": "Thief's Gloves",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_thiefsgloves.png"
+     },
+     {
+      "name": "Bloodthirster",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bloodthirster.png"
+     },
+     {
+      "name": "Striker's Flail",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_powergauntlet.png"
+     }
+    ]
+   },
+   {
+    "name": "Master Yi",
+    "tier": "C",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_masteryi/skins/base/images/tft18_masteryi_splash_tile_52.png",
+    "traits": [
+     "Blossom",
+     "Adaptor"
+    ],
+    "ability": "Passive: Every third attack is a Double Strike. On takedown, gain a burst of movement speed. Adaptor : Double Strikes grant 12% + 3% stacking Attack Speed. Adaptor : Double Strikes deal bonus damage and heal.",
+    "slam": [
+     {
+      "name": "Quicksilver",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_quicksilver.png"
+     },
+     {
+      "name": "Guinsoo's Rageblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guinsoosrageblade.png"
+     },
+     {
+      "name": "Kraken's Fury",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png"
+     }
+    ]
+   },
+   {
+    "name": "Tristana",
+    "tier": "C",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_tristana/skins/base/images/tft18_tristana_splash_tile_61.png",
+    "traits": [
+     "Fae",
+     "Sprykin",
+     "Hunter"
+    ],
+    "ability": "Attach an explosive charge to the target that lasts 4 seconds. While active, gain infinite range and 40% + 20% Attack Speed. After the duration, the charge explodes and splits damage between all enemies within 2 hexes, dealing 160/240/385 physical damage + 10/…",
+    "slam": [
+     {
+      "name": "Striker's Flail",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_powergauntlet.png"
+     },
+     {
+      "name": "Giant Slayer",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_madredsbloodrazor.png"
+     },
+     {
+      "name": "Hextech Gunblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
+     }
+    ]
+   },
+   {
+    "name": "Mama Beak",
+    "tier": "F",
+    "cost": 3,
+    "icon": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_raptor/skins/base/images/t_18_crimsonraptor_teamplannersplash.png",
+    "traits": [
+     "Riftbeast",
+     "Summoner",
+     "Rapidfire"
+    ],
+    "ability": "Summon 4 untargetable Tiny Beaks nearby for 5 seconds. Whenever Mama Beak attacks, Tiny Beaks attack the same enemy, dealing 22/33/48 physical damage. Orange Buff: Dealing physical damage reduces enemy Armor by 2.",
+    "slam": [
+     {
+      "name": "Last Whisper",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_lastwhisper.png"
+     },
+     {
+      "name": "Hextech Gunblade",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
+     },
+     {
+      "name": "Kraken's Fury",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png"
+     }
+    ]
+   }
+  ]
+ },
  "augments": {
   "crashtestdummies": {
    "name": "Crash Test Dummies",

@@ -14,8 +14,10 @@ structured facts (tiers, leveling tables, conditions, BIS augments) and credits 
 Usage: python src/build_gameplan_data.py
 """
 
+import csv
 import html
 import json
+import math
 import re
 import requests
 from pathlib import Path
@@ -415,6 +417,50 @@ def utility_icons(icons, names, items_by_name, calc):
     return {"items": items, "traits": traits}
 
 
+# ── Stage 1 unit priority (BunnyMuffins tiers via src/match_unit_tiers.py) ────
+
+def wilson_lower(p, n, z=1.96):
+    if n == 0:
+        return 0
+    return (p + z * z / (2 * n) - z * math.sqrt((p * (1 - p) + z * z / (4 * n)) / n)) / (1 + z * z / n)
+
+
+def slam_items(cd_id, rows, calc_items, names, icons, n=3):
+    """Top completed items on this unit in Challenger/GM games (same ranking as /api/item-recs)."""
+    mine = [r for r in rows if r["unit_id"] == cd_id]
+    if not mine:
+        return []
+    total = max(int(r["games"]) for r in mine)
+    floor = max(50, total * 0.05)
+    craftable = {k for k, it in calc_items.items() if "Craftable" in (it.get("tags") or [])}
+    ok = [r for r in mine if int(r["games"]) >= floor and r["item_id"].replace("DA_", "") in craftable]
+    ok.sort(key=lambda r: -wilson_lower(float(r["top4_rate"]), int(r["games"])))
+    return [{"name": names.get(r["item_id"], r["item_id"]), "icon": icons.get(r["item_id"])} for r in ok[:n]]
+
+
+def build_unit_priority(calc, names, icons):
+    tiers_path = Path(__file__).parent.parent / "data" / "static" / "unit_tiers.json"
+    wr_path = Path(__file__).parent.parent / "data" / "processed" / "item_winrates.csv"
+    if not tiers_path.exists():
+        print("  unit_tiers.json missing — run src/match_unit_tiers.py")
+        return {}
+    tiers = json.loads(tiers_path.read_text(encoding="utf-8"))["tiers"]
+    rows = list(csv.DictReader(open(wr_path, encoding="utf-8"))) if wr_path.exists() else []
+    units_by_name = {u["name"]: u for u in calc["units"].values()}
+    out = {}
+    for cost, entries in tiers.items():
+        out[cost] = []
+        for e in entries:
+            u = units_by_name.get(e["name"]) or {}
+            ab = u.get("ability")
+            ab = ab.get("desc") if isinstance(ab, dict) else ab
+            ab = re.sub(r"\s+", " ", re.sub(r"%i:\w+%|<[^>]+>|\{[^}]*\}", " ", ab or "")).strip()  # drop icon/var placeholders
+            out[cost].append({"name": e["name"], "tier": e["tier"], "cost": int(cost), "icon": u.get("icon"),
+                              "traits": u.get("traits") or [], "ability": ab[:260] + ("…" if len(ab) > 260 else ""),
+                              "slam": slam_items(u.get("cdId"), rows, calc.get("items", {}), names, icons)})
+    return out
+
+
 def load_calc_data():
     p = Path(__file__).parent.parent / "data" / "static" / "calculator_data.json"
     return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {"units": {}, "traits": {}}
@@ -627,6 +673,7 @@ def main():
         "comps": comps,
         "bmCompToTfta": bm_to_tfta,
         "utilityIcons": utility_icons(icons, names, items_by_name, calc),
+        "unitPriority": build_unit_priority(calc, names, icons),
         "augments": augments,
         "augmentPrinciples": aug_general,
         "openerGuide": {k: v for k, v in openers.items() if k != "fullText"},

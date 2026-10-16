@@ -1,0 +1,220 @@
+{
+ "source": {
+  "1": "https://bunnymuffins.lol/wp-content/uploads/2026/09/Screenshot-2026-09-17-025515.png",
+  "2": "https://bunnymuffins.lol/wp-content/uploads/2026/04/2chold-6.png",
+  "3": "https://bunnymuffins.lol/wp-content/uploads/2026/09/3cholds.png"
+ },
+ "tiers": {
+  "1": [
+   {
+    "name": "Akali",
+    "tier": "S",
+    "slot": 0
+   },
+   {
+    "name": "Camille",
+    "tier": "S",
+    "slot": 1
+   },
+   {
+    "name": "Cinderling",
+    "tier": "A",
+    "slot": 0
+   },
+   {
+    "name": "Karma",
+    "tier": "A",
+    "slot": 1
+   },
+   {
+    "name": "Rakan",
+    "tier": "A",
+    "slot": 2
+   },
+   {
+    "name": "Rek'Sai",
+    "tier": "A",
+    "slot": 3
+   },
+   {
+    "name": "Yorick",
+    "tier": "A",
+    "slot": 4
+   },
+   {
+    "name": "Kobuko",
+    "tier": "B",
+    "slot": 0
+   },
+   {
+    "name": "Leona",
+    "tier": "B",
+    "slot": 1
+   },
+   {
+    "name": "Ornn",
+    "tier": "B",
+    "slot": 2
+   },
+   {
+    "name": "Veigar",
+    "tier": "B",
+    "slot": 3
+   },
+   {
+    "name": "Pebbles",
+    "tier": "C",
+    "slot": 0
+   },
+   {
+    "name": "Xayah",
+    "tier": "C",
+    "slot": 1
+   },
+   {
+    "name": "Varus",
+    "tier": "C",
+    "slot": 2
+   }
+  ],
+  "2": [
+   {
+    "name": "LeBlanc",
+    "tier": "S",
+    "slot": 0
+   },
+   {
+    "name": "Scuttlecrab",
+    "tier": "S",
+    "slot": 1
+   },
+   {
+    "name": "Teemo",
+    "tier": "S",
+    "slot": 2
+   },
+   {
+    "name": "Caitlyn",
+    "tier": "A",
+    "slot": 0
+   },
+   {
+    "name": "Sejuani",
+    "tier": "A",
+    "slot": 1
+   },
+   {
+    "name": "Elise",
+    "tier": "A",
+    "slot": 2
+   },
+   {
+    "name": "Alistar",
+    "tier": "A",
+    "slot": 3
+   },
+   {
+    "name": "Murkwolf",
+    "tier": "A",
+    "slot": 4
+   },
+   {
+    "name": "Warwick",
+    "tier": "B",
+    "slot": 0
+   },
+   {
+    "name": "Yunara",
+    "tier": "B",
+    "slot": 1
+   },
+   {
+    "name": "Gromp",
+    "tier": "B",
+    "slot": 2
+   },
+   {
+    "name": "Shen",
+    "tier": "C",
+    "slot": 0
+   },
+   {
+    "name": "Kayle",
+    "tier": "F",
+    "slot": 0
+   }
+  ],
+  "3": [
+   {
+    "name": "Kha'Zix",
+    "tier": "S",
+    "slot": 0
+   },
+   {
+    "name": "Cassiopeia",
+    "tier": "A",
+    "slot": 0
+   },
+   {
+    "name": "Diana",
+    "tier": "A",
+    "slot": 1
+   },
+   {
+    "name": "Krug",
+    "tier": "A",
+    "slot": 2
+   },
+   {
+    "name": "Azir",
+    "tier": "A",
+    "slot": 3
+   },
+   {
+    "name": "Rengar",
+    "tier": "A",
+    "slot": 4
+   },
+   {
+    "name": "Fiddlesticks",
+    "tier": "B",
+    "slot": 0
+   },
+   {
+    "name": "Kog'Maw",
+    "tier": "B",
+    "slot": 1
+   },
+   {
+    "name": "Hecarim",
+    "tier": "B",
+    "slot": 2
+   },
+   {
+    "name": "Rammus",
+    "tier": "B",
+    "slot": 3
+   },
+   {
+    "name": "Vi",
+    "tier": "B",
+    "slot": 4
+   },
+   {
+    "name": "Master Yi",
+    "tier": "C",
+    "slot": 0
+   },
+   {
+    "name": "Tristana",
+    "tier": "C",
+    "slot": 1
+   },
+   {
+    "name": "Mama Beak",
+    "tier": "F",
+    "slot": 0
+   }
+  ]
+ }
+}

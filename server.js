@@ -1491,6 +1491,7 @@ app.get("/api/gameplan", (_req, res) => {
   res.json({
     patch: gameplanData.patch, updated: gameplanData.updated, comps, augments,
     bmCompToTfta: gameplanData.bmCompToTfta, utilityIcons: gameplanData.utilityIcons,
+    unitPriority: gameplanData.unitPriority,
     openerRules: gameplanData.openerGuide.rules, hardForce: gameplanData.openerGuide.hardForce,
   });
 });

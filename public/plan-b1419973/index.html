@@ -383,7 +383,22 @@ a { color: inherit; }
 .ut-tile.done { opacity: 0.3; }
 .ut-check { position: absolute; right: -5px; top: -5px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold);
   color: var(--navy); font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
-.ut-tip { position: fixed; z-index: 200; width: 240px; padding: 9px 11px; border-radius: 8px; pointer-events: none; display: none;
+.unit-prio { display: grid; gap: 6px; margin-bottom: 12px; }
+.up-row { display: flex; align-items: center; gap: 10px; }
+.up-cost { width: 34px; flex-shrink: 0; font-size: 13px; font-weight: 700; }
+.up-units { display: flex; flex-wrap: wrap; gap: 5px; }
+.up-unit { width: 40px; height: 40px; padding: 0; border-radius: 7px; border: 3px solid #808080; background: #111017;
+  overflow: hidden; cursor: pointer; }
+.up-unit img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.up-unit:hover { transform: translateY(-1px); }
+.up-unit.tier-S { border-color: #FE454B; } .up-unit.tier-A { border-color: #FF9C00; } .up-unit.tier-B { border-color: #FEEA33; }
+.up-unit.tier-C { border-color: #A7F238; } .up-unit.tier-F { border-color: #5ab0ff; }
+.tip-tier { font-size: 10px; font-weight: 800; padding: 1px 5px; border-radius: 4px; color: #0c2340; margin-left: 4px; }
+.tip-tier.tier-S { background: #FE454B; } .tip-tier.tier-A { background: #FF9C00; } .tip-tier.tier-B { background: #FEEA33; }
+.tip-tier.tier-C { background: #A7F238; } .tip-tier.tier-F { background: #5ab0ff; }
+.tip-sub { margin-top: 7px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); }
+.tip-recipe { flex-wrap: wrap; }
+.ut-tip { position: fixed; z-index: 200; width: 280px; padding: 9px 11px; border-radius: 8px; pointer-events: none; display: none;
   background: rgba(7,24,48,0.97); border: 1px solid rgba(174,145,66,0.5); box-shadow: 0 8px 24px rgba(0,0,0,0.5); font-size: 12.5px; }
 .ut-tip.show { display: block; }
 .tip-recipe { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
@@ -571,9 +586,32 @@ function nodeOpener() {
              placeholder="Search a unit in your opener (e.g. Gromp)" value="${esc(S.unitQuery || "")}">
       <datalist id="unitList">${units.map(u => `<option value="${esc(u)}">`).join("")}</datalist>
     </div>
+    ${unitPriorityHtml()}
     <div id="opMatches">${openerMatchesHtml()}</div>
     <div class="skip"><button class="btn ghost" data-act="skip-opener">Skip — I already know my comp</button></div>
     <div class="card rules"><div class="lbl">Got one of these? Play this</div>${rules}</div>` });
+}
+
+// Stage 1 holds by cost, best first (BunnyMuffins tiers); click one to filter openers by it
+const TIER_RANK = { S: 0, A: 1, B: 2, C: 3, F: 4 };
+function unitPriorityHtml() {
+  const up = DATA.unitPriority || {};
+  return `<div class="unit-prio">${["1", "2", "3"].filter(c => up[c]?.length).map(cost => `<div class="up-row">
+      <span class="up-cost">${COIN(cost)}</span>
+      <span class="up-units">${up[cost].map((u, i) => ({ u, i })).sort((a, b) => TIER_RANK[a.u.tier] - TIER_RANK[b.u.tier] || a.i - b.i)
+        .map(({ u, i }) => `<button class="up-unit tier-${esc(u.tier)}" data-act="unit-pick" data-v="${esc(u.name)}" data-tipunit="${cost}|${i}" aria-label="${esc(u.name)}">
+          ${u.icon ? `<img src="${esc(u.icon)}" alt="" loading="lazy">` : esc(u.name)}</button>`).join("")}</span></div>`).join("")}</div>`;
+}
+
+function unitTipHtml(ref) {
+  const [cost, i] = ref.split("|");
+  const u = DATA.unitPriority?.[cost]?.[+i];
+  if (!u) return "";
+  return `<b>${esc(u.name)}</b> <span class="tip-tier tier-${esc(u.tier)}">${esc(u.tier)} tier</span>
+    <div class="tip-note">${COIN(u.cost)} · ${esc(u.traits.join(" · "))}</div>
+    ${u.slam?.length ? `<div class="tip-sub">Slam</div><div class="tip-recipe">${u.slam.map(it =>
+      `<span>${it.icon ? `<img src="${esc(it.icon)}" alt="">` : ""}${esc(shortItem(it.name))}</span>`).join("")}</div>` : ""}
+    ${u.ability ? `<div class="tip-note">${esc(u.ability)}</div>` : ""}`;
 }
 
 // Opener boards (and TFT Academy early boards) that use the searched unit
@@ -1148,6 +1186,14 @@ document.addEventListener("click", e => {
   else if (act === "rank") { /* rule ranking re-renders below */ }
   else if (act === "ask-ai" && comp) { ensureAI(comp, st, true); }
   else if (act === "retry" && comp) { e.preventDefault(); ensureAI(comp, st, true); }
+  else if (act === "unit-pick") {
+    S.unitQuery = v;
+    const box = document.getElementById("unitSearch");
+    if (box) box.value = v;
+    document.getElementById("opMatches").innerHTML = openerMatchesHtml();
+    save();
+    return;
+  }
   else if (act === "clear-all") {
     S = { opener: null, skipOpener: false, comp: null, streak: "mixed", hp: "", augs: {}, offers: {}, tab: {},
           favs: S.favs || [], antiheal: [], utilOpen: S.utilOpen };
@@ -1173,13 +1219,16 @@ const utTip = document.createElement("div");
 utTip.className = "ut-tip";
 document.body.appendChild(utTip);
 document.addEventListener("mouseover", e => {
-  const t = e.target.closest("[data-tip], [data-tipcomp]");
+  const t = e.target.closest("[data-tip], [data-tipcomp], [data-tipunit]");
   if (!t) { utTip.classList.remove("show"); return; }
-  utTip.innerHTML = t.dataset.tipcomp ? itemTipHtml(t.dataset.tipcomp, +t.dataset.tipi) : utilityTipHtml(t.dataset.tip);
+  utTip.innerHTML = t.dataset.tipunit ? unitTipHtml(t.dataset.tipunit)
+    : t.dataset.tipcomp ? itemTipHtml(t.dataset.tipcomp, +t.dataset.tipi) : utilityTipHtml(t.dataset.tip);
   const r = t.getBoundingClientRect();
-  utTip.style.left = `${Math.min(r.left, innerWidth - 250)}px`;
-  utTip.style.top = `${r.bottom + 6}px`;
   utTip.classList.add("show");
+  utTip.style.left = `${Math.min(r.left, innerWidth - utTip.offsetWidth - 10)}px`;
+  // Below the icon, or above it when it would run off the bottom of the window
+  const below = r.bottom + 6, h = utTip.offsetHeight;
+  utTip.style.top = `${below + h > innerHeight - 8 ? Math.max(8, r.top - h - 6) : below}px`;
 });
 
 // Remember which utility boxes are open across re-renders (toggle doesn't bubble: capture it)
