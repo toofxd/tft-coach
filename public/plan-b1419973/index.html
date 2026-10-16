@@ -189,7 +189,7 @@ a { color: inherit; }
 /* ── Game plan tree ────────────────────────────────────────────── */
 .wrap { max-width: 1180px; margin: 0 auto; }
 .layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 22px; align-items: start; }
-.util-panel { position: sticky; top: 76px; display: grid; gap: 10px; }
+.util-panel { position: sticky; top: 76px; display: grid; gap: 10px; max-height: calc(100vh - 86px); overflow-y: auto; scrollbar-width: thin; }
 .tree { list-style: none; position: relative; }
 .node { position: relative; padding: 0 0 22px 34px; }
 .node::before { /* connector line */
@@ -290,12 +290,10 @@ a { color: inherit; }
 
 /* Hex board (final comp) — 4 rows × 7, odd rows shifted half a hex */
 .tips .it { grid-template-columns: 62px 1fr; color: var(--text-70); }
-.board-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
-.tr-bar { display: flex; flex-wrap: wrap; gap: 5px; }
-.board-top .prio { margin-left: auto; }
-.hex-board { --hx: min(70px, calc((100vw - 90px) / 7.6)); --gap: 5px; position: relative;
+.tr-bar { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+.hex-board { --hx: min(64px, calc((100vw - 90px) / 7.6)); --gap: 4px; position: relative;
   width: calc(7.5 * (var(--hx) + var(--gap))); height: calc(3 * (var(--hx) * 1.1547 * 0.75 + var(--gap)) + var(--hx) * 1.1547 + 14px);
-  margin: 14px auto 4px; }
+  margin: 6px 0 4px; }
 .hx { position: absolute; width: var(--hx); height: calc(var(--hx) * 1.1547);
   left: calc((var(--c) + var(--odd) * 0.5) * (var(--hx) + var(--gap))); top: calc(var(--r) * (var(--hx) * 1.1547 * 0.75 + var(--gap)) + 10px); }
 .hx::before, .hx-in { content: ""; position: absolute; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
@@ -384,8 +382,29 @@ a { color: inherit; }
 .aug-chip { display: inline-flex; align-items: center; gap: 5px; padding-left: 4px; }
 .aug-chip img { width: 18px; height: 18px; border-radius: 4px; }
 
-/* Comp detail */
-.comp-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+/* Comp detail: board left, side column right */
+.comp-detail { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: start; }
+.cd-side { min-width: 0; }
+.cd-prio { margin-bottom: 14px; }
+.cd-tips { display: grid; gap: 6px; }
+.cd-tip { font-size: 12.5px; line-height: 1.45; color: var(--text-70); background: var(--navy-deep); border-radius: 6px; padding: 6px 8px; }
+.cd-tip .w { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); }
+@media (max-width: 900px) { .comp-detail { grid-template-columns: 1fr; } }
+
+/* Next augment recommendations */
+.rec-group { padding: 6px 0; }
+.rec-group + .rec-group { border-top: 1px solid var(--border); }
+.rec-head { margin-bottom: 5px; }
+.rec-type { display: block; white-space: nowrap; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-50); }
+.rec-group.top .rec-type { color: var(--gold-light); font-size: 11px; }
+.rec-why { display: block; font-size: 11px; color: var(--text-50); line-height: 1.35; margin-top: 1px; }
+.rec-icons { display: flex; flex-wrap: wrap; gap: 5px; }
+.rec-ic { position: relative; overflow: visible; width: 32px; height: 32px; }
+.rec-ic img { border-radius: 6px; }
+.rk { position: absolute; right: -4px; bottom: -4px; min-width: 13px; height: 13px; border-radius: 3px; font-size: 9px; font-weight: 800;
+  line-height: 13px; text-align: center; color: #0c2340; }
+.rk.tier-S { background: #FE454B; } .rk.tier-A { background: #FF9C00; } .rk.tier-B { background: #FEEA33; } .rk.tier-C { background: #A7F238; }
+.cp { position: absolute; left: -3px; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--gold-light); border: 1px solid var(--navy); }
 .comp-detail .full { grid-column: 1 / -1; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { font-size: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 12px; padding: 3px 9px; color: var(--text-70); }
@@ -655,7 +674,7 @@ function render() {
   nodes.push(nodeComp());
   nodes.push(nodeSpot(comp));
   document.getElementById("tree").innerHTML = nodes.join("");
-  document.getElementById("utilPanel").innerHTML = augPanelHtml() + utilityPanelHtml(comp);
+  document.getElementById("utilPanel").innerHTML = utilityPanelHtml(comp) + augPanelHtml() + augRecsHtml(comp);
   save();
 }
 
@@ -849,7 +868,7 @@ function boardTraits(units) {
 }
 
 // TFT board: 4 rows × 7 hexes, boardIndex = row * 7 + col (row 0 = front line), odd rows shifted right
-function hexBoardHtml(c, corner = "") {   // corner: shown top right (item priority)
+function hexBoardHtml(c) {
   const at = new Map(c.finalComp.filter(u => u.boardIndex != null).map(u => [u.boardIndex, u]));
   const cells = [];
   for (let i = 0; i < 28; i++) {
@@ -862,7 +881,7 @@ function hexBoardHtml(c, corner = "") {   // corner: shown top right (item prior
       ${u.items.length ? `<span class="hx-items">${u.items.map(n => itemIcon(n, "hx-it")).join("")}</span>` : ""}</span>`);
   }
   const placed = at.size === c.finalComp.length;
-  return `<div class="board-top"><div class="tr-bar">${boardTraits(c.finalComp).map(([t, n]) => traitChip(t, n)).join("")}</div>${corner}</div>
+  return `<div class="tr-bar">${boardTraits(c.finalComp).map(([t, n]) => traitChip(t, n)).join("")}</div>
     ${placed ? `<div class="hex-board">${cells.join("")}</div>` : `<div class="cc-units">${unitIcons(c)}</div>`}`;
 }
 
@@ -942,35 +961,16 @@ function compMatchesHtml() {
   return body;
 }
 
-function augIcon(name) {
-  const a = augByName(name);
-  return a?.icon ? `<span class="aug-ic" data-tipaug="${esc(a.name)}|" aria-label="${esc(a.name)}"><img src="${esc(a.icon)}" alt="" loading="lazy"></span>`
-    : `<span class="chip">${esc(name)}</span>`;
-}
-
-// Selected comp: the final board on a hex grid, then icon rows (hover any icon for detail)
-// Recommended augments split into Econ / Items / Combat, in the comp's own priority order.
-// An augment with several tags goes to the type this comp values most
-const AUG_GROUP_OF = { econ: "Econ", reroll: "Econ", items: "Items", combat: "Combat", trait: "Combat", tempo: "Combat" };
-function augGroups(c) {
-  const order = [...new Set([...c.augmentTypes.filter(t => ["Econ", "Items", "Combat"].includes(t)), "Items", "Econ", "Combat"])];
-  const groups = Object.fromEntries(order.map(t => [t, []]));
-  c.augments.forEach(name => {
-    const types = (augByName(name)?.tags || []).map(t => AUG_GROUP_OF[t]).filter(Boolean);
-    groups[order.find(t => types.includes(t)) || "Combat"].push(name);
-  });
-  return order.filter(t => groups[t].length).map(t => [t, groups[t]]);
-}
-
-// Selected comp: the final board on a hex grid (item priority top right), early board, augments, stage tips
+// Selected comp: hex board on the left; item priority, early board and stage tips on the right
 function compDetail(c) {
   return `<div class="card comp-detail">
-    <div class="full">${hexBoardHtml(c, itemPrioHtml(c, true))}</div>
-    <div><div class="lbl">Early board</div><div class="ic-row">${c.earlyComp.map(u => unitIcon(u.name, { comp: c })).join("") || '<span class="muted">—</span>'}</div></div>
-    <div><div class="lbl">Recommended augments</div>
-      ${augGroups(c).map(([t, names]) => `<div class="ic-row"><span class="role">${t}</span>${names.map(augIcon).join("")}</div>`).join("") || '<span class="muted">—</span>'}</div>
-    ${c.tips?.length ? `<div class="full"><div class="lbl">Tips</div><div class="ifthen tips">${c.tips.map(t =>
-      `<div class="it on"><span class="w">${esc(t.stage)}</span><span class="t">${costify(t.tip)}</span></div>`).join("")}</div></div>` : ""}
+    <div class="cd-board">${hexBoardHtml(c)}</div>
+    <div class="cd-side">
+      ${itemPrioHtml(c, true) ? `<div class="cd-prio">${itemPrioHtml(c, true)}</div>` : ""}
+      <div class="lbl">Early board</div><div class="ic-row wrap">${c.earlyComp.map(u => unitIcon(u.name, { comp: c })).join("") || '<span class="muted">—</span>'}</div>
+      ${c.tips?.length ? `<div class="lbl" style="margin-top:12px">Tips</div><div class="cd-tips">${c.tips.map(t =>
+        `<div class="cd-tip"><span class="w">${esc(t.stage)}</span>${costify(t.tip)}</div>`).join("")}</div>` : ""}
+    </div>
   </div>`;
 }
 
@@ -986,8 +986,7 @@ function nodeSpot(comp) {
       <label class="muted">HP <input class="hp" id="hpIn" type="number" min="1" max="100" placeholder="optional" value="${esc(S.hp)}"></label>
     </div>
     <div class="card" style="margin-top:12px"><div class="lbl">Level / econ — ${stageLabel.toLowerCase()}</div>
-      ${stage ? rollLevelBlock(comp, stage) : rollLevelBlock(comp, "5", true)}${ifThenHtml(comp, stage || "5")}</div>
-    ${stage ? augTypeCard(comp, stage) : ""}` });
+      ${stage ? rollLevelBlock(comp, stage) : rollLevelBlock(comp, "5", true)}${ifThenHtml(comp, stage || "5")}</div>` });
 }
 
 // Leveling row for the streak: fast comps have Win/Lose/Mixed, rerolls Lose/Other
@@ -1288,25 +1287,54 @@ function augTypeVerdict(comp, stage, chosen) {
   const ranked = Object.keys(score).sort((a, b) => score[b] - score[a]);
   const pick = ranked[0];
   const reasons = why[pick].sort((a, b) => b[0] - a[0]).map(w => w[1]);
-  return { type: pick, next: ranked[1], reasons };
+  return { type: pick, next: ranked[1], ranked, reasons };
 }
 
-function augTypeCard(comp, stage) {
-  const chosen = chosenBefore(stage);
+// ── Augment recommendations (left panel) ────────────────────────────
+// Items / Econ / Combat for the next augment round. The groups follow the rule verdict, so the type
+// to take next is on top (take econ and combat can move up). Inside a group: TFT Academy's
+// S/A/B/C rating for that round, then fit with this comp. Click one to log it as taken.
+const AUG_GROUP_OF = { econ: "Econ", reroll: "Econ", items: "Items", combat: "Combat", trait: "Combat", tempo: "Combat" };
+const REC_GROUPS = ["Items", "Econ", "Combat"];
+const RATING_RANK = { S: 0, A: 1, B: 2, C: 3 };
+
+// One group per augment: of its types, the one this comp values most
+function augGroupOf(a, comp) {
+  const types = (a.tags || []).map(t => AUG_GROUP_OF[t]).filter(Boolean);
+  const order = [...new Set([...comp.augmentTypes.filter(t => REC_GROUPS.includes(t)), ...REC_GROUPS])];
+  return order.find(t => types.includes(t)) || null;
+}
+
+function augRecsHtml(comp) {
+  if (!comp) return "";
+  const chosen = augList();
+  if (chosen.length >= 3) return "";
+  const stage = STAGES[chosen.length];
   const v = augTypeVerdict(comp, stage, chosen);
-  const ideal = type => DATA.augments
-    .filter(a => a.stages.includes(stage) && !chosen.includes(a.name) && (a.tags || []).includes(AUG_TYPES[type])
-      && (type === "Econ" || !(a.tags || []).includes("econ")))
-    .map(a => ({ a, sc: ruleScore(a, comp, stage, chosen).score }))
-    .filter(x => x.sc > 0).sort((x, y) => y.sc - x.sc).slice(0, 4).map(x => x.a.name);
-  const names = ideal(v.type);
-  return `<div class="card type-card">
-    <div class="lbl">Next augment (${esc(stage)})</div>
-    <div class="go">Go <b>${esc(v.type)}</b></div>
-    ${v.reasons.length ? `<div class="items-list">${esc(v.reasons.slice(0, 2).join(" · "))}</div>` : ""}
-    ${names.length ? `<div class="ic-row" style="margin-top:8px">${names.map(n => { const a = augByName(n); return `<button class="aug-ic aug-pick" data-act="aug-add" data-v="${esc(n)}" data-tipaug="${esc(n)}|${esc(stage)}" aria-label="${esc(n)}">${a?.icon ? `<img src="${esc(a.icon)}" alt="">` : esc(n)}</button>`; }).join("")}<span class="muted">click the one you took</span></div>` : ""}
-    <div class="muted" style="margin-top:8px">If none show up: ${esc(v.next)}</div>
-  </div>`;
+  const order = [...v.ranked.map(t => t === "Emblem" ? "Combat" : t).filter(t => REC_GROUPS.includes(t)), ...REC_GROUPS]
+    .filter((t, i, a) => a.indexOf(t) === i);
+  const picks = {};
+  DATA.augments.forEach(a => {
+    const rating = augRating(a, stage);
+    if (!a.stages.includes(stage) || chosen.includes(a.name) || !(rating in RATING_RANK)) return;
+    const group = augGroupOf(a, comp);
+    const fit = ruleScore(a, comp, stage, chosen);
+    if (!group || fit.score < 0) return;
+    (picks[group] = picks[group] || []).push({ a, rating, fit: fit.score, compPick: comp.augments.includes(a.name) });
+  });
+  const rows = order.map((g, gi) => {
+    const list = (picks[g] || []).sort((x, y) => RATING_RANK[x.rating] - RATING_RANK[y.rating] || y.fit - x.fit).slice(0, 6);
+    if (!list.length) return "";
+    return `<div class="rec-group${gi === 0 ? " top" : ""}">
+      <div class="rec-head"><span class="rec-type">${gi === 0 ? "Go " : ""}${g}</span>${gi === 0 && v.reasons[0] ? `<span class="rec-why">${esc(v.reasons[0])}</span>` : ""}</div>
+      <div class="rec-icons">${list.map(({ a, rating, compPick }) => `<button class="aug-ic aug-pick rec-ic" data-act="aug-add" data-v="${esc(a.name)}" data-tipaug="${esc(a.name)}|${esc(stage)}" aria-label="${esc(a.name)}">
+        ${a.icon ? `<img src="${esc(a.icon)}" alt="">` : esc(a.name)}<span class="rk tier-${rating}">${rating}</span>${compPick ? '<span class="cp" title="TFT Academy pick for this comp"></span>' : ""}</button>`).join("")}</div>
+    </div>`;
+  }).join("");
+  return `<div class="card ah-box-card">
+    <div class="ah-head"><span class="ah-title">Next augment</span><span class="ah-skip">${esc(stage)}</span></div>
+    <div class="ah-what">Ranked S → C for this round. Click the one you took.</div>
+    ${rows || '<div class="muted">No rated augments for this round.</div>'}</div>`;
 }
 
 // Augments taken, in order: 1st = 2-1, 2nd = 3-2, 3rd = 4-2
@@ -1357,9 +1385,12 @@ function augTipHtml(ref) {
   if (!a) return "";
   const kinds = (a.tags || []).map(t => AUG_KIND[t]).filter(Boolean);
   const rating = augRating(a, stage);
+  const comp = S.comp && compById(S.comp);
+  const fit = comp && stage ? ruleScore(a, comp, stage, chosenBefore(stage)).why.slice(0, 2) : [];
   return `<b>${esc(a.name)}</b>${rating ? ` <span class="tip-tier tier-${esc(rating)}">${esc(rating)}</span>` : ""}
     <div class="tip-note">${esc([a.tier ? a.tier[0].toUpperCase() + a.tier.slice(1) : "", ...kinds.slice(0, 2)].filter(Boolean).join(" · "))}</div>
-    ${a.desc ? `<div class="tip-note">${esc(a.desc)}</div>` : ""}`;
+    ${a.desc ? `<div class="tip-note">${esc(a.desc)}</div>` : ""}
+    ${fit.length ? `<div class="tip-best">${esc(fit.join(" · "))}</div>` : ""}`;
 }
 
 function chosenBefore(stage) {
