@@ -819,7 +819,7 @@ function nodeStage(comp, stage, i) {
 const UTILITY_SOURCES = [
   // Anti-heal: Wound (−33% healing) + 1% Burn always come together
   { id: "inferno", needs: ["antiheal"], kind: "Trait", name: "Inferno", how: "2 Inferno units on board", trait: "Inferno" },
-  { id: "sunfire", needs: ["antiheal"], kind: "Item", name: "Sunfire Cape", how: "On a tank", item: "Sunfire Cape" },
+  { id: "sunfire", needs: ["antiheal"], kind: "Item", name: "Sunfire Cape", how: "", item: "Sunfire Cape", tank: true },
   { id: "morello", needs: ["antiheal"], kind: "Item", name: "Morellonomicon", how: "On an AP caster", item: "Morellonomicon" },
   { id: "redbuff", needs: ["antiheal"], kind: "Item", name: "Red Buff", how: "On an attack-speed carry", item: "Red Buff" },
   { id: "cinderling", needs: ["antiheal"], kind: "Champion", name: "Cinderling", how: "20% Wound + Burn — weaker, still build one", partial: true, unit: "Cinderling" },
@@ -827,13 +827,13 @@ const UTILITY_SOURCES = [
   { id: "aug-board", needs: ["antiheal"], kind: "Augment", name: "Sunfire Board", how: "3-2 / 4-2 — burns and wounds every enemy" },
   // Sunder: −30% armor (AD comps)
   { id: "lastwhisper", needs: ["sunder"], kind: "Item", name: "Last Whisper", how: "On your AD carry", item: "Last Whisper" },
-  { id: "evenshroud", needs: ["sunder"], kind: "Item", name: "Evenshroud", how: "On a tank", item: "Evenshroud" },
+  { id: "evenshroud", needs: ["sunder"], kind: "Item", name: "Evenshroud", how: "", item: "Evenshroud", tank: true },
   { id: "gnar", needs: ["sunder", "shred"], kind: "Champion", name: "Gnar", how: "(stacks)", partial: true, unit: "Gnar" },
   { id: "xayah", needs: ["sunder"], kind: "Champion", name: "Xayah", how: "(stacks)", partial: true, unit: "Xayah" },
   { id: "mamabeak", needs: ["sunder"], kind: "Champion", name: "Mama Beak", how: "(stacks)", partial: true, unit: "Mama Beak" },
   // Shred: −30% magic resist (AP comps)
   { id: "voidstaff", needs: ["shred"], kind: "Item", name: "Void Staff", how: "On your AP carry", item: "Void Staff" },
-  { id: "ionic", needs: ["shred"], kind: "Item", name: "Ionic Spark", how: "On a tank", item: "Ionic Spark" },
+  { id: "ionic", needs: ["shred"], kind: "Item", name: "Ionic Spark", how: "", item: "Ionic Spark", tank: true },
   { id: "kayle", needs: ["shred"], kind: "Champion", name: "Kayle", how: "(stacks)", partial: true, unit: "Kayle" },
   { id: "fiddlesticks", needs: ["shred"], kind: "Champion", name: "Fiddlesticks", how: "(stacks)", partial: true, unit: "Fiddlesticks" },
   { id: "pebbles", needs: ["shred"], kind: "Champion", name: "Pebbles", how: "(stacks)", partial: true, unit: "Pebbles" },
@@ -916,9 +916,9 @@ function utilityPanelHtml(comp) {
       return { on, auto: on && ((x.kind === "Augment" && augs.includes(x.name)) || fromComp.has(x.id) || !!augGave(x.id)),
                fromComp: fromComp.has(x.id), done: !!full && !on, best: best?.id === x.id };
     };
-    // One row of icons: traits, items, champions, augments (best fit first within each)
-    const tiles = KIND_ORDER.flatMap(kind => opts.filter(x => x.kind === kind).sort((a, b) => b.score - a.score))
-      .map(x => utilityTile(x, stateOf(x))).join("");
+    // One row of icons in a fixed order: tank items, carry items, traits, champions, augments
+    const group = x => x.kind === "Item" ? (x.tank ? 0 : 1) : { Trait: 2, Champion: 3, Augment: 4 }[x.kind];
+    const tiles = opts.slice().sort((a, b) => group(a) - group(b)).map(x => utilityTile(x, stateOf(x))).join("");
     const status = full ? `<span class="ah-met">✓ ${esc(full.name)}</span>`
       : partial && isNeeded ? `<span class="ah-part">Partial — keep building</span>`
       : isNeeded ? `<span class="ah-need-tag">Needed</span>` : `<span class="ah-skip">Not needed for ${esc(comp.lean)}</span>`;
@@ -948,13 +948,13 @@ function utilityTipHtml(id) {
   const recipe = x.item ? (DATA.utilityIcons?.items[x.item]?.from || []) : [];
   const have = utilityHave();
   const full = UTILITY_SOURCES.find(u => u.needs.some(n => x.needs.includes(n)) && u.id !== id && have.has(u.id) && !u.partial);
-  const note = utilityFromComp().has(id) ? "From your comp — always on"
+  const note = utilityFromComp().has(id) ? (x.partial ? "In your comp (stacks) — still build one" : "In your comp — already covered")
     : augGave(id) ? `From your ${augGave(id)} augment`
     : !have.has(id) && full ? `Not needed — ${full.name} already covers it` : fit.note || x.how;
   return `<b>${esc(x.name)}</b> <span class="tip-kind">${esc(x.kind)}</span>
     ${recipe.length ? `<div class="tip-recipe">${recipe.map(c => `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="">` : ""}${esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>` : ""}
     ${x.partial && !utilityFromComp().has(id) && note !== x.how ? `<div class="tip-note">${esc(x.how)}</div>` : ""}
-    <div class="tip-note">${esc(note)}</div>`;
+    ${note ? `<div class="tip-note">${esc(note)}</div>` : ""}`;
 }
 
 function nodeLate(comp) {
