@@ -282,7 +282,8 @@ a { color: inherit; }
 .prio .pi { display: inline-flex; align-items: center; gap: 4px; }
 .prio img { width: 18px; height: 18px; border-radius: 3px; }
 .prio.big img { width: 26px; height: 26px; }
-.prio.big .pi { font-size: 12.5px; color: var(--text); background: var(--navy-deep); border: 1px solid var(--border); border-radius: 6px; padding: 3px 7px 3px 3px; }
+.prio.big .pi { background: var(--navy-deep); border: 1px solid var(--border); border-radius: 6px; padding: 3px; cursor: default; }
+.prio.big .pi:hover { border-color: rgba(174,145,66,0.6); }
 .prio .arr { color: var(--text-30); font-size: 13px; }
 .comp-wrap { display: flex; }
 .comp-wrap .comp-btn { border-top-right-radius: 0; border-bottom-right-radius: 0; }
@@ -478,7 +479,6 @@ a { color: inherit; }
   <div class="page-header">
     <div class="page-title">Game Plan</div>
     <button class="btn ghost clear-all" data-act="clear-all">Clear all</button>
-    <div class="page-sub">Opener → comp → augments at 2-1, 3-2, 4-2 → when to roll and level</div>
   </div>
   <div class="layout">
     <aside class="util-panel" id="utilPanel" aria-label="Utility items"></aside>
@@ -617,8 +617,8 @@ function leanBadge(lean) {
 
 function itemPrioHtml(c, big = false) {
   if (!c.itemPriority?.length) return "";
-  return `<span class="prio${big ? " big" : ""}">${c.itemPriority.map(it =>
-    `<span class="pi" title="${esc(it.name)}">${it.icon ? `<img src="${esc(it.icon)}" alt="">` : ""}${big ? esc(shortItem(it.name)) : ""}</span>`).join('<span class="arr">›</span>')}</span>`;
+  return `<span class="prio${big ? " big" : ""}">${c.itemPriority.map((it, i) =>
+    `<span class="pi" data-tipcomp="${esc(c.id)}" data-tipi="${i}" aria-label="${esc(it.name)}">${it.icon ? `<img src="${esc(it.icon)}" alt="">` : esc(shortItem(it.name))}</span>`).join('<span class="arr">›</span>')}</span>`;
 }
 
 function unitIcons(c) {
@@ -887,6 +887,14 @@ function utilityPanelHtml(comp) {
 }
 
 // Hover tooltip for item/trait tiles: name, recipe with component icons, and the fit note
+function itemTipHtml(compId, i) {
+  const it = compById(compId)?.itemPriority?.[i];
+  if (!it) return "";
+  return `<b>${esc(it.name)}</b>${it.from?.length ? `<div class="tip-recipe">${it.from.map(c =>
+    `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="">` : ""}${esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>`
+    : '<div class="tip-note">Component</div>'}`;
+}
+
 function utilityTipHtml(id) {
   const comp = S.comp && compById(S.comp);
   const x = UTILITY_SOURCES.find(u => u.id === id);
@@ -1141,7 +1149,6 @@ document.addEventListener("click", e => {
   else if (act === "ask-ai" && comp) { ensureAI(comp, st, true); }
   else if (act === "retry" && comp) { e.preventDefault(); ensureAI(comp, st, true); }
   else if (act === "clear-all") {
-    if (!confirm("Clear this game's plan? Favorites are kept.")) return;
     S = { opener: null, skipOpener: false, comp: null, streak: "mixed", hp: "", augs: {}, offers: {}, tab: {},
           favs: S.favs || [], antiheal: [], utilOpen: S.utilOpen };
     window.scrollTo(0, 0);
@@ -1166,9 +1173,9 @@ const utTip = document.createElement("div");
 utTip.className = "ut-tip";
 document.body.appendChild(utTip);
 document.addEventListener("mouseover", e => {
-  const t = e.target.closest("[data-tip]");
+  const t = e.target.closest("[data-tip], [data-tipcomp]");
   if (!t) { utTip.classList.remove("show"); return; }
-  utTip.innerHTML = utilityTipHtml(t.dataset.tip);
+  utTip.innerHTML = t.dataset.tipcomp ? itemTipHtml(t.dataset.tipcomp, +t.dataset.tipi) : utilityTipHtml(t.dataset.tip);
   const r = t.getBoundingClientRect();
   utTip.style.left = `${Math.min(r.left, innerWidth - 250)}px`;
   utTip.style.top = `${r.bottom + 6}px`;

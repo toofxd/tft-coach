@@ -602,6 +602,9 @@ def main():
                 u["cost"], u["icon"] = (cu.get("cost"), cu.get("icon")) if cu else (None, None)
             c[board] = [u for u in c[board] if u["cost"]]
         c.update(comp_shape(c["finalComp"], items_by_name, c["mainChampion"]))
+        for it in c["itemPriority"]:  # recipe for the hover tooltip (components have none)
+            it["from"] = [{"name": names.get(COMPONENT_API[x], COMPONENTS.get(x)), "icon": icons.get(COMPONENT_API[x])}
+                          for x in (items_by_name.get(it["name"]) or {}).get("from") or [] if x in COMPONENT_API]
         words = c["short"].lower()
         c["traits"] = sorted([t for t, n in counts.items() if n >= 2 or t.lower() in words], key=lambda t: -counts.get(t, 0))
     for c in comps:
