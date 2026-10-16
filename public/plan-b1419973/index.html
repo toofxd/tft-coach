@@ -396,6 +396,8 @@ a { color: inherit; }
 .tip-tier { font-size: 10px; font-weight: 800; padding: 1px 5px; border-radius: 4px; color: #0c2340; margin-left: 4px; }
 .tip-tier.tier-S { background: #FE454B; } .tip-tier.tier-A { background: #FF9C00; } .tip-tier.tier-B { background: #FEEA33; }
 .tip-tier.tier-C { background: #A7F238; } .tip-tier.tier-F { background: #5ab0ff; }
+.tip-items { display: flex; gap: 5px; margin-top: 7px; }
+.tip-items img { width: 28px; height: 28px; border-radius: 4px; }
 .tip-sub { margin-top: 7px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); }
 .tip-recipe { flex-wrap: wrap; }
 .ut-tip { position: fixed; z-index: 200; width: 280px; padding: 9px 11px; border-radius: 8px; pointer-events: none; display: none;
@@ -608,10 +610,8 @@ function unitTipHtml(ref) {
   const u = DATA.unitPriority?.[cost]?.[+i];
   if (!u) return "";
   return `<b>${esc(u.name)}</b> <span class="tip-tier tier-${esc(u.tier)}">${esc(u.tier)} tier</span>
-    <div class="tip-note">${COIN(u.cost)} · ${esc(u.traits.join(" · "))}</div>
-    ${u.slam?.length ? `<div class="tip-sub">Slam</div><div class="tip-recipe">${u.slam.map(it =>
-      `<span>${it.icon ? `<img src="${esc(it.icon)}" alt="">` : ""}${esc(shortItem(it.name))}</span>`).join("")}</div>` : ""}
-    ${u.ability ? `<div class="tip-note">${esc(u.ability)}</div>` : ""}`;
+    ${u.slam?.length ? `<div class="tip-items">${u.slam.map(it => it.icon ? `<img src="${esc(it.icon)}" alt="${esc(it.name)}">` : "").join("")}</div>` : ""}
+    ${u.tip ? `<div class="tip-note">${esc(u.tip)}</div>` : ""}`;
 }
 
 // Opener boards (and TFT Academy early boards) that use the searched unit

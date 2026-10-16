@@ -438,7 +438,39 @@ def slam_items(cd_id, rows, calc_items, names, icons, n=3):
     return [{"name": names.get(r["item_id"], r["item_id"]), "icon": icons.get(r["item_id"])} for r in ok[:n]]
 
 
-def build_unit_priority(calc, names, icons):
+# Names BunnyMuffins writes differently from the game data
+UNIT_ALIASES = {"Scuttlecrab": ["Scuttle Crab", "Scuttlecrab"], "Cassiopeia": ["Cassiopeia", "Cassio"],
+                "Master Yi": ["Master Yi", "Yi"]}
+
+
+def unit_tips(openers_text):
+    """Per-champion sentences from the opener guide's unit priority notes (1/2/3 Costs paragraphs)."""
+    body = openers_text[openers_text.find("Unit Priority", openers_text.find("Unit Priority") + 20):]
+    end = body.find("Lose Streak")
+    body = body[:end if end > 0 else len(body)]
+    blocks = {}
+    for cost in ("1", "2", "3"):
+        i = body.find(f"{cost} Costs")
+        j = min([k for k in (body.find(f"{int(cost) + 1} Costs", i), len(body)) if k > i])
+        blocks[cost] = re.split(r"(?<=[.!?])\s+", re.sub(r"\s+", " ", body[i + 7:j]).strip())
+    return blocks
+
+
+def tip_for(name, sentences, traits=(), tier=""):
+    """Sentences naming the champion; else a group sentence about their trait ("The Defender
+    front liners..."); else one about their tier ("All 3 A tier frontliners", "Lower tier units")."""
+    def find(pattern):
+        return [x for x in sentences if re.search(pattern, x, re.I)]
+    names = "|".join(re.escape(k) for k in UNIT_ALIASES.get(name, [name]))
+    hits = [x for x in sentences if re.search(rf"(?<![\w'])(?:{names})(?![\w])", x)]
+    if not hits and traits:
+        hits = find(rf"\b(?:{'|'.join(map(re.escape, traits))}) (?:front ?liners|back ?liners|units)\b")
+    if not hits and tier:
+        hits = find(rf"\b{tier} tier") if tier in "SAB" else find(r"\blower tier")
+    return " ".join(hits[:2])[:240]
+
+
+def build_unit_priority(calc, names, icons, openers_text=""):
     tiers_path = Path(__file__).parent.parent / "data" / "static" / "unit_tiers.json"
     wr_path = Path(__file__).parent.parent / "data" / "processed" / "item_winrates.csv"
     if not tiers_path.exists():
@@ -447,6 +479,7 @@ def build_unit_priority(calc, names, icons):
     tiers = json.loads(tiers_path.read_text(encoding="utf-8"))["tiers"]
     rows = list(csv.DictReader(open(wr_path, encoding="utf-8"))) if wr_path.exists() else []
     units_by_name = {u["name"]: u for u in calc["units"].values()}
+    tips = unit_tips(openers_text) if openers_text else {}
     out = {}
     for cost, entries in tiers.items():
         out[cost] = []
@@ -457,7 +490,8 @@ def build_unit_priority(calc, names, icons):
             ab = re.sub(r"\s+", " ", re.sub(r"%i:\w+%|<[^>]+>|\{[^}]*\}", " ", ab or "")).strip()  # drop icon/var placeholders
             out[cost].append({"name": e["name"], "tier": e["tier"], "cost": int(cost), "icon": u.get("icon"),
                               "traits": u.get("traits") or [], "ability": ab[:260] + ("…" if len(ab) > 260 else ""),
-                              "slam": slam_items(u.get("cdId"), rows, calc.get("items", {}), names, icons)})
+                              "slam": slam_items(u.get("cdId"), rows, calc.get("items", {}), names, icons),
+                              "tip": tip_for(e["name"], tips.get(cost, []), u.get("traits") or [], e["tier"])})
     return out
 
 
@@ -673,7 +707,7 @@ def main():
         "comps": comps,
         "bmCompToTfta": bm_to_tfta,
         "utilityIcons": utility_icons(icons, names, items_by_name, calc),
-        "unitPriority": build_unit_priority(calc, names, icons),
+        "unitPriority": build_unit_priority(calc, names, icons, openers["fullText"]),
         "augments": augments,
         "augmentPrinciples": aug_general,
         "openerGuide": {k: v for k, v in openers.items() if k != "fullText"},

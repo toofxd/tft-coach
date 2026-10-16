@@ -17843,7 +17843,8 @@
       "name": "Edge of Night",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guardianangel.png"
      }
-    ]
+    ],
+    "tip": "Ravager is a trait that offers sustain making it great for long early game fights so Akali and Camille are S tier."
    },
    {
     "name": "Camille",
@@ -17868,7 +17869,8 @@
       "name": "Edge of Night",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guardianangel.png"
      }
-    ]
+    ],
+    "tip": "Ravager is a trait that offers sustain making it great for long early game fights so Akali and Camille are S tier."
    },
    {
     "name": "Cinderling",
@@ -17893,7 +17895,8 @@
       "name": "Last Whisper",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_lastwhisper.png"
      }
-    ]
+    ],
+    "tip": "Cinderling is the Premium AD backline holder, Karma is the AP counterpart."
    },
    {
     "name": "Karma",
@@ -17918,7 +17921,8 @@
       "name": "Rabadon's Deathcap",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rabadonsdeathcap.png"
      }
-    ]
+    ],
+    "tip": "Cinderling is the Premium AD backline holder, Karma is the AP counterpart."
    },
    {
     "name": "Rakan",
@@ -17944,7 +17948,8 @@
       "name": "Sunfire Cape",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_redbuff.png"
      }
-    ]
+    ],
+    "tip": "Rakan and Yorick are good 3 trait units, that will be useful in many lines, and the Juggernaut front line leads to a premium line."
    },
    {
     "name": "Rek'Sai",
@@ -17969,7 +17974,8 @@
       "name": "Rabadon's Deathcap",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rabadonsdeathcap.png"
      }
-    ]
+    ],
+    "tip": "Rek'Sai and Kobuko are good for tempo but have less flexiblity."
    },
    {
     "name": "Yorick",
@@ -17995,7 +18001,8 @@
       "name": "Evenshroud",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spectralgauntlet.png"
      }
-    ]
+    ],
+    "tip": "Rakan and Yorick are good 3 trait units, that will be useful in many lines, and the Juggernaut front line leads to a premium line."
    },
    {
     "name": "Kobuko",
@@ -18016,7 +18023,8 @@
       "name": "Warmog's Armor",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_warmogsarmor.png"
      }
-    ]
+    ],
+    "tip": "Rek'Sai and Kobuko are good for tempo but have less flexiblity."
    },
    {
     "name": "Leona",
@@ -18041,7 +18049,8 @@
       "name": "Protector's Vow",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_frozenheart.png"
      }
-    ]
+    ],
+    "tip": "The Defender front liners are not bad but do not lead to any viable lines and doesn't enable fast 9 as hard as Juggernauts."
    },
    {
     "name": "Ornn",
@@ -18066,7 +18075,8 @@
       "name": "Crownguard",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_crownguard.png"
      }
-    ]
+    ],
+    "tip": "The Defender front liners are not bad but do not lead to any viable lines and doesn't enable fast 9 as hard as Juggernauts."
    },
    {
     "name": "Veigar",
@@ -18092,7 +18102,8 @@
       "name": "Hextech Gunblade",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
      }
-    ]
+    ],
+    "tip": ""
    },
    {
     "name": "Pebbles",
@@ -18117,7 +18128,8 @@
       "name": "Archangel's Staff",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_archangelsstaff.png"
      }
-    ]
+    ],
+    "tip": "Lower tier backliners are more conditional but can perform in the right set ups."
    },
    {
     "name": "Xayah",
@@ -18143,7 +18155,8 @@
       "name": "Giant Slayer",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_madredsbloodrazor.png"
      }
-    ]
+    ],
+    "tip": "For example, Xayah is generally not great unless you have a Guinsoo's and sufficient frontline."
    },
    {
     "name": "Varus",
@@ -18168,7 +18181,8 @@
       "name": "Deathblade",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_deathblade.png"
      }
-    ]
+    ],
+    "tip": "Varus isn't unplayable but requires multiple items that increase his casting output to be useful."
    }
   ],
   "2": [
@@ -18195,7 +18209,8 @@
       "name": "Adaptive Helm",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_adaptivehelm.png"
      }
-    ]
+    ],
+    "tip": "LeBlanc and Teemo are great AP holders and can perform in most circumstances but LeBlanc has an added bonus of providing econ."
    },
    {
     "name": "Scuttlecrab",
@@ -18220,7 +18235,8 @@
       "name": "Dragon's Claw",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_dragonsclaw.png"
      }
-    ]
+    ],
+    "tip": "Scuttle Crab is a key hold as it enables the 3 Riftbeast opener a lot more than any unit other than Krug."
    },
    {
     "name": "Teemo",
@@ -18245,7 +18261,8 @@
       "name": "Jeweled Gauntlet",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png"
      }
-    ]
+    ],
+    "tip": "LeBlanc and Teemo are great AP holders and can perform in most circumstances but LeBlanc has an added bonus of providing econ."
    },
    {
     "name": "Caitlyn",
@@ -18270,7 +18287,8 @@
       "name": "Kraken's Fury",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png"
      }
-    ]
+    ],
+    "tip": "Caitlyn is a great Guinsoo's holder and can enable fast 9."
    },
    {
     "name": "Sejuani",
@@ -18295,7 +18313,8 @@
       "name": "Warmog's Armor",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_warmogsarmor.png"
      }
-    ]
+    ],
+    "tip": "All 3 A tier frontliners are good in with their respective traits and very good if 2 starred."
    },
    {
     "name": "Elise",
@@ -18320,7 +18339,8 @@
       "name": "Gargoyle Stoneplate",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_gargoylestoneplate.png"
      }
-    ]
+    ],
+    "tip": "All 3 A tier frontliners are good in with their respective traits and very good if 2 starred."
    },
    {
     "name": "Alistar",
@@ -18345,7 +18365,8 @@
       "name": "Bramble Vest",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bramblevest.png"
      }
-    ]
+    ],
+    "tip": "All 3 A tier frontliners are good in with their respective traits and very good if 2 starred."
    },
    {
     "name": "Murkwolf",
@@ -18370,7 +18391,8 @@
       "name": "Quicksilver",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_quicksilver.png"
      }
-    ]
+    ],
+    "tip": "Murkwolf and Warwick are good when paired with Camille and Akali."
    },
    {
     "name": "Warwick",
@@ -18395,7 +18417,8 @@
       "name": "Titan's Resolve",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_titansresolve.png"
      }
-    ]
+    ],
+    "tip": "Murkwolf and Warwick are good when paired with Camille and Akali."
    },
    {
     "name": "Yunara",
@@ -18420,7 +18443,8 @@
       "name": "Spear of Shojin",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spearofshojin.png"
      }
-    ]
+    ],
+    "tip": "Yunara opens up 3 Blossom that can be used for Econ or Yunara reroll, making her a great alternative if your spot lacks direction."
    },
    {
     "name": "Gromp",
@@ -18445,7 +18469,8 @@
       "name": "Jeweled Gauntlet",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png"
      }
-    ]
+    ],
+    "tip": ""
    },
    {
     "name": "Shen",
@@ -18470,7 +18495,8 @@
       "name": "Dragon's Claw",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_dragonsclaw.png"
      }
-    ]
+    ],
+    "tip": "For example, 3 Inferno can be used to cheat out higher cost units so if you must loss streak Shen can be valuable."
    },
    {
     "name": "Kayle",
@@ -18495,7 +18521,8 @@
       "name": "Jeweled Gauntlet",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png"
      }
-    ]
+    ],
+    "tip": "Lower tier units are usable within the right context but are outclassed."
    }
   ],
   "3": [
@@ -18521,7 +18548,8 @@
       "name": "Hand Of Justice",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_unstableconcoction.png"
      }
-    ]
+    ],
+    "tip": "Kha'Zix from a 2-1 orb leads to a premium reroll line, if you have a Kha'Zix and a slam, heavily consider Kha'Zix Reroll . Even if you are not playing around Kha'Zix as a main carry his access to specific traits can be valuable later."
    },
    {
     "name": "Cassiopeia",
@@ -18546,7 +18574,8 @@
       "name": "Blue Buff",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bluebuff.png"
      }
-    ]
+    ],
+    "tip": "Cassio is a premium AP holder that scales in longer fights which are very common in the early game."
    },
    {
     "name": "Diana",
@@ -18572,7 +18601,8 @@
       "name": "Giant Slayer",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_madredsbloodrazor.png"
      }
-    ]
+    ],
+    "tip": "Diana deals a lot of damage and opens up 4 Ravager."
    },
    {
     "name": "Krug",
@@ -18597,7 +18627,8 @@
       "name": "Gargoyle Stoneplate",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_gargoylestoneplate.png"
      }
-    ]
+    ],
+    "tip": "Krug enables a 3 Riftbeast opener, protects melee carries with his taunt on death, and is very tanky."
    },
    {
     "name": "Azir",
@@ -18623,7 +18654,8 @@
       "name": "Hextech Gunblade",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
      }
-    ]
+    ],
+    "tip": "Azir is a premium reroll line but without a slam it is hard to justify holding him."
    },
    {
     "name": "Rengar",
@@ -18647,7 +18679,8 @@
       "name": "Kraken's Fury",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png"
      }
-    ]
+    ],
+    "tip": "Rengar farms money and holds every AD item in the game decently, making him great for any AD line."
    },
    {
     "name": "Fiddlesticks",
@@ -18673,7 +18706,8 @@
       "name": "Protector's Vow",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_frozenheart.png"
      }
-    ]
+    ],
+    "tip": "B Tier front liners are fine and useful if their traits are active."
    },
    {
     "name": "Kog'Maw",
@@ -18699,7 +18733,8 @@
       "name": "Hextech Gunblade",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
      }
-    ]
+    ],
+    "tip": "Yi and Kog'Maw are alright but out classed."
    },
    {
     "name": "Hecarim",
@@ -18724,7 +18759,8 @@
       "name": "Gargoyle Stoneplate",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_gargoylestoneplate.png"
      }
-    ]
+    ],
+    "tip": "B Tier front liners are fine and useful if their traits are active."
    },
    {
     "name": "Rammus",
@@ -18749,7 +18785,8 @@
       "name": "Spirit Visage",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spiritvisagerr.png"
      }
-    ]
+    ],
+    "tip": "B Tier front liners are fine and useful if their traits are active."
    },
    {
     "name": "Vi",
@@ -18774,7 +18811,8 @@
       "name": "Striker's Flail",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_powergauntlet.png"
      }
-    ]
+    ],
+    "tip": "B Tier front liners are fine and useful if their traits are active."
    },
    {
     "name": "Master Yi",
@@ -18799,7 +18837,8 @@
       "name": "Kraken's Fury",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png"
      }
-    ]
+    ],
+    "tip": "Yi and Kog'Maw are alright but out classed."
    },
    {
     "name": "Tristana",
@@ -18825,7 +18864,8 @@
       "name": "Hextech Gunblade",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
      }
-    ]
+    ],
+    "tip": "Tristana and Mama Beak need Guinsoo's and are underwhelming."
    },
    {
     "name": "Mama Beak",
@@ -18851,7 +18891,8 @@
       "name": "Kraken's Fury",
       "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png"
      }
-    ]
+    ],
+    "tip": "Tristana and Mama Beak need Guinsoo's and are underwhelming."
    }
   ]
  },
