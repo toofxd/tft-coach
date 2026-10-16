@@ -226,6 +226,7 @@ a { color: inherit; }
 .op-name { font-size: 14px; font-weight: 700; }
 .op-traits { display: flex; flex-wrap: wrap; gap: 5px; min-height: 22px; }
 .op-units { display: flex; flex-wrap: wrap; gap: 6px; }
+.op.op-chosen { display: inline-flex; cursor: default; min-width: 230px; border-color: rgba(174,145,66,0.45); }
 .tip-board { display: block; width: 240px; max-width: 100%; margin-top: 6px; border-radius: 6px; }
 
 /* Tier × cost grid of stage 1 units */
@@ -690,7 +691,9 @@ function node(n, { title, sub = "", choice = "", done = false, locked = false, c
 function nodeOpener() {
   const op = S.opener && OPENERS.find(o => o.name === S.opener);
   if (op || S.skipOpener) {
-    return node(1, { title: "Opener", choice: op ? `${esc(op.name)} <span class="ic-row inline">${op.champions.map(n => unitIcon(n)).join("")}</span>` : "Skipped", done: true, change: "opener" });
+    // Keep the chosen opener's card on screen while you move on
+    return node(1, { title: "Opener", choice: op ? "" : "Skipped", done: true, change: "opener",
+      body: op ? `<div class="op op-chosen" data-tipop="${esc(op.name)}">${openerCardInner(op)}</div>` : "" });
   }
   const units = [...new Set([...OPENERS.flatMap(o => o.champions), ...DATA.comps.flatMap(c => c.earlyComp.map(u => u.name))])].sort();
   const rules = DATA.openerRules.map((r, i) => ruleTile(r, i)).join("");
@@ -788,6 +791,11 @@ function unitTipHtml(ref) {
     ${u.tip ? `<div class="tip-note">${esc(u.tip)}</div>` : ""}`;
 }
 
+function openerCardInner(o, isHit = () => false) {
+  return `<span class="op-head">${o.tier ? `<span class="tier-tag ${esc(o.tier)}">${esc(o.tier)}</span>` : ""}<span class="op-name">${esc(o.name)}</span></span>
+    <span class="op-units">${o.champions.map(n => unitIcon(n, { cls: isHit(n) ? "hit" : "" })).join("")}</span>`;
+}
+
 // Opener boards (and TFT Academy early boards) that use the searched unit
 function openerMatchesHtml() {
   const q = norm(S.unitQuery || "");
@@ -795,8 +803,7 @@ function openerMatchesHtml() {
   const ops = (q ? OPENERS.filter(o => o.champions.some(hit)) : OPENERS).filter(o => SHOW_TIERS.includes(o.tier));
   // Name + champions only; hover the card for the opener's board picture; hover a champion for its details
   const cards = ops.map(o => `<button class="op" data-act="pick-opener" data-v="${esc(o.name)}" data-tipop="${esc(o.name)}">
-      <span class="op-head">${o.tier ? `<span class="tier-tag ${esc(o.tier)}">${esc(o.tier)}</span>` : ""}<span class="op-name">${esc(o.name)}</span></span>
-      <span class="op-units">${o.champions.map(n => unitIcon(n, { cls: q && hit(n) ? "hit" : "" })).join("")}</span></button>`).join("");
+      ${openerCardInner(o, n => q && hit(n))}</button>`).join("");
   const comps = q ? DATA.comps.filter(c => c.earlyComp.some(u => hit(u.name))) : [];
   return `${ops.length ? `<div class="op-grid">${cards}</div>` : `<div class="muted">No opener board uses that unit.</div>`}
     ${comps.length ? `<div class="comp-group" style="margin-top:12px"><div class="lbl">TFT Academy comps that open with it</div>
