@@ -545,7 +545,7 @@ const augByName = name => DATA.augments.find(a => a.name.toLowerCase() === Strin
 // Reset everything after a node when an earlier choice changes
 function resetFrom(step) {
   if (step <= 1) { S.comp = null; }
-  if (step <= 3) { S.augs = {}; S.offers = {}; S.antiheal = []; S.antihealOff = []; }
+  if (step <= 3) { S.augs = {}; S.offers = {}; S.antiheal = []; }
 }
 function resetStage(stage) {
   STAGES.slice(STAGES.indexOf(stage)).forEach(st => { delete S.augs[st]; });
@@ -697,7 +697,9 @@ function compMatchesHtml() {
     const clean = t => t.toLowerCase().replace(/['’.\-]/g, "");
     const words = clean(q).split(/\s+/).filter(Boolean);
     const hay = c => clean([c.name, c.short, c.style, c.mainChampion, ...c.traits, ...c.finalComp.map(u => u.name), ...c.earlyComp.map(u => u.name)].join(" "));
-    const hits = DATA.comps.filter(c => words.every(w => hay(c).includes(w)));
+    const nameHit = c => words.every(w => clean(`${c.name} ${c.short}`).includes(w));
+    const hits = DATA.comps.filter(c => words.every(w => hay(c).includes(w)))
+      .sort((a, b) => nameHit(b) - nameHit(a));   // name matches first, then champion/trait matches
     return hits.length ? `<div class="comp-list">${hits.map(c => compBtn(c)).join("")}</div>` : `<div class="muted">No comp matches “${esc(q)}”.</div>`;
   }
   const op = S.opener && OPENERS.find(o => o.name === S.opener);
@@ -861,8 +863,7 @@ function utilityHave() {
   const have = new Set(S.antiheal || []);
   const augs = Object.values(S.augs || {});
   UTILITY_SOURCES.filter(x => x.kind === "Augment" && augs.includes(x.name)).forEach(x => have.add(x.id));  // auto from your augments
-  const off = new Set(S.antihealOff || []);
-  utilityFromComp().forEach(id => { if (!off.has(id)) have.add(id); });   // auto from your comp (untickable)
+  utilityFromComp().forEach(id => have.add(id));   // auto from your comp (locked on)
   return have;
 }
 
@@ -895,7 +896,7 @@ function utilityRow(x, state, full) {
   return `<button class="ah-row${state.on ? " on" : ""}${state.done ? " done" : ""}" data-act="ah" data-v="${x.id}" ${state.auto ? "disabled" : ""}>
     <span class="ah-box">${state.on ? "✓" : ""}</span>
     <span class="ah-main"><b>${esc(x.name)}</b>${state.best ? ' <span class="ah-rec">Best fit</span>' : ""}
-      <span class="ah-how">${esc(state.done ? `Covered by ${full.name}` : x.note || x.how)}</span></span>
+      <span class="ah-how">${esc(state.fromComp ? `From your comp — ${x.how}` : state.done ? `Covered by ${full.name}` : x.note || x.how)}</span></span>
   </button>`;
 }
 
@@ -910,9 +911,11 @@ function utilityPanelHtml(comp) {
     const isNeeded = needed.includes(need);
     const opts = UTILITY_SOURCES.filter(x => x.needs.includes(need)).map(x => ({ ...x, ...utilityFit(comp, x) }));
     const best = full || !isNeeded ? null : opts.filter(x => !x.partial).sort((a, b) => b.score - a.score)[0];
+    const fromComp = utilityFromComp();
     const stateOf = x => {
       const on = have.has(x.id);
-      return { on, auto: on && x.kind === "Augment" && augs.includes(x.name), done: !!full && !on, best: best?.id === x.id };
+      return { on, auto: on && ((x.kind === "Augment" && augs.includes(x.name)) || fromComp.has(x.id)),
+               fromComp: fromComp.has(x.id), done: !!full && !on, best: best?.id === x.id };
     };
     const groups = KIND_ORDER.map(kind => {
       const rows = opts.filter(x => x.kind === kind).sort((a, b) => b.score - a.score);
@@ -951,7 +954,7 @@ function utilityTipHtml(id) {
   const recipe = x.item ? (DATA.utilityIcons?.items[x.item]?.from || []) : [];
   return `<b>${esc(x.name)}</b>
     ${recipe.length ? `<div class="tip-recipe">${recipe.map(c => `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="">` : ""}${esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>` : ""}
-    <div class="tip-note">${esc(fit.note || x.how)}</div>`;
+    <div class="tip-note">${esc(utilityFromComp().has(id) ? "From your comp — always on" : fit.note || x.how)}</div>`;
 }
 
 function nodeLate(comp) {
@@ -1206,19 +1209,14 @@ document.addEventListener("click", e => {
   }
   else if (act === "clear-all") {
     S = { opener: null, skipOpener: false, comp: null, streak: "mixed", hp: "", augs: {}, offers: {}, tab: {},
-          favs: S.favs || [], antiheal: [], antihealOff: [], utilOpen: S.utilOpen };
+          favs: S.favs || [], antiheal: [], utilOpen: S.utilOpen };
     window.scrollTo(0, 0);
   }
   else if (act === "ah") {
-    if (utilityFromComp().has(v)) {            // comp-provided: untick/retick by remembering the opt-out
-      const off = new Set(S.antihealOff || []);
-      off.has(v) ? off.delete(v) : off.add(v);
-      S.antihealOff = [...off];
-    } else {
-      const cur = new Set(S.antiheal || []);
-      cur.has(v) ? cur.delete(v) : cur.add(v);
-      S.antiheal = [...cur];
-    }
+    if (utilityFromComp().has(v)) return;      // provided by your comp: always on
+    const cur = new Set(S.antiheal || []);
+    cur.has(v) ? cur.delete(v) : cur.add(v);
+    S.antiheal = [...cur];
   }
   else if (act === "fav") {
     S.favs = isFav(v) ? S.favs.filter(x => x !== v) : [...(S.favs || []), v];
