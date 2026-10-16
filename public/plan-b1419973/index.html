@@ -215,22 +215,106 @@ a { color: inherit; }
 .lbl { font-size: 10px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
 .muted { color: var(--text-50); font-size: 12px; }
 
-/* Opener grid */
-.op-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+/* Opener cards: name, traits, champion portraits (hover the card for the board picture) */
+.op-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
 .op {
-  position: relative; background: #111017; border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
-  cursor: pointer; padding: 0; font-family: inherit; color: var(--text); text-align: left;
+  position: relative; display: flex; flex-direction: column; gap: 8px; background: var(--navy-deep); border: 1px solid var(--border);
+  border-radius: 9px; cursor: pointer; padding: 10px; font-family: inherit; color: var(--text); text-align: left;
 }
 .op:hover, .op:focus-visible { border-color: rgba(174,145,66,0.7); outline: none; }
-.op .img { height: 120px; display: flex; align-items: center; justify-content: center; background: #111017; }
-.op img { max-width: 100%; max-height: 120px; display: block; }
-.op .nm { padding: 7px 9px; font-size: 12px; font-weight: 600; border-top: 1px solid var(--border); }
-.op .units { font-size: 11px; font-weight: 400; color: var(--text-50); margin-top: 2px; }
+.op-head { display: flex; align-items: center; gap: 8px; }
+.op-name { font-size: 14px; font-weight: 700; }
+.op-traits { display: flex; flex-wrap: wrap; gap: 5px; min-height: 22px; }
+.op-units { display: flex; flex-wrap: wrap; gap: 6px; }
+.tip-board { display: block; width: 240px; max-width: 100%; margin-top: 6px; border-radius: 6px; }
+
+/* Tier × cost grid of stage 1 units */
+.tier-grid { display: grid; grid-template-columns: 26px repeat(3, minmax(0, 1fr)); gap: 8px 14px; align-items: center; margin-bottom: 14px; }
+.tg-head { font-size: 14px; font-weight: 700; padding-bottom: 2px; border-bottom: 1px solid var(--border); }
+.tg-cell { display: flex; flex-wrap: wrap; gap: 6px; min-height: 48px; align-items: center; }
+.up-unit.on { box-shadow: 0 0 0 3px var(--gold-light); }
+
+/* Icons with hover detail */
+.ui.big { width: 44px; height: 44px; }
+.ui .un-txt { font-size: 9px; line-height: 1.1; display: block; padding: 2px; }
+.ui.hit { box-shadow: 0 0 0 2px var(--gold-light); }
+.op .ui { width: 42px; height: 42px; }
+.ui[data-tipu]:hover { filter: brightness(1.15); }
+.it-ic, .aug-ic { display: inline-flex; width: 30px; height: 30px; border-radius: 5px; overflow: hidden; background: #111017;
+  border: 1px solid var(--border); flex-shrink: 0; align-items: center; justify-content: center; font-size: 9px; padding: 0; }
+.it-ic img, .aug-ic img { width: 100%; height: 100%; display: block; }
+.aug-ic { width: 36px; height: 36px; border-radius: 7px; }
+.aug-pick { cursor: pointer; }
+.aug-pick:hover, .it-ic:hover, .aug-ic:hover { border-color: rgba(174,145,66,0.7); }
+.ic-row { display: flex; align-items: center; gap: 5px; margin-bottom: 6px; }
+.ic-row.wrap { flex-wrap: wrap; }
+.ic-row.inline { display: inline-flex; margin: 0 0 0 6px; vertical-align: middle; }
+.ic-row.inline .ui { width: 24px; height: 24px; }
+.ic-row .arr { color: var(--text-30); }
+.cnt { display: inline-flex; align-items: center; gap: 2px; margin-right: 4px; }
+.cnt b { font-size: 12px; color: var(--text-70); }
+.tr-chip { display: inline-flex; align-items: center; gap: 3px; background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  border-radius: 5px; padding: 2px 6px 2px 3px; font-size: 12px; color: var(--text-70); }
+.tr-chip img { width: 18px; height: 18px; display: block; }
+.tr-chip b { color: var(--text); font-weight: 700; }
+.tip-traits, .tip-itemlist { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 5px; font-size: 12px; color: var(--text-70); }
+.tip-traits span, .tip-itemlist span { display: inline-flex; align-items: center; gap: 4px; }
+.tip-traits img { width: 16px; height: 16px; }
+.tip-it { display: inline-flex; width: 22px; height: 22px; }
+.tip-it img { width: 100%; height: 100%; border-radius: 3px; }
+.tip-best { margin-top: 4px; font-size: 12px; font-weight: 600; color: var(--gold-light); }
+
+/* "Got one of these?" icon tiles; hover lists the comps */
+.rule-tiles { display: flex; flex-wrap: wrap; gap: 8px; }
+.rule-tile { display: inline-flex; align-items: center; gap: 3px; padding: 4px; min-height: 44px; border-radius: 8px; cursor: pointer;
+  background: var(--navy-deep); border: 1px solid var(--border); font-family: inherit; color: var(--text); }
+.rule-tile:hover { border-color: rgba(174,145,66,0.7); }
+.rt-ic { display: inline-flex; width: 34px; height: 34px; border-radius: 6px; overflow: hidden; border: 2px solid transparent; }
+.rt-ic img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.rt-ic.k-trait { background: #1b2a40; border-color: rgba(174,145,66,0.5); padding: 3px; }
+.rt-ic.k-trait img { object-fit: contain; }
+.rt-ic { position: relative; }
+.rt-stars { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font-size: 8px; line-height: 11px; color: #3a2a00; background: #e8b923; }
+.rt-plus { color: var(--text-30); font-size: 12px; }
+.rt-slam { display: inline-flex; align-items: center; gap: 2px; }
+.rt-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--text-50); margin-left: 2px; }
+.rt-txt { font-size: 11px; font-weight: 600; color: var(--text-70); padding: 0 5px; max-width: 90px; line-height: 1.2; }
+.ut-tip.interactive { pointer-events: auto; max-width: 320px; }
+.tip-comps { display: grid; gap: 4px; margin-top: 6px; }
+.tip-comp { display: flex; align-items: center; gap: 7px; padding: 5px 6px; border-radius: 6px; cursor: pointer; text-align: left;
+  background: var(--navy-card); border: 1px solid var(--border); color: var(--text); font: 600 12.5px/1.2 inherit; font-family: inherit; }
+.tip-comp:hover { border-color: rgba(174,145,66,0.7); }
+.tip-comp .tc-units { display: inline-flex; gap: 3px; margin-left: auto; }
+.tip-comp .ui { width: 26px; height: 26px; }
+
+/* Hex board (final comp) — 4 rows × 7, odd rows shifted half a hex */
+.tr-bar { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+.hex-board { --hx: min(70px, calc((100vw - 90px) / 7.6)); --gap: 5px; position: relative;
+  width: calc(7.5 * (var(--hx) + var(--gap))); height: calc(3 * (var(--hx) * 1.1547 * 0.75 + var(--gap)) + var(--hx) * 1.1547 + 14px);
+  margin: 14px auto 4px; }
+.hx { position: absolute; width: var(--hx); height: calc(var(--hx) * 1.1547);
+  left: calc((var(--c) + var(--odd) * 0.5) * (var(--hx) + var(--gap))); top: calc(var(--r) * (var(--hx) * 1.1547 * 0.75 + var(--gap)) + 10px); }
+.hx::before, .hx-in { content: ""; position: absolute; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+.hx::before { inset: 0; background: currentColor; }
+.hx.empty { color: rgba(255,255,255,0.05); }
+.hx-in { inset: 3px; background: #111017; overflow: hidden; }
+.hx-in img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.hx-nm { position: absolute; left: 0; right: 0; bottom: 22%; text-align: center; font-size: 10px; font-weight: 700; color: #fff;
+  text-shadow: 0 1px 3px #000, 0 0 2px #000; white-space: nowrap; overflow: hidden; }
+.hx.cost-1 { color: #9b9b9b; } .hx.cost-2 { color: #11b288; } .hx.cost-3 { color: #207ac7; }
+.hx.cost-4 { color: #c440da; } .hx.cost-5 { color: #ffb93b; }
+.hx[data-tipu] { cursor: default; }
+.hx[data-tipu]:hover::before { background: var(--gold-light); }
+.hx-stars { position: absolute; top: -9px; left: 50%; transform: translateX(-50%); z-index: 1; padding: 0 5px; border-radius: 4px;
+  background: #e8b923; color: #3a2a00; font-size: 9px; letter-spacing: 1px; line-height: 14px; }
+.hx-items { position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); z-index: 1; display: flex; gap: 1px; }
+.hx-it { display: inline-flex; width: calc(var(--hx) * 0.3); height: calc(var(--hx) * 0.3); border-radius: 3px; overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.6); background: #111017; }
+.hx-it img { width: 100%; height: 100%; display: block; }
 .tier-tag {
   display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 5px; flex-shrink: 0;
   font: 900 13px/1 'Cinzel', serif; color: #0c2340;
 }
-.op .tier-tag { position: absolute; top: 6px; left: 6px; }
 .tier-tag.S { background: #FE454B; } .tier-tag.A { background: #FF9C00; }
 .tier-tag.B { background: #FEEA33; } .tier-tag.C { background: #A7F238; } .tier-tag.Special { background: #b39ddb; font-size: 10px; }
 .skip { margin-top: 10px; }
@@ -583,32 +667,87 @@ function node(n, { title, sub = "", choice = "", done = false, locked = false, c
 function nodeOpener() {
   const op = S.opener && OPENERS.find(o => o.name === S.opener);
   if (op || S.skipOpener) {
-    return node(1, { title: "Opener", choice: op ? esc(op.name) : "Skipped", done: true, change: "opener" });
+    return node(1, { title: "Opener", choice: op ? `${esc(op.name)} <span class="ic-row inline">${op.champions.map(n => unitIcon(n)).join("")}</span>` : "Skipped", done: true, change: "opener" });
   }
   const units = [...new Set([...OPENERS.flatMap(o => o.champions), ...DATA.comps.flatMap(c => c.earlyComp.map(u => u.name))])].sort();
-  const rules = DATA.openerRules.map(r => `<div class="rule"><span class="if">${esc(r.if)}?</span> →
-      ${r.play.map(p => { const c = compByName(p); return c ? `<button class="chip gold" data-act="pick-comp-direct" data-v="${esc(c.id)}" style="cursor:pointer">${esc(p)}</button>` : `<span class="chip">${esc(p)}</span>`; }).join("")}</div>`).join("");
+  const rules = DATA.openerRules.map((r, i) => ruleTile(r, i)).join("");
   return node(1, { title: "Opener", sub: "What does your stage 1–2 board look like?", body: `
     <div class="offer-row" style="margin-bottom:10px">
       <input class="aug-in" id="unitSearch" type="search" list="unitList" autocomplete="off"
              placeholder="Search a unit in your opener (e.g. Gromp)" value="${esc(S.unitQuery || "")}">
       <datalist id="unitList">${units.map(u => `<option value="${esc(u)}">`).join("")}</datalist>
     </div>
-    ${unitPriorityHtml()}
+    <div id="unitGrid">${unitPriorityHtml()}</div>
     <div id="opMatches">${openerMatchesHtml()}</div>
     <div class="skip"><button class="btn ghost" data-act="skip-opener">Skip — I already know my comp</button></div>
-    <div class="card rules"><div class="lbl">Got one of these? Play this</div>${rules}</div>` });
+    <div class="card rules"><div class="lbl">Got one of these? Play this</div><div class="rule-tiles">${rules}</div></div>` });
 }
 
-// Stage 1 holds by cost, best first (BunnyMuffins tiers); click one to filter openers by it
-const TIER_RANK = { S: 0, A: 1, B: 2, C: 3, F: 4 };
+// "Got one of these?" as icons: each part of the condition (emblem → trait icon, champion, item)
+// becomes an icon; anything unrecognised stays as a short text badge
+// "slam" = build a finished item early; shown as the paired champion's best slam items
+const slamItems = unit => Object.values(DATA.unitPriority || {}).flat().find(u => u.name === unit)?.slam || [];
+function ruleParts(cond) {
+  const units = Object.keys(DATA.unitIcons || {}), items = Object.keys(DATA.itemIcons || {});
+  let lastUnit = null;
+  return cond.split(/\s\+\s/).map(s => s.trim()).filter(Boolean).map(part => {
+    if (/\bslam$/i.test(part)) return { kind: "slam", name: part, items: slamItems(lastUnit).slice(0, 2), unit: lastUnit };
+    const trait = part.replace(/\s*emblem$/i, "");
+    if (DATA.traitIcons?.[trait]) return { kind: "trait", name: trait, icon: DATA.traitIcons[trait] };
+    const bare = norm(part.replace(/\b(orb|\d+)\b/gi, ""));
+    const unit = units.find(u => norm(u) === bare);
+    if (unit && DATA.unitIcons[unit].icon) {
+      lastUnit = unit;
+      const stars = +(part.match(/\b([23])\b/)?.[1] || 0);   // "Veigar 2" = a 2-star Veigar
+      return { kind: "unit", name: unit, icon: DATA.unitIcons[unit].icon, cost: DATA.unitIcons[unit].cost, stars };
+    }
+    const item = DATA.componentIcons?.[part] ? part : items.find(n => norm(n).startsWith(bare) && bare.length >= 4);
+    const icon = item && (DATA.itemIcons?.[item]?.icon || DATA.componentIcons?.[item]);
+    if (icon) return { kind: "item", name: item, icon };
+    return { kind: "text", name: part };
+  });
+}
+
+function ruleTile(r, i) {
+  const comps = uniqComps(r.play);
+  const parts = ruleParts(r.if);
+  const one = comps.length === 1;
+  return `<button class="rule-tile" data-act="${one ? "pick-comp-direct" : "rule-open"}" data-v="${esc(one ? comps[0].id : i)}" data-tiprule="${i}" aria-label="${esc(r.if)}">
+    ${parts.map((p, k) => (k ? '<span class="rt-plus">+</span>' : "") + (
+      p.kind === "text" || (p.kind === "slam" && !p.items.length) ? `<span class="rt-txt">${esc(p.name)}</span>`
+      : p.kind === "slam" ? `<span class="rt-slam">${p.items.map(it => `<span class="rt-ic k-item"><img src="${esc(it.icon)}" alt=""></span>`).join("")}<span class="rt-lbl">slam</span></span>`
+      : `<span class="rt-ic k-${p.kind}${p.cost ? ` cost-${p.cost}` : ""}"><img src="${esc(p.icon)}" alt="">${p.stars ? `<span class="rt-stars">${"★".repeat(p.stars)}</span>` : ""}</span>`)).join("")}</button>`;
+}
+
+// Hover for a rule tile: the condition, then each comp to play (click one to pick it)
+function ruleHoverHtml(i) {
+  const r = DATA.openerRules[+i];
+  if (!r) return "";
+  const comps = uniqComps(r.play);
+  const slam = ruleParts(r.if).find(p => p.kind === "slam" && p.unit);
+  const slamList = slam ? slamItems(slam.unit) : [];
+  return `<b>${esc(r.if)}</b>
+    ${slamList.length ? `<div class="tip-note">Slam = build a finished item now instead of holding components. Best for ${esc(slam.unit)}:</div>
+      <div class="tip-itemlist">${slamList.map(it => `<span>${itemIcon(it.name, "tip-it")}${esc(it.name)}</span>`).join("")}</div>` : ""}
+    <div class="tip-note">Play ${comps.length > 1 ? "one of these — click to pick" : "this"}:</div>
+    <div class="tip-comps">${comps.map(c => `<button class="tip-comp" data-act="pick-comp-direct" data-v="${esc(c.id)}">
+      <span class="tier-tag ${esc(c.tier)}">${c.tier === "Special" ? "SP" : esc(c.tier)}</span><span class="tc-name">${esc(c.short)}</span>
+      <span class="tc-units">${(c.carries || []).slice(0, 3).map(x => unitIcon(x.name, { comp: c })).join("")}</span></button>`).join("")}</div>`;
+}
+
+// Stage 1 holds: tier (S/A/B) down, cost (1/2/3) across (BunnyMuffins tiers; C and below left out).
+// Click one to filter openers by it
+const SHOW_TIERS = ["S", "A", "B"];
 function unitPriorityHtml() {
   const up = DATA.unitPriority || {};
-  return `<div class="unit-prio">${["1", "2", "3"].filter(c => up[c]?.length).map(cost => `<div class="up-row">
-      <span class="up-cost">${COIN(cost)}</span>
-      <span class="up-units">${up[cost].map((u, i) => ({ u, i })).sort((a, b) => TIER_RANK[a.u.tier] - TIER_RANK[b.u.tier] || a.i - b.i)
-        .map(({ u, i }) => `<button class="up-unit tier-${esc(u.tier)}" data-act="unit-pick" data-v="${esc(u.name)}" data-tipunit="${cost}|${i}" aria-label="${esc(u.name)}">
-          ${u.icon ? `<img src="${esc(u.icon)}" alt="" loading="lazy">` : esc(u.name)}</button>`).join("")}</span></div>`).join("")}</div>`;
+  const costs = ["1", "2", "3"];
+  const cell = (tier, cost) => (up[cost] || []).map((u, i) => ({ u, i })).filter(({ u }) => u.tier === tier)
+    .map(({ u, i }) => `<button class="up-unit tier-${esc(u.tier)}${norm(u.name) === norm(S.unitQuery || "") ? " on" : ""}" data-act="unit-pick" data-v="${esc(u.name)}" data-tipunit="${cost}|${i}" aria-label="${esc(u.name)}">
+        ${u.icon ? `<img src="${esc(u.icon)}" alt="" loading="lazy">` : esc(u.name)}</button>`).join("");
+  return `<div class="tier-grid">
+    <span></span>${costs.map(c => `<span class="tg-head">${COIN(c)}</span>`).join("")}
+    ${SHOW_TIERS.map(t => `<span class="tier-tag ${t}">${t}</span>${costs.map(c => `<div class="tg-cell">${cell(t, c)}</div>`).join("")}`).join("")}
+  </div>`;
 }
 
 function unitTipHtml(ref) {
@@ -624,11 +763,12 @@ function unitTipHtml(ref) {
 function openerMatchesHtml() {
   const q = norm(S.unitQuery || "");
   const hit = name => norm(name).includes(q);
-  const ops = q ? OPENERS.filter(o => o.champions.some(hit)) : OPENERS;
-  const cards = ops.map(o => `<button class="op" data-act="pick-opener" data-v="${esc(o.name)}">
-      ${o.tier ? `<span class="tier-tag ${esc(o.tier)}">${esc(o.tier)}</span>` : ""}
-      <div class="img"><img src="${esc(o.img)}" alt="" loading="lazy"></div>
-      <div class="nm">${esc(o.name)}<div class="units">${esc(o.champions.join(", "))}</div></div></button>`).join("");
+  const ops = (q ? OPENERS.filter(o => o.champions.some(hit)) : OPENERS).filter(o => SHOW_TIERS.includes(o.tier));
+  // Hover the card for the opener's board picture; hover a champion for its details
+  const cards = ops.map(o => `<button class="op" data-act="pick-opener" data-v="${esc(o.name)}" data-tipop="${esc(o.name)}">
+      <span class="op-head">${o.tier ? `<span class="tier-tag ${esc(o.tier)}">${esc(o.tier)}</span>` : ""}<span class="op-name">${esc(o.name)}</span></span>
+      <span class="op-traits">${(o.traits || []).map(([t, n]) => traitChip(t, n)).join("")}</span>
+      <span class="op-units">${o.champions.map(n => unitIcon(n, { cls: q && hit(n) ? "hit" : "" })).join("")}</span></button>`).join("");
   const comps = q ? DATA.comps.filter(c => c.earlyComp.some(u => hit(u.name))) : [];
   return `${ops.length ? `<div class="op-grid">${cards}</div>` : `<div class="muted">No opener board uses that unit.</div>`}
     ${comps.length ? `<div class="comp-group" style="margin-top:12px"><div class="lbl">TFT Academy comps that open with it</div>
@@ -665,22 +805,86 @@ function itemPrioHtml(c, big = false) {
     `<span class="pi" data-tipcomp="${esc(c.id)}" data-tipi="${i}" aria-label="${esc(it.name)}">${it.icon ? `<img src="${esc(it.icon)}" alt="">` : esc(shortItem(it.name))}</span>`).join('<span class="arr">›</span>')}</span>`;
 }
 
-function unitIcons(c) {
-  const carryNames = new Set((c.carries || []).map(x => x.name));
-  const units = [...c.finalComp].sort((a, b) => carryNames.has(b.name) - carryNames.has(a.name) || b.cost - a.cost);
-  return units.map(u => `<span class="ui cost-${u.cost}${carryNames.has(u.name) ? " carry" : ""}" title="${esc(u.name)}${u.items.length ? " — " + esc(u.items.join(", ")) : ""}">
-      ${u.icon ? `<img src="${esc(u.icon)}" alt="" loading="lazy">` : ""}<span class="un">${esc(u.name)}</span></span>`).join("");
+// ── Icons with hover detail (champions, items, traits, components) ──
+// Champion portrait with a cost-coloured border; hover shows cost, traits, items and tip.
+// comp: look the unit up on that comp's final board for its stars and items
+function unitIcon(name, { comp = null, cls = "", big = false } = {}) {
+  const U = DATA.unitIcons?.[name] || {};
+  const carry = comp && (comp.carries || []).some(x => x.name === name);
+  return `<span class="ui cost-${U.cost || 0}${big ? " big" : ""}${carry ? " carry" : ""}${cls ? " " + cls : ""}" data-tipu="${esc(name)}" data-tipc="${esc(comp?.id || "")}" aria-label="${esc(name)}">
+    ${U.icon ? `<img src="${esc(U.icon)}" alt="" loading="lazy">` : `<span class="un-txt">${esc(name)}</span>`}</span>`;
 }
 
+function itemIcon(name, cls = "it-ic") {
+  const icon = DATA.itemIcons?.[name]?.icon || DATA.utilityIcons?.items?.[name]?.icon || DATA.componentIcons?.[name];
+  return `<span class="${cls}" data-tipitem="${esc(name)}" aria-label="${esc(name)}">${icon ? `<img src="${esc(icon)}" alt="" loading="lazy">` : esc(shortItem(name))}</span>`;
+}
+
+function traitChip(name, n) {
+  const icon = DATA.traitIcons?.[name];
+  return `<span class="tr-chip" data-tiptrait="${esc(name)}|${n || ""}">${icon ? `<img src="${esc(icon)}" alt="">` : ""}${n ? `<b>${n}</b>` : ""}${icon ? "" : esc(name)}</span>`;
+}
+
+// Units on the final board, carries first
+function unitIcons(c) {
+  const carryNames = new Set((c.carries || []).map(x => x.name));
+  return [...c.finalComp].sort((a, b) => carryNames.has(b.name) - carryNames.has(a.name) || b.cost - a.cost)
+    .map(u => unitIcon(u.name, { comp: c })).join("");
+}
+
+// Active traits on a board: count of units per trait, biggest first
+function boardTraits(units) {
+  const counts = {};
+  units.forEach(u => (u.traits || DATA.unitIcons?.[u.name]?.traits || []).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
+  return Object.entries(counts).filter(([, n]) => n >= 2).sort((a, b) => b[1] - a[1]);
+}
+
+// TFT board: 4 rows × 7 hexes, boardIndex = row * 7 + col (row 0 = front line), odd rows shifted right
+function hexBoardHtml(c) {
+  const at = new Map(c.finalComp.filter(u => u.boardIndex != null).map(u => [u.boardIndex, u]));
+  const cells = [];
+  for (let i = 0; i < 28; i++) {
+    const r = Math.floor(i / 7), col = i % 7, u = at.get(i);
+    const pos = `style="--r:${r};--c:${col};--odd:${r % 2}"`;
+    if (!u) { cells.push(`<span class="hx empty" ${pos}></span>`); continue; }
+    cells.push(`<span class="hx cost-${u.cost}" ${pos} data-tipu="${esc(u.name)}" data-tipc="${esc(c.id)}">
+      <span class="hx-in">${u.icon ? `<img src="${esc(u.icon)}" alt="" loading="lazy">` : ""}<span class="hx-nm">${esc(u.name)}</span></span>
+      ${u.stars > 1 ? `<span class="hx-stars s${u.stars}">${"★".repeat(u.stars)}</span>` : ""}
+      ${u.items.length ? `<span class="hx-items">${u.items.map(n => itemIcon(n, "hx-it")).join("")}</span>` : ""}</span>`);
+  }
+  const placed = at.size === c.finalComp.length;
+  return `<div class="tr-bar">${boardTraits(c.finalComp).map(([t, n]) => traitChip(t, n)).join("")}</div>
+    ${placed ? `<div class="hex-board">${cells.join("")}</div>` : `<div class="cc-units">${unitIcons(c)}</div>`}`;
+}
+
+function unitHoverHtml(name, compId) {
+  const U = DATA.unitIcons?.[name] || {};
+  const comp = compId && compById(compId);
+  const u = comp && (comp.finalComp.find(x => x.name === name) || comp.earlyComp.find(x => x.name === name));
+  const items = u?.items?.length ? u.items : [];
+  const role = comp && ((comp.carries || []).some(x => x.name === name) ? "Carry" : (comp.tanks || []).includes(name) ? "Tank" : "");
+  const tip = Object.values(DATA.unitPriority || {}).flat().find(x => x.name === name)?.tip;
+  return `<b>${esc(name)}</b> ${U.cost ? COIN(U.cost) : ""}${u?.stars > 1 ? ` <span class="t-gold">${"★".repeat(u.stars)}</span>` : ""}${role ? ` <span class="tip-kind">${role}</span>` : ""}
+    ${U.traits?.length ? `<div class="tip-traits">${U.traits.map(t => `<span>${DATA.traitIcons?.[t] ? `<img src="${esc(DATA.traitIcons[t])}" alt="">` : ""}${esc(t)}</span>`).join("")}</div>` : ""}
+    ${items.length ? `<div class="tip-itemlist">${items.map(n => `<span>${itemIcon(n, "tip-it")}${esc(n)}</span>`).join("")}</div>` : unitExtrasHtml(name)}
+    ${items.length && tip ? `<div class="tip-note">${esc(tip)}</div>` : ""}`;
+}
+
+function itemHoverHtml(name) {
+  const it = DATA.itemIcons?.[name] || DATA.utilityIcons?.items?.[name];
+  const from = it?.from || [];
+  return `<b>${esc(name)}</b>${from.length ? `<div class="tip-recipe">${from.map(c =>
+    `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="${esc(c.name)}">` : esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>`
+    : DATA.componentIcons?.[name] ? '<div class="tip-note">Component</div>' : ""}`;
+}
+
+// Comp card: name line, then the final board as portraits (carries first, gold ring) and item priority
 function compBtnInner(c, act) {
-  const carries = (c.carries || []).map(x => `<b>${esc(x.name)}</b>`).join(" · ");
   return `<button class="comp-btn card-btn" data-act="${act}" data-v="${esc(c.id)}">
     <span class="cc-top"><span class="tier-tag ${esc(c.tier)}" ${c.tier === "Special" ? 'title="Needs a specific augment or emblem"' : ""}>${c.tier === "Special" ? "SP" : esc(c.tier)}</span>
       <span class="cc-name">${esc(c.short)}</span>${leanBadge(c.lean)}<span class="strat">${costify(c.style || STRAT_LABEL[c.strategy])}</span></span>
-    ${carries ? `<span class="cc-line"><span class="role">Carry</span>${carries}</span>` : ""}
-    ${c.tanks?.length ? `<span class="cc-line"><span class="role">Tank</span>${esc(c.tanks.join(" · "))}</span>` : ""}
-    ${c.support?.length ? `<span class="cc-line"><span class="role">Support</span>${esc(c.support.join(" · "))}</span>` : ""}
-    ${c.itemPriority?.length ? `<span class="cc-line"><span class="role">Items</span>${itemPrioHtml(c)}</span>` : ""}
+    <span class="cc-units">${unitIcons(c)}</span>
+    ${c.itemPriority?.length ? `<span class="cc-line">${itemPrioHtml(c)}</span>` : ""}
   </button>`;
 }
 
@@ -729,31 +933,29 @@ function compMatchesHtml() {
   return body;
 }
 
-function augChip(name) {
+function augIcon(name) {
   const a = augByName(name);
-  return `<span class="chip gold aug-chip">${a?.icon ? `<img src="${esc(a.icon)}" alt="" loading="lazy">` : ""}${esc(name)}</span>`;
+  return a?.icon ? `<span class="aug-ic" data-tipaug="${esc(a.name)}|" aria-label="${esc(a.name)}"><img src="${esc(a.icon)}" alt="" loading="lazy"></span>`
+    : `<span class="chip">${esc(name)}</span>`;
 }
 
+// Selected comp: the final board on a hex grid, then icon rows (hover any icon for detail)
 function compDetail(c) {
-  const stars = n => n > 1 ? ` <span class="t-gold">${"★".repeat(n)}</span>` : "";
-  const board = c.finalComp.map(u => `<div><b>${esc(u.name)}</b>${stars(u.stars)}${u.items.length ? ` — ${esc(u.items.join(", "))}` : ""}</div>`).join("");
-  const early = c.earlyComp.map(u => esc(u.name)).join(", ");
   const bm = c.bm;
+  const counts = list => list.map(w => `<span class="cnt">${itemIcon(w.name)}<b>×${w.count}</b></span>`).join("");
   return `<div class="card comp-detail">
-    <div class="full"><div class="lbl">Item priority (TFT Academy)</div>${itemPrioHtml(c, true) || '<span class="muted">—</span>'}
-      <div class="items-list" style="margin-top:8px">${(c.carries || []).map(x => `<div><b>${esc(x.name)}</b> — ${esc(x.items.join(" › "))}</div>`).join("")}</div>
-      ${c.wants?.carry?.length ? `<div class="items-list" style="margin-top:6px">Hold for carries: <b>${esc(c.wants.carry.map(w => `${shortItem(w.name)} ×${w.count}`).join(" · "))}</b>${c.wants.tank?.length ? ` &nbsp;|&nbsp; tanks: <b>${esc(c.wants.tank.map(w => `${shortItem(w.name)} ×${w.count}`).join(" · "))}</b>` : ""}</div>` : ""}</div>
-    <div><div class="lbl">Recommended augments</div><div class="chips">${c.augments.map(augChip).join("") || '<span class="muted">—</span>'}</div>
-      ${c.augmentTypes.length ? `<div class="items-list" style="margin-top:8px">Priority: <b>${esc(c.augmentTypes.join(" > "))}</b></div>` : ""}</div>
-    <div><div class="lbl">Final board</div><div class="items-list">
-      ${[["Carry", (c.carries || []).map(x => x.name)], ["Tank", c.tanks || []], ["Support", c.support || []]].filter(([, n]) => n.length)
-        .map(([role, names]) => `<div style="margin-bottom:4px"><span class="role">${role}</span>${names.map(n => {
-          const u = c.finalComp.find(x => x.name === n);
-          return `<b>${esc(n)}</b>${u && u.stars > 1 ? ` <span class="t-gold">${"★".repeat(u.stars)}</span>` : ""}${u?.items.length && role !== "Carry" ? ` (${esc(u.items.join(", "))})` : ""}`;
-        }).join(" · ")}</div>`).join("")}</div></div>
-    <div><div class="lbl">Early board</div><div class="items-list">${early || "—"}</div>
-      <div class="items-list" style="margin-top:12px">Difficulty: <b>${esc(c.difficulty || "—")}</b> · <a href="${esc(c.url)}" target="_blank" rel="noopener" style="color:var(--gold-light)">TFT Academy guide ↗</a></div></div>
-    <div>${bm?.conditions?.length ? `<div class="lbl">Play it if you have</div><div class="chips">${bm.conditions.map(x => `<span class="chip">${esc(x)}</span>`).join("")}</div>` : ""}
+    <div class="full">${hexBoardHtml(c)}</div>
+    <div><div class="lbl">Carry items</div>
+      ${(c.carries || []).map(x => `<div class="ic-row">${unitIcon(x.name, { comp: c })}<span class="arr">›</span>${x.items.map(n => itemIcon(n)).join("")}</div>`).join("") || '<span class="muted">—</span>'}
+      <div class="lbl" style="margin-top:12px">Item priority</div>${itemPrioHtml(c, true) || '<span class="muted">—</span>'}</div>
+    <div>${c.wants?.carry?.length ? `<div class="lbl">Hold components</div>
+        <div class="ic-row"><span class="role">Carry</span>${counts(c.wants.carry)}</div>
+        ${c.wants.tank?.length ? `<div class="ic-row"><span class="role">Tank</span>${counts(c.wants.tank)}</div>` : ""}` : ""}
+      <div class="lbl" style="margin-top:12px">Early board</div><div class="ic-row">${c.earlyComp.map(u => unitIcon(u.name, { comp: c })).join("") || '<span class="muted">—</span>'}</div></div>
+    <div><div class="lbl">Recommended augments${c.augmentTypes.length ? ` <span class="muted" style="text-transform:none;letter-spacing:0">· ${esc(c.augmentTypes.join(" > "))}</span>` : ""}</div>
+      <div class="ic-row wrap">${c.augments.map(augIcon).join("") || '<span class="muted">—</span>'}</div></div>
+    <div><div class="items-list">Difficulty: <b>${esc(c.difficulty || "—")}</b> · <a href="${esc(c.url)}" target="_blank" rel="noopener" style="color:var(--gold-light)">TFT Academy guide ↗</a></div>
+      ${bm?.conditions?.length ? `<div class="lbl" style="margin-top:12px">Play it if you have</div><div class="chips">${bm.conditions.map(x => `<span class="chip">${esc(x)}</span>`).join("")}</div>` : ""}
       ${bm?.itemHolders ? `<div class="lbl" style="margin-top:12px">Early item holders</div><div class="items-list">${esc(bm.itemHolders)}</div>` : ""}
       ${bm?.teamCode ? `<div class="lbl" style="margin-top:12px">Team code</div><div class="code"><code>${esc(bm.teamCode)}</code>
         <button class="btn ghost" data-act="copy" data-v="${esc(bm.teamCode)}">Copy</button></div>` : ""}
@@ -883,7 +1085,7 @@ function utilityTile(x, state) {
     : x.unit ? icons.units?.[x.unit] : augByName(x.name)?.icon;
   const cls = ["ut-tile", `k-${x.kind.toLowerCase()}`, x.partial && "partial", state.on && "on", state.done && "done",
                state.best && "best"].filter(Boolean).join(" ");
-  return `<button class="${cls}" data-act="ah" data-v="${x.id}" data-tip="${x.id}" aria-label="${esc(x.name)}" ${state.auto ? "disabled" : ""}>
+  return `<button class="${cls}" data-act="ah" data-v="${x.id}" data-tip="${x.id}"${state.best ? ' data-best="1"' : ""} aria-label="${esc(x.name)}" ${state.auto ? "disabled" : ""}>
     ${icon ? `<img src="${esc(icon)}" alt="">` : esc(x.name)}${state.on ? '<span class="ut-check">✓</span>' : ""}</button>`;
 }
 
@@ -934,7 +1136,7 @@ function unitExtrasHtml(name) {
     ${tip ? `<div class="tip-note">${esc(tip)}</div>` : ""}`;
 }
 
-function utilityTipHtml(id) {
+function utilityTipHtml(id, best = false) {
   const comp = S.comp && compById(S.comp);
   const x = UTILITY_SOURCES.find(u => u.id === id);
   if (!x) return "";
@@ -946,6 +1148,7 @@ function utilityTipHtml(id) {
     : augGave(id) ? `From your ${augGave(id)} augment`
     : !have.has(id) && full ? `Not needed — ${full.name} already covers it` : fit.note || x.how;
   return `<b>${esc(x.name)}</b> <span class="tip-kind">${esc(x.kind)}</span>
+    ${best ? '<div class="tip-best">Gold border = best option for this comp</div>' : ""}
     ${recipe.length ? `<div class="tip-recipe">${recipe.map(c => `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="${esc(c.name)}">` : esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>` : ""}
     ${x.partial && !utilityFromComp().has(id) && note !== x.how ? `<div class="tip-note">${esc(x.how)}</div>` : ""}
     ${note ? `<div class="tip-note">${esc(note)}</div>` : ""}
@@ -1089,7 +1292,7 @@ function augTypeCard(comp, stage) {
     <div class="lbl">Next augment (${esc(stage)})</div>
     <div class="go">Go <b>${esc(v.type)}</b></div>
     ${v.reasons.length ? `<div class="items-list">${esc(v.reasons.slice(0, 2).join(" · "))}</div>` : ""}
-    ${names.length ? `<div class="chips" style="margin-top:8px">${names.map(n => `<button class="chip gold aug-pick" data-act="aug-add" data-v="${esc(n)}">${esc(n)}</button>`).join("")}</div>` : ""}
+    ${names.length ? `<div class="ic-row" style="margin-top:8px">${names.map(n => { const a = augByName(n); return `<button class="aug-ic aug-pick" data-act="aug-add" data-v="${esc(n)}" data-tipaug="${esc(n)}|${esc(stage)}" aria-label="${esc(n)}">${a?.icon ? `<img src="${esc(a.icon)}" alt="">` : esc(n)}</button>`; }).join("")}<span class="muted">click the one you took</span></div>` : ""}
     <div class="muted" style="margin-top:8px">If none show up: ${esc(v.next)}</div>
   </div>`;
 }
@@ -1211,7 +1414,9 @@ function aiHtml(comp, stage) {
 document.addEventListener("click", e => {
   const el = e.target.closest("[data-act]");
   if (!el) return;
-  const act = el.dataset.act, v = el.dataset.v, st = el.dataset.st;
+  const act = el.dataset.act, st = el.dataset.st;
+  let v = el.dataset.v;
+  if (utTip.contains(el)) hideTip(true);
   const comp = S.comp && compById(S.comp);
   if (act === "pick-opener") { S.opener = v; S.skipOpener = false; resetFrom(1); }
   else if (act === "skip-opener") { S.skipOpener = true; S.opener = null; resetFrom(1); }
@@ -1238,11 +1443,17 @@ document.addEventListener("click", e => {
     setAugList(augList().filter(n => n !== v));
   }
   else if (act === "unit-pick") {
-    S.unitQuery = v;
+    S.unitQuery = norm(S.unitQuery || "") === norm(v) ? "" : v;   // click again to clear
+    v = S.unitQuery;
     const box = document.getElementById("unitSearch");
     if (box) box.value = v;
     document.getElementById("opMatches").innerHTML = openerMatchesHtml();
+    document.getElementById("unitGrid").innerHTML = unitPriorityHtml();
     save();
+    return;
+  }
+  else if (act === "rule-open") {   // several comps: the hover lists them; a click keeps it open
+    showTip(el, true);
     return;
   }
   else if (act === "clear-all") {
@@ -1271,17 +1482,47 @@ document.addEventListener("click", e => {
 const utTip = document.createElement("div");
 utTip.className = "ut-tip";
 document.body.appendChild(utTip);
-document.addEventListener("mouseover", e => {
-  const t = e.target.closest("[data-tip], [data-tipcomp], [data-tipunit], [data-tipaug]");
-  if (!t) { utTip.classList.remove("show"); return; }
-  utTip.innerHTML = t.dataset.tipaug ? augTipHtml(t.dataset.tipaug) : t.dataset.tipunit ? unitTipHtml(t.dataset.tipunit)
-    : t.dataset.tipcomp ? itemTipHtml(t.dataset.tipcomp, +t.dataset.tipi) : utilityTipHtml(t.dataset.tip);
+const TIP_SEL = "[data-tip], [data-tipcomp], [data-tipunit], [data-tipaug], [data-tipu], [data-tipitem], [data-tiptrait], [data-tipop], [data-tiprule]";
+let tipFor = null, tipPinned = false, hideTimer = 0;
+function tipHtml(t) {
+  const d = t.dataset;
+  if (d.tiprule) return ruleHoverHtml(d.tiprule);
+  if (d.tipaug) return augTipHtml(d.tipaug);
+  if (d.tipunit) return unitTipHtml(d.tipunit);
+  if (d.tipu) return unitHoverHtml(d.tipu, d.tipc);
+  if (d.tipitem) return itemHoverHtml(d.tipitem);
+  if (d.tiptrait) { const [n, c] = d.tiptrait.split("|"); return `<b>${esc(n)}</b>${c ? ` <span class="tip-kind">${esc(c)} units</span>` : ""}`; }
+  if (d.tipop) { const o = OPENERS.find(x => x.name === d.tipop); return o ? `<b>${esc(o.name)}</b><img class="tip-board" src="${esc(o.img)}" alt="">${o.tip ? `<div class="tip-note">${esc(o.tip)}</div>` : ""}` : ""; }
+  if (d.tipcomp) return itemTipHtml(d.tipcomp, +d.tipi);
+  return utilityTipHtml(d.tip, d.best === "1");
+}
+function showTip(t, pin = false) {
+  clearTimeout(hideTimer);
+  tipFor = t; tipPinned = pin;
+  utTip.innerHTML = tipHtml(t).replaceAll(' loading="lazy"', "");   // lazy images never load in a just-shown fixed box
+  utTip.classList.toggle("interactive", !!t.dataset.tiprule);
   const r = t.getBoundingClientRect();
   utTip.classList.add("show");
-  utTip.style.left = `${Math.min(r.left, innerWidth - utTip.offsetWidth - 10)}px`;
+  utTip.style.left = `${Math.max(8, Math.min(r.left, innerWidth - utTip.offsetWidth - 10))}px`;
   // Below the icon, or above it when it would run off the bottom of the window
-  const below = r.bottom + 6, h = utTip.offsetHeight;
-  utTip.style.top = `${below + h > innerHeight - 8 ? Math.max(8, r.top - h - 6) : below}px`;
+  const below = r.bottom + 4, h = utTip.offsetHeight;
+  utTip.style.top = `${below + h > innerHeight - 8 ? Math.max(8, r.top - h - 4) : below}px`;
+}
+function hideTip(now = false) {
+  clearTimeout(hideTimer);
+  const go = () => { utTip.classList.remove("show"); tipFor = null; tipPinned = false; };
+  now ? go() : (hideTimer = setTimeout(go, 180));
+}
+document.addEventListener("mouseover", e => {
+  if (utTip.contains(e.target)) { clearTimeout(hideTimer); return; }   // moving into an interactive tip
+  // Innermost hover target wins (a champion inside an opener card shows the champion)
+  const t = e.target.closest(TIP_SEL);
+  if (!t) { if (!tipPinned) hideTip(); return; }
+  if (t !== tipFor) showTip(t);
+  else clearTimeout(hideTimer);
+});
+document.addEventListener("click", e => {
+  if (tipPinned && !utTip.contains(e.target) && !e.target.closest("[data-tiprule]")) hideTip(true);
 });
 
 
@@ -1291,6 +1532,7 @@ document.addEventListener("input", e => {
   if (t.id === "unitSearch") {
     S.unitQuery = t.value;
     document.getElementById("opMatches").innerHTML = openerMatchesHtml();
+    document.getElementById("unitGrid").innerHTML = unitPriorityHtml();
   } else if (t.dataset.search === "augpanel") {
     S.augPanelQuery = t.value;
     document.getElementById("apMatches").innerHTML = augPanelMatchesHtml();

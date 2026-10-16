@@ -613,10 +613,14 @@ def build_tfta_comps(guides, names, augments_by_api, icons):
         return a["name"] if a else nm(api)
 
     def board(units):
+        for u in units or []:
+            for i in u.get("items") or []:
+                item_api.setdefault(nm(i), i)
         return [{"name": nm(u.get("apiName")), "stars": u.get("stars") or 1,
                  "items": [nm(i) for i in (u.get("items") or [])], "boardIndex": u.get("boardIndex")}
                 for u in (units or [])]
 
+    item_api = {}  # item name -> apiName, for the board's item icons
     tier_name = {"X": "Special"}
     comps = []
     for g in sorted(guides, key=lambda g: ("SABCX".find(g.get("tier") or "X"), g.get("displayIndex") or 0)):
@@ -640,7 +644,12 @@ def build_tfta_comps(guides, names, augments_by_api, icons):
             "url": f"https://tftacademy.com/tierlist/comps/{g['compSlug']}",
             "updated": g.get("updated"),
         })
-    return comps
+    return comps, item_api
+
+
+# Opener-guide comp names that word matching can't place (rules and opener boards use these)
+OPENER_COMP_ALIASES = {"Defender Cassiopeia Rengar": "set-18-defender-cassio",
+                       "5 Rapidfire Aphelios": "set-18-aphelios-rapidfire"}
 
 
 def match_bm(tfta_comps, bm_comps):
@@ -689,8 +698,9 @@ def main():
     lvl_text = to_text(lvl_raw)
     level_tables = parse_leveling_guide(lvl_text)
     tfta_patch, tfta_guides = fetch_tfta()
-    comps = build_tfta_comps(tfta_guides, names, by_api, icons)
+    comps, item_api = build_tfta_comps(tfta_guides, names, by_api, icons)
     bm_to_tfta = match_bm(comps, bm_comps)
+    bm_to_tfta.update({k: v for k, v in OPENER_COMP_ALIASES.items() if any(c["id"] == v for c in comps)})
     calc = load_calc_data()
     trait_names = sorted({t["name"] for t in calc["traits"].values() if t.get("name")})
     tag_augments(augments, trait_names)
@@ -707,6 +717,7 @@ def main():
             for u in c[board]:
                 cu = units_by_name.get(u["name"])
                 u["cost"], u["icon"] = (cu.get("cost"), cu.get("icon")) if cu else (None, None)
+                u["traits"] = (cu or {}).get("traits") or []
             c[board] = [u for u in c[board] if u["cost"]]
         c.update(comp_shape(c["finalComp"], items_by_name, c["mainChampion"]))
         for it in c["itemPriority"]:  # recipe for the hover tooltip (components have none)
@@ -733,6 +744,16 @@ def main():
         "metaSummary": to_text(meta_raw).split("Augment Guide", 1)[0].replace("Video Guides at YouTube", "").replace("Meta Snapshot Summary", "").strip(),
         "comps": comps,
         "bmCompToTfta": bm_to_tfta,
+        # Icon + recipe for every item on a TFT Academy board (hover detail on the hex board)
+        "itemIcons": {name: {"icon": icons.get(api),
+                             "from": [{"name": names.get(COMPONENT_API[x], COMPONENTS.get(x)), "icon": icons.get(COMPONENT_API[x])}
+                                      for x in (items_by_name.get(name) or {}).get("from") or [] if x in COMPONENT_API]}
+                      for name, api in item_api.items()},
+        # Icons by name for hover detail: every champion, trait and component
+        "unitIcons": {u["name"]: {"icon": u.get("icon"), "cost": u.get("cost"), "traits": u.get("traits") or []}
+                      for u in calc["units"].values() if u.get("name")},
+        "traitIcons": {t["name"]: t.get("icon") for t in calc["traits"].values() if t.get("name") and t.get("icon")},
+        "componentIcons": {COMPONENTS[c]: icons.get(api) for c, api in COMPONENT_API.items()},
         "utilityIcons": utility_icons(icons, names, items_by_name, calc, load_winrate_rows()),
         "unitPriority": build_unit_priority(calc, names, icons, openers["fullText"]),
         "augments": augments,

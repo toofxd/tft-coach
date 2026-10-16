@@ -1490,7 +1490,8 @@ app.get("/api/gameplan", (_req, res) => {
     .map(a => ({ name: a.name, tier: a.tier, stages: a.stages, desc: a.desc, icon: a.icon, tags: a.tags, traits: a.traits, rating: a.rating }));
   res.json({
     patch: gameplanData.patch, updated: gameplanData.updated, comps, augments,
-    bmCompToTfta: gameplanData.bmCompToTfta, utilityIcons: gameplanData.utilityIcons,
+    bmCompToTfta: gameplanData.bmCompToTfta, utilityIcons: gameplanData.utilityIcons, itemIcons: gameplanData.itemIcons || {},
+    unitIcons: gameplanData.unitIcons || {}, traitIcons: gameplanData.traitIcons || {}, componentIcons: gameplanData.componentIcons || {},
     unitPriority: gameplanData.unitPriority,
     openerRules: gameplanData.openerGuide.rules, hardForce: gameplanData.openerGuide.hardForce,
   });
