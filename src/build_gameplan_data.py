@@ -401,6 +401,7 @@ COMPONENT_API = {1: "DA_Component_BFSword", 2: "DA_Component_RecurveBow", 3: "DA
                  4: "DA_Component_TearOfTheGoddess", 5: "DA_Component_ChainVest", 6: "DA_Component_NegatronCloak",
                  7: "DA_Component_GiantsBelt", 8: "DA_Component_SparringGloves"}
 UTILITY_TRAITS = ("Inferno", "Caustic")
+UTILITY_UNITS = ("Cinderling", "Brambleback", "Gnar", "Xayah", "Mama Beak", "Kayle", "Fiddlesticks", "Pebbles", "Kog'Maw")
 
 
 def utility_icons(icons, names, items_by_name, calc):
@@ -411,10 +412,14 @@ def utility_icons(icons, names, items_by_name, calc):
                        "from": [{"name": names.get(COMPONENT_API[c], COMPONENTS.get(c)), "icon": icons.get(COMPONENT_API[c])}
                                 for c in recipe if c in COMPONENT_API]}
     traits = {t["name"]: t.get("icon") for t in calc["traits"].values() if t.get("name") in UTILITY_TRAITS}
+    units = {u["name"]: u.get("icon") for u in calc["units"].values() if u.get("name") in UTILITY_UNITS}
     missing = [n for n, v in items.items() if not v["icon"] or not all(c["icon"] for c in v["from"])]
     if missing:
         print("  utility items missing an icon:", missing)
-    return {"items": items, "traits": traits}
+    missing_units = [n for n in UTILITY_UNITS if not units.get(n)]
+    if missing_units:
+        print("  utility champions missing an icon:", missing_units)
+    return {"items": items, "traits": traits, "units": units}
 
 
 # ── Stage 1 unit priority (BunnyMuffins tiers via src/match_unit_tiers.py) ────

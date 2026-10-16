@@ -17815,6 +17815,17 @@
   "traits": {
    "Caustic": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_caustic.png",
    "Inferno": "https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_18_inferno.png"
+  },
+  "units": {
+   "Kog'Maw": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_kogmaw/skins/base/images/tft18_kogmaw_splash_tile_3.png",
+   "Kayle": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_kayle/skins/base/images/tft18_kayle_splash_tile_42.png",
+   "Brambleback": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_brambleback/skins/base/images/t_18_brambleback_teamplannersplash.png",
+   "Gnar": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_gnar/skins/base/images/tft18_gnar_splash_tile_0.png",
+   "Mama Beak": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_raptor/skins/base/images/t_18_crimsonraptor_teamplannersplash.png",
+   "Cinderling": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_cinderling/skins/base/images/t_18_cinderling_teamplannersplash.png",
+   "Xayah": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_xayah/skins/base/images/tft18_xayah_splash_tile_8.png",
+   "Pebbles": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_sentry/skins/base/images/t_18_sentry_teamplannersplash.png",
+   "Fiddlesticks": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_fiddlesticks/skins/base/images/tft18_fiddlesticks_splash_tile_46.png"
   }
  },
  "unitPriority": {

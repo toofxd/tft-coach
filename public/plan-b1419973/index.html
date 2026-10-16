@@ -189,7 +189,7 @@ a { color: inherit; }
 /* ── Game plan tree ────────────────────────────────────────────── */
 .wrap { max-width: 1180px; margin: 0 auto; }
 .layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 22px; align-items: start; }
-.util-panel { position: sticky; top: 76px; max-height: calc(100vh - 90px); overflow-y: auto; display: grid; gap: 10px; }
+.util-panel { position: sticky; top: 76px; display: grid; gap: 10px; }
 .tree { list-style: none; position: relative; }
 .node { position: relative; padding: 0 0 22px 34px; }
 .node::before { /* connector line */
@@ -370,18 +370,21 @@ a { color: inherit; }
 .ah-box-card .ah-how { font-size: 11.5px; }
 .ah-title { font-size: 14px; font-weight: 700; }
 .ah-met { font-size: 12px; font-weight: 600; color: var(--gold-light); }
-.ah-what { font-size: 11.5px; color: var(--text-50); margin: 4px 0 6px; line-height: 1.4; }
+.ah-what { font-size: 11.5px; color: var(--text-50); margin: 4px 0 8px; line-height: 1.4; }
 .ah-group { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin: 6px 0 2px; }
 .ah-list { display: grid; gap: 4px; }
-.ut-tiles { display: flex; flex-wrap: wrap; gap: 6px; }
-.ut-tile { position: relative; width: 38px; height: 38px; padding: 0; border-radius: 7px; border: 2px solid var(--border);
+.ut-tiles { display: flex; flex-wrap: nowrap; gap: 4px; }   /* one row per box (max 7 icons) */
+.ut-tile { position: relative; width: 31px; height: 31px; flex-shrink: 0; padding: 0; border-radius: 7px; border: 2px solid var(--border);
   background: var(--navy-deep); cursor: pointer; overflow: visible; }
 .ut-tile img { width: 100%; height: 100%; border-radius: 5px; display: block; }
 .ut-tile:hover { border-color: rgba(174,145,66,0.7); }
 .ut-tile.best { border-color: var(--gold-light); box-shadow: 0 0 0 2px rgba(201,168,76,0.35); }
 .ut-tile.on { border-color: var(--gold); }
 .ut-tile.done { opacity: 0.3; }
-.ut-check { position: absolute; right: -5px; top: -5px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold);
+.ut-tile.partial { border-style: dashed; }
+.ut-tile.k-champion img { object-fit: cover; object-position: 50% 20%; }
+.tip-kind { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-30); margin-left: 4px; }
+.ut-check { position: absolute; right: -5px; top: -5px; width: 14px; height: 14px; border-radius: 50%; background: var(--gold);
   color: var(--navy); font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
 .unit-prio { display: grid; gap: 6px; margin-bottom: 12px; }
 .up-row { display: flex; align-items: center; gap: 10px; }
@@ -821,10 +824,7 @@ const UTILITY_SOURCES = [
   { id: "redbuff", needs: ["antiheal"], kind: "Item", name: "Red Buff", how: "On an attack-speed carry", item: "Red Buff" },
   { id: "cinderling", needs: ["antiheal"], kind: "Champion", name: "Cinderling", how: "20% Wound + Burn — weaker, still build one", partial: true, unit: "Cinderling" },
   { id: "brambleback", needs: ["antiheal"], kind: "Champion", name: "Brambleback", how: "Burn only, no Wound — still build one", partial: true, unit: "Brambleback" },
-  { id: "aug-feed", needs: ["antiheal"], kind: "Augment", name: "Feed the Flames", how: "2-1 / 3-2 — gives a Sunfire Cape" },
-  { id: "aug-pyro", needs: ["antiheal"], kind: "Augment", name: "Pyromaniac", how: "2-1 / 3-2 — gives a Red Buff" },
   { id: "aug-board", needs: ["antiheal"], kind: "Augment", name: "Sunfire Board", how: "3-2 / 4-2 — burns and wounds every enemy" },
-  { id: "aug-buffs", needs: ["antiheal"], kind: "Augment", name: "One Buff, Two Buff", how: "3-2 / 4-2 — gives a Red Buff" },
   // Sunder: −30% armor (AD comps)
   { id: "lastwhisper", needs: ["sunder"], kind: "Item", name: "Last Whisper", how: "On your AD carry", item: "Last Whisper" },
   { id: "evenshroud", needs: ["sunder"], kind: "Item", name: "Evenshroud", how: "On a tank", item: "Evenshroud" },
@@ -841,9 +841,9 @@ const UTILITY_SOURCES = [
   { id: "kogmaw", needs: ["sunder", "shred"], kind: "Champion", name: "Kog'Maw", how: "Caustic: 30% Shred and Sunder", unit: "Kog'Maw" },
 ];
 const UTILITY_NEEDS = {
-  antiheal: { title: "Anti-heal", what: "Wound cuts enemy healing by 33% (and adds a 1% Burn). One source is enough." },
-  sunder: { title: "Sunder", what: "−30% armor so AD damage gets through the enemy tank. Build by stage 4, stage 5 at the latest." },
-  shred: { title: "Shred", what: "−30% magic resist so AP damage gets through the enemy tank. Build by stage 4, stage 5 at the latest." },
+  antiheal: { title: "Anti-heal", what: "Cuts enemy healing by 33%. One source is enough." },
+  sunder: { title: "Sunder", lean: "AD", what: "Reduces enemies' armor by 30%. Build by stage 4 or 5." },
+  shred: { title: "Shred", lean: "AP", what: "Reduces enemies' magic resist by 30%. Build by stage 4 or 5." },
 };
 const KIND_ORDER = ["Trait", "Item", "Champion", "Augment"];
 
@@ -859,10 +859,15 @@ function utilityFromComp() {
   return new Set(UTILITY_SOURCES.filter(x => (x.trait && comp.traits.includes(x.trait)) || (x.unit && onBoard.has(x.unit))).map(x => x.id));
 }
 
+// Augments that hand you a utility item: not listed, but taking one ticks that item
+const AUG_GIVES = { "Feed the Flames": "sunfire", "Pyromaniac": "redbuff", "One Buff, Two Buff": "redbuff" };
+const augGave = id => Object.entries(AUG_GIVES).find(([aug, item]) => item === id && Object.values(S.augs || {}).includes(aug))?.[0];
+
 function utilityHave() {
   const have = new Set(S.antiheal || []);
   const augs = Object.values(S.augs || {});
   UTILITY_SOURCES.filter(x => x.kind === "Augment" && augs.includes(x.name)).forEach(x => have.add(x.id));  // auto from your augments
+  Object.entries(AUG_GIVES).forEach(([aug, id]) => { if (augs.includes(aug)) have.add(id); });
   utilityFromComp().forEach(id => have.add(id));   // auto from your comp (locked on)
   return have;
 }
@@ -885,19 +890,13 @@ function utilityFit(comp, x) {
 
 // Three permanent boxes (build them any time); boxes this comp doesn't need are dimmed
 function utilityTile(x, state) {
-  const icons = DATA.utilityIcons || { items: {}, traits: {} };
-  const icon = x.item ? icons.items[x.item]?.icon : icons.traits[x.trait];
-  const cls = ["ut-tile", state.on && "on", state.done && "done", state.best && "best"].filter(Boolean).join(" ");
+  const icons = DATA.utilityIcons || { items: {}, traits: {}, units: {} };
+  const icon = x.item ? icons.items[x.item]?.icon : x.trait ? icons.traits[x.trait]
+    : x.unit ? icons.units?.[x.unit] : augByName(x.name)?.icon;
+  const cls = ["ut-tile", `k-${x.kind.toLowerCase()}`, x.partial && "partial", state.on && "on", state.done && "done",
+               state.best && "best"].filter(Boolean).join(" ");
   return `<button class="${cls}" data-act="ah" data-v="${x.id}" data-tip="${x.id}" aria-label="${esc(x.name)}" ${state.auto ? "disabled" : ""}>
     ${icon ? `<img src="${esc(icon)}" alt="">` : esc(x.name)}${state.on ? '<span class="ut-check">✓</span>' : ""}</button>`;
-}
-
-function utilityRow(x, state, full) {
-  return `<button class="ah-row${state.on ? " on" : ""}${state.done ? " done" : ""}" data-act="ah" data-v="${x.id}" ${state.auto ? "disabled" : ""}>
-    <span class="ah-box">${state.on ? "✓" : ""}</span>
-    <span class="ah-main"><b>${esc(x.name)}</b>${state.best ? ' <span class="ah-rec">Best fit</span>' : ""}
-      <span class="ah-how">${esc(state.fromComp ? `From your comp — ${x.how}` : state.done ? `Covered by ${full.name}` : x.note || x.how)}</span></span>
-  </button>`;
 }
 
 // Three permanent boxes (build them any time); boxes this comp doesn't need are dimmed
@@ -914,26 +913,21 @@ function utilityPanelHtml(comp) {
     const fromComp = utilityFromComp();
     const stateOf = x => {
       const on = have.has(x.id);
-      return { on, auto: on && ((x.kind === "Augment" && augs.includes(x.name)) || fromComp.has(x.id)),
+      return { on, auto: on && ((x.kind === "Augment" && augs.includes(x.name)) || fromComp.has(x.id) || !!augGave(x.id)),
                fromComp: fromComp.has(x.id), done: !!full && !on, best: best?.id === x.id };
     };
-    const groups = KIND_ORDER.map(kind => {
-      const rows = opts.filter(x => x.kind === kind).sort((a, b) => b.score - a.score);
-      if (!rows.length) return "";
-      const tiles = kind === "Item" || kind === "Trait";
-      return `<div class="ah-group">${kind}s</div>${tiles
-        ? `<div class="ut-tiles">${rows.map(x => utilityTile(x, stateOf(x))).join("")}</div>`
-        : rows.map(x => utilityRow(x, stateOf(x), full)).join("")}`;
-    }).join("");
+    // One row of icons: traits, items, champions, augments (best fit first within each)
+    const tiles = KIND_ORDER.flatMap(kind => opts.filter(x => x.kind === kind).sort((a, b) => b.score - a.score))
+      .map(x => utilityTile(x, stateOf(x))).join("");
     const status = full ? `<span class="ah-met">✓ ${esc(full.name)}</span>`
       : partial && isNeeded ? `<span class="ah-part">Partial — keep building</span>`
       : isNeeded ? `<span class="ah-need-tag">Needed</span>` : `<span class="ah-skip">Not needed for ${esc(comp.lean)}</span>`;
     // Collapsed by default (header + status always visible); the arrow expands it and the choice is remembered
     const open = (S.utilOpen || {})[need] ?? false;
     return `<details class="card ah-box-card${full ? " met" : ""}${isNeeded ? "" : " skip"}" data-need="${need}" ${open ? "open" : ""}>
-      <summary class="ah-head"><span class="ah-title">${UTILITY_NEEDS[need].title}</span>${status}</summary>
+      <summary class="ah-head"><span class="ah-title">${UTILITY_NEEDS[need].title}</span>${UTILITY_NEEDS[need].lean ? leanBadge(UTILITY_NEEDS[need].lean) : ""}${status}</summary>
       <div class="ah-what">${esc(UTILITY_NEEDS[need].what)}</div>
-      <div class="ah-list">${groups}</div></details>`;
+      <div class="ut-tiles">${tiles}</div></details>`;
   }).join("");
 }
 
@@ -952,9 +946,15 @@ function utilityTipHtml(id) {
   if (!x) return "";
   const fit = utilityFit(comp, x);
   const recipe = x.item ? (DATA.utilityIcons?.items[x.item]?.from || []) : [];
-  return `<b>${esc(x.name)}</b>
+  const have = utilityHave();
+  const full = UTILITY_SOURCES.find(u => u.needs.some(n => x.needs.includes(n)) && u.id !== id && have.has(u.id) && !u.partial);
+  const note = utilityFromComp().has(id) ? "From your comp — always on"
+    : augGave(id) ? `From your ${augGave(id)} augment`
+    : !have.has(id) && full ? `Not needed — ${full.name} already covers it` : fit.note || x.how;
+  return `<b>${esc(x.name)}</b> <span class="tip-kind">${esc(x.kind)}</span>
     ${recipe.length ? `<div class="tip-recipe">${recipe.map(c => `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="">` : ""}${esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>` : ""}
-    <div class="tip-note">${esc(utilityFromComp().has(id) ? "From your comp — always on" : fit.note || x.how)}</div>`;
+    ${x.partial && !utilityFromComp().has(id) ? `<div class="tip-note">${esc(x.how)}</div>` : ""}
+    <div class="tip-note">${esc(note)}</div>`;
 }
 
 function nodeLate(comp) {
