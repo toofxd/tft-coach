@@ -190,10 +190,6 @@ a { color: inherit; }
 .wrap { max-width: 1180px; margin: 0 auto; }
 .layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 22px; align-items: start; }
 .util-panel { position: sticky; top: 76px; max-height: calc(100vh - 90px); overflow-y: auto; display: grid; gap: 10px; }
-@media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
-  .util-panel { position: static; max-height: none; }
-}
 .tree { list-style: none; position: relative; }
 .node { position: relative; padding: 0 0 22px 34px; }
 .node::before { /* connector line */
@@ -364,6 +360,9 @@ a { color: inherit; }
 .ah-box-card.skip { opacity: 0.55; }
 .ah-head { display: flex; align-items: baseline; gap: 8px; cursor: pointer; list-style: none; }
 .ah-head::-webkit-details-marker { display: none; }
+.ah-head::after { content: "▾"; margin-left: auto; color: var(--text-50); font-size: 13px; transition: transform 0.15s; }
+.ah-box-card:not([open]) .ah-head::after { transform: rotate(-90deg); }
+.ah-head:hover::after { color: var(--gold-light); }
 .ah-need-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ff8a7a; }
 .ah-skip { font-size: 11px; color: var(--text-30); }
 .ah-box-card .ah-row { padding: 5px 7px; font-size: 12.5px; }
@@ -811,7 +810,6 @@ function utilityFit(comp, x) {
 function utilityPanelHtml(comp) {
   const have = utilityHave();
   const needed = comp ? utilityNeeds(comp) : ["antiheal", "sunder", "shred"];
-  const desktop = window.matchMedia("(min-width: 901px)").matches;
   return ["antiheal", "sunder", "shred"].map(need => {
     const full = UTILITY_SOURCES.find(x => x.needs.includes(need) && have.has(x.id) && !x.partial);
     const isNeeded = needed.includes(need);
@@ -833,10 +831,9 @@ function utilityPanelHtml(comp) {
     }).join("");
     const status = full ? `<span class="ah-met">✓ ${esc(full.name)}</span>`
       : isNeeded ? `<span class="ah-need-tag">Needed</span>` : `<span class="ah-skip">Not needed for ${esc(comp.lean)}</span>`;
-    // Open by default only while it still needs a source (desktop); your own open/close is remembered per state
-    const key = `${need}:${full ? 1 : 0}:${isNeeded ? 1 : 0}`;
-    const open = (S.utilOpen || {})[key] ?? (desktop && isNeeded && !full);
-    return `<details class="card ah-box-card${full ? " met" : ""}${isNeeded ? "" : " skip"}" data-need="${key}" ${open ? "open" : ""}>
+    // Collapsed by default (header + status always visible); the arrow expands it and the choice is remembered
+    const open = (S.utilOpen || {})[need] ?? false;
+    return `<details class="card ah-box-card${full ? " met" : ""}${isNeeded ? "" : " skip"}" data-need="${need}" ${open ? "open" : ""}>
       <summary class="ah-head"><span class="ah-title">${UTILITY_NEEDS[need].title}</span>${status}</summary>
       <div class="ah-what">${esc(UTILITY_NEEDS[need].what)}</div>
       <div class="ah-list">${groups}</div></details>`;
