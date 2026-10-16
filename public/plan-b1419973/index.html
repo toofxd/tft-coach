@@ -474,7 +474,7 @@ a { color: inherit; }
   background: var(--navy-deep); cursor: pointer; overflow: visible; }
 .ut-tile img { width: 100%; height: 100%; border-radius: 5px; display: block; }
 .ut-tile:hover { border-color: rgba(174,145,66,0.7); }
-.ut-tile.best { border-color: var(--gold-light); box-shadow: 0 0 0 2px rgba(201,168,76,0.35); }
+.ut-tile.best { border-color: rgba(255,255,255,0.45); }
 .ut-tile.on { border-color: var(--gold); }
 .ut-tile.done { opacity: 0.3; }
 .ut-tile.partial { border-style: dashed; }
@@ -1160,7 +1160,7 @@ function utilityTipHtml(id, best = false) {
     : augGave(id) ? `From your ${augGave(id)} augment`
     : !have.has(id) && full ? `Not needed — ${full.name} already covers it` : fit.note || x.how;
   return `<b>${esc(x.name)}</b> <span class="tip-kind">${esc(x.kind)}</span>
-    ${best ? '<div class="tip-best">Gold border = best option for this comp</div>' : ""}
+    ${best ? '<div class="tip-best">Best option for this comp</div>' : ""}
     ${recipe.length ? `<div class="tip-recipe">${recipe.map(c => `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="${esc(c.name)}">` : esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>` : ""}
     ${x.partial && !utilityFromComp().has(id) && note !== x.how ? `<div class="tip-note">${esc(x.how)}</div>` : ""}
     ${note ? `<div class="tip-note">${esc(note)}</div>` : ""}
