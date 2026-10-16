@@ -17826,6 +17826,134 @@
    "Xayah": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_xayah/skins/base/images/tft18_xayah_splash_tile_8.png",
    "Pebbles": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_sentry/skins/base/images/t_18_sentry_teamplannersplash.png",
    "Fiddlesticks": "https://raw.communitydragon.org/latest/game/assets/characters/tft18_fiddlesticks/skins/base/images/tft18_fiddlesticks_splash_tile_46.png"
+  },
+  "unitItems": {
+   "Kog'Maw": [
+    {
+     "name": "Nashor's Tooth",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_leviathan.png"
+    },
+    {
+     "name": "Deathblade",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_deathblade.png"
+    },
+    {
+     "name": "Hextech Gunblade",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
+    }
+   ],
+   "Kayle": [
+    {
+     "name": "Rabadon's Deathcap",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rabadonsdeathcap.png"
+    },
+    {
+     "name": "Red Buff",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rapidfirecannon.png"
+    },
+    {
+     "name": "Jeweled Gauntlet",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png"
+    }
+   ],
+   "Brambleback": [
+    {
+     "name": "Thief's Gloves",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_thiefsgloves.png"
+    },
+    {
+     "name": "Bloodthirster",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bloodthirster.png"
+    },
+    {
+     "name": "Quicksilver",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_quicksilver.png"
+    }
+   ],
+   "Gnar": [
+    {
+     "name": "Edge of Night",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guardianangel.png"
+    },
+    {
+     "name": "Spirit Visage",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spiritvisagerr.png"
+    },
+    {
+     "name": "Bloodthirster",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bloodthirster.png"
+    }
+   ],
+   "Mama Beak": [
+    {
+     "name": "Last Whisper",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_lastwhisper.png"
+    },
+    {
+     "name": "Hextech Gunblade",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
+    },
+    {
+     "name": "Kraken's Fury",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png"
+    }
+   ],
+   "Cinderling": [
+    {
+     "name": "Hextech Gunblade",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png"
+    },
+    {
+     "name": "Giant Slayer",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_madredsbloodrazor.png"
+    },
+    {
+     "name": "Last Whisper",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_lastwhisper.png"
+    }
+   ],
+   "Xayah": [
+    {
+     "name": "Kraken's Fury",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png"
+    },
+    {
+     "name": "Infinity Edge",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_infinityedge.png"
+    },
+    {
+     "name": "Giant Slayer",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_madredsbloodrazor.png"
+    }
+   ],
+   "Pebbles": [
+    {
+     "name": "Blue Buff",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bluebuff.png"
+    },
+    {
+     "name": "Jeweled Gauntlet",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png"
+    },
+    {
+     "name": "Archangel's Staff",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_archangelsstaff.png"
+    }
+   ],
+   "Fiddlesticks": [
+    {
+     "name": "Crownguard",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_crownguard.png"
+    },
+    {
+     "name": "Adaptive Helm",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_adaptivehelm.png"
+    },
+    {
+     "name": "Protector's Vow",
+     "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_frozenheart.png"
+    }
+   ]
   }
  },
  "unitPriority": {

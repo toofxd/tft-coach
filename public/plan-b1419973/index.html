@@ -936,8 +936,16 @@ function itemTipHtml(compId, i) {
   const it = compById(compId)?.itemPriority?.[i];
   if (!it) return "";
   return `<b>${esc(it.name)}</b>${it.from?.length ? `<div class="tip-recipe">${it.from.map(c =>
-    `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="">` : ""}${esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>`
+    `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="${esc(c.name)}">` : esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>`
     : '<div class="tip-note">Component</div>'}`;
+}
+
+// Recommended items (icons only) + BunnyMuffins tip for a champion, wherever we have them
+function unitExtrasHtml(name) {
+  const items = DATA.utilityIcons?.unitItems?.[name] || [];
+  const tip = Object.values(DATA.unitPriority || {}).flat().find(u => u.name === name)?.tip;
+  return `${items.length ? `<div class="tip-items">${items.map(it => it.icon ? `<img src="${esc(it.icon)}" alt="${esc(it.name)}">` : "").join("")}</div>` : ""}
+    ${tip ? `<div class="tip-note">${esc(tip)}</div>` : ""}`;
 }
 
 function utilityTipHtml(id) {
@@ -952,9 +960,10 @@ function utilityTipHtml(id) {
     : augGave(id) ? `From your ${augGave(id)} augment`
     : !have.has(id) && full ? `Not needed — ${full.name} already covers it` : fit.note || x.how;
   return `<b>${esc(x.name)}</b> <span class="tip-kind">${esc(x.kind)}</span>
-    ${recipe.length ? `<div class="tip-recipe">${recipe.map(c => `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="">` : ""}${esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>` : ""}
+    ${recipe.length ? `<div class="tip-recipe">${recipe.map(c => `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="${esc(c.name)}">` : esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>` : ""}
     ${x.partial && !utilityFromComp().has(id) && note !== x.how ? `<div class="tip-note">${esc(x.how)}</div>` : ""}
-    ${note ? `<div class="tip-note">${esc(note)}</div>` : ""}`;
+    ${note ? `<div class="tip-note">${esc(note)}</div>` : ""}
+    ${x.unit ? unitExtrasHtml(x.unit) : ""}`;
 }
 
 function nodeLate(comp) {

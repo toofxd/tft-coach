@@ -404,7 +404,7 @@ UTILITY_TRAITS = ("Inferno", "Caustic")
 UTILITY_UNITS = ("Cinderling", "Brambleback", "Gnar", "Xayah", "Mama Beak", "Kayle", "Fiddlesticks", "Pebbles", "Kog'Maw")
 
 
-def utility_icons(icons, names, items_by_name, calc):
+def utility_icons(icons, names, items_by_name, calc, winrate_rows=()):
     items = {}
     for name, api in UTILITY_ITEM_API.items():
         recipe = (items_by_name.get(name) or {}).get("from") or []
@@ -413,13 +413,15 @@ def utility_icons(icons, names, items_by_name, calc):
                                 for c in recipe if c in COMPONENT_API]}
     traits = {t["name"]: t.get("icon") for t in calc["traits"].values() if t.get("name") in UTILITY_TRAITS}
     units = {u["name"]: u.get("icon") for u in calc["units"].values() if u.get("name") in UTILITY_UNITS}
+    unit_items = {u["name"]: slam_items(u.get("cdId"), winrate_rows, calc.get("items", {}), names, icons)
+                  for u in calc["units"].values() if u.get("name") in UTILITY_UNITS}
     missing = [n for n, v in items.items() if not v["icon"] or not all(c["icon"] for c in v["from"])]
     if missing:
         print("  utility items missing an icon:", missing)
     missing_units = [n for n in UTILITY_UNITS if not units.get(n)]
     if missing_units:
         print("  utility champions missing an icon:", missing_units)
-    return {"items": items, "traits": traits, "units": units}
+    return {"items": items, "traits": traits, "units": units, "unitItems": unit_items}
 
 
 # ── Stage 1 unit priority (BunnyMuffins tiers via src/match_unit_tiers.py) ────
@@ -473,6 +475,11 @@ def tip_for(name, sentences, traits=(), tier=""):
     if not hits and tier:
         hits = find(rf"\b{tier} tier") if tier in "SAB" else find(r"\blower tier")
     return " ".join(hits[:2])[:240]
+
+
+def load_winrate_rows():
+    wr_path = Path(__file__).parent.parent / "data" / "processed" / "item_winrates.csv"
+    return list(csv.DictReader(open(wr_path, encoding="utf-8"))) if wr_path.exists() else []
 
 
 def build_unit_priority(calc, names, icons, openers_text=""):
@@ -711,7 +718,7 @@ def main():
         "metaSummary": to_text(meta_raw).split("Augment Guide", 1)[0].replace("Video Guides at YouTube", "").replace("Meta Snapshot Summary", "").strip(),
         "comps": comps,
         "bmCompToTfta": bm_to_tfta,
-        "utilityIcons": utility_icons(icons, names, items_by_name, calc),
+        "utilityIcons": utility_icons(icons, names, items_by_name, calc, load_winrate_rows()),
         "unitPriority": build_unit_priority(calc, names, icons, openers["fullText"]),
         "augments": augments,
         "augmentPrinciples": aug_general,
