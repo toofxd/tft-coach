@@ -828,15 +828,15 @@ const UTILITY_SOURCES = [
   // Sunder: −30% armor (AD comps)
   { id: "lastwhisper", needs: ["sunder"], kind: "Item", name: "Last Whisper", how: "On your AD carry", item: "Last Whisper" },
   { id: "evenshroud", needs: ["sunder"], kind: "Item", name: "Evenshroud", how: "On a tank", item: "Evenshroud" },
-  { id: "gnar", needs: ["sunder", "shred"], kind: "Champion", name: "Gnar", how: "Cuts armor and MR by 15–20 — stacks, still build one", partial: true, unit: "Gnar" },
-  { id: "xayah", needs: ["sunder"], kind: "Champion", name: "Xayah", how: "−2 armor per feather — stacks, still build one", partial: true, unit: "Xayah" },
-  { id: "mamabeak", needs: ["sunder"], kind: "Champion", name: "Mama Beak", how: "Orange Buff: −2 armor per hit — stacks, still build one", partial: true, unit: "Mama Beak" },
+  { id: "gnar", needs: ["sunder", "shred"], kind: "Champion", name: "Gnar", how: "(stacks)", partial: true, unit: "Gnar" },
+  { id: "xayah", needs: ["sunder"], kind: "Champion", name: "Xayah", how: "(stacks)", partial: true, unit: "Xayah" },
+  { id: "mamabeak", needs: ["sunder"], kind: "Champion", name: "Mama Beak", how: "(stacks)", partial: true, unit: "Mama Beak" },
   // Shred: −30% magic resist (AP comps)
   { id: "voidstaff", needs: ["shred"], kind: "Item", name: "Void Staff", how: "On your AP carry", item: "Void Staff" },
   { id: "ionic", needs: ["shred"], kind: "Item", name: "Ionic Spark", how: "On a tank", item: "Ionic Spark" },
-  { id: "kayle", needs: ["shred"], kind: "Champion", name: "Kayle", how: "20% Shred at 2nd ascension — stacks, still build one", partial: true, unit: "Kayle" },
-  { id: "fiddlesticks", needs: ["shred"], kind: "Champion", name: "Fiddlesticks", how: "−10 MR on the 3 nearest — stacks, still build one", partial: true, unit: "Fiddlesticks" },
-  { id: "pebbles", needs: ["shred"], kind: "Champion", name: "Pebbles", how: "−3 MR per second channeling — stacks, still build one", partial: true, unit: "Pebbles" },
+  { id: "kayle", needs: ["shred"], kind: "Champion", name: "Kayle", how: "(stacks)", partial: true, unit: "Kayle" },
+  { id: "fiddlesticks", needs: ["shred"], kind: "Champion", name: "Fiddlesticks", how: "(stacks)", partial: true, unit: "Fiddlesticks" },
+  { id: "pebbles", needs: ["shred"], kind: "Champion", name: "Pebbles", how: "(stacks)", partial: true, unit: "Pebbles" },
   // Both, at full strength
   { id: "kogmaw", needs: ["sunder", "shred"], kind: "Champion", name: "Kog'Maw", how: "Caustic: 30% Shred and Sunder", unit: "Kog'Maw" },
 ];
@@ -953,7 +953,7 @@ function utilityTipHtml(id) {
     : !have.has(id) && full ? `Not needed — ${full.name} already covers it` : fit.note || x.how;
   return `<b>${esc(x.name)}</b> <span class="tip-kind">${esc(x.kind)}</span>
     ${recipe.length ? `<div class="tip-recipe">${recipe.map(c => `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="">` : ""}${esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>` : ""}
-    ${x.partial && !utilityFromComp().has(id) ? `<div class="tip-note">${esc(x.how)}</div>` : ""}
+    ${x.partial && !utilityFromComp().has(id) && note !== x.how ? `<div class="tip-note">${esc(x.how)}</div>` : ""}
     <div class="tip-note">${esc(note)}</div>`;
 }
 
