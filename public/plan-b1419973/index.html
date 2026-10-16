@@ -1110,7 +1110,8 @@ function utilityPanelHtml(comp) {
     const partial = UTILITY_SOURCES.find(x => x.needs.includes(need) && have.has(x.id) && x.partial);
     const isNeeded = needed.includes(need);
     const opts = UTILITY_SOURCES.filter(x => x.needs.includes(need)).map(x => ({ ...x, ...utilityFit(comp, x) }));
-    const best = full || !isNeeded ? null : opts.filter(x => !x.partial).sort((a, b) => b.score - a.score)[0];
+    // Only recommend once a comp is chosen — with nothing picked there is nothing to fit
+    const best = !comp || full || !isNeeded ? null : opts.filter(x => !x.partial).sort((a, b) => b.score - a.score)[0];
     const fromComp = utilityFromComp();
     const stateOf = x => {
       const on = have.has(x.id);
