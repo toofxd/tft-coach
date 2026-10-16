@@ -1487,7 +1487,7 @@ app.get("/api/gameplan", (_req, res) => {
   }));
   const augments = Object.values(gameplanData.augments)
     .filter(a => a.stages.length)
-    .map(a => ({ name: a.name, tier: a.tier, stages: a.stages, desc: a.desc, icon: a.icon, tags: a.tags, traits: a.traits }));
+    .map(a => ({ name: a.name, tier: a.tier, stages: a.stages, desc: a.desc, icon: a.icon, tags: a.tags, traits: a.traits, rating: a.rating }));
   res.json({
     patch: gameplanData.patch, updated: gameplanData.updated, comps, augments,
     bmCompToTfta: gameplanData.bmCompToTfta, utilityIcons: gameplanData.utilityIcons,

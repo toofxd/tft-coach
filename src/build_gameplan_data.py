@@ -581,6 +581,18 @@ def fetch_tfta():
     return patch, [g for g in guides["guides"] if g.get("isPublic")]
 
 
+def fetch_tfta_augment_tiers():
+    """TFT Academy augment tier list: {apiName: {stage: "S"|"A"|"B"|"C"}} (rated per augment round)."""
+    r = requests.get("https://tftacademy.com/api/tierlist/augments?set=18", headers=UA, timeout=30)
+    r.raise_for_status()
+    out = {}
+    for block in r.json().get("augments_tierlists", []):
+        for tier, apis in (block.get("tier") or {}).items():
+            for api in apis:
+                out.setdefault(api, {})[block.get("stage") or "any"] = tier
+    return out
+
+
 def tfta_strategy(style):
     s = (style or "").lower()
     m = re.match(r"(\d)-cost reroll", s)
@@ -669,6 +681,9 @@ def main():
     openers = parse_openers(op_raw)
     cd_augs, names, icons = fetch_cdragon()
     augments = build_augments(fetch_tt_augments(), guide, cd_augs)
+    aug_tiers = fetch_tfta_augment_tiers()
+    for a in augments.values():
+        a["rating"] = aug_tiers.get(a.get("apiName") or "", {})
     by_api = {a["apiName"]: a for a in augments.values() if a.get("apiName")}
 
     lvl_text = to_text(lvl_raw)

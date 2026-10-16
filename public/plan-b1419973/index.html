@@ -369,6 +369,18 @@ a { color: inherit; }
 .ah-what { font-size: 11.5px; color: var(--text-50); margin: 4px 0 8px; line-height: 1.4; }
 .ah-group { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin: 6px 0 2px; }
 .ah-list { display: grid; gap: 4px; }
+.comp-style { color: #8fb4d9; font-weight: 500; }
+.ap-search { width: 100%; margin-top: 8px; padding: 6px 9px; font-size: 12.5px; }
+.ap-results { display: grid; gap: 2px; margin-top: 4px; }
+.ap-result { display: flex; align-items: center; gap: 7px; padding: 4px 6px; border-radius: 6px; background: none; border: none;
+  color: var(--text); font: 500 12.5px/1.2 inherit; font-family: inherit; cursor: pointer; text-align: left; }
+.ap-result:hover { background: rgba(174,145,66,0.15); }
+.ap-result img { width: 22px; height: 22px; border-radius: 4px; }
+.ap-slots { display: flex; gap: 6px; margin-top: 8px; }
+.ap-slot { width: 38px; height: 38px; border-radius: 7px; border: 1px dashed var(--border); display: flex; align-items: center;
+  justify-content: center; font-size: 10px; color: var(--text-30); padding: 0; background: none; }
+.ap-slot.filled { border: 2px solid rgba(174,145,66,0.6); cursor: pointer; background: var(--navy-deep); }
+.ap-slot.filled img { width: 100%; height: 100%; border-radius: 5px; display: block; }
 .ut-tiles { display: flex; flex-wrap: nowrap; gap: 4px; }   /* one row per box (max 7 icons) */
 .ut-tile { position: relative; width: 31px; height: 31px; flex-shrink: 0; padding: 0; border-radius: 7px; border: 2px solid var(--border);
   background: var(--navy-deep); cursor: pointer; overflow: visible; }
@@ -546,9 +558,6 @@ function resetFrom(step) {
   if (step <= 1) { S.comp = null; }
   if (step <= 3) { S.augs = {}; S.offers = {}; S.antiheal = []; }
 }
-function resetStage(stage) {
-  STAGES.slice(STAGES.indexOf(stage)).forEach(st => { delete S.augs[st]; });
-}
 
 // ── Render ───────────────────────────────────────────────────────────
 function render() {
@@ -557,10 +566,8 @@ function render() {
   nodes.push(nodeOpener());
   nodes.push(nodeComp());
   nodes.push(nodeSpot(comp));
-  STAGES.forEach((st, i) => nodes.push(nodeStage(comp, st, i)));
-  nodes.push(nodeLate(comp));
   document.getElementById("tree").innerHTML = nodes.join("");
-  document.getElementById("utilPanel").innerHTML = utilityPanelHtml(comp);
+  document.getElementById("utilPanel").innerHTML = augPanelHtml() + utilityPanelHtml(comp);
   save();
 }
 
@@ -682,7 +689,7 @@ function nodeComp() {
   const comp = S.comp && compById(S.comp);
   if (!ready) return node(2, { title: "Comp", sub: "Pick an opener first", locked: true });
   if (comp) {
-    return node(2, { title: "Comp", choice: `${esc(comp.short)} ${leanBadge(comp.lean)} · ${costify(comp.style || "")} ${favBtn(comp)}`, done: true, change: "comp", body: compDetail(comp) });
+    return node(2, { title: "Comp", choice: `${esc(comp.short)} ${leanBadge(comp.lean)} <span class="comp-style">(${costify(comp.style || "")})</span> ${favBtn(comp)}`, done: true, change: "comp", body: compDetail(comp) });
   }
   const search = `<div class="offer-row" style="margin-bottom:10px"><input class="aug-in" type="search" autocomplete="off"
     data-search="comp" placeholder="Search a comp, champion, trait or style (e.g. Draven, Riftbeast, reroll)" value="${esc(S.compQuery || "")}"></div>`;
@@ -757,10 +764,17 @@ function compDetail(c) {
 function nodeSpot(comp) {
   if (!comp) return node(3, { title: "Your spot", sub: "Pick a comp first", locked: true });
   const seg = ["win", "mixed", "lose"].map(s => `<button class="${S.streak === s ? "on" : ""}" data-act="streak" data-v="${s}">${s[0].toUpperCase() + s.slice(1)} streak</button>`).join("");
-  return node(3, { title: "Your spot", choice: "", done: true, body: `<div class="spot-row">
-    <div class="seg">${seg}</div>
-    <label class="muted">HP <input class="hp" id="hpIn" type="number" min="1" max="100" placeholder="optional" value="${esc(S.hp)}"></label>
-  </div>` });
+  const taken = augList().length;
+  const stage = taken < 3 ? STAGES[taken] : null;           // next augment round, or late game once all 3 are in
+  const stageLabel = stage ? `Stage ${stage[0]}` : "Stage 5+";
+  return node(3, { title: "Your spot", choice: `${stageLabel}${stage ? ` · next augment ${stage}` : ""}`, done: true, body: `
+    <div class="spot-row">
+      <div class="seg">${seg}</div>
+      <label class="muted">HP <input class="hp" id="hpIn" type="number" min="1" max="100" placeholder="optional" value="${esc(S.hp)}"></label>
+    </div>
+    <div class="card" style="margin-top:12px"><div class="lbl">Level / econ — ${stageLabel.toLowerCase()}</div>
+      ${stage ? rollLevelBlock(comp, stage) : rollLevelBlock(comp, "5", true)}${ifThenHtml(comp, stage || "5")}</div>
+    ${stage ? augTypeCard(comp, stage) : ""}` });
 }
 
 // Leveling row for the streak: fast comps have Win/Lose/Mixed, rerolls Lose/Other
@@ -786,28 +800,6 @@ function rollLevelBlock(comp, stage, late = false) {
   return `${steps.length ? `<div class="timeline">${steps.map(s => `<span class="step"><span class="r">${costify(s.round)}</span><span class="l">Lv ${esc(s.level)}</span></span>`).join("")}</div>` : ""}
     ${row ? `<div class="muted">${esc(row.label)} · ${costify(comp.style || "")}</div>` : ""}
     ${notes.length ? `<ul class="notes">${notes.map(t => `<li>${costify(t)}</li>`).join("")}</ul>` : ""}`;
-}
-
-const stageOpen = st => S.comp && STAGES.slice(0, STAGES.indexOf(st)).every(p => S.augs[p]);
-
-function nodeStage(comp, stage, i) {
-  const n = 4 + i;
-  const title = `Stage ${stage[0]} · ${stage} augment`;
-  if (!comp) return node(n, { title, sub: "", locked: true });
-  if (!stageOpen(stage)) return node(n, { title, sub: `Pick your ${STAGES[i - 1]} augment first`, locked: true });
-  const taken = S.augs[stage];
-  const roll = `<div class="card"><div class="lbl">Roll / level — stage ${stage[0]}</div>${rollLevelBlock(comp, stage)}${ifThenHtml(comp, stage)}</div>`;
-  if (taken) {
-    const a = augByName(taken);
-    return node(n, { title, choice: `${esc(taken)}${a?.tier ? ` <span class="t-${esc(a.tier)}" style="font-size:11px">${esc(a.tier)}</span>` : ""}`, done: true,
-      change: `stage:${stage}`, body: roll });
-  }
-  const body = `<div class="offer-row"><input class="aug-in" type="search" autocomplete="off" data-search="aug" data-st="${stage}"
-      placeholder="Type the augment you took" value="${esc((S.augQuery || {})[stage] || "")}"></div>
-    <div id="augMatches-${stage}" style="margin-top:6px">${augMatchesHtml(comp, stage)}</div>
-    ${augTypeCard(comp, stage)}
-    <div style="margin-top:10px">${roll}</div>`;
-  return node(n, { title, sub: "Log what you took to continue", body });
 }
 
 // ── Utility: anti-heal + sunder/shred (dpei: mandatory every game) ───
@@ -960,12 +952,6 @@ function utilityTipHtml(id) {
     ${x.unit ? unitExtrasHtml(x.unit) : ""}`;
 }
 
-function nodeLate(comp) {
-  if (!comp || !STAGES.every(st => S.augs[st])) return node(7, { title: "Stage 5+", sub: "Finish your augments first", locked: true });
-  return node(7, { title: "Stage 5+", choice: "Cap your board", done: true,
-    body: `<div class="card"><div class="lbl">Roll / level — late game</div>${rollLevelBlock(comp, "5", true)}${ifThenHtml(comp, "5")}</div>` });
-}
-
 // ── If-then roll/level rules (matching rows light up for your spot) ──
 function ifThenRules(comp, stage) {
   const fast = isFast(comp), cost = +(comp.strategy.match(/reroll(\d)/)?.[1] || 0);
@@ -1060,16 +1046,6 @@ function ruleScore(a, comp, stage, chosen) {
   return { score: s, why: why.map(w => w[1]) };
 }
 
-function augMatchesHtml(comp, stage) {
-  const q = norm((S.augQuery || {})[stage] || "");
-  if (!q) return "";
-  const chosen = chosenBefore(stage);
-  const hits = DATA.augments.filter(a => a.stages.includes(stage) && !chosen.includes(a.name) && norm(a.name).includes(q))
-    .sort((x, y) => norm(y.name).startsWith(q) - norm(x.name).startsWith(q) || x.name.localeCompare(y.name)).slice(0, 8);
-  if (!hits.length) return `<div class="muted">No ${stage} augment matches that.</div>`;
-  return `<div class="chips">${hits.map(a => `<button class="chip aug-pick" data-act="took" data-st="${stage}" data-v="${esc(a.name)}">${esc(a.name)}</button>`).join("")}</div>`;
-}
-
 const AUG_TYPES = { Econ: "econ", Items: "items", Combat: "combat", Emblem: "trait" };
 
 function augTypeVerdict(comp, stage, chosen) {
@@ -1110,12 +1086,65 @@ function augTypeCard(comp, stage) {
     .filter(x => x.sc > 0).sort((x, y) => y.sc - x.sc).slice(0, 4).map(x => x.a.name);
   const names = ideal(v.type);
   return `<div class="card type-card">
-    <div class="lbl">Augment to take</div>
+    <div class="lbl">Next augment (${esc(stage)})</div>
     <div class="go">Go <b>${esc(v.type)}</b></div>
     ${v.reasons.length ? `<div class="items-list">${esc(v.reasons.slice(0, 2).join(" · "))}</div>` : ""}
-    ${names.length ? `<div class="chips" style="margin-top:8px">${names.map(n => `<span class="chip gold">${esc(n)}</span>`).join("")}</div>` : ""}
+    ${names.length ? `<div class="chips" style="margin-top:8px">${names.map(n => `<button class="chip gold aug-pick" data-act="aug-add" data-v="${esc(n)}">${esc(n)}</button>`).join("")}</div>` : ""}
     <div class="muted" style="margin-top:8px">If none show up: ${esc(v.next)}</div>
   </div>`;
+}
+
+// Augments taken, in order: 1st = 2-1, 2nd = 3-2, 3rd = 4-2
+const augList = () => STAGES.map(st => S.augs[st]).filter(Boolean);
+function setAugList(list) {
+  S.augs = {};
+  list.slice(0, 3).forEach((name, i) => { S.augs[STAGES[i]] = name; });
+}
+
+function augRating(a, stage) {
+  const r = a?.rating || {};
+  return r[stage] || r.All || "";
+}
+
+function augPanelHtml() {
+  const list = augList();
+  const slots = [0, 1, 2].map(i => {
+    const a = list[i] && augByName(list[i]);
+    return a ? `<button class="ap-slot filled" data-act="aug-remove" data-v="${esc(a.name)}" data-tipaug="${esc(a.name)}|${STAGES[i]}" aria-label="${esc(a.name)}">
+        ${a.icon ? `<img src="${esc(a.icon)}" alt="">` : esc(a.name)}</button>`
+      : `<span class="ap-slot">${STAGES[i]}</span>`;
+  }).join("");
+  return `<div class="card ah-box-card">
+    <div class="ah-head"><span class="ah-title">Augments</span><span class="ah-skip">${list.length}/3</span></div>
+    ${list.length < 3 ? `<input class="aug-in ap-search" type="search" autocomplete="off" data-search="augpanel"
+        placeholder="Search augments you took" value="${esc(S.augPanelQuery || "")}">
+      <div id="apMatches">${augPanelMatchesHtml()}</div>` : ""}
+    <div class="ap-slots">${slots}</div></div>`;
+}
+
+function augPanelMatchesHtml() {
+  const q = norm(S.augPanelQuery || "");
+  if (!q) return "";
+  const list = augList();
+  const stage = STAGES[list.length];
+  const hits = DATA.augments.filter(a => !list.includes(a.name) && norm(a.name).includes(q))
+    .sort((x, y) => (norm(y.name).startsWith(q) - norm(x.name).startsWith(q)) || (y.stages.includes(stage) - x.stages.includes(stage)) || x.name.localeCompare(y.name))
+    .slice(0, 6);
+  if (!hits.length) return `<div class="muted" style="margin-top:6px">No augment matches that.</div>`;
+  return `<div class="ap-results">${hits.map(a => `<button class="ap-result" data-act="aug-add" data-v="${esc(a.name)}" data-tipaug="${esc(a.name)}|${stage}">
+      ${a.icon ? `<img src="${esc(a.icon)}" alt="">` : ""}<span>${esc(a.name)}</span></button>`).join("")}</div>`;
+}
+
+const AUG_KIND = { econ: "Econ", items: "Items", combat: "Combat", trait: "Emblem / trait", reroll: "Reroll", tempo: "Tempo" };
+function augTipHtml(ref) {
+  const [name, stage] = ref.split("|");
+  const a = augByName(name);
+  if (!a) return "";
+  const kinds = (a.tags || []).map(t => AUG_KIND[t]).filter(Boolean);
+  const rating = augRating(a, stage);
+  return `<b>${esc(a.name)}</b>${rating ? ` <span class="tip-tier tier-${esc(rating)}">${esc(rating)}</span>` : ""}
+    <div class="tip-note">${esc([a.tier ? a.tier[0].toUpperCase() + a.tier.slice(1) : "", ...kinds.slice(0, 2)].filter(Boolean).join(" · "))}</div>
+    ${a.desc ? `<div class="tip-note">${esc(a.desc)}</div>` : ""}`;
 }
 
 function chosenBefore(stage) {
@@ -1191,9 +1220,7 @@ document.addEventListener("click", e => {
   else if (act === "opener") { S.opener = null; S.skipOpener = false; resetFrom(1); }
   else if (act === "comp") { S.comp = null; resetFrom(3); }
   else if (act === "streak") { S.streak = v; }  // your spot changes mid-game; keep picks
-  else if (act.startsWith("stage:")) { resetStage(act.slice(6)); }
   else if (act === "tab") { S.tab[st] = v; }
-  else if (act === "took") { S.augs[st] = v; if (S.augQuery) delete S.augQuery[st]; }
   else if (act === "took-typed") {
     const a = augByName(document.getElementById(`took-${st}`).value.trim());
     if (!a) { alert("Not an augment that can appear at " + st); return; }
@@ -1202,6 +1229,14 @@ document.addEventListener("click", e => {
   else if (act === "rank") { /* rule ranking re-renders below */ }
   else if (act === "ask-ai" && comp) { ensureAI(comp, st, true); }
   else if (act === "retry" && comp) { e.preventDefault(); ensureAI(comp, st, true); }
+  else if (act === "aug-add") {
+    const list = augList();
+    if (list.length < 3 && !list.includes(v)) setAugList([...list, v]);
+    S.augPanelQuery = "";
+  }
+  else if (act === "aug-remove") {
+    setAugList(augList().filter(n => n !== v));
+  }
   else if (act === "unit-pick") {
     S.unitQuery = v;
     const box = document.getElementById("unitSearch");
@@ -1226,7 +1261,8 @@ document.addEventListener("click", e => {
   }
   else if (act === "copy") { navigator.clipboard?.writeText(v); el.textContent = "Copied"; return; }
   render();
-  if (act.startsWith("pick") || act === "took" || act === "took-typed") {
+  if (act === "aug-add" && augList().length < 3) document.querySelector("[data-search=augpanel]")?.focus();
+  if (act.startsWith("pick")) {
     const next = document.querySelector(".node:not(.done):not(.locked)");
     next?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -1236,9 +1272,9 @@ const utTip = document.createElement("div");
 utTip.className = "ut-tip";
 document.body.appendChild(utTip);
 document.addEventListener("mouseover", e => {
-  const t = e.target.closest("[data-tip], [data-tipcomp], [data-tipunit]");
+  const t = e.target.closest("[data-tip], [data-tipcomp], [data-tipunit], [data-tipaug]");
   if (!t) { utTip.classList.remove("show"); return; }
-  utTip.innerHTML = t.dataset.tipunit ? unitTipHtml(t.dataset.tipunit)
+  utTip.innerHTML = t.dataset.tipaug ? augTipHtml(t.dataset.tipaug) : t.dataset.tipunit ? unitTipHtml(t.dataset.tipunit)
     : t.dataset.tipcomp ? itemTipHtml(t.dataset.tipcomp, +t.dataset.tipi) : utilityTipHtml(t.dataset.tip);
   const r = t.getBoundingClientRect();
   utTip.classList.add("show");
@@ -1255,13 +1291,12 @@ document.addEventListener("input", e => {
   if (t.id === "unitSearch") {
     S.unitQuery = t.value;
     document.getElementById("opMatches").innerHTML = openerMatchesHtml();
+  } else if (t.dataset.search === "augpanel") {
+    S.augPanelQuery = t.value;
+    document.getElementById("apMatches").innerHTML = augPanelMatchesHtml();
   } else if (t.dataset.search === "comp") {
     S.compQuery = t.value;
     document.getElementById("compMatches").innerHTML = compMatchesHtml();
-  } else if (t.dataset.search === "aug") {
-    const comp = S.comp && compById(S.comp);
-    S.augQuery = { ...(S.augQuery || {}), [t.dataset.st]: t.value };
-    if (comp) document.getElementById(`augMatches-${t.dataset.st}`).innerHTML = augMatchesHtml(comp, t.dataset.st);
   } else return;
   save();
 });

@@ -19048,6 +19048,7 @@
    "desc": "Gain ? Training Dummies. Combat start: Your Training Dummies launch themselves towards a group of enemies and Stun them for ? seconds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/crash-test-dummies-ii.png",
    "apiName": "TFT10_Augment_CrashTestDummies",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19062,6 +19063,7 @@
    "desc": "Gain an Adaptive Helm. Champions holding this item gain both effects.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/fully-adapted-ii.png",
    "apiName": "TFT10_Augment_FullyAdapted",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19076,6 +19078,10 @@
    "desc": "You no longer gain interest. Gain ? gold now. Gain ? XP after every player combat.  Interest is extra gold you gain per ?g saved.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/going-long-iii.png",
    "apiName": "DA_GoingLong",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "tempo",
     "econ"
@@ -19093,6 +19099,10 @@
    "desc": "Champions that aren't holding items have a ?% chance to drop 1 gold on death.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/good-for-something-i.png",
    "apiName": "DA_18_GoodForSomethingI",
+   "rating": {
+    "2-1": "B",
+    "All": "B"
+   },
    "tags": [
     "items",
     "losestreak",
@@ -19111,6 +19121,10 @@
    "desc": "Gain 2 Lesser Champion Duplicators. Gain 4 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/heroic-grab-bag-ii.png",
    "apiName": "DA_HeroicGrabBag",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "items",
     "reroll",
@@ -19130,6 +19144,7 @@
    "desc": "Your 4-cost and 5-cost champions gain ? Health and ?% Attack Speed for every 1-cost and 2-cost champion on your board.  ?",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/little-buddies-ii.png",
    "apiName": "TFT10_Augment_LittleBuddies",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19144,6 +19159,7 @@
    "desc": "Gain a Training Dummy and 4 gold. If it is the first to die each player combat, gain 1 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/the-scapegoat-ii.png",
    "apiName": "TFT10_Augment_Scapegoat",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -19160,6 +19176,7 @@
    "desc": "Immediately go to level 6 and gain 8 XP. You don't get to choose your future augments.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/atwhatcost_iii.png",
    "apiName": "TFT11_Augment_AtWhatCost",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -19177,6 +19194,7 @@
    "desc": "Every 8 damage you deal to enemy tacticians gives you 2 gold. Total Payouts: ? Gold",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/bloodbank_i.png",
    "apiName": "TFT11_Augment_BloodBank",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -19193,6 +19211,10 @@
    "desc": "Gain a random ?-star 1-cost champion. Gain 6 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/constructacompanion_iii.png",
    "apiName": "DA_BuildABud",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "items",
     "econ"
@@ -19210,6 +19232,10 @@
    "desc": "Gain a powerful and random reward.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/calltochaos_iii.png",
    "apiName": "DA_CallToChaos",
+   "rating": {
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [],
    "traits": []
   },
@@ -19224,6 +19250,10 @@
    "desc": "Now, and at the start of every stage, gain ? XP and ? free rerolls.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/epoch_ii.png",
    "apiName": "DA_Epoch",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -19240,6 +19270,10 @@
    "desc": "Now, and at the start of every stage, gain ? XP and ? free rerolls.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/epoch_ii.png",
    "apiName": "DA_EpochPlus",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -19256,6 +19290,7 @@
    "desc": "For the next stage, you only get 2 bench slots. After, get ? item&nbsp;components.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/overencumbered_i.png",
    "apiName": "TFT11_Augment_OverEncumbered",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19270,6 +19305,7 @@
    "desc": "Gain 2 item components. Every 5 wins gives you an item&nbsp;component.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/prizefighter_ii.png",
    "apiName": "TFT11_Augment_Prizefighter",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19285,6 +19321,7 @@
    "desc": "Gain a Masterwork Upgrade and 1 component anvil.  Masterwork Upgrade upgrades an item to Radiant!",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/radiantrefactor_iii.png",
    "apiName": "TFT11_Augment_RadiantRefactor",
+   "rating": {},
    "tags": [
     "items"
    ],
@@ -19301,6 +19338,7 @@
    "desc": "Gain 7 gold now and 1 gold every&nbsp;round.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/raininggold_ii.png",
    "apiName": "TFT11_Augment_RainingGold",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -19317,6 +19355,7 @@
    "desc": "Gain 18 gold now and 1 gold every&nbsp;round.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/raininggold_ii.png",
    "apiName": "TFT11_Augment_RainingGoldPlus",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -19333,6 +19372,7 @@
    "desc": "The next 4-cost champion you buy with gold is instantly upgraded to 2-star. Gain 7 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/reinfourcement_ii.png",
    "apiName": "TFT11_Augment_Reinfourcement",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -19349,6 +19389,7 @@
    "desc": "Every round, if you're in the bottom 4, your team permanently gains ?% Attack Damage and Ability Power. If you're in the Top 4, they have ?% more Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/scoreboardscrapper_ii.png",
    "apiName": "TFT11_Augment_ScoreboardScrapper",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19363,6 +19404,10 @@
    "desc": "Gain 3 gold. After each player combat, if there are no items on your bench (other than consumables), gain ? XP.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/slammin_ii.png",
    "apiName": "DA_Slammin",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "econ",
     "items"
@@ -19380,6 +19425,10 @@
    "desc": "Gain ? gold and ? XP now. After each player combat, if there are no items on your bench (other than consumables), gain ? XP.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/slammin_ii.png",
    "apiName": "DA_SlamminPlus",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ",
     "items"
@@ -19398,6 +19447,7 @@
    "desc": "Your team becomes small, gaining ?% Attack Speed and Movement Speed.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/tinybutdeadly_iii.png",
    "apiName": "TFT11_Augment_TinyButDeadly",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19414,6 +19464,12 @@
    "desc": "Gain a Spatula. Champions holding Spatula or Frying Pan items gain ?% Attack Speed and 3 Mana Regen.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/ultrarapidfire_ii.png",
    "apiName": "DA_URF",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "2-1": "A",
+    "4-2": "A"
+   },
    "tags": [
     "trait"
    ],
@@ -19430,6 +19486,10 @@
    "desc": "Gain ? Thief's Gloves. After ? player combats, gain another.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/bandthieves3.png",
    "apiName": "DA_BandOfThievesII",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "combat",
     "tempo"
@@ -19447,6 +19507,10 @@
    "desc": "Gain ? Thief's Gloves. After ? player combats, gain another.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/bandthieves3.png",
    "apiName": "DA_BandOfThievesIIPlus",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "items",
     "combat"
@@ -19464,6 +19528,10 @@
    "desc": "Gain ? Thief's Gloves. After ? player combats, gain another.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/bandthieves3.png",
    "apiName": "DA_BandOfThievesIIPlusPlus",
+   "rating": {
+    "4-2": "B",
+    "All": "B"
+   },
    "tags": [
     "items",
     "combat"
@@ -19481,6 +19549,10 @@
    "desc": "After losing your combat, gain 2 gold and a free Shop reroll.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/calculatedloss2.png",
    "apiName": "DA_CalculatedLoss",
+   "rating": {
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "losestreak",
     "econ"
@@ -19498,6 +19570,10 @@
    "desc": "If there are no champions on your bench at the end of player combat, gain 3 XP.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/clearmind2.png",
    "apiName": "DA_ClearMind",
+   "rating": {
+    "All": "B",
+    "2-1": "A"
+   },
    "tags": [
     "fast8",
     "econ"
@@ -19516,6 +19592,11 @@
    "desc": "Your champions holding an item gain ? Health and ?% Attack Damage. Gain a B.F. Sword.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/cybernetic2.png",
    "apiName": "DA_CyberneticImplants_Gold",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "items"
    ],
@@ -19533,6 +19614,11 @@
    "desc": "Your champions holding an item gain ? Health and ? Mana Regen. Gain a Tear of the Goddess.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/cybernetic-uplink-ii.png",
    "apiName": "DA_CyberneticUplink_Gold",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "items"
    ],
@@ -19550,6 +19636,7 @@
    "desc": "Allies holding an item gain 275 Health and 3 Mana Regen. Gain a Tear of the Goddess.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/cybernetic-uplink-iii.png",
    "apiName": "TFT6_Augment_CyberneticUplink3",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19565,6 +19652,7 @@
    "desc": "Your champions that start combat with no adjacent champions gain a 20% max Health shield for 10 seconds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/exiles1.png",
    "apiName": "TFT6_Augment_Distancing",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19580,6 +19668,7 @@
    "desc": "Your champions that start combat with no adjacent champions gain a 30% max Health shield for 10 seconds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/exiles2.png",
    "apiName": "TFT6_Augment_Distancing2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19595,6 +19684,11 @@
    "desc": "Your units gain ?% Attack Damage and ?% Ability Power for each non-unique Trait active across your team.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/standunited1.png",
    "apiName": "DA_StandUnited",
+   "rating": {
+    "3-2": "B",
+    "4-2": "B",
+    "All": "B"
+   },
    "tags": [],
    "traits": []
   },
@@ -19611,6 +19705,12 @@
    "desc": "Every ? attacks an ally takes, they deal ?-? (based on current Stage) magic damage to nearby enemies (1 second cooldown).",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/electrocharge-i.png",
    "apiName": "DA_ElectrochargeI",
+   "rating": {
+    "3-2": "B",
+    "2-1": "B",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -19629,6 +19729,12 @@
    "desc": "Every ? attacks an ally takes, they deal ?-? (based on current Stage) magic damage to nearby enemies (1 second cooldown).",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/electrocharge-ii.png",
    "apiName": "DA_ElectrochargeII",
+   "rating": {
+    "3-2": "B",
+    "All": "B",
+    "2-1": "B",
+    "4-2": "B"
+   },
    "tags": [
     "combat"
    ],
@@ -19647,6 +19753,7 @@
    "desc": "Gain +1 max team size and 1 four-cost champion.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/newrecruit3.png",
    "apiName": "TFT6_Augment_ForceOfNature",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19663,6 +19770,7 @@
    "desc": "Gain +1 max team size and 2 four-cost champions.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/newrecruit3.png",
    "apiName": "TFT6_Augment_ForceOfNaturePlus",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19678,6 +19786,11 @@
    "desc": "Each time your shop is rerolled you have a ?% chance to gain a free reroll.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/goldenticket3.png",
    "apiName": "DA_PrismaticTicket",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "reroll"
    ],
@@ -19694,6 +19807,10 @@
    "desc": "You no longer gain interest but gain ? gold at the start of every player combat round. Gain ? gold now.  Interest is extra gold you gain per ?g saved.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/hyperroll2.png",
    "apiName": "DA_Hustler",
+   "rating": {
+    "All": "B",
+    "2-1": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -19712,6 +19829,7 @@
    "desc": "Gain 1 random completed item.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/itemgrabbag1.png",
    "apiName": "TFT6_Augment_ItemGrabBag1",
+   "rating": {},
    "tags": [
     "items"
    ],
@@ -19730,6 +19848,7 @@
    "desc": "Combat start: Grant units with adjacent allies a 130 Health Shield for 8 seconds. This Shield stacks.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/keepers-i.png",
    "apiName": "TFT6_Augment_Keepers1",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19746,6 +19865,7 @@
    "desc": "Combat start: Grant units with adjacent allies a 210 Health Shield for 8 seconds. This Shield stacks.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/keepers-ii.png",
    "apiName": "TFT6_Augment_Keepers2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19761,6 +19881,10 @@
    "desc": "Champions without items equipped gain ? Armor and Magic Resist.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/makeshift1.png",
    "apiName": "DA_MakeshiftArmorI",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "items"
    ],
@@ -19778,6 +19902,10 @@
    "desc": "Champions without items equipped gain ? Armor and Magic Resist.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/makeshift2.png",
    "apiName": "DA_MakeshiftArmorII",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "items"
    ],
@@ -19794,6 +19922,10 @@
    "desc": "When you buy XP, gain an additional ?. Gain 6 immediately.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/levelup3.png",
    "apiName": "DA_LevelUp",
+   "rating": {
+    "All": "A",
+    "2-1": "B"
+   },
    "tags": [
     "fast9",
     "econ"
@@ -19811,6 +19943,10 @@
    "desc": "Gain 1 random component, 2 gold, and 1 random 5-cost champion.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/one-two-five-i.png",
    "apiName": "DA_18_OneTwoFive",
+   "rating": {
+    "4-2": "A",
+    "All": "B"
+   },
    "tags": [
     "econ"
    ],
@@ -19829,6 +19965,7 @@
    "desc": "Round start: items on your bench are randomized.   Gain 1 random component.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/pandora1.png",
    "apiName": "TFT6_Augment_PandorasItems",
+   "rating": {},
    "tags": [
     "items"
    ],
@@ -19847,6 +19984,12 @@
    "desc": "Choose 1 of 4 Artifacts. Artifacts are more powerful items with a unique effect.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/portableforge2.png",
    "apiName": "DA_PortableForge",
+   "rating": {
+    "3-2": "B",
+    "All": "B",
+    "2-1": "B",
+    "4-2": "B"
+   },
    "tags": [
     "items"
    ],
@@ -19865,6 +20008,12 @@
    "desc": "Choose 1 of 5 Radiant Items. Gain a Magnetic Remover.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/radiantrelic-iii.png",
    "apiName": "DA_RadiantRelic",
+   "rating": {
+    "3-2": "S",
+    "4-2": "A",
+    "All": "A",
+    "2-1": "S"
+   },
    "tags": [
     "items",
     "reroll"
@@ -19882,6 +20031,10 @@
    "desc": "Champions on your board permanently transform into random champions 1 cost tier higher (max 5). Gain 2 Magnetic Removers and ? free rerolls.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/recombobulator-i.png",
    "apiName": "DA_Recombobulator",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "fast8"
    ],
@@ -19898,6 +20051,10 @@
    "desc": "Gain 1 random completed item now, and 1 component after ? player combats. Selling champions breaks completed items into components (excluding Tactician's items and Emblems).",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/salvage2.png",
    "apiName": "DA_SalvageBin",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "items"
    ],
@@ -19915,6 +20072,7 @@
    "desc": "After 10 seconds of combat, your team heals 40% of their missing Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/second--wind-i.png",
    "apiName": "TFT6_Augment_SecondWind1",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19930,6 +20088,7 @@
    "desc": "After 10 seconds of combat, your team heals 60% of their missing Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/second--wind-ii.png",
    "apiName": "TFT6_Augment_SecondWind2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19945,6 +20104,7 @@
    "desc": "Combat Start: Burn all enemies for 18% of their max Health over 18 seconds and reduce healing received by 33%.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/sunfireboard2.png",
    "apiName": "TFT6_Augment_SunfireBoard",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -19959,6 +20119,10 @@
    "desc": "Gain a golden egg that hatches in ? turns for a huge amount of loot. Winning player combat speeds up the hatch timer by an extra turn.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/the-golden-egg-iii.png",
    "apiName": "DA_GoldenEgg",
+   "rating": {
+    "4-2": "C",
+    "All": "C"
+   },
    "tags": [
     "econ"
    ],
@@ -19976,6 +20140,7 @@
    "desc": "You can no longer buy XP. Every time you spend gold to reroll your Shop, gain 2 XP. Gain 1 gold now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/wisespending3.png",
    "apiName": "TFT6_Augment_ThriftShop",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -19992,6 +20157,7 @@
    "desc": "Increase your current and max player health by ?.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/tiny-titans-i.png",
    "apiName": "TFT6_Augment_TinyTitans",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20006,6 +20172,10 @@
    "desc": "Gain a Shop reroll every round. Gain 2 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/trade2.png",
    "apiName": "DA_TradeSector",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "reroll",
     "econ"
@@ -20023,6 +20193,10 @@
    "desc": "Gain ? free Shop rerolls now and ? every round for the rest of the game.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/trade3.png",
    "apiName": "DA_CommerceCore",
+   "rating": {
+    "4-2": "S",
+    "All": "S"
+   },
    "tags": [
     "reroll",
     "fast8"
@@ -20042,6 +20216,7 @@
    "desc": "When you field exactly 2 copies of a champion, they both gain ?% Attack Damage and Ability Power and ? Armor, and Magic Resist. When you 3-star, gain a 2-star copy.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/double-trouble-ii.png",
    "apiName": "DA_DoubleTrouble",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20056,6 +20231,7 @@
    "desc": "You cannot perform actions for the next 3 rounds. Afterwards, gain 17 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/afk-i.png",
    "apiName": "TFT7_Augment_AFK",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -20074,6 +20250,12 @@
    "desc": "Gain ? Thief's Gloves.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/bandthieves1.png",
    "apiName": "DA_BandOfThieves",
+   "rating": {
+    "3-2": "A",
+    "2-1": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "combat",
     "tempo"
@@ -20092,6 +20274,7 @@
    "desc": "Allies isolated in pairs gain ?% Attack Speed and 9 Armor and Magic Resist at the start of combat.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/best-friends-i.png",
    "apiName": "TFT7_Augment_BestFriends1",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20107,6 +20290,7 @@
    "desc": "Allies isolated in pairs gain ?% Attack Speed and 14 Armor and Magic Resist at the start of combat.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/best-friends-ii.png",
    "apiName": "TFT7_Augment_BestFriends2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20122,6 +20306,7 @@
    "desc": "Allies that start combat next to an ally with over 1750 Health gain 10% Durability. Gain a Giant's Belt.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/big-friend-i.png",
    "apiName": "TFT7_Augment_BigFriend",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20137,6 +20322,7 @@
    "desc": "Allies that start combat next to an ally with over 1750 Health gain 13% Durability. Gain a Giant's Belt.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/big-friend-ii.png",
    "apiName": "TFT7_Augment_BigFriend2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20151,6 +20337,10 @@
    "desc": "Gain a 2-star champion and 1 gold each time you level up. The champion's cost tier is your level minus ? (max: ?-cost).",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/golden-gifts-iii.png",
    "apiName": "DA_BirthdayPresent",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "fast9",
     "econ"
@@ -20168,6 +20358,10 @@
    "desc": "Gain 4 ?-cost champions now. If your bench is full at the end of player combat, gain 3 XP.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/dizzy-ii.png",
    "apiName": "DA_ClutteredMind",
+   "rating": {
+    "All": "A",
+    "2-1": "B"
+   },
    "tags": [
     "fast8",
     "econ"
@@ -20186,6 +20380,7 @@
    "desc": "Gain +2 max team size and your team gains ?% Durability, but you take double player damage when you lose a player combat.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/cursedcrown-iii.png",
    "apiName": "TFT7_Augment_CursedCrown",
+   "rating": {},
    "tags": [
     "tempo",
     "reroll"
@@ -20203,6 +20398,10 @@
    "desc": "When you reach Level 9, gain 27 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/late-game-specialist-i.png",
    "apiName": "DA_LateGameSpecialist",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ",
     "fast9"
@@ -20220,6 +20419,10 @@
    "desc": "Gain an Artifact Anvil now and after every ? player combats.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/living-forge-iii.png",
    "apiName": "DA_LivingForge",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "items"
    ],
@@ -20236,6 +20439,10 @@
    "desc": "Thief's Gloves will always give your champions ideal items. Gain ? Sparring Gloves and ? gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/lucky-gloves-iii.png",
    "apiName": "DA_LuckyGloves",
+   "rating": {
+    "All": "A",
+    "2-1": "B"
+   },
    "tags": [
     "items",
     "combat",
@@ -20255,6 +20462,11 @@
    "desc": "Thief's Gloves will always give your champions ideal items. Gain ? Sparring Gloves now, then another after ? player combats.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/lucky-gloves-iii.png",
    "apiName": "DA_LuckyGlovesPlus",
+   "rating": {
+    "3-2": "A",
+    "4-2": "B",
+    "All": "B"
+   },
    "tags": [
     "items",
     "combat"
@@ -20273,6 +20485,11 @@
    "desc": "At the start of every round, champions on the 3 rightmost bench slots transform into random champions of the same cost. Gain 4 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/pandoras-bench-ii.png",
    "apiName": "DA_PandorasBench",
+   "rating": {
+    "3-2": "A",
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "reroll",
     "econ"
@@ -20290,6 +20507,7 @@
    "desc": "Champions on your bench permanently gain 30 Health, 3% Attack Damage, and 3% Ability Power every round. Champions start with 1 stack of this effect, and can stack up to 4 times.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/preparation-i.png",
    "apiName": "TFT7_Augment_Preparation",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20304,6 +20522,7 @@
    "desc": "Champions on your bench permanently gain 50 Health, 5% Attack Damage, and 5% Ability Power every round. Champions start with 1 stack of this effect, and can stack up to 4 times.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/preparation-ii.png",
    "apiName": "TFT7_Augment_Preparation2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20319,6 +20538,11 @@
    "desc": "Gain ? Spatula, 3 random components, and 5 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/urfs-grab-bag-iii.png",
    "apiName": "DA_UrfsGrabBag",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "items",
     "trait",
@@ -20338,6 +20562,11 @@
    "desc": "Gain 1 random completed item now, and 1 component after ? player combats. Selling champions breaks completed items into components (excluding Tactician's items and Emblems).",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/salvage2.png",
    "apiName": "DA_SalvageBinPlus",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "items"
    ],
@@ -20354,6 +20583,7 @@
    "desc": "Choose a gold-generating Artifact item and gain a Magnetic Remover.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/all-that-shimmers-ii.png",
    "apiName": "TFT9_Augment_AllThatShimmers",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -20371,6 +20601,11 @@
    "desc": "Gain a Lesser Champion Duplicator. Gain another after ? player combats.  This item allows you to copy a 3-cost or less champion.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/building-an-army-i.png",
    "apiName": "DA_TeamBuilding",
+   "rating": {
+    "3-2": "S",
+    "2-1": "A",
+    "All": "S"
+   },
    "tags": [
     "reroll"
    ],
@@ -20387,6 +20622,10 @@
    "desc": "Gain a random 2-cost champion now. Gain the same one again every time you level up.  Champion: 0",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/caretaker_s-chosen-i.png",
    "apiName": "DA_18_CaretakersAlly",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "reroll"
    ],
@@ -20403,6 +20642,10 @@
    "desc": "Gain a component anvil when you reach level 5, 6, 7, and 8.  Component anvils offer 4 choices.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/caretaker_s-chosen-ii.png",
    "apiName": "DA_CaretakersFavor",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "fast8"
    ],
@@ -20419,6 +20662,7 @@
    "desc": "As you level, gain more powerful items. Level 4: Component anvil Level 6: Completed item anvil Level 8: Choose 1 of 5 Radiant items",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/caretaker_s-chosen-iii.png",
    "apiName": "TFT9_Augment_BardPlaybook3",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20434,6 +20678,11 @@
    "desc": "Gain 3 random components, 2 gold, and 1 Reforger.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/grab-bag-ii.png",
    "apiName": "DA_18_BigGrabBag",
+   "rating": {
+    "3-2": "S",
+    "All": "S",
+    "4-2": "S"
+   },
    "tags": [
     "items",
     "econ"
@@ -20451,6 +20700,7 @@
    "desc": "Gain a random item component now and at the start of the next 5 rounds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/buried-treasures-iii.png",
    "apiName": "TFT9_Augment_BuildingACollectionPlusPlus",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20466,6 +20716,11 @@
    "desc": "After 12 seconds of combat, your units gain ?% Damage Amp.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/ascension2.png",
    "apiName": "DA_Ascension",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "items",
     "combat"
@@ -20484,6 +20739,7 @@
    "desc": "Your team gains ?% Damage Amp. After ? seconds, this increases to 60% Damage Amp.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/ascension3.png",
    "apiName": "TFT9_Augment_Commander_FinalAscension",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20499,6 +20755,11 @@
    "desc": "After 12 seconds of combat, your units gain ?% Damage Amp.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/ascension1.png",
    "apiName": "DA_PartialAscension",
+   "rating": {
+    "3-2": "A",
+    "4-2": "S",
+    "All": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -20516,6 +20777,7 @@
    "desc": "Gain 10 free Shop rerolls.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/rolling-for-days-i.png",
    "apiName": "TFT9_Augment_Commander_RollingForDays",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20531,6 +20793,7 @@
    "desc": "Gain 1 random component and 2 random 3-cost champions.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/teaming-up-i.png",
    "apiName": "TFT9_Augment_Commander_TeamingUp1",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20545,6 +20808,7 @@
    "desc": "Whenever you would get a component, gain a component anvil instead. Gain a random component.The anvil offers 4 choices.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/the-customer-is-always-right-i.png",
    "apiName": "DA_ComponentBuffet",
+   "rating": {},
    "tags": [
     "items"
    ],
@@ -20561,6 +20825,7 @@
    "desc": "Enemies have a ?% chance to drop loot when killed.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/spoils-of-war-legend-i.png",
    "apiName": "TFT9_Augment_DravenSpoilsOfWar",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20575,6 +20840,7 @@
    "desc": "Enemies have a ?% chance to drop loot when killed.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/spoils-of-war-legend-ii.png",
    "apiName": "TFT9_Augment_DravenSpoilsOfWar2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20589,6 +20855,7 @@
    "desc": "Enemies have a ?% chance to drop loot when killed.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/spoils-of-war-legend-iii.png",
    "apiName": "TFT9_Augment_DravenSpoilsOfWar3",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20604,6 +20871,11 @@
    "desc": "Your team gains ?% Critical Strike Chance, ?% Critical Strike Damage, and Precision.  Precision: Ability damage can critically strike. Additional Precision grants 10% Critical Strike Damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/jeweled-lotus-iii.png",
    "apiName": "DA_JeweledLotus_II",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -20621,6 +20893,11 @@
    "desc": "When an enemy dies, a nearby ally is healed for ? Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/healing-orbs-i.png",
    "apiName": "DA_HealingOrbsI",
+   "rating": {
+    "3-2": "B",
+    "4-2": "B",
+    "All": "B"
+   },
    "tags": [
     "combat"
    ],
@@ -20638,6 +20915,11 @@
    "desc": "When an enemy dies, a nearby ally is healed for ? Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/healing-orbs-ii.png",
    "apiName": "DA_HealingOrbsII",
+   "rating": {
+    "3-2": "A",
+    "All": "B",
+    "4-2": "B"
+   },
    "tags": [
     "combat"
    ],
@@ -20654,6 +20936,10 @@
    "desc": "Gain 22 gold. Your max interest is increased to 10.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/richgetricher3.png",
    "apiName": "DA_HedgeFund",
+   "rating": {
+    "All": "A",
+    "2-1": "B"
+   },
    "tags": [
     "losestreak",
     "econ"
@@ -20671,6 +20957,7 @@
    "desc": "Gain 30 gold. Your max interest is increased to 10.  Interest is extra gold you gain per 10g saved.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/richgetricher3.png",
    "apiName": "TFT9_Augment_HedgeFundPlus",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -20687,6 +20974,7 @@
    "desc": "When you level up, gain a number of free shop refreshes equal to your level+1. Gain 2 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/silver-ticket-iii.png",
    "apiName": "TFT9_Augment_Legend_HighEndSector",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -20703,6 +20991,10 @@
    "desc": "Gain a component anvil and ? gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/iron-assets-i.png",
    "apiName": "DA_IronAssets",
+   "rating": {
+    "2-1": "B",
+    "All": "B"
+   },
    "tags": [
     "items",
     "econ"
@@ -20721,6 +21013,11 @@
    "desc": "Your team gains ?% Critical Strike Chance and Precision.  Precision: Ability damage can critically strike. Additional Precision grants 10% Critical Strike Damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/jeweled-lotus-ii.png",
    "apiName": "DA_JeweledLotus_I",
+   "rating": {
+    "3-2": "S",
+    "All": "A",
+    "4-2": "S"
+   },
    "tags": [
     "combat"
    ],
@@ -20739,6 +21036,7 @@
    "desc": "You can see who you will fight next. Your team gains ?% Damage Amp, increased to ?% if you and your opponent have any of the same traits active.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/know-your-enemy-ii.png",
    "apiName": "DA_KnowYourEnemy",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20753,6 +21051,10 @@
    "desc": "After player combat, gain ? XP if you won or ? XP if you lost.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/learning-from-experience-ii.png",
    "apiName": "DA_PatientStudy",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "losestreak",
     "fast9",
@@ -20772,6 +21074,10 @@
    "desc": "After ?  player combats, gain an Artifact anvil.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/long-time-crafting-i.png",
    "apiName": "DA_LatentForge",
+   "rating": {
+    "2-1": "B",
+    "All": "B"
+   },
    "tags": [
     "items"
    ],
@@ -20789,6 +21095,11 @@
    "desc": "Gain a copy of each 1-cost champion.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missed-connections-i.png",
    "apiName": "DA_MissedConnections",
+   "rating": {
+    "3-2": "S",
+    "4-2": "S",
+    "All": "S"
+   },
    "tags": [
     "econ",
     "tempo",
@@ -20809,6 +21120,7 @@
    "desc": "Gain 2 1-cost champion, ? 2-cost champion, and 1 3-cost champion.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/threes-company-i.png",
    "apiName": "TFT9_Augment_OneTwosThree",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20825,6 +21137,12 @@
    "desc": "Round start: items on your bench are randomized.   Gain ? random components and ? gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/pandora2.png",
    "apiName": "DA_PandorasItemsII",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "2-1": "S",
+    "4-2": "B"
+   },
    "tags": [
     "items",
     "econ"
@@ -20843,6 +21161,11 @@
    "desc": "Round start: items on your bench are randomized.   Gain ? Radiant item.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/pandora3.png",
    "apiName": "DA_PandorasItemsIII",
+   "rating": {
+    "3-2": "A",
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "items"
    ],
@@ -20859,6 +21182,7 @@
    "desc": "Your team gains 6% Attack Speed. After each round, they gain 0.5% more. (Current Attack Speed: ?%)",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/pumping-up-i.png",
    "apiName": "TFT9_Augment_PumpingUp",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20873,6 +21197,7 @@
    "desc": "Your team gains 10% Attack Speed. After each round, they gain 1% more. (Current Attack Speed: ?%)",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/pumping-up-ii.png",
    "apiName": "TFT9_Augment_PumpingUp2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20887,6 +21212,7 @@
    "desc": "Your team gains 16% Attack Speed. After each round, they gain 2% more. (Current Attack Speed: ?%)",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/pumping-up-iii.png",
    "apiName": "TFT9_Augment_PumpingUp3",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -20901,6 +21227,7 @@
    "desc": "Your Tactician loses 20 Health, but after 7 player combats, gain 26 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/risky-moves-i.png",
    "apiName": "TFT9_Augment_RiskyMoves",
+   "rating": {},
    "tags": [
     "gamble",
     "econ"
@@ -20919,6 +21246,11 @@
    "desc": "Gain a Radiant Thief's Gloves item. This equips 2 random Radiant items every round.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/roll-the-dice-iii.png",
    "apiName": "DA_RadiantRascal",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "items",
     "combat"
@@ -20936,6 +21268,10 @@
    "desc": "Gain 10 XP.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/silver-spoon-i.png",
    "apiName": "DA_SilverSpoon",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -20952,6 +21288,7 @@
    "desc": "The first 1-cost and 2-cost champions you buy are instantly upgraded to 2-star. Gain 7 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/stars-are-born-ii.png",
    "apiName": "TFT9_Augment_StarsAreBorn",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -20968,6 +21305,7 @@
    "desc": "Gain a 4-cost champion, a 2-star 1-cost champion that shares a trait with them, and 8 gold.  At the start of the next 2 stages, gain that 4-cost champion again.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/starter-kit-iii.png",
    "apiName": "TFT9_Augment_StarterKit",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -20984,6 +21322,7 @@
    "desc": "Gain 2 player Health and 2 gold after every player combat. Your Tactician also moves faster. Gain 10 gold now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/tiniest-titaniii.png",
    "apiName": "TFT9_Augment_TiniestTitanPlus",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -21001,6 +21340,11 @@
    "desc": "Your team gains 88 Health, ?% Attack Damage, ?% Ability Power, 8 Armor, 8 Magic Resist, ?% Attack Speed, and 8 Mana.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/tons-of-stats-ii.png",
    "apiName": "DA_TonsOfStatsII",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -21018,6 +21362,7 @@
    "desc": "Gain a Recurve Bow. Your team gains 12% Attack Speed.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/you-have-my-bow-ii.png",
    "apiName": "TFT9_Augment_YouHaveMyBow",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21032,6 +21377,10 @@
    "desc": "You can always move freely on Carousel rounds. Gain 5 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/young-and-wild-and-free-i.png",
    "apiName": "DA_YoungAndWildAndFree",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "tempo",
     "econ"
@@ -21049,6 +21398,9 @@
    "desc": "Gain ? Gold. Your next augment is one tier lower.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/advancedloan_ii.png",
    "apiName": "DA_AdvancedLoan",
+   "rating": {
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -21065,6 +21417,10 @@
    "desc": "Gain ? Gold. Your next augment is one tier lower.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/advancedloan_ii.png",
    "apiName": "DA_AdvancedLoanPlus",
+   "rating": {
+    "3-2": "S",
+    "All": "S"
+   },
    "tags": [
     "econ"
    ],
@@ -21081,6 +21437,7 @@
    "desc": "You are more likely to fight stronger players, and you know who you will fight. When you lose, gain 2 XP. After your first win and every 3 wins after, gain a component.  Foes vanquished: ?",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/aimforthetop_ii.png",
    "apiName": "TFT_Augment_AimForTheTop",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -21097,6 +21454,7 @@
    "desc": "Choose a gold-generating Artifact. Gain a Magnetic Remover and 4 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/all-that-shimmers-ii.png",
    "apiName": "TFT_Augment_AllThatShimmersPlus",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -21113,6 +21471,7 @@
    "desc": "Gain three 2-cost champions. If you 3-star two of them, gain an orb filled with loot. Gain a Lesser Champion Duplicator at the start of next 2 stages.  Champions: ?, ?, ?",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/exaltedadventure_iii.png",
    "apiName": "TFT_Augment_AnExaltedAdventure",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21127,6 +21486,7 @@
    "desc": "The next completed item you make grants an additional copy of it. Gain 5 gold now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/anotherone_ii.png",
    "apiName": "TFT_Augment_AnotherOne",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -21144,6 +21504,7 @@
    "desc": "The next completed item you make grants another copy of it. Gain 1 component anvil.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/anotherone_ii.png",
    "apiName": "TFT_Augment_AnotherOnePlus",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21159,6 +21520,11 @@
    "desc": "After ? seconds of combat, stun the enemy team for 1.5 seconds. Repeat this after ? seconds of combat.  TFT Macao Open, 2024",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/arcaneviktory_ii.png",
    "apiName": "DA_ArcaneViktory",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -21175,6 +21541,7 @@
    "desc": "Gain a ?-star 5-cost champion holding a recommended item. You cannot field it until Stage 4-3.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/aurafarming_ii.png",
    "apiName": "TFT_Augment_AuraFarming",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21190,6 +21557,11 @@
    "desc": "Combat start: Your team gains ?% Attack Damage and Ability Power per second for ? seconds. At max stacks, deal ?% bonus true damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/awakenedsoul_iii.png",
    "apiName": "DA_SoulAwakening",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -21206,6 +21578,10 @@
    "desc": "Gain a 3-cost non-Tank champion and an Emblem that matches their class.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/backlineblueprint_ii.png",
    "apiName": "DA_BacklineBlueprint",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "combat",
     "trait"
@@ -21224,6 +21600,7 @@
    "desc": "Combat start:  Every 3 seconds, champions in your 3 rightmost bench slots grant your team ?% Attack Speed per slot.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/backupdancers_ii.png",
    "apiName": "TFT_Augment_BackupDancers",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21239,6 +21616,11 @@
    "desc": "Gain ? Giant's Belts. Your Giant's Belts grant +? bonus Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/beltoverflow_iii.png",
    "apiName": "DA_BeltOverflow",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "items",
     "combat"
@@ -21256,6 +21638,10 @@
    "desc": "Gain a random ?-star ?-cost champion. At Level ?, gain a random item component. At Level ?, gain a random ?-star ?-cost champion.  Inkborn Fables Tactician's Crown, 2024",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/birthdayreunion_ii.png",
    "apiName": "DA_BirthdayReunion",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "fast9"
    ],
@@ -21273,6 +21659,7 @@
    "desc": "Combat start: Your highest Attack Speed champion gains 20% Ability Power and ?% Attack Speed. Repeat on another ally every 3 seconds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/blazing-soul-ii.png",
    "apiName": "TFT_Augment_BlazingSoul",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21288,6 +21675,7 @@
    "desc": "Combat start: Your highest Attack Speed champion gains 35% Ability Power and ?% Attack Speed. Repeat on another ally every 3 seconds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/blazing-soul-iii.png",
    "apiName": "TFT_Augment_BlazingSoul2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21303,6 +21691,7 @@
    "desc": "Your allies gain ?-?% Damage Amp based on their missing Health. Maximum Damage Amp gained at 30% Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/bloodrage_ii.png",
    "apiName": "TFT_Augment_BloodRage",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21317,6 +21706,10 @@
    "desc": "Allies gain 15 Armor and Magic Resist, increased by ? per player level.  Gizmos & Gadgets Championship, 2022",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/bodyguardstraining_ii.png",
    "apiName": "DA_BodyguardTraining",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "fast9",
     "fast8"
@@ -21334,6 +21727,10 @@
    "desc": "Gain ? gold of random champions. (At least one ?-cost guaranteed!)",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/boosterpack1_ii.png",
    "apiName": "DA_BoosterPack",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "items",
     "direction",
@@ -21352,6 +21749,10 @@
    "desc": "Gain ? gold of random champions. (At least one ?-cost guaranteed!)",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/boosterpack1_ii.png",
    "apiName": "DA_BoosterPackPlus",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ",
     "direction"
@@ -21370,6 +21771,11 @@
    "desc": "Your team gains ? Health for each champion that starts combat in the front row.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/boxinglessons_i.png",
    "apiName": "DA_BoxingLessons",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -21389,6 +21795,10 @@
    "desc": "Gain a random Emblem.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/branching-out-i.png",
    "apiName": "DA_18_BranchingOut",
+   "rating": {
+    "2-1": "S",
+    "All": "S"
+   },
    "tags": [
     "trait",
     "direction"
@@ -21406,6 +21816,10 @@
    "desc": "Gain a random Emblem and a Reforger.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/branching-out-i.png",
    "apiName": "DA_18_BranchingOutPlus",
+   "rating": {
+    "3-2": "S",
+    "All": "S"
+   },
    "tags": [
     "trait",
     "direction"
@@ -21424,6 +21838,11 @@
    "desc": "Your team gains ?% Damage Amp and 4 Armor and Magic Resist for each Bronze-tier trait.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/bronzeforlife_iii.png",
    "apiName": "DA_BronzeForLifeII",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "trait"
    ],
@@ -21441,6 +21860,11 @@
    "desc": "Your team gains ?% Damage Amp for each Bronze-tier trait.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/bronzeforlife_ii.png",
    "apiName": "DA_BronzeForLifeI",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "trait"
    ],
@@ -21457,6 +21881,10 @@
    "desc": "Set your win streak to +?. Gain 4 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/calledshot_i.png",
    "apiName": "DA_CalledShot",
+   "rating": {
+    "2-1": "B",
+    "All": "B"
+   },
    "tags": [
     "tempo",
     "econ"
@@ -21474,6 +21902,7 @@
    "desc": "Starring up a champion grants them one of the following: 100 Health, ?% Durability, 10% Ability Power, ?% Attack Damage, ?% Attack Speed. Bonuses stack.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/chaosevolution_i.png",
    "apiName": "TFT_Augment_ChaosEvolution",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21489,6 +21918,7 @@
    "desc": "Your team gains 7% Damage Amp. ?% of overkill damage is dealt to the nearest enemy as magic damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/chargetransfer1_i.png",
    "apiName": "TFT_Augment_ChargeTransfer1",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21504,6 +21934,7 @@
    "desc": "Your team gains 10% Damage Amp. ?% of overkill damage is dealt to the nearest enemy as magic damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/chargetransfer2_ii.png",
    "apiName": "TFT_Augment_ChargeTransfer2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21519,6 +21950,7 @@
    "desc": "Each time an ally dies, allies that share at least one trait with them gain 3.5% Ability Power, ?% Attack Damage, 3.5 Armor, and 3.5 Magic Resist.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/climbtheladder_i.png",
    "apiName": "TFT_Augment_ClimbTheLadder1",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21534,6 +21966,7 @@
    "desc": "Each time an ally dies, allies that share at least one trait with them gain 7% Ability Power, ?% Attack Damage, 6 Armor, and 6 Magic Resist.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/climbtheladder_ii.png",
    "apiName": "TFT_Augment_ClimbTheLadder2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21549,6 +21982,11 @@
    "desc": "Your team gains ?% Attack Speed every ? seconds in combat.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/clockworkaccelerator_ii.png",
    "apiName": "DA_ClockworkAccelerator",
+   "rating": {
+    "3-2": "B",
+    "All": "B",
+    "4-2": "B"
+   },
    "tags": [],
    "traits": []
   },
@@ -21565,6 +22003,7 @@
    "desc": "Empower the hex in the center of the third row. Summon a clone of the champion in it with ?% base Health and ?% increased Mana cost.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/trickmirror_ii.png",
    "apiName": "TFT_Augment_CloningFacility",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21579,6 +22018,10 @@
    "desc": "Gain 7 gold, ? ?-star 1-cost champion, ? ?-cost champion, ? ?-cost champions, ? XP, and 1 Shop reroll.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/cognitiveoverload_ii.png",
    "apiName": "DA_CognitiveOverload",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "econ"
    ],
@@ -21595,6 +22038,10 @@
    "desc": "Gain 8 gold and ? XP.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/cognitivetax_i.png",
    "apiName": "DA_CognitiveTax",
+   "rating": {
+    "2-1": "B",
+    "All": "B"
+   },
    "tags": [
     "econ"
    ],
@@ -21611,6 +22058,10 @@
    "desc": "Gain ? gold and ? XP.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/cognitivetax_i.png",
    "apiName": "DA_CognitiveTaxPlus",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "econ"
    ],
@@ -21627,6 +22078,10 @@
    "desc": "Your team gains 4 Health and ?% Attack Speed per missing player Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/comebackstory_iii.png",
    "apiName": "DA_ComebackStory",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -21643,6 +22098,10 @@
    "desc": "Gain a Recurve Bow. After your champions attack 1000 times, get ? more.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/recurvewrecker_i.png",
    "apiName": "DA_BackupBows",
+   "rating": {
+    "2-1": "B",
+    "All": "B"
+   },
    "tags": [],
    "traits": []
   },
@@ -21659,6 +22118,7 @@
    "desc": "Gain a Needlessly Large Rod. After your team deals 42000 magic damage, gain 2 more.  Damage dealt: ?",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/hyperbolicrodextender_i.png",
    "apiName": "TFT_Augment_ComponentQuestRod",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21673,6 +22133,10 @@
    "desc": "Gain a B.F. Sword. After your champions deal ? physical damage, gain ? more.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/carveapath_i.png",
    "apiName": "DA_CarveAPath",
+   "rating": {
+    "2-1": "S",
+    "All": "S"
+   },
    "tags": [
     "combat"
    ],
@@ -21689,6 +22153,10 @@
    "desc": "Gain a Tear of the Goddess. After your champions spend ? Mana, gain ? more.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/griefofthegreatgoddess_i.png",
    "apiName": "DA_FlowingTears",
+   "rating": {
+    "2-1": "S",
+    "All": "S"
+   },
    "tags": [
     "items"
    ],
@@ -21705,6 +22173,7 @@
    "desc": "The next 1-cost champion you buy is 3-star. Gain 2 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/constructacompanion_iii.png",
    "apiName": "TFT_Augment_ConstructACompanion",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -21721,6 +22190,10 @@
    "desc": "At the start of each turn, all allies holding a Frying Pan or Spatula item grant the nearest champion 60 permanent Health. Gain a Frying Pan.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/cookingpot_ii.png",
    "apiName": "DA_CookingPot",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "trait"
    ],
@@ -21738,6 +22211,11 @@
    "desc": "Gain a Tactician's Crown. Tactician's Crown, Cape, and Shield grant the holder ?% Attack Speed, ?% Attack Damage, and ?% Ability Power.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/coronation_iii.png",
    "apiName": "DA_Coronation",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -21755,6 +22233,11 @@
    "desc": "Enemies in the first two rows lose 4 Armor and Magic Resist every 2 seconds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/corrosion_i.png",
    "apiName": "DA_Corrosion",
+   "rating": {
+    "3-2": "B",
+    "4-2": "B",
+    "All": "B"
+   },
    "tags": [
     "combat"
    ],
@@ -21771,6 +22254,7 @@
    "desc": "Call upon the Gods to sell all units on your board and bench. Gain 2 random Emblems and 15 free Shop rerolls.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/cosmicrestart_ii.png",
    "apiName": "TFT_Augment_CosmicRestart",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21785,6 +22269,10 @@
    "desc": "Whenever you craft a completed item, gain ? rerolls.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/craftedcrafting_i.png",
    "apiName": "DA_CraftedCrafting",
+   "rating": {
+    "2-1": "B",
+    "All": "B"
+   },
    "tags": [
     "econ",
     "items"
@@ -21803,6 +22291,7 @@
    "desc": "Enemies take ?% damage as bonus true damage, increased by ?% up to ?% every time they take damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/crossfire_ii.png",
    "apiName": "TFT_Augment_Crossfire2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21819,6 +22308,7 @@
    "desc": "Gain a Needlessly Large Rod and a Chain Vest. Your team gains 8 Ability Power and 6 Armor.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/will-of-the-crown-ii.png",
    "apiName": "TFT_Augment_CrownguardSpirit",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -21834,6 +22324,11 @@
    "desc": "Gain a Tear of the Goddess. Your team gains 1 Mana Regen. After ? seconds in combat, increase this to 4.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/crymeariver_ii.png",
    "apiName": "DA_CryMeARiver",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "items"
    ],
@@ -21850,6 +22345,9 @@
    "desc": "When you buy a Wisp, gain a random Blossom champion based on the Wisp's cost. Gain a Yunara, a Yorick, and a Karma.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_BlossomTraitAugment",
+   "rating": {
+    "All": "B"
+   },
    "tags": [],
    "traits": [
     "Blossom"
@@ -21866,6 +22364,10 @@
    "desc": "When you choose to continue gathering Coven essence, heal 2 Tactician health. Gain a Camille, an Elise, and a Caitlyn.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_CovenTraitAugment",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "losestreak"
    ],
@@ -21885,6 +22387,11 @@
    "desc": "Converting Coven Essence to rewards grants Coven champions Ability Power instead of loot. Gain a Camille, an Elise, and a Caitlyn.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_CovenTraitAugment_LootToAP",
+   "rating": {
+    "3-2": "A",
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "combat"
    ],
@@ -21901,6 +22408,10 @@
    "desc": "Gain 2 random 5-cost champions and 2 copies of a random component.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/duoqueue_ii.png",
    "apiName": "DA_18_DuoQueue",
+   "rating": {
+    "All": "A",
+    "4-2": "S"
+   },
    "tags": [
     "items",
     "fast9"
@@ -21920,6 +22431,12 @@
    "desc": "Champions that start combat adjacent to an Elderwood plant gain ?% Attack Speed and heal ?% of their maximum Health every 2 seconds. Gain an Alistar, an Ornn, and a Xayah.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_ElderwoodTraitAugment",
+   "rating": {
+    "3-2": "B",
+    "All": "B",
+    "2-1": "B",
+    "4-2": "B"
+   },
    "tags": [],
    "traits": [
     "Elderwood"
@@ -21938,6 +22455,12 @@
    "desc": "Fae pixies are now larger and grant ?% more Attack Damage and Ability Power. Fae champions gain ?% Attack Damage and Ability Power immediately. Gain a Xayah and a Rakan.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_FaeTraitAugment",
+   "rating": {
+    "3-2": "B",
+    "All": "B",
+    "2-1": "B",
+    "4-2": "B"
+   },
    "tags": [],
    "traits": [
     "Fae"
@@ -21955,6 +22478,10 @@
    "desc": "Gain a Flora Fatalis emblem. The champion holding the emblem gains ?% increased benefits from Flora Fatalis. Gain 3 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_FloraFatalisAugment",
+   "rating": {
+    "All": "B",
+    "2-1": "A"
+   },
    "tags": [
     "reroll",
     "econ"
@@ -21972,6 +22499,10 @@
    "desc": "Gain a random 4-cost champion. For each item equipped to that champion, your team gains 100 health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_FOURcing",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "items",
     "fast8",
@@ -21992,6 +22523,12 @@
    "desc": "Your 1 and 2-cost Inferno champions gain 0.2 Attack Damage and Ability Power. The one who did the most damage last combat gains double. Gain a Varus and an Akali.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_18_InfernoTraitAugment",
+   "rating": {
+    "3-2": "C",
+    "2-1": "C",
+    "4-2": "C",
+    "All": "C"
+   },
    "tags": [],
    "traits": []
   },
@@ -22006,6 +22543,10 @@
    "desc": "Your Lunar champions gain 100 Health and ?% Damage Amp for each unique Solar champion fielded. Gain a Leona, a Kayle, and a Diana.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_LunarTraitAugment",
+   "rating": {
+    "3-2": "C",
+    "All": "C"
+   },
    "tags": [],
    "traits": [
     "Eclipse"
@@ -22022,6 +22563,10 @@
    "desc": "Open an armory and choose one of  ? traits. Gain a Lux with that trait and a Spear of Shojin.  Traits on your board are more likely to appear in the armory. Lux provides +2 to her chosen trait",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t3.png",
    "apiName": "DA_18_LuxAugmentII",
+   "rating": {
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "trait"
    ],
@@ -22038,6 +22583,10 @@
    "desc": "Primal grants an additional Blessing. Gain a Vi now and a Nidalee after ? rounds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_PrimalAugment_Nidalee",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "fast8"
    ],
@@ -22056,6 +22605,10 @@
    "desc": "Your team gains 60 Health. Each time you purchase a Wisp, increase this by ?.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_18_ResidualMagic",
+   "rating": {
+    "2-1": "B",
+    "All": "B"
+   },
    "tags": [
     "reroll"
    ],
@@ -22074,6 +22627,10 @@
    "desc": "Your team gains 75 Health. Each time you purchase a Wisp, increase this by ?.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_18_ResidualMagicPlus",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "reroll"
    ],
@@ -22092,6 +22649,10 @@
    "desc": "Your team gains 90 Health. Each time you purchase a Wisp, increase this by ?.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_18_ResidualMagicPlusPlus",
+   "rating": {
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "reroll"
    ],
@@ -22112,6 +22673,12 @@
    "desc": "You can now choose a second Alpha Riftbeast. Alpha Riftbeasts gain ?% max Health and ?% Attack Speed. Gain a Scuttlecrab, a Cinderling, and a Pebbles.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_RiftbeastTraitAugment",
+   "rating": {
+    "3-2": "B",
+    "All": "A",
+    "2-1": "B",
+    "4-2": "B"
+   },
    "tags": [],
    "traits": [
     "Riftbeast"
@@ -22130,6 +22697,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -22145,6 +22713,10 @@
    "desc": "You can field Rengar and Kha'Zix together with no penalties, and they gain bonuses when the other casts. Gain a Rengar and a Kha'Zix.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_RivalsAugment",
+   "rating": {
+    "All": "C",
+    "2-1": "B"
+   },
    "tags": [],
    "traits": []
   },
@@ -22159,6 +22731,10 @@
    "desc": "Gain a Leona, a Kayle, and a Sejuani. Leona gains 70 permanent max Health each round, increased by ? for each unique 3-star champion fielded.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_18_SolarTraitAugment",
+   "rating": {
+    "All": "C",
+    "2-1": "C"
+   },
    "tags": [
     "reroll"
    ],
@@ -22179,6 +22755,11 @@
    "desc": "While Sprykin is active, gain a second BFF summon that is ?% as powerful. Gain a Teemo, a Veigar, and a Kobuko.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_SprykinAugment",
+   "rating": {
+    "All": "B",
+    "2-1": "B",
+    "4-2": "B"
+   },
    "tags": [],
    "traits": [
     "Sprykin"
@@ -22195,6 +22776,10 @@
    "desc": "The first time you 3-star a champion, gain a copy of them each round for the rest of the game. 3-starring the same champion again grants additional copies. Gain a Lesser Champion Duplicator.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_WeightTheWorth",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "reroll"
    ],
@@ -22211,6 +22796,10 @@
    "desc": "Each time you purchase a Wisp, gain 2 gold. Gain ? gold now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_18_WispRebatePlus",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "reroll",
     "econ"
@@ -22230,6 +22819,10 @@
    "desc": "Each time you purchase a Wisp, gain 2 gold. Gain ? gold now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_18_WispRebatePlusPlus",
+   "rating": {
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "reroll",
     "econ"
@@ -22249,6 +22842,10 @@
    "desc": "Your next augment is one tier higher.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/powerup_i.png",
    "apiName": "DA_AugmentedPower",
+   "rating": {
+    "3-2": "A",
+    "All": "B"
+   },
    "tags": [
     "econ"
    ],
@@ -22266,6 +22863,11 @@
    "desc": "Gain a random Tank item. After 8 seconds of combat, your team gains ?% bonus Attack Damage and Ability Power every second for the rest of combat.  TFT Paris Open, 2025",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/thebaronslair_iii.png",
    "apiName": "DA_BaronsLair",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -22283,6 +22885,11 @@
    "desc": "The first 3 times you sacrifice a champion in the Blackthorn hex, gain a copy of a random component they're holding. Gain an Azir, Veigar, and a Rek'Sai.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_BlackthornTraitAugment",
+   "rating": {
+    "3-2": "A",
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "items"
    ],
@@ -22301,6 +22908,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [],
    "traits": [
     "Coven"
@@ -22317,6 +22925,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [],
    "traits": [
     "Coven"
@@ -22333,6 +22942,10 @@
    "desc": "Gain ? gold of random champions. (At least one ?-cost guaranteed!)",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/boosterpack1_ii.png",
    "apiName": "DA_BoosterPackPlusPlus",
+   "rating": {
+    "All": "S",
+    "4-2": "S"
+   },
    "tags": [
     "econ",
     "direction"
@@ -22350,6 +22963,10 @@
    "desc": "Gain a random item component now and at the start of the next ? rounds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/buried-treasures-iii.png",
    "apiName": "DA_BuriedTreasuresIII",
+   "rating": {
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "items"
    ],
@@ -22366,6 +22983,10 @@
    "desc": "Store gold equal to the interest you earn. On 3-3, gain gold equal to ?% of the stored gold. Gain ? gold now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_CapitalGainsI",
+   "rating": {
+    "2-1": "B",
+    "All": "B"
+   },
    "tags": [
     "econ"
    ],
@@ -22382,6 +23003,10 @@
    "desc": "Store gold equal to the interest you earn. On 3-3, gain gold equal to ?% of the stored gold. Gain ? gold now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_CapitalGainsII",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -22399,6 +23024,11 @@
    "desc": "Your team gains ?% Omnivamp. Excess healing is converted to a shield up to ? Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/celestialblessing1.png",
    "apiName": "DA_CelestialBlessingI",
+   "rating": {
+    "3-2": "B",
+    "4-2": "B",
+    "All": "B"
+   },
    "tags": [
     "combat"
    ],
@@ -22416,6 +23046,11 @@
    "desc": "Your team gains ?% Omnivamp. Excess healing is converted to a shield up to ? Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/celestialblessing2.png",
    "apiName": "DA_CelestialBlessingII",
+   "rating": {
+    "3-2": "B",
+    "All": "B",
+    "4-2": "B"
+   },
    "tags": [
     "combat"
    ],
@@ -22433,6 +23068,11 @@
    "desc": "Your team gains ?% Omnivamp. Excess healing is converted to a shield up to ? Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/celestialblessing3.png",
    "apiName": "DA_CelestialBlessingIII",
+   "rating": {
+    "3-2": "C",
+    "4-2": "C",
+    "All": "B"
+   },
    "tags": [
     "combat"
    ],
@@ -22450,6 +23090,11 @@
    "desc": "At the start of combat, allies gain ?% Attack Speed for 3 seconds. On takedown, allies dash to their next target and gain this bonus again.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/choiceui/precisiongrace_ii.png",
    "apiName": "DA_ChallengersGrace",
+   "rating": {
+    "3-2": "B",
+    "All": "B",
+    "4-2": "B"
+   },
    "tags": [
     "combat"
    ],
@@ -22466,6 +23111,10 @@
    "desc": "Gain ? 2-cost champions. After 6 rounds, gain ? more.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_ChampDelivery",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "econ",
     "direction"
@@ -22483,6 +23132,10 @@
    "desc": "Gain ? 3-cost champions. After 6 rounds, gain ? more.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_ChampDeliveryPlus",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ",
     "direction"
@@ -22500,6 +23153,10 @@
    "desc": "Gain ? 4-cost champions. After 6 rounds, gain ? more.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_ChampDeliveryPlusPlus",
+   "rating": {
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ",
     "direction"
@@ -22517,6 +23174,10 @@
    "desc": "Gain a random component and 1 gold. The next 7 times you win a player combat, gain a different random component. Afterwards, gain ? gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t3.png",
    "apiName": "DA_ComponentQuest",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "items",
     "tempo",
@@ -22537,6 +23198,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -22553,6 +23215,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -22567,6 +23230,10 @@
    "desc": "Gain a Deathblade. Deathblades permanently gain ?% Attack Damage whenever their holders score a takedown.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/deadlierblades_ii.png",
    "apiName": "DA_DeadlierBlades",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -22583,6 +23250,10 @@
    "desc": "Gain a Rabadon's Deathcap. Rabadon's Deathcaps grant 1 Mana Regen and permanently gain ?% Ability Power whenever their holders score a takedown.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/deadliercaps_ii.png",
    "apiName": "DA_DeadlierCaps",
+   "rating": {
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "combat"
    ],
@@ -22599,6 +23270,10 @@
    "desc": "Lose all champions on your board and bench. Gain a Training Dummy with ?% of their combined health. The dummy gains ? Health per stage. Gain a random non-tank 2-star 2 cost champion.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/dummify_i.png",
    "apiName": "DA_Dummify",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "direction"
    ],
@@ -22615,6 +23290,10 @@
    "desc": "Your team gains ?% Attack Damage & Ability Power. This increases by ?% after each player combat. 1-cost champions gain double.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/earlylearning_ii.png",
    "apiName": "DA_EarlyLearnings",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "reroll"
    ],
@@ -22631,6 +23310,10 @@
    "desc": "When you reach Level 8, gain 20 Shop rerolls.  Runeterra Reforged Championship, 2023",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/epicrolldown_ii.png",
    "apiName": "DA_EpicRolldown",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ",
     "fast8"
@@ -22649,6 +23332,11 @@
    "desc": "Gain a Lucky Item Chest, a Magnetic Remover and 7 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/exclusivecustomization_ii.png",
    "apiName": "DA_ExclusiveCustomization",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "items",
     "combat",
@@ -22667,6 +23355,7 @@
    "desc": "Now and at the start of the next 2 stages, roll 3 dice. Gain various rewards based on their total.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/addicted-to-rolling-iii.png",
    "apiName": "DA_ExpectedUnexpectedness",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -22681,6 +23370,10 @@
    "desc": "At the start of every round, lose the champion in the rightmost bench slot. After losing 33 gold of champions in this way, gain a powerful reward. Gain a 3-cost champion now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/expedition_i.png",
    "apiName": "DA_Expedition",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "reroll",
     "econ"
@@ -22698,6 +23391,10 @@
    "desc": "Now and at the start of the next ? rounds, gain 7 XP.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/explosivegrowth_ii.png",
    "apiName": "DA_ExplosiveGrowth",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -22714,6 +23411,10 @@
    "desc": "Now and at the start of the next ? rounds, gain ? XP.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/explosivegrowth_ii.png",
    "apiName": "DA_ExplosiveGrowthPlus",
+   "rating": {
+    "All": "S",
+    "4-2": "S"
+   },
    "tags": [
     "econ"
    ],
@@ -22730,6 +23431,10 @@
    "desc": "Gain a Giant's Belt. After your champions take ? damage, get ? more.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/extrabuckles_i.png",
    "apiName": "DA_ExtraBuckles",
+   "rating": {
+    "2-1": "S",
+    "All": "S"
+   },
    "tags": [
     "items",
     "combat"
@@ -22747,6 +23452,10 @@
    "desc": "Gain ? gold, then flip a coin. If heads, gain ? more gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/feelinglucky_i.png",
    "apiName": "DA_FeelingLucky",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -22764,6 +23473,11 @@
    "desc": "Your champion that starts combat in the center of the front row gains ?% Damage Amp and ?% max Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/findyourcenter_i.png",
    "apiName": "DA_FindYourCenter",
+   "rating": {
+    "3-2": "B",
+    "4-2": "B",
+    "All": "B"
+   },
    "tags": [
     "combat"
    ],
@@ -22780,6 +23494,10 @@
    "desc": "Gain 1 random Emblem. At the start of every Stage, gain a random Emblem. Your team gains 30 Health for each Emblem they are holding.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/flexible_ii.png",
    "apiName": "DA_Flexible",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "trait"
    ],
@@ -22797,6 +23515,11 @@
    "desc": "Your team gains ?% Attack Damage. Every 5 seconds, they gain ?% more.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/marksman_i.png",
    "apiName": "DA_FocusedFire",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -22813,6 +23536,7 @@
    "desc": "The next 1-cost champion you buy is 3-star. Gain 5 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/constructacompanion_iii.png",
    "apiName": "TFT_Augment_ForgeAFriend",
+   "rating": {},
    "tags": [
     "items",
     "econ"
@@ -22830,6 +23554,10 @@
    "desc": "Gain ? random Artifact. When you drop below 35 Health, gain ? more random Artifact, ? random completed item, and ? random components.  Remix Rumble Championship, 2023",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/forgedinstrength_iii.png",
    "apiName": "DA_ForgedInStrength",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "items",
     "losestreak"
@@ -22847,6 +23575,10 @@
    "desc": "Gain a 2-star 1-cost Tank champion and an Emblem that matches their class.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/frontlinefoundation_ii.png",
    "apiName": "DA_FrontlineFoundation",
+   "rating": {
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "combat",
     "trait"
@@ -22864,6 +23596,10 @@
    "desc": "Your Tactician loses 20 Health, but after 5 player combats, gain 3 4-cost champions and ? gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_FutureFocused",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "fast8",
     "gamble",
@@ -22882,6 +23618,10 @@
    "desc": "Gain 21 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/windfall2.png",
    "apiName": "DA_GainGold",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -22899,6 +23639,11 @@
    "desc": "Your team becomes large, gaining 200 Health and ?% max Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/giantandmighty_iii.png",
    "apiName": "DA_GiantAndMighty",
+   "rating": {
+    "3-2": "B",
+    "4-2": "A",
+    "All": "B"
+   },
    "tags": [
     "combat"
    ],
@@ -22915,6 +23660,10 @@
    "desc": "Gain two 5-cost champions. If you field at least one 5-cost champion, your 1 to 4-cost champions gain ?% Durability.  K.O. Coliseum Tactician's Crown, 2025",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/gildedsteel_ii.png",
    "apiName": "DA_GildedSteel",
+   "rating": {
+    "All": "S",
+    "4-2": "S"
+   },
    "tags": [
     "combat",
     "fast9"
@@ -22933,6 +23682,11 @@
    "desc": "Allies that start combat in the back row begin combat at ?% Health but gain ?% Damage Amp.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/glasscannon_ii.png",
    "apiName": "DA_GlassCannon_Gold",
+   "rating": {
+    "3-2": "S",
+    "All": "A",
+    "4-2": "S"
+   },
    "tags": [
     "combat"
    ],
@@ -22950,6 +23704,11 @@
    "desc": "Allies that start combat in the back row begin combat at ?% Health but gain ?% Damage Amp.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/glasscannon_i.png",
    "apiName": "DA_GlassCannon_Silver",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -22966,6 +23725,10 @@
    "desc": "Gain a random Gold Augment and 3 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/goldendestiny_ii.png",
    "apiName": "DA_GoldDestiny",
+   "rating": {
+    "All": "B",
+    "2-1": "A"
+   },
    "tags": [
     "econ",
     "gamble"
@@ -22985,6 +23748,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -23001,6 +23765,10 @@
    "desc": "Gain 2 gold and flip a coin. If heads, gain a Radiant Lucky Item Chest. If tails, gain 2 Completed Item anvils.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/goldengamble_iii.png",
    "apiName": "DA_GoldenGamble",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "items",
     "gamble",
@@ -23019,6 +23787,10 @@
    "desc": "Gain 3 gold and flip a coin. If heads, gain a Radiant Lucky Item Chest. If tails, gain 2 Completed Item anvils.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/goldengamble_iii.png",
    "apiName": "DA_GoldenGamblePlus",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "items",
     "gamble",
@@ -23037,6 +23809,10 @@
    "desc": "Gain 6 gold and flip a coin. If heads, gain a Radiant Lucky Item Chest. If tails, gain 2 Completed Item anvils.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/goldengamble_iii.png",
    "apiName": "DA_GoldenGamblePlusPlus",
+   "rating": {
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "items",
     "gamble",
@@ -23056,6 +23832,11 @@
    "desc": "Combat start: Champions grant other adjacent champions ? Armor and Magic Resist. This effect stacks.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/grouphug1_i.png",
    "apiName": "DA_GroupHugI",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -23073,6 +23854,11 @@
    "desc": "Combat start: Champions grant other adjacent champions ? Armor and Magic Resist. This effect stacks.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/grouphug2_ii.png",
    "apiName": "DA_GroupHugII",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -23089,6 +23875,10 @@
    "desc": "You cannot choose your Carousel rewards. Gain an additional 6 player health and 8 gold each carousel round. When you do not pick a Carousel Reward, you are given an unpicked champion and the item it carries.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/hardbargain_ii.png",
    "apiName": "DA_HardBargain",
+   "rating": {
+    "All": "A",
+    "2-1": "B"
+   },
    "tags": [
     "items",
     "tempo",
@@ -23107,6 +23897,10 @@
    "desc": "Gain a random emblem. Now and at the start of each stage, gain a 1-star champion of that trait with a cost equal to the Stage (max 5) and 3 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/hardcommit_iii.png",
    "apiName": "DA_HardCommit",
+   "rating": {
+    "All": "B",
+    "2-1": "A"
+   },
    "tags": [
     "gamble",
     "direction",
@@ -23125,6 +23919,10 @@
    "desc": "Gain a Steadfast Heart. Every ? seconds of combat its holder survives, Steadfast Heart gains additional 16 permanent max Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/healthygains_ii.png",
    "apiName": "DA_HeartOfSteel",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "combat"
    ],
@@ -23141,6 +23939,10 @@
    "desc": "Gain 2 Lesser Champion Duplicators. Gain 8 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/heroic-grab-bag-ii.png",
    "apiName": "DA_HeroicGrabBagPlus",
+   "rating": {
+    "3-2": "A",
+    "All": "B"
+   },
    "tags": [
     "items",
     "reroll",
@@ -23159,6 +23961,10 @@
    "desc": "Gain 2 Lesser Champion Duplicators. Gain 14 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/heroic-grab-bag-ii.png",
    "apiName": "DA_HeroicGrabBagPlusPlus",
+   "rating": {
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "items",
     "reroll",
@@ -23178,6 +23984,11 @@
    "desc": "Champions in your back 2 rows gain ?% Ability Power and ?% Attack Damage for each champion that starts combat in your front row.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/holdtheline_iii.png",
    "apiName": "DA_HoldTheLine",
+   "rating": {
+    "3-2": "S",
+    "4-2": "S",
+    "All": "S"
+   },
    "tags": [
     "combat"
    ],
@@ -23197,6 +24008,10 @@
    "desc": "Gain 3 gold now. On Stage 3-7, gain an Infinity Force. Infinity Force gives allies in the same row a ?% Health shield.  Monsters Attack Championship, 2023",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/infinityprotection_ii.png",
    "apiName": "DA_InfinityProtection",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "combat",
     "econ"
@@ -23214,6 +24029,10 @@
    "desc": "Gain 26 gold. At the start of each round, gain 1 Shop reroll for every 10 gold above 50 (max 80 gold).",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/invested-iii.png",
    "apiName": "DA_InvestedPlus",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -23230,6 +24049,10 @@
    "desc": "Gain 45 gold. At the start of each round, gain 1 Shop reroll for every 10 gold above 50 (max 80 gold).",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/invested-iii.png",
    "apiName": "DA_InvestedPlusPlus",
+   "rating": {
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -23246,6 +24069,10 @@
    "desc": "Your champions gain ? permanent max health per interest you earn. Your max interest is increased by ?. Gain 8 gold now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/investmentstrategy_iii.png",
    "apiName": "DA_InvestmentStrategy",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "reroll",
     "econ"
@@ -23263,6 +24090,10 @@
    "desc": "Your champions gain ? permanent max health per interest you earn. Gain 4 gold now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/investmentstrategy_ii.png",
    "apiName": "DA_InvestmentStrategyI",
+   "rating": {
+    "All": "B",
+    "2-1": "A"
+   },
    "tags": [
     "reroll",
     "econ"
@@ -23282,6 +24113,12 @@
    "desc": "Gain 1 random completed item.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/itemgrabbag1.png",
    "apiName": "DA_ItemGrabBag",
+   "rating": {
+    "3-2": "A",
+    "2-1": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "items",
     "gamble"
@@ -23301,6 +24138,11 @@
    "desc": "Gain a championship hex in the bottom right corner. The champion in it gains ?% Damage Amp and ?% Attack Speed, and drops 1 gold every ? takedowns.  Lore & Legends Tactician's Crown, 2026",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_ItsMeBaby",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -23317,6 +24159,10 @@
    "desc": "Gain a random ?-star 2-cost champion and 1 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/kickstart_i.png",
    "apiName": "DA_KickStart",
+   "rating": {
+    "2-1": "B",
+    "All": "B"
+   },
    "tags": [
     "items",
     "tempo",
@@ -23336,6 +24182,11 @@
    "desc": "After winning player combat, gain ? gold. If they had more health than you, gain ? Gold instead. Gain 1 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/kingslayer_i.png",
    "apiName": "DA_Kingslayer",
+   "rating": {
+    "3-2": "A",
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "econ",
     "gamble"
@@ -23353,6 +24204,10 @@
    "desc": "Gain 2 XP at the start of player combat rounds. Your 5-cost champions gain ?% Health and ?% Attack Speed.  Cyber City Tactician's Crown, 2025",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/lategamescaling_ii.png",
    "apiName": "DA_LateGameScaling",
+   "rating": {
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "combat",
     "fast9",
@@ -23371,6 +24226,10 @@
    "desc": "Gain a random Emblem. Your 3-cost champions and all allies equipped with an Emblem gain ? Health and ?% Attack Speed.  Reckoning Championship, 2021",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/legionofthrees_ii.png",
    "apiName": "DA_LegionOfThrees",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "trait",
     "reroll"
@@ -23388,6 +24247,10 @@
    "desc": "Your dice and coins are luckier.  Roll a die and gain gold equal to the number rolled. Then flip a coin and gain 1 gold if you flip heads.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_LoadedDice",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -23404,6 +24267,10 @@
    "desc": "Gain a package containing a ?-cost champion, a 2-star ?-cost champion, and 3 gold.  At the start of the next ? stages, gain the package again.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/luxurysubscription_iii.png",
    "apiName": "DA_LuxurySubscription",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "econ",
     "fast9"
@@ -23421,6 +24288,10 @@
    "desc": "Roll 3 dice. Gain rewards based on their total.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/a-magical-roll-ii.png",
    "apiName": "DA_MagicRoll",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "gamble"
    ],
@@ -23437,6 +24308,10 @@
    "desc": "Gain 4 gold. For the next 2 rounds, enemy champions drop ? gold when killed.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/mirroredmonetization_ii.png",
    "apiName": "DA_MaliciousMonetization",
+   "rating": {
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "econ",
     "combat"
@@ -23454,6 +24329,10 @@
    "desc": "Gain 10 free Shop rerolls. When you reach level 9, gain ? free Shop rerolls and a Champion Duplicator.  Galaxies Championship, 2020",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/maxbuild_ii.png",
    "apiName": "DA_MaxBuild",
+   "rating": {
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [
     "fast9"
    ],
@@ -23470,6 +24349,10 @@
    "desc": "Gain a Golden Item Remover, 4 random components, and 4 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/minmax_iii.png",
    "apiName": "DA_Min_Max",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "items",
     "econ"
@@ -23487,6 +24370,10 @@
    "desc": "Gain 7 gold now, then 7 gold at the start of every stage. Picking up gold makes your Tactician larger.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/moneyhungry1_ii.png",
    "apiName": "DA_MoneyHungry_NotBroken",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "econ"
    ],
@@ -23503,6 +24390,10 @@
    "desc": "Gain ? gold now, then ? gold at the start of every stage. Picking up gold makes your Tactician larger.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/moneyhungry2_ii.png",
    "apiName": "DA_MoneyHungryPlus",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -23519,6 +24410,10 @@
    "desc": "Gain ? gold now and every round for the rest of the game.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/moneymonsoon_iii.png",
    "apiName": "DA_MoneyMonsoon",
+   "rating": {
+    "4-2": "S",
+    "All": "S"
+   },
    "tags": [
     "econ"
    ],
@@ -23535,6 +24430,10 @@
    "desc": "Gain an Artifact Anvil. After you open it, gain a Component Anvil. After you open that, gain 4 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t3.png",
    "apiName": "DA_NestingAnvils",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "items",
     "econ"
@@ -23552,6 +24451,10 @@
    "desc": "Gain an Artifact Anvil. After you open it, gain a Component Anvil. After you open that, gain 8 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t3.png",
    "apiName": "DA_NestingAnvilsPlus",
+   "rating": {
+    "4-2": "B",
+    "All": "A"
+   },
    "tags": [
     "items",
     "econ"
@@ -23571,6 +24474,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -23585,6 +24489,10 @@
    "desc": "Champions that fight in player combat cannot be benched or sold. Your team gains ?% Health, and ?% Attack Damage and Ability Power after player combat.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/noscoutnopivot_ii.png",
    "apiName": "DA_NoScoutNoPivot",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "reroll"
    ],
@@ -23602,6 +24510,11 @@
    "desc": "Gain a Red Buff, a Blue Buff, and a Champion Duplicator.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/onebufftwobuff_iii.png",
    "apiName": "DA_OneBuffTwoBuff",
+   "rating": {
+    "3-2": "S",
+    "4-2": "S",
+    "All": "S"
+   },
    "tags": [
     "combat"
    ],
@@ -23620,6 +24533,12 @@
    "desc": "Round start: items on your bench are randomized.   Gain ? random component.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/pandora1.png",
    "apiName": "DA_PandorasItemsI",
+   "rating": {
+    "3-2": "A",
+    "2-1": "S",
+    "4-2": "B",
+    "All": "S"
+   },
    "tags": [
     "items"
    ],
@@ -23636,6 +24555,10 @@
    "desc": "Gain ? rerolls now. Each round, gain 1 free reroll if you did not buy a champion last round.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/patienceisavirtue_i.png",
    "apiName": "DA_PatienceIsAVirtue",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -23652,6 +24575,10 @@
    "desc": "Each round, gain a 1-star copy of the first champion you killed last combat. The first time you gain ? gold worth of champions in this way, gain a Thief's Gloves.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/pilfer_ii.png",
    "apiName": "DA_Pilfer",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "econ",
     "combat",
@@ -23671,6 +24598,11 @@
    "desc": "Your team gains ? Armor and Magic Resist. After falling below ?% Health, increase this to ? for the rest of combat.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/plotarmor_ii.png",
    "apiName": "DA_PlotArmor",
+   "rating": {
+    "3-2": "B",
+    "All": "B",
+    "4-2": "A"
+   },
    "tags": [
     "combat"
    ],
@@ -23687,6 +24619,10 @@
    "desc": "Gain a random Prismatic Augment and 4 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/prismaticdestiny_iii.png",
    "apiName": "DA_PrismaticDestiny",
+   "rating": {
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "gamble",
     "econ"
@@ -23706,6 +24642,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -23721,6 +24658,11 @@
    "desc": "Gain a Protector's Vow. Protector's Vow grants its holder ?% additional Mana from all sources and ? max Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/promisedprotection_ii.png",
    "apiName": "DA_PromisedProtection",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "items",
     "combat"
@@ -23738,6 +24680,10 @@
    "desc": "You gain twice as much progress towards win and loss streaks. Gain 2 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_QuickStreaks",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -23755,6 +24701,11 @@
    "desc": "Choose 1 of 3 components. For the next ? rounds, gain a copy of that component.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/replication-ii.png",
    "apiName": "DA_Replication",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "items"
    ],
@@ -23772,6 +24723,11 @@
    "desc": "Gain ? Hands of Justice. Allies equipped with Hand of Justice gain Precision and ?% Critical Strike Chance.  Precision: Ability damage can critically strike. Additional Precision grants 10% Critical Strike Damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/retribution_iii.png",
    "apiName": "DA_Retribution",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [],
    "traits": []
   },
@@ -23787,6 +24743,11 @@
    "desc": "Gain ? free Shop rerolls.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/rolling-for-days-i.png",
    "apiName": "DA_RollingForDays",
+   "rating": {
+    "3-2": "A",
+    "4-2": "S",
+    "All": "A"
+   },
    "tags": [
     "reroll"
    ],
@@ -23804,6 +24765,11 @@
    "desc": "Gain an Archangel's Staff. Archangel's Staff grants 2 additional Mana Regen if its holder has ?% or more Ability Power.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/seraphimsstaff_ii.png",
    "apiName": "DA_SeraphimsStaff",
+   "rating": {
+    "3-2": "S",
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "items",
     "combat"
@@ -23821,6 +24787,10 @@
    "desc": "Gain a Gambler's Blade. After ? player combats, gain a Mogul's Mail.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/shimmerscaleessence_iii.png",
    "apiName": "DA_ShimmerscaleEssence",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "combat",
     "gamble"
@@ -23838,6 +24808,10 @@
    "desc": "Gain a random Silver Augment and 2 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/silverdestiny_i.png",
    "apiName": "DA_SilverDestiny",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "gamble",
     "econ"
@@ -23855,6 +24829,10 @@
    "desc": "Gain a random Silver Augment and 4 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/silverdestiny_i.png",
    "apiName": "DA_SilverDestinyPlus",
+   "rating": {
+    "3-2": "S",
+    "All": "A"
+   },
    "tags": [
     "gamble",
     "econ"
@@ -23872,6 +24850,10 @@
    "desc": "Gain a random Silver Augment and 7 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/silverdestiny_i.png",
    "apiName": "DA_SilverDestinyPlusPlus",
+   "rating": {
+    "4-2": "S",
+    "All": "S"
+   },
    "tags": [
     "gamble",
     "econ"
@@ -23889,6 +24871,10 @@
    "desc": "Twice per stage, gain a random champion. Its cost increases by Stage. This effect ends after receiving ? ?-cost champion.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/slice_of_life_i.png",
    "apiName": "DA_SliceOfLife",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "econ"
    ],
@@ -23905,6 +24891,10 @@
    "desc": "Roll a die. Gain rewards based on the number rolled.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/slightlymagicroll_i.png",
    "apiName": "DA_SlightlyMagicRoll",
+   "rating": {
+    "2-1": "A",
+    "All": "A"
+   },
    "tags": [
     "gamble"
    ],
@@ -23922,6 +24912,11 @@
    "desc": "Gain ? random item components.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/smallgrabbag_i.png",
    "apiName": "DA_SmallGrabBag",
+   "rating": {
+    "3-2": "S",
+    "4-2": "S",
+    "All": "S"
+   },
    "tags": [
     "items"
    ],
@@ -23938,6 +24933,10 @@
    "desc": "For the next 5 combats, your team size is ?, but the champion you field has massively increased stats. Gain 1 XP for every kill they get. Afterwards, gain 2 item components.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/sololeveling_ii.png",
    "apiName": "DA_SoloLeveling",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "items",
     "combat",
@@ -23957,6 +24956,11 @@
    "desc": "Gain a Gargoyle Stoneplate. Allies holding Gargoyle Stoneplate gain ?% max Health if they start combat alone in their row.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/soloplate_ii.png",
    "apiName": "DA_SoloPlate",
+   "rating": {
+    "3-2": "S",
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "items",
     "combat"
@@ -23974,6 +24978,10 @@
    "desc": "Gain a Guinsoo's Rageblade. When ? players are eliminated, gain 40 gold.  Fates Championship, 2021",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/speedydoublekill_ii.png",
    "apiName": "DA_SpeedyDoubleKill",
+   "rating": {
+    "All": "B",
+    "2-1": "B"
+   },
    "tags": [
     "combat",
     "econ"
@@ -23992,6 +25000,11 @@
    "desc": "Gain a Spirit Visage. Every ? seconds, Spirit Visage heals allies within 1 hex for ?% of their missing Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/spiritofredemption_ii.png",
    "apiName": "DA_SpiritOfRedemption",
+   "rating": {
+    "3-2": "A",
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "items",
     "combat"
@@ -24009,6 +25022,10 @@
    "desc": "Gain a random Emblems. After 3 combats, gain another.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/spreadingroots_ii.png",
    "apiName": "DA_SpreadingRoots",
+   "rating": {
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "trait",
     "direction"
@@ -24026,6 +25043,10 @@
    "desc": "Gain ? random Emblems and ? gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/spreadingroots_ii.png",
    "apiName": "DA_SpreadingRootsPlus",
+   "rating": {
+    "3-2": "S",
+    "All": "S"
+   },
    "tags": [
     "trait",
     "direction",
@@ -24044,6 +25065,10 @@
    "desc": "Gain  ? random completed items that build from Needlessly Large Rod.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/rodsmith_ii.png",
    "apiName": "DA_Staffsmith",
+   "rating": {
+    "All": "S",
+    "4-2": "S"
+   },
    "tags": [
     "items",
     "combat"
@@ -24062,6 +25087,11 @@
    "desc": "Gain an Artifact anvil. Your team gains 16 Health for each item equipped on champions.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/sweettreats_iii.png",
    "apiName": "DA_SweetTreats",
+   "rating": {
+    "3-2": "A",
+    "4-2": "B",
+    "All": "A"
+   },
    "tags": [
     "items"
    ],
@@ -24079,6 +25109,11 @@
    "desc": "Gain ? BF Swords. Your BF Swords grant +?% Attack Speed.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/bladeoverflow_iii.png",
    "apiName": "DA_SwordOverflow",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "items",
     "combat"
@@ -24096,6 +25131,10 @@
    "desc": "Gain ? random completed items that build from B.F. Sword.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/swordsmith_ii.png",
    "apiName": "DA_Swordsmith",
+   "rating": {
+    "All": "S",
+    "4-2": "S"
+   },
    "tags": [
     "items",
     "combat"
@@ -24113,6 +25152,10 @@
    "desc": "Gain a random Emblem. After ? rounds, gain a Tactician's Cape.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/tacticianskitchen_iii.png",
    "apiName": "DA_TacticiansKitchen",
+   "rating": {
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "direction"
    ],
@@ -24129,6 +25172,10 @@
    "desc": "Gain a Mogul's Mail. Champions holding Mogul's Mail take up +? team slot but gain 600 Health and ?% Durability.  Mogul's Mail gives gold as well as combat power. Dragonlands Championship, 2022",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/thegoldendragon_ii.png",
    "apiName": "DA_TheGoldenDragon",
+   "rating": {
+    "3-2": "B",
+    "All": "B"
+   },
    "tags": [
     "items",
     "combat",
@@ -24149,6 +25196,12 @@
    "desc": "Gain a giant Training Dummy. Every ? seconds, it zaps the ? nearest enemies dealing ?% max Health true damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/thetower_i.png",
    "apiName": "DA_TheTower",
+   "rating": {
+    "3-2": "B",
+    "2-1": "B",
+    "4-2": "B",
+    "All": "B"
+   },
    "tags": [
     "tempo"
    ],
@@ -24165,6 +25218,10 @@
    "desc": "Gain ? random Emblems and 2 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/thetraittree_iii.png",
    "apiName": "DA_TheTraitTree",
+   "rating": {
+    "All": "S",
+    "2-1": "S"
+   },
    "tags": [
     "trait",
     "direction",
@@ -24183,6 +25240,10 @@
    "desc": "Gain ? random Emblems, a Reforger, and ? gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/thetraittree_iii.png",
    "apiName": "DA_TheTraitTreePlus",
+   "rating": {
+    "3-2": "S",
+    "All": "S"
+   },
    "tags": [
     "trait",
     "direction",
@@ -24201,6 +25262,10 @@
    "desc": "Disable your Shop for the next ? rounds. Then gain ? XP.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/timeskip_ii.png",
    "apiName": "DA_TimeSkip",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "reroll",
     "fast8",
@@ -24219,6 +25284,10 @@
    "desc": "Gain a Shop reroll every round. Gain ? gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/trade2.png",
    "apiName": "DA_TradeSectorPlus",
+   "rating": {
+    "3-2": "A",
+    "All": "A"
+   },
    "tags": [
     "reroll",
     "econ"
@@ -24236,6 +25305,10 @@
    "desc": "Gain a random emblem. After fielding ? non-unique traits in a player combat, gain a reward. Then increase the number of traits needed and the size of the reward.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t3.png",
    "apiName": "DA_TraitLadder",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "trait"
    ],
@@ -24253,6 +25326,11 @@
    "desc": "If you have exactly ? allies in your first row, grant them 100 Health, ? Armor, and ? Magic Resist.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/twinguardians_i.png",
    "apiName": "DA_TwinGuardians",
+   "rating": {
+    "3-2": "A",
+    "4-2": "S",
+    "All": "A"
+   },
    "tags": [
     "items",
     "combat"
@@ -24270,6 +25348,10 @@
    "desc": "Buying XP costs ? less. Gain ? Health and ? Shop rerolls whenever you level up.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/upwardmobility_iii.png",
    "apiName": "DA_UpwardMobility",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "fast9",
     "fast8",
@@ -24289,6 +25371,11 @@
    "desc": "Champions gain ?% Attack Damage, ?% Ability Power, ? Armor, and ? Magic Resist for each ally that shares a trait with them.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_VerticalityI",
+   "rating": {
+    "3-2": "B",
+    "4-2": "B",
+    "All": "B"
+   },
    "tags": [
     "trait"
    ],
@@ -24306,6 +25393,11 @@
    "desc": "Champions gain ?% Attack Damage, ?% Ability Power, ? Armor, and ? Magic Resist for each ally that shares a trait with them.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_VerticalityII",
+   "rating": {
+    "3-2": "B",
+    "All": "B",
+    "4-2": "B"
+   },
    "tags": [
     "trait"
    ],
@@ -24323,6 +25415,11 @@
    "desc": "Champions gain ?% Attack Damage, ?% Ability Power, ? Armor, and ? Magic Resist for each ally that shares a trait with them.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t3.png",
    "apiName": "DA_VerticalityIII",
+   "rating": {
+    "3-2": "B",
+    "4-2": "B",
+    "All": "B"
+   },
    "tags": [
     "trait"
    ],
@@ -24340,6 +25437,11 @@
    "desc": "Gain ? Needlessly Large Rods. Your Needlessly Large Rods grant +?% Attack Speed.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/wandoverflow_iii.png",
    "apiName": "DA_WandOverflow",
+   "rating": {
+    "3-2": "A",
+    "4-2": "A",
+    "All": "A"
+   },
    "tags": [
     "items",
     "combat"
@@ -24357,6 +25459,10 @@
    "desc": "Gain a 2-star 2-cost champion. After dealing 80 player damage, gain a chest of high cost champions and items.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/warpath_ii.png",
    "apiName": "DA_Warpath",
+   "rating": {
+    "All": "B",
+    "2-1": "A"
+   },
    "tags": [
     "items",
     "tempo"
@@ -24374,6 +25480,10 @@
    "desc": "Gain a random Emblem and a completed item anvil. Allies that share a trait with that Emblem gain ?% Attack Speed. 0 0  Into The Arcane Tactician's Crown, 2025",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/westicktogether_iii.png",
    "apiName": "DA_WeStickTogether",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "trait",
     "direction"
@@ -24391,6 +25501,10 @@
    "desc": "Gain a random 1-cost champion. Gain another copy of them at the start of each round for the rest of the game.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/worththewait_ii.png",
    "apiName": "DA_WorththeWait",
+   "rating": {
+    "All": "B",
+    "2-1": "A"
+   },
    "tags": [
     "tempo",
     "reroll"
@@ -24408,6 +25522,10 @@
    "desc": "Gain 2 copies of a random 2-cost champion. Gain another copy of them at the start of each round for the rest of the game.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/worththewait_iii.png",
    "apiName": "DA_WorththeWaitII",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "tempo",
     "reroll"
@@ -24425,6 +25543,10 @@
    "desc": "Gain a random item component. Every 2200 Mana spent by your champions, grants an additional component (max: 0/?).",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/wovenmagic_iii.png",
    "apiName": "DA_WovenMagic",
+   "rating": {
+    "All": "A",
+    "2-1": "A"
+   },
    "tags": [
     "items",
     "tempo"
@@ -24443,6 +25565,7 @@
    "desc": "You heal for ?% of the damage you deal to enemy Tacticians. Your team gains ?% Omnivamp.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/dhampyr_ii.png",
    "apiName": "TFT_Augment_Dhampyr1",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24457,6 +25580,7 @@
    "desc": "For the next 4 carousels, gain a second copy of the champion taken. Gain 4 gold now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/efficientshopper_i.png",
    "apiName": "TFT_Augment_EfficientShopper",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -24475,6 +25599,7 @@
    "desc": "Your champions deal ?% of their damage as True Damage for each Star level.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/evilbeyondmeasure_ii.png",
    "apiName": "TFT_Augment_EvilBeyondMeasure",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24489,6 +25614,7 @@
    "desc": "Gain 2 Lucky Item Chests, a Magnetic Remover, and 7 gold.  Use a Lucky Item Chest on a champion to choose from an armory of recommended items!",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/exclusivecustomization_ii.png",
    "apiName": "TFT_Augment_ExclusiveCustomization2",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -24505,6 +25631,7 @@
    "desc": "For every 15 ally champions that die, gain a random component (max 3).  Deaths Remaining: ?",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/eyeforaneye_i.png",
    "apiName": "TFT_Augment_EyeForAnEye",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24519,6 +25646,7 @@
    "desc": "Gain a random component. For every 18 ally champions that die, gain another component (max 2).  Deaths Remaining: ?",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/eyeforaneye_i.png",
    "apiName": "TFT_Augment_EyeForAnEyePlus",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24534,6 +25662,7 @@
    "desc": "Gain a Sunfire Cape. Your team gains ?% Omnivamp when attacking Burning enemies.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/feedtheflames_ii.png",
    "apiName": "TFT_Augment_FeedTheFlames",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24546,6 +25675,7 @@
    "desc": "Each round, steal a random 3-cost or lower champion from the shop. Gain 1 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/firesale_i.png",
    "apiName": "TFT_Augment_FiresalePlus",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -24563,6 +25693,7 @@
    "desc": "After 10 seconds of combat, your champions gain ?% Attack Speed and attacks also hurl 2 delicious projectiles that deal 25 () magic damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/foodfighttactics_ii.png",
    "apiName": "TFT_Augment_FoodfightTactics",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24577,6 +25708,7 @@
    "desc": "Lose all your gold. After ? player combats, gain back the original amount and another 62 gold.  Incoming Gold: ?",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/forwardthinking_ii.png",
    "apiName": "TFT_Augment_ForwardThinking",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -24594,6 +25726,7 @@
    "desc": "Every 5th attack deals bonus true damage equal to ?% Basic Attack Damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/furiousblows_ii.png",
    "apiName": "TFT_Augment_FuriousBlows",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24608,6 +25741,10 @@
    "desc": "Gain a random Gold Augment and 5 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/goldendestiny_ii.png",
    "apiName": "DA_GoldDestinyPlus",
+   "rating": {
+    "3-2": "S",
+    "All": "S"
+   },
    "tags": [
     "econ",
     "gamble"
@@ -24625,6 +25762,7 @@
    "desc": "The first time you have ? or more gold, gain a 2-star 5-cost champion and 2 items tailored to them.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/agoldenquest_ii.png",
    "apiName": "TFT_Augment_GoldenQuest",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -24641,6 +25779,7 @@
    "desc": "Gain a Training Dummy. Every 10 seconds, all Training Dummies grant 1 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/goldfordummies_ii.png",
    "apiName": "TFT_Augment_GoldForDummies",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -24657,6 +25796,7 @@
    "desc": "Lose all champions on your board and bench. Gain a Golem with 60% of their combined Health and 33% of their combined Attack Damage. The Golem gains 1200 Health per stage. Gain a non-Tank 2-star 2-cost champion.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/golemify_ii.png",
    "apiName": "TFT_Augment_Golemify",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24672,6 +25812,7 @@
    "desc": "Gain a Sparring Gloves. Your team gains ?% Critical Strike Chance.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/will-of-the-flail-ii.png",
    "apiName": "TFT_Augment_GuardbreakerSpirit",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24686,6 +25827,7 @@
    "desc": "Sell your board and bench. Gain 4 random 2-star ?-cost champions. Disable your Shop for the next ? rounds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/headstart_i.png",
    "apiName": "TFT_Augment_HeadStart",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24701,6 +25843,7 @@
    "desc": "Gain a Crown of Demacia, which provides significant bonuses to the wearer. If the holder dies, lose the round.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/heavyisthecrown_ii.png",
    "apiName": "TFT_Augment_HeavyIsTheCrown",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24715,6 +25858,7 @@
    "desc": "Your team gains ? Health and size for each time you've rolled this game. Gain 5 gold.   Rolls: ? Health: ?",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/heftyrolls_ii.png",
    "apiName": "TFT_Augment_HeftyRolls",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -24732,6 +25876,7 @@
    "desc": "Gain an Ionic Spark. Your Ionic Sparks have +3 hex radius and do ?% more damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/highvoltage_ii.png",
    "apiName": "TFT_Augment_HighVoltage",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24746,6 +25891,7 @@
    "desc": "Now and at the start of the next 2 Stages, receive a care package with loot and 1 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/carepackage_ii.png",
    "apiName": "TFT_Augment_HomeCooking",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -24762,6 +25908,7 @@
    "desc": "For every 550 Mana your team spends, summon a whirlwind that knocks up enemies.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/howlinggale_ii.png",
    "apiName": "TFT_Augment_HowlingGale",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24777,6 +25924,7 @@
    "desc": "Allies that start in the back two rows split 60 total Mana after 6 seconds of combat.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/incoming_i.png",
    "apiName": "TFT_Augment_Incoming",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24792,6 +25940,7 @@
    "desc": "For each unique item they are holding, your team gains ?% Attack Damage and 1% Ability Power.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/itemcollector_i.png",
    "apiName": "TFT_Augment_ItemCollector1",
+   "rating": {},
    "tags": [
     "items"
    ],
@@ -24809,6 +25958,7 @@
    "desc": "Your team gains 20 Health. For each unique item they are holding, your team gains bonus 5 Health, ?% Attack Damage, and 1% Ability Power.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/itemcollector_ii.png",
    "apiName": "TFT_Augment_ItemCollector2",
+   "rating": {},
    "tags": [
     "items"
    ],
@@ -24826,6 +25976,7 @@
    "desc": "Gain a Giant Slayer. Giant Slayers gain their Damage Amp against all enemies instead of just Tanks.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/indiscriminateslayer_ii.png",
    "apiName": "TFT_Augment_JustSlayer",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24841,6 +25992,7 @@
    "desc": "The first time each ally falls below ?% Health, they restore ?% maximum Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/lastsecondsave_ii.png",
    "apiName": "TFT_Augment_LastSecondSave",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24856,6 +26008,7 @@
    "desc": "Your team gains 2 Armor and Magic Resist for each ally that starts combat in the front two rows.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/lineup-i.png",
    "apiName": "TFT_Augment_Lineup",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24870,6 +26023,7 @@
    "desc": "Roll 3 dice. Gain rewards based on their total.  Reward: ?",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/a-magical-roll-ii.png",
    "apiName": "TFT_Augment_MagicRoll",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24884,6 +26038,7 @@
    "desc": "Your team gains 55 Health for each active Unique trait. Gain a Rhaast and a Miss Fortune.  ?  Unique traits belong to 1 champion and are shown in orange.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/misfits_ii.png",
    "apiName": "TFT_Augment_Misfits",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24898,6 +26053,7 @@
    "desc": "Combat start: 1 random 1-cost champion is upgraded to 3-star for that round and gains ?% Attack Damage and ?% Ability Power.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/moonlight_ii.png",
    "apiName": "TFT_Augment_Moonlight",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24912,6 +26068,7 @@
    "desc": "After ? player combats, gain 1 of every item component. Gain a random component now.  ? ?",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/museumheist_iii.png",
    "apiName": "TFT_Augment_MuseumHeist",
+   "rating": {},
    "tags": [
     "items"
    ],
@@ -24928,6 +26085,7 @@
    "desc": "Set your current and max player Health to 9. On combat loss, you only lose 1 health and gain loot. You can't gain health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/ninelives_iii.png",
    "apiName": "TFT_Augment_NineLives",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24943,6 +26101,7 @@
    "desc": "When your first ally dies each combat, grant your team 25 + ?% of that ally's Armor and Magic Resistance.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/anoblesacrifice_ii.png",
    "apiName": "TFT_Augment_NobleSacrifice",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24958,6 +26117,7 @@
    "desc": "Every third attack deals ?% damage and heals ?% of the damage. Excess healing is converted to a shield up to 400 Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/overheal_ii.png",
    "apiName": "TFT_Augment_Overheal",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -24972,6 +26132,7 @@
    "desc": "Your team gains ?% Attack Speed. Gain 8 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/placebo_i.png",
    "apiName": "TFT_Augment_Placebo",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -24988,6 +26149,7 @@
    "desc": "Your team gains ?% Attack Speed. Gain 14 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/placebo_i.png",
    "apiName": "TFT_Augment_PlaceboPlus",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -25002,6 +26164,7 @@
    "desc": "Get 2 Pocket Recombobulators, a consumable that transforms a 1 or 2-cost champion into one of a higher cost. They keep their Star level. Also receive 2 Reforgers.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/pocketrecombulator_i.png",
    "apiName": "TFT_Augment_PocketRecombobulator",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25016,6 +26179,7 @@
    "desc": "Gain a random 1-cost Champion Augment. After 3 turns, gain a copy of the champion at the start of every turn.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/protaganist_iii.png",
    "apiName": "TFT_Augment_Protagonist",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25031,6 +26195,7 @@
    "desc": "Round start Completed Items on benched champions turn into one of their recommended items. Gain a random completed item.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/psychicforge_ii.png",
    "apiName": "TFT_Augment_PsychicForge",
+   "rating": {},
    "tags": [
     "items"
    ],
@@ -25048,6 +26213,7 @@
    "desc": "Gain a Red Buff. Your Burns deal ?% increased damage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/pyromaniac_ii.png",
    "apiName": "TFT_Augment_Pyromaniac",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25063,6 +26229,7 @@
    "desc": "Champions holding exactly 1 item upgrade that item to Radiant. Champions holding Radiant items gain ?% Health. Gain 2 Magnetic Removers.  Thief's Gloves counts as multiple items.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/qualityoverquantity_iii.png",
    "apiName": "TFT_Augment_QualityOverQuantity",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25077,6 +26244,7 @@
    "desc": "For the next 3 player combats, you cannot use your shop. After, gain 24 gold and a Completed Item Anvil.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/quietquitting_ii.png",
    "apiName": "TFT_Augment_QuietQuitting",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -25093,6 +26261,7 @@
    "desc": "For every 1 unused Augment Reroll, gain 3 free shop rerolls. Gain 1 gold.  Does not include the round this augment is selected.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/reroll-transfer-i.png",
    "apiName": "TFT_Augment_RerollTransfer",
+   "rating": {},
    "tags": [
     "reroll",
     "econ"
@@ -25110,6 +26279,7 @@
    "desc": "Remove all champions on your board and bench. Gain 2 random 2-star 3-costs, 2 2-star 2-costs, and 1 2-star 1-cost champion.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/restartmission_i.png",
    "apiName": "TFT_Augment_RestartMission",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25124,6 +26294,7 @@
    "desc": "Your next shop and every ? shops will contain all 3-cost champions. Gain 5 rerolls.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/riggedshop_i.png",
    "apiName": "TFT_Augment_RiggedShopPlus",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25138,6 +26309,7 @@
    "desc": "After you earn ? gold in interest, gain 25 gold. Your max interest is increased to 7. Gain 2 gold now.  Gold earned: ?",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/savingsaccount_ii.png",
    "apiName": "TFT_Augment_SavingsAccount",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -25156,6 +26328,7 @@
    "desc": "Your team gains ?% Attack Damage and 5 Mana. Gain a B.F. Sword and a Tear of the Goddess.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/will-of-the-spear-ii.png",
    "apiName": "TFT_Augment_ShojinSpirit",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25171,6 +26344,7 @@
    "desc": "When an ally is healed, they deal ?% of the healing to their target as magic damage. Every 5 seconds, allies heal for ?% of their max Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/sideeffects_ii.png",
    "apiName": "TFT_Augment_SideEffects",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25185,6 +26359,7 @@
    "desc": "Gain a Giant's Belt. After a champion starts combat with more than ? max Health, gain a Warmog's Armor.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/sizematters_i.png",
    "apiName": "TFT_Augment_SizeMatters",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25200,6 +26375,7 @@
    "desc": "Champions restore ?% of their max Health every 4 seconds. Increase the healing by 0.5% for every 10 missing player Health.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/spiritlink_ii.png",
    "apiName": "TFT_Augment_SpiritLink1",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25214,6 +26390,7 @@
    "desc": "Collect Golden Balls by defeating players in combat. Collect all 7 for a reward, then restart the quest with more powerful rewards.   Gain a 2-star 1-cost champion to start your journey.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/questfortheseven_ii.png",
    "apiName": "TFT_Augment_StoryOfSeven",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25228,6 +26405,7 @@
    "desc": "Now and at the start of each Stage, open a Shop of 4 unique 4-cost champions and gain 6 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/subscriptionservice_iii.png",
    "apiName": "TFT_Augment_SubscriptionService",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -25244,6 +26422,7 @@
    "desc": "Gain 4 gold. After 3 players are eliminated, gain 100 more gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/survivor_i.png",
    "apiName": "TFT_Augment_Survivor",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -25260,6 +26439,7 @@
    "desc": "After the next 2 carousels, gain one champion that was not taken and its item. Gain 1 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/tablescraps_i.png",
    "apiName": "TFT_Augment_TableScraps",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -25277,6 +26457,7 @@
    "desc": "Each of your allies with 3 items equipped emits 2 arcs of lightning every 5 seconds, dealing 240-270 magic damage based on stage.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/teslacoil_ii.png",
    "apiName": "TFT_Augment_TeslaCoil",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25292,6 +26473,7 @@
    "desc": "Gain a Bloodthirster. Combat start: Allies holding Bloodthirsters lose ?% Health but gain a ?% Health shield and ?% Attack Damage and Ability Power.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/trailofblood_ii.png",
    "apiName": "TFT_Augment_TheDarkinBlade",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25307,6 +26489,7 @@
    "desc": "Gain a Bramble Vest. Your Bramble Vests deal ?-?% more damage (based on Stage).",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/thornplatedarmor_ii.png",
    "apiName": "TFT_Augment_ThornPlatedArmor",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25322,6 +26505,7 @@
    "desc": "Increase your current and max player Health by 25. On carousel rounds you are released earlier, but are much slower.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/titanictitan_i.png",
    "apiName": "TFT_Augment_TitanicTitan",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25336,6 +26520,7 @@
    "desc": "For the next 3 players eliminated, choose one of their completed items to keep.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/tombraider_ii.png",
    "apiName": "TFT_Augment_TombRaider1",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25350,6 +26535,7 @@
    "desc": "Gain 1 completed item anvil. Every time a player is eliminated, choose one of their completed items to keep.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/tombraider_iii.png",
    "apiName": "TFT_Augment_TombRaider2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25364,6 +26550,7 @@
    "desc": "Gain a locked chest each Stage between now and Stage ?. Unlock each chest when you spend ? gold on Shop rerolls. These chests persist until opened.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/treasurehunt_ii.png",
    "apiName": "TFT_Augment_TreasureHunt",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -25381,6 +26568,7 @@
    "desc": "Gain ? 3-cost champions. Combat Start: 3 random 3-cost champions gain 220 Health and ?% Attack Speed.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/trifecta-ii.png",
    "apiName": "TFT_Augment_Trifecta1",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25396,6 +26584,7 @@
    "desc": "Gain ? 3-cost champions. Allies gain ?% Attack Speed.  Combat Start: 3 random 3-cost champions gain 300 Health and ?% Attack Speed.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/trifecta-iii.png",
    "apiName": "TFT_Augment_Trifecta2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25408,6 +26597,7 @@
    "desc": "Gain 1 reroll for every 2 unique 2-cost champions fielded last player combat. Gain 1 2-cost champions.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/twomuchvalue_ii.png",
    "apiName": "TFT_Augment_TwoMuchValue",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25423,6 +26613,7 @@
    "desc": "When you field exactly 2 copies of a champion, they both gain 375 Health. When one copy dies, the other gains a ?% max Health Shield for 12 seconds. When you 3-star, gain a 2-star copy.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/two-tanky-ii.png",
    "apiName": "TFT_Augment_TwoTanky",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25437,6 +26628,7 @@
    "desc": "Gain a random 2-star 2-cost and 2 random 2-star 1-cost champions.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/two-trick-ii.png",
    "apiName": "TFT_Augment_TwoTrick",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25453,6 +26645,7 @@
    "desc": "Whenever your team has fewer allies alive than your opponent, regenerate 4% missing Health each second (Max: 150).",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/underdogs1.png",
    "apiName": "TFT_Augment_Underdogs",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25468,6 +26661,7 @@
    "desc": "Every round, your team gain 5% Attack Damage and Ability Power. Champions start with 1 stack of this effect, and can stack up to 4 times.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/unforgotten_ii.png",
    "apiName": "TFT_Augment_Unforgotten",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25483,6 +26677,7 @@
    "desc": "Gain a Nashor's Tooth, a Jeweled Gauntlet, a Needlessly Large Rod and a Magnetic Remover.  Useful for Magic Carries!",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/unlimitedpower_iii.png",
    "apiName": "TFT_Augment_UnlimitedPower",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25497,6 +26692,7 @@
    "desc": "If you win your next player combat, gain a Spatula. If you lose, gain a Frying Pan. Gain a component anvil and 3 gold now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/urfsgambit_ii.png",
    "apiName": "TFT_Augment_UrfsGambit",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -25514,6 +26710,7 @@
    "desc": "Your team gains ?% Critical Strike chance, and their Abilities can critically strike. If an Ability critically strikes, restore 9% of your Mana over 3 seconds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/waterlotus_ii.png",
    "apiName": "TFT_Augment_WaterLotus1",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25529,6 +26726,7 @@
    "desc": "Your team gains ?% Critical Strike chance, and their Abilities can critically strike. If an Ability critically strikes, restore 15% of your Mana over 3 seconds.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/waterlotus_iii.png",
    "apiName": "TFT_Augment_WaterLotus2",
+   "rating": {},
    "tags": [],
    "traits": []
   },
@@ -25543,6 +26741,7 @@
    "desc": "Whenever you star up a champion that you fielded last combat, gain ? free Shop rerolls. Gain 6 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/onaroll_i.png",
    "apiName": "TFT_Augment_Waverider",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -25559,6 +26758,7 @@
    "desc": "When you reach level 9, immediately level to 10 and gain 8 free Shop rerolls. Gain 10 XP now.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/winout_iii.png",
    "apiName": "TFT_Augment_WinOut",
+   "rating": {},
    "tags": [
     "econ"
    ],
@@ -25575,6 +26775,10 @@
    "desc": "Primal grants an additional Blessing. Gain a Vi and a Sivir.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_PrimalAugmentPlus_Sivir",
+   "rating": {
+    "All": "A",
+    "4-2": "A"
+   },
    "tags": [],
    "traits": [
     "Primal"
@@ -25592,6 +26796,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [
     "reroll"
    ],
@@ -25609,6 +26814,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [
     "combat"
    ],
@@ -25626,6 +26832,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [
     "reroll"
    ],
@@ -25643,6 +26850,7 @@
    "desc": null,
    "icon": null,
    "apiName": null,
+   "rating": {},
    "tags": [
     "reroll"
    ],
@@ -25659,6 +26867,10 @@
    "desc": "Gain ? 1-cost champions, ? 2-cost champion, and ? 3-cost champion.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t1.png",
    "apiName": "DA_18_OnesTwosThree",
+   "rating": {
+    "2-1": "B",
+    "All": "B"
+   },
    "tags": [
     "econ"
    ],
@@ -25675,6 +26887,10 @@
    "desc": "Gain a random Prismatic Augment and 7 gold.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/prismaticdestiny_iii.png",
    "apiName": "DA_PrismaticDestinyPlus",
+   "rating": {
+    "3-2": "S",
+    "All": "S"
+   },
    "tags": [
     "gamble",
     "econ"
@@ -25692,6 +26908,10 @@
    "desc": "Your Lunar champions gain 100 Health and ?% Damage Amp for each unique Solar champion fielded. Gain a Leona, a Kayle, and an Aphelios.",
    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/augments/hexcore/missing-t2.png",
    "apiName": "DA_18_LunarTraitAugmentPlus",
+   "rating": {
+    "All": "C",
+    "4-2": "C"
+   },
    "tags": [],
    "traits": [
     "Eclipse"
