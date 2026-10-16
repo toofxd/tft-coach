@@ -543,7 +543,7 @@ const augByName = name => DATA.augments.find(a => a.name.toLowerCase() === Strin
 // Reset everything after a node when an earlier choice changes
 function resetFrom(step) {
   if (step <= 1) { S.comp = null; }
-  if (step <= 3) { S.augs = {}; S.offers = {}; S.antiheal = []; }
+  if (step <= 3) { S.augs = {}; S.offers = {}; S.antiheal = []; S.antihealOff = []; }
 }
 function resetStage(stage) {
   STAGES.slice(STAGES.indexOf(stage)).forEach(st => { delete S.augs[st]; });
@@ -849,10 +849,20 @@ function utilityNeeds(comp) {
   return ["antiheal", ...(comp.lean === "AD" ? ["sunder"] : comp.lean === "AP" ? ["shred"] : ["sunder", "shred"])];
 }
 
+// Sources the chosen comp already brings: its traits (Inferno) and listed champions on its final board
+function utilityFromComp() {
+  const comp = S.comp && compById(S.comp);
+  if (!comp) return new Set();
+  const onBoard = new Set(comp.finalComp.map(u => u.name));
+  return new Set(UTILITY_SOURCES.filter(x => (x.trait && comp.traits.includes(x.trait)) || (x.unit && onBoard.has(x.unit))).map(x => x.id));
+}
+
 function utilityHave() {
   const have = new Set(S.antiheal || []);
   const augs = Object.values(S.augs || {});
   UTILITY_SOURCES.filter(x => x.kind === "Augment" && augs.includes(x.name)).forEach(x => have.add(x.id));  // auto from your augments
+  const off = new Set(S.antihealOff || []);
+  utilityFromComp().forEach(id => { if (!off.has(id)) have.add(id); });   // auto from your comp (untickable)
   return have;
 }
 
@@ -1196,13 +1206,19 @@ document.addEventListener("click", e => {
   }
   else if (act === "clear-all") {
     S = { opener: null, skipOpener: false, comp: null, streak: "mixed", hp: "", augs: {}, offers: {}, tab: {},
-          favs: S.favs || [], antiheal: [], utilOpen: S.utilOpen };
+          favs: S.favs || [], antiheal: [], antihealOff: [], utilOpen: S.utilOpen };
     window.scrollTo(0, 0);
   }
   else if (act === "ah") {
-    const cur = new Set(S.antiheal || []);
-    cur.has(v) ? cur.delete(v) : cur.add(v);
-    S.antiheal = [...cur];
+    if (utilityFromComp().has(v)) {            // comp-provided: untick/retick by remembering the opt-out
+      const off = new Set(S.antihealOff || []);
+      off.has(v) ? off.delete(v) : off.add(v);
+      S.antihealOff = [...off];
+    } else {
+      const cur = new Set(S.antiheal || []);
+      cur.has(v) ? cur.delete(v) : cur.add(v);
+      S.antiheal = [...cur];
+    }
   }
   else if (act === "fav") {
     S.favs = isFav(v) ? S.favs.filter(x => x !== v) : [...(S.favs || []), v];
