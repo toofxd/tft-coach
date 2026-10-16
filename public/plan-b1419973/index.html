@@ -187,7 +187,13 @@ a { color: inherit; }
 
 
 /* ── Game plan tree ────────────────────────────────────────────── */
-.wrap { max-width: 900px; margin: 0 auto; }
+.wrap { max-width: 1180px; margin: 0 auto; }
+.layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 22px; align-items: start; }
+.util-panel { position: sticky; top: 76px; max-height: calc(100vh - 90px); overflow-y: auto; display: grid; gap: 10px; }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .util-panel { position: static; max-height: none; }
+}
 .tree { list-style: none; position: relative; }
 .node { position: relative; padding: 0 0 22px 34px; }
 .node::before { /* connector line */
@@ -353,11 +359,18 @@ a { color: inherit; }
 .type-card .go b { color: var(--gold-light); font-weight: 800; }
 .aug-pick { cursor: pointer; font-family: inherit; }
 .aug-pick:hover { border-color: rgba(174,145,66,0.6); color: var(--text); }
-.ah-need + .ah-need { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
-.ah-head { display: flex; align-items: baseline; gap: 10px; }
+.ah-box-card { padding: 10px 12px; }
+.ah-box-card.met { border-color: rgba(174,145,66,0.55); }
+.ah-box-card.skip { opacity: 0.55; }
+.ah-head { display: flex; align-items: baseline; gap: 8px; cursor: pointer; list-style: none; }
+.ah-head::-webkit-details-marker { display: none; }
+.ah-need-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ff8a7a; }
+.ah-skip { font-size: 11px; color: var(--text-30); }
+.ah-box-card .ah-row { padding: 5px 7px; font-size: 12.5px; }
+.ah-box-card .ah-how { font-size: 11.5px; }
 .ah-title { font-size: 14px; font-weight: 700; }
 .ah-met { font-size: 12px; font-weight: 600; color: var(--gold-light); }
-.ah-what { font-size: 12px; color: var(--text-50); margin: 2px 0 8px; }
+.ah-what { font-size: 11.5px; color: var(--text-50); margin: 4px 0 6px; line-height: 1.4; }
 .ah-group { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin: 6px 0 2px; }
 .ah-list { display: grid; gap: 4px; }
 .ah-row { display: flex; align-items: flex-start; gap: 10px; text-align: left; width: 100%; padding: 7px 9px; border-radius: 7px;
@@ -446,7 +459,10 @@ a { color: inherit; }
     <div class="page-title">Game Plan</div>
     <div class="page-sub">Opener → comp → augments at 2-1, 3-2, 4-2 → when to roll and level</div>
   </div>
-  <ol class="tree" id="tree"><li class="loading">Loading…</li></ol>
+  <div class="layout">
+    <aside class="util-panel" id="utilPanel" aria-label="Utility items"></aside>
+    <ol class="tree" id="tree"><li class="loading">Loading…</li></ol>
+  </div>
   <div class="disclaimer">
     <p style="margin-bottom:6px;"><strong style="color:#8a9aaa;">Source:</strong> comp tier list and recommended augments from <a href="https://tftacademy.com/tierlist/comps" target="_blank" rel="noopener">TFT Academy</a><span id="patchNote"></span>; leveling patterns, conditions and augment notes adapted from <a href="https://bunnymuffins.lol/meta/" target="_blank" rel="noopener">BunnyMuffins</a>; augment list from <a href="https://tactics.tools/augments" target="_blank" rel="noopener">tactics.tools</a>. Augment picks and roll/level advice come from fixed if-then rules (comp picks, strategy, streak, HP, earlier augments) — no AI.</p>
     <p style="font-size:11px;color:#556070;line-height:1.6;max-width:760px;margin:0 auto 8px;">This tool isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
@@ -504,10 +520,10 @@ function render() {
   nodes.push(nodeOpener());
   nodes.push(nodeComp());
   nodes.push(nodeSpot(comp));
-  nodes.push(nodeAntiheal(comp));
   STAGES.forEach((st, i) => nodes.push(nodeStage(comp, st, i)));
   nodes.push(nodeLate(comp));
   document.getElementById("tree").innerHTML = nodes.join("");
+  document.getElementById("utilPanel").innerHTML = utilityPanelHtml(comp);
   save();
 }
 
@@ -715,7 +731,7 @@ function rollLevelBlock(comp, stage, late = false) {
 const stageOpen = st => S.comp && STAGES.slice(0, STAGES.indexOf(st)).every(p => S.augs[p]);
 
 function nodeStage(comp, stage, i) {
-  const n = 5 + i;
+  const n = 4 + i;
   const title = `Stage ${stage[0]} · ${stage} augment`;
   if (!comp) return node(n, { title, sub: "", locked: true });
   if (!stageOpen(stage)) return node(n, { title, sub: `Pick your ${STAGES[i - 1]} augment first`, locked: true });
@@ -776,6 +792,7 @@ function utilityHave() {
 }
 
 function utilityFit(comp, x) {
+  if (!comp) return x.unit ? { score: -9 } : { score: x.kind === "Augment" ? -1 : 0, note: "" };
   const holder = x.item && comp.finalComp.find(u => u.items.includes(x.item));
   const onBoard = x.unit && [...comp.finalComp, ...comp.earlyComp].some(u => u.name === x.unit);
   if (x.id === "inferno" && comp.traits.includes("Inferno")) return { score: 6, note: "This comp already runs Inferno" };
@@ -790,15 +807,16 @@ function utilityFit(comp, x) {
   return { score, note: "" };
 }
 
-function nodeAntiheal(comp) {
-  if (!comp) return node(4, { title: "Utility items", sub: "Pick a comp first", locked: true });
+// Three permanent boxes (build them any time); boxes this comp doesn't need are dimmed
+function utilityPanelHtml(comp) {
   const have = utilityHave();
-  const needs = utilityNeeds(comp);
-  const coveredBy = need => UTILITY_SOURCES.find(x => x.needs.includes(need) && have.has(x.id) && !x.partial);
-  const sections = needs.map(need => {
-    const full = coveredBy(need);
+  const needed = comp ? utilityNeeds(comp) : ["antiheal", "sunder", "shred"];
+  const desktop = window.matchMedia("(min-width: 901px)").matches;
+  return ["antiheal", "sunder", "shred"].map(need => {
+    const full = UTILITY_SOURCES.find(x => x.needs.includes(need) && have.has(x.id) && !x.partial);
+    const isNeeded = needed.includes(need);
     const opts = UTILITY_SOURCES.filter(x => x.needs.includes(need)).map(x => ({ ...x, ...utilityFit(comp, x) })).filter(x => x.score > -9);
-    const best = full ? null : opts.slice().sort((a, b) => b.score - a.score)[0];
+    const best = full || !isNeeded ? null : opts.slice().sort((a, b) => b.score - a.score)[0];
     const groups = KIND_ORDER.map(kind => {
       const rows = opts.filter(x => x.kind === kind).sort((a, b) => b.score - a.score);
       if (!rows.length) return "";
@@ -809,24 +827,25 @@ function nodeAntiheal(comp) {
         return `<button class="ah-row${on ? " on" : ""}${done ? " done" : ""}" data-act="ah" data-v="${x.id}" ${auto ? "disabled" : ""}>
           <span class="ah-box">${on ? "✓" : ""}</span>
           <span class="ah-main"><b>${esc(x.name)}</b>${best && best.id === x.id ? ' <span class="ah-rec">Best fit</span>' : ""}
-            <span class="ah-how">${esc(done ? `Not needed — ${full.name} already covers it` : x.note || x.how)}</span></span>
+            <span class="ah-how">${esc(done ? `Covered by ${full.name}` : x.note || x.how)}</span></span>
         </button>`;
       }).join("")}`;
     }).join("");
-    return `<div class="ah-need${full ? " met" : ""}">
-      <div class="ah-head"><span class="ah-title">${UTILITY_NEEDS[need].title}</span>${full ? `<span class="ah-met">✓ ${esc(full.name)}</span>` : ""}</div>
+    const status = full ? `<span class="ah-met">✓ ${esc(full.name)}</span>`
+      : isNeeded ? `<span class="ah-need-tag">Needed</span>` : `<span class="ah-skip">Not needed for ${esc(comp.lean)}</span>`;
+    // Open by default only while it still needs a source (desktop); your own open/close is remembered per state
+    const key = `${need}:${full ? 1 : 0}:${isNeeded ? 1 : 0}`;
+    const open = (S.utilOpen || {})[key] ?? (desktop && isNeeded && !full);
+    return `<details class="card ah-box-card${full ? " met" : ""}${isNeeded ? "" : " skip"}" data-need="${key}" ${open ? "open" : ""}>
+      <summary class="ah-head"><span class="ah-title">${UTILITY_NEEDS[need].title}</span>${status}</summary>
       <div class="ah-what">${esc(UTILITY_NEEDS[need].what)}</div>
-      <div class="ah-list">${groups}</div></div>`;
+      <div class="ah-list">${groups}</div></details>`;
   }).join("");
-  const met = needs.filter(coveredBy).length;
-  return node(4, { title: "Utility items", choice: `${met}/${needs.length} covered`, done: met === needs.length, body: `<div class="card">
-    ${sections}
-    <div class="items-list" style="margin-top:10px">Then fully item <b>one carry and one tank</b> before starting a second carry.</div></div>` });
 }
 
 function nodeLate(comp) {
-  if (!comp || !STAGES.every(st => S.augs[st])) return node(8, { title: "Stage 5+", sub: "Finish your augments first", locked: true });
-  return node(8, { title: "Stage 5+", choice: "Cap your board", done: true,
+  if (!comp || !STAGES.every(st => S.augs[st])) return node(7, { title: "Stage 5+", sub: "Finish your augments first", locked: true });
+  return node(7, { title: "Stage 5+", choice: "Cap your board", done: true,
     body: `<div class="card"><div class="lbl">Roll / level — late game</div>${rollLevelBlock(comp, "5", true)}${ifThenHtml(comp, "5")}</div>` });
 }
 
@@ -1081,6 +1100,14 @@ document.addEventListener("click", e => {
     next?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 });
+
+// Remember which utility boxes are open across re-renders (toggle doesn't bubble: capture it)
+document.addEventListener("toggle", e => {
+  const need = e.target.dataset?.need;
+  if (!need) return;
+  S.utilOpen = { ...(S.utilOpen || {}), [need]: e.target.open };
+  save();
+}, true);
 
 // Live search boxes: redraw only the results so the input keeps focus
 document.addEventListener("input", e => {
