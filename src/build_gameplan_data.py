@@ -219,6 +219,9 @@ def parse_augment_guide(raw):
 
 # ── Opener guide → directional rules ──────────────────────────────────────────
 
+# Guide conditions shown differently on the page (key = condition as written in the guide)
+RULE_IF_OVERRIDES = {"Scuttle Crab + Riftbeast": "Riftbeast Emblem"}
+
 def parse_openers(raw):
     text = to_text(raw)
     rules = []
@@ -226,7 +229,10 @@ def parse_openers(raw):
     for l in block.splitlines():
         if "->" in l or "?" in l and "->" in l:
             cond, _, comps = l.partition("->")
-            rules.append({"if": cond.strip().rstrip("?").strip(), "play": [c.strip() for c in comps.split(",") if c.strip()]})
+            cond = cond.strip().rstrip("?").strip()
+            rules.append({"if": RULE_IF_OVERRIDES.get(cond, cond), "play": [c.strip() for c in comps.split(",") if c.strip()]})
+    # Emblem rules first, so all the emblem tiles sit together
+    rules.sort(key=lambda r: not r["if"].endswith("Emblem"))
     hard = section(block.splitlines(), "Hard Force", {"conditional", "reroll check", "lose streak"})
     # Per-augment advice paragraphs (heading line = augment names, then the advice)
     aug_notes = {}

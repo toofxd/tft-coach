@@ -30812,6 +30812,12 @@
     ]
    },
    {
+    "if": "Riftbeast Emblem",
+    "play": [
+     "Riftbeast Reroll"
+    ]
+   },
+   {
     "if": "Brawler",
     "play": [
      "Adaptor Master Yi Reroll"
@@ -30860,12 +30866,6 @@
     "if": "Azir Orb + Rod",
     "play": [
      "Azir Reroll"
-    ]
-   },
-   {
-    "if": "Scuttle Crab + Riftbeast",
-    "play": [
-     "Riftbeast Reroll"
     ]
    }
   ],

@@ -2,7 +2,10 @@
 # collect_pro.py -> features.py -> slim CSV (production reads the slim one).
 # Does NOT commit or push — review the counts, then push manually.
 
-$ErrorActionPreference = 'Stop'
+# Not 'Stop': in PowerShell 5.1, `*>>` turns every python stderr line (warnings, retry
+# notices) into an ErrorRecord, and 'Stop' kills the run on the first one. Failures are
+# caught by the $LASTEXITCODE checks below instead.
+$ErrorActionPreference = 'Continue'
 $root   = $PSScriptRoot
 $python = 'C:\Users\Tiffany\AppData\Local\Programs\Python\Python314\python.exe'
 Set-Location $root

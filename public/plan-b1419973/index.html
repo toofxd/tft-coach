@@ -751,7 +751,7 @@ function ruleParts(cond) {
 function ruleIconsHtml(parts) {
   return parts.map((p, k) => (k ? '<span class="rt-plus">+</span>' : "") + (
       p.kind === "text" || (p.kind === "slam" && !p.items.length) ? `<span class="rt-txt">${esc(p.name)}</span>`
-      : p.kind === "slam" ? `<span class="rt-slam">${p.items.map(it => `<span class="rt-ic k-item"><img src="${esc(it.icon)}" alt=""></span>`).join("")}<span class="rt-lbl">slam</span></span>`
+      : p.kind === "slam" ? `<span class="rt-slam">${p.items.map(it => `<span class="rt-ic k-item"><img src="${esc(it.icon)}" alt=""></span>`).join("")}</span>`
       : `<span class="rt-ic k-${p.kind}${p.cost ? ` cost-${p.cost}` : ""}"><img src="${esc(p.icon)}" alt="">${p.stars ? `<span class="rt-stars">${"★".repeat(p.stars)}</span>` : ""}</span>`)).join("");
 }
 
@@ -1330,8 +1330,8 @@ function emblemRecipeHtml(trait) {
   const r = emblemRecipe(trait);
   if (!r) return DATA.emblems?.uncraftable.includes(`${trait} Emblem`)
     ? `<div class="tip-note">Can't be crafted — augments, carousel or loot only</div>` : "";
-  return `<div class="tip-recipe"><span><img src="${esc(r.base.icon)}" alt="">${esc(r.base.name)}</span><i>+</i>
-    <span><img src="${esc(r.component.icon)}" alt="">${esc(r.component.name)}</span></div>`;
+  return `<div class="tip-recipe"><span><img src="${esc(r.base.icon)}" alt="${esc(r.base.name)}"></span><i>+</i>
+    <span><img src="${esc(r.component.icon)}" alt="${esc(r.component.name)}"></span></div>`;
 }
 
 // Same layout as the Stat Calculator's Emblem Recipes: Spatula + its 8 emblems, then Frying Pan.
