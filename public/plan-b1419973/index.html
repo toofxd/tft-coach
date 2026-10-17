@@ -1072,8 +1072,13 @@ const UTILITY_NEEDS = {
 };
 const KIND_ORDER = ["Trait", "Item", "Champion", "Augment"];
 
+// Per carry, not the comp's overall lean: an AP comp with an AD carry (Riftbeast's Cinderling)
+// still needs Sunder
 function utilityNeeds(comp) {
-  return ["antiheal", ...(comp.lean === "AD" ? ["sunder"] : comp.lean === "AP" ? ["shred"] : ["sunder", "shred"])];
+  const leans = new Set((comp.carries || []).map(c => c.lean).filter(Boolean));
+  if (!leans.size && comp.lean) leans.add(comp.lean);
+  const needs = [leans.has("AD") && "sunder", leans.has("AP") && "shred"].filter(Boolean);
+  return ["antiheal", ...(needs.length ? needs : ["sunder", "shred"])];
 }
 
 // Sources the chosen comp already brings: its traits (Inferno) and listed champions on its final board
