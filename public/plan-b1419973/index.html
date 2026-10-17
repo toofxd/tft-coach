@@ -757,7 +757,9 @@ function ruleHoverHtml(i) {
   const parts = ruleParts(r.if);
   const slam = parts.find(p => p.kind === "slam" && p.unit);
   const slamList = slam ? slamItems(slam.unit) : [];
-  return `<div class="tip-rule">${ruleIconsHtml(parts)}</div>
+  // Emblems: the tile already shows the icon, so the hover spells out the name
+  const head = parts.every(p => p.kind === "trait") ? `<b>${esc(r.if)}</b>` : `<div class="tip-rule">${ruleIconsHtml(parts)}</div>`;
+  return `${head}
     ${slamList.length ? `<div class="tip-sub">Slam item for ${esc(slam.unit)}</div>
       <div class="tip-itemlist">${slamList.map(it => `<span>${itemIcon(it.name, "tip-it")}${esc(it.name)}</span>`).join("")}</div>
       <div class="tip-note">Slam = build the full item now instead of holding components.</div>` : ""}
