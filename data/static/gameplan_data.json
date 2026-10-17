@@ -21417,6 +21417,150 @@
   "Giant's Belt": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_giantsbelt.png",
   "Sparring Gloves": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_sparringgloves.png"
  },
+ "emblems": {
+  "bases": [
+   {
+    "name": "Spatula",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spatula.png",
+    "makes": {
+     "1": {
+      "name": "Fae Emblem",
+      "trait": "Fae",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_fae.png"
+     },
+     "2": {
+      "name": "Inferno Emblem",
+      "trait": "Inferno",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_inferno.png"
+     },
+     "3": {
+      "name": "Blossom Emblem",
+      "trait": "Blossom",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_blossom.png"
+     },
+     "4": {
+      "name": "Lunar Emblem",
+      "trait": "Lunar",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_lunar.png"
+     },
+     "5": {
+      "name": "Elderwood Emblem",
+      "trait": "Elderwood",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_elderwood.png"
+     },
+     "6": {
+      "name": "Sprykin Emblem",
+      "trait": "Sprykin",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_sprykin.png"
+     },
+     "7": {
+      "name": "Blackthorn Emblem",
+      "trait": "Blackthorn",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_blackthorn.png"
+     },
+     "8": {
+      "name": "Primal Emblem",
+      "trait": "Primal",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_primal.png"
+     }
+    }
+   },
+   {
+    "name": "Frying Pan",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_fryingpan.png",
+    "makes": {
+     "1": {
+      "name": "Hunter Emblem",
+      "trait": "Hunter",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_hunter.png"
+     },
+     "2": {
+      "name": "Rapidfire Emblem",
+      "trait": "Rapidfire",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_rapidfire.png"
+     },
+     "3": {
+      "name": "Spellweaver Emblem",
+      "trait": "Spellweaver",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_spellweaver.png"
+     },
+     "4": {
+      "name": "Invoker Emblem",
+      "trait": "Invoker",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_invoker.png"
+     },
+     "5": {
+      "name": "Vanguard Emblem",
+      "trait": "Vanguard",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_vanguard.png"
+     },
+     "6": {
+      "name": "Ravager Emblem",
+      "trait": "Ravager",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_ravager.png"
+     },
+     "7": {
+      "name": "Brawler Emblem",
+      "trait": "Brawler",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_brawler.png"
+     },
+     "8": {
+      "name": "Executioner Emblem",
+      "trait": "Executioner",
+      "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set18/tft18_emblem_executioner.png"
+     }
+    }
+   }
+  ],
+  "components": [
+   {
+    "id": "1",
+    "name": "BF Sword",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bfsword.png"
+   },
+   {
+    "id": "2",
+    "name": "Recurve Bow",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_recurvebow.png"
+   },
+   {
+    "id": "3",
+    "name": "Rod",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_needlesslylargerod.png"
+   },
+   {
+    "id": "4",
+    "name": "Tear",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_tearofthegoddess.png"
+   },
+   {
+    "id": "5",
+    "name": "Chain Vest",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_chainvest.png"
+   },
+   {
+    "id": "6",
+    "name": "Negatron Cloak",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_negatroncloak.png"
+   },
+   {
+    "id": "7",
+    "name": "Giant's Belt",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_giantsbelt.png"
+   },
+   {
+    "id": "8",
+    "name": "Sparring Gloves",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_sparringgloves.png"
+   }
+  ],
+  "uncraftable": [
+   "Coven Emblem",
+   "Defender Emblem",
+   "Flora Fatalis Emblem",
+   "Juggernaut Emblem"
+  ]
+ },
  "utilityIcons": {
   "items": {
    "Sunfire Cape": {

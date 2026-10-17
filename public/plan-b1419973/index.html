@@ -392,6 +392,15 @@ a { color: inherit; }
 .cd-tip .w { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); }
 @media (max-width: 900px) { .comp-detail { grid-template-columns: 1fr; } }
 
+/* Emblem recipe grid */
+.em-grid { display: grid; grid-template-columns: repeat(9, 24px); gap: 3px; margin-top: 6px; }
+.em-ic { width: 24px; height: 24px; border-radius: 4px; overflow: hidden; background: var(--navy-deep); border: 1px solid transparent; }
+.em-ic img { width: 100%; height: 100%; display: block; }
+.em-ic.base { border-color: rgba(174,145,66,0.5); }
+.em-ic.fit { border-color: rgba(255,255,255,0.6); }
+.tip-recipe span img { vertical-align: middle; }
+.tip-recipe span { font-size: 12px; color: var(--text-70); }
+
 /* Next augment recommendations */
 .rec-group { padding: 6px 0; }
 .rec-group + .rec-group { border-top: 1px solid var(--border); }
@@ -675,7 +684,7 @@ function render() {
   nodes.push(nodeComp());
   nodes.push(nodeSpot(comp));
   document.getElementById("tree").innerHTML = nodes.join("");
-  document.getElementById("utilPanel").innerHTML = utilityPanelHtml(comp) + augPanelHtml() + augRecsHtml(comp);
+  document.getElementById("utilPanel").innerHTML = utilityPanelHtml(comp) + augPanelHtml() + emblemCardHtml(comp) + augRecsHtml(comp);
   save();
 }
 
@@ -758,7 +767,9 @@ function ruleHoverHtml(i) {
   const slam = parts.find(p => p.kind === "slam" && p.unit);
   const slamList = slam ? slamItems(slam.unit) : [];
   // Emblems: the tile already shows the icon, so the hover spells out the name
-  const head = parts.every(p => p.kind === "trait") ? `<b>${esc(r.if)}</b>` : `<div class="tip-rule">${ruleIconsHtml(parts)}</div>`;
+  const emblemOnly = parts.every(p => p.kind === "trait");
+  const head = emblemOnly ? `<b>${esc(r.if)}</b>${parts.map(p => emblemRecipeHtml(p.name)).join("")}`
+    : `<div class="tip-rule">${ruleIconsHtml(parts)}</div>`;
   return `${head}
     ${slamList.length ? `<div class="tip-sub">Slam item for ${esc(slam.unit)}</div>
       <div class="tip-itemlist">${slamList.map(it => `<span>${itemIcon(it.name, "tip-it")}${esc(it.name)}</span>`).join("")}</div>
@@ -853,7 +864,8 @@ function unitIcon(name, { comp = null, cls = "", big = false } = {}) {
 }
 
 function itemIcon(name, cls = "it-ic") {
-  const icon = DATA.itemIcons?.[name]?.icon || DATA.utilityIcons?.items?.[name]?.icon || DATA.componentIcons?.[name];
+  const icon = DATA.itemIcons?.[name]?.icon || DATA.utilityIcons?.items?.[name]?.icon || DATA.componentIcons?.[name]
+    || DATA.emblems?.bases.find(b => b.name === name)?.icon;
   return `<span class="${cls}" data-tipitem="${esc(name)}" aria-label="${esc(name)}">${icon ? `<img src="${esc(icon)}" alt="" loading="lazy">` : esc(shortItem(name))}</span>`;
 }
 
@@ -912,7 +924,7 @@ function itemHoverHtml(name) {
   const from = it?.from || [];
   return `<b>${esc(name)}</b>${from.length ? `<div class="tip-recipe">${from.map(c =>
     `<span>${c.icon ? `<img src="${esc(c.icon)}" alt="${esc(c.name)}">` : esc(shortItem(c.name))}</span>`).join("<i>+</i>")}</div>`
-    : DATA.componentIcons?.[name] ? '<div class="tip-note">Component</div>' : ""}`;
+    : DATA.componentIcons?.[name] || DATA.emblems?.bases.some(b => b.name === name) ? '<div class="tip-note">Component</div>' : ""}`;
 }
 
 // Comp card: name line, then the final board as portraits (carries first, gold ring) and item priority
@@ -1299,6 +1311,43 @@ function augTypeVerdict(comp, stage, chosen) {
   return { type: pick, next: ranked[1], ranked, reasons };
 }
 
+// ── Emblems: Spatula / Frying Pan + component ───────────────────────
+function emblemRecipe(trait) {
+  const E = DATA.emblems;
+  if (!E) return null;
+  for (const b of E.bases) {
+    const hit = Object.entries(b.makes).find(([, m]) => m.trait === trait);
+    if (hit) return { base: b, component: E.components.find(c => c.id === hit[0]), emblem: hit[1] };
+  }
+  return null;
+}
+
+function emblemRecipeHtml(trait) {
+  const r = emblemRecipe(trait);
+  if (!r) return DATA.emblems?.uncraftable.includes(`${trait} Emblem`)
+    ? `<div class="tip-note">Can't be crafted — augments, carousel or loot only</div>` : "";
+  return `<div class="tip-recipe"><span><img src="${esc(r.base.icon)}" alt="">${esc(r.base.name)}</span><i>+</i>
+    <span><img src="${esc(r.component.icon)}" alt="">${esc(r.component.name)}</span></div>`;
+}
+
+// Grid: components across, Spatula / Frying Pan down; emblems for traits your comp runs are outlined
+function emblemCardHtml(comp) {
+  const E = DATA.emblems;
+  if (!E) return "";
+  const mine = new Set(comp?.traits || []);
+  const ic = (src, cls = "") => `<span class="em-ic${cls}">${src ? `<img src="${esc(src)}" alt="" loading="lazy">` : ""}</span>`;
+  return `<div class="card ah-box-card">
+    <div class="ah-head"><span class="ah-title">Emblems</span></div>
+    <div class="em-grid">
+      <span></span>${E.components.map(c => `<span class="em-ic comp" data-tipitem="${esc(c.name)}">${c.icon ? `<img src="${esc(c.icon)}" alt="">` : ""}</span>`).join("")}
+      ${E.bases.map(b => `<span class="em-ic base" data-tipitem="${esc(b.name)}">${b.icon ? `<img src="${esc(b.icon)}" alt="">` : ""}</span>
+        ${E.components.map(c => { const m = b.makes[c.id];
+          return m ? `<span class="em-ic${mine.has(m.trait) ? " fit" : ""}" data-tipemb="${esc(m.trait)}"><img src="${esc(m.icon)}" alt=""></span>` : ic(""); }).join("")}`).join("")}
+    </div>
+    ${E.uncraftable.length ? `<div class="ah-what" style="margin:6px 0 0">Not craftable: ${esc(E.uncraftable.map(n => n.replace(" Emblem", "")).join(", "))}</div>` : ""}
+  </div>`;
+}
+
 // ── Augment recommendations (left panel) ────────────────────────────
 // Items / Econ / Combat for the next augment round. The groups follow the rule verdict, so the type
 // to take next is on top (take econ and combat can move up). Inside a group: TFT Academy's
@@ -1534,11 +1583,12 @@ document.addEventListener("click", e => {
 const utTip = document.createElement("div");
 utTip.className = "ut-tip";
 document.body.appendChild(utTip);
-const TIP_SEL = "[data-tip], [data-tipcomp], [data-tipunit], [data-tipaug], [data-tipu], [data-tipitem], [data-tiptrait], [data-tipop], [data-tiprule]";
+const TIP_SEL = "[data-tip], [data-tipcomp], [data-tipunit], [data-tipaug], [data-tipu], [data-tipitem], [data-tiptrait], [data-tipop], [data-tiprule], [data-tipemb]";
 let tipFor = null, tipPinned = false, hideTimer = 0;
 function tipHtml(t) {
   const d = t.dataset;
   if (d.tiprule) return ruleHoverHtml(d.tiprule);
+  if (d.tipemb) return `<b>${esc(d.tipemb)} Emblem</b>${emblemRecipeHtml(d.tipemb)}${(S.comp && compById(S.comp)?.traits.includes(d.tipemb)) ? '<div class="tip-best">Your comp runs this trait</div>' : ""}`;
   if (d.tipaug) return augTipHtml(d.tipaug);
   if (d.tipunit) return unitTipHtml(d.tipunit);
   if (d.tipu) return unitHoverHtml(d.tipu, d.tipc);

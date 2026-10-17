@@ -679,6 +679,33 @@ def match_bm(tfta_comps, bm_comps):
     return bm_to_tfta
 
 
+def emblem_recipes(calc):
+    """Spatula / Frying Pan + component → emblem, from the calculator item list.
+    Recipe ids: 1–8 = the usual components, 9 = Spatula, 10 = Frying Pan.
+    Emblems with no recipe (augment / loot only) are listed under 'uncraftable'."""
+    items = list(calc.get("items", {}).values())
+    by_name = {i["name"]: i for i in items}
+    comp_name = {**COMPONENTS, 9: "Spatula", 10: "Frying Pan"}
+    comp_full = {1: "B.F. Sword", 2: "Recurve Bow", 3: "Needlessly Large Rod", 4: "Tear of the Goddess", 5: "Chain Vest",
+                 6: "Negatron Cloak", 7: "Giant's Belt", 8: "Sparring Gloves", 9: "Spatula", 10: "Frying Pan"}
+    icon_of = lambda n: (by_name.get(n) or {}).get("icon")
+    out = {"bases": [], "components": [], "uncraftable": []}
+    for base_id in (9, 10):
+        base = comp_full[base_id]
+        makes = {}
+        for i in items:
+            frm = i.get("from") or []
+            if "Emblem" in (i.get("tags") or [""])[0] and len(frm) == 2 and base_id in frm:
+                other = frm[0] if frm[1] == base_id else frm[1]
+                makes[other] = {"name": i["name"], "trait": i["name"].replace(" Emblem", ""), "icon": i.get("icon")}
+        out["bases"].append({"name": base, "icon": icon_of(base), "makes": {str(k): v for k, v in sorted(makes.items())}})
+    out["components"] = [{"id": str(c), "name": comp_name[c], "icon": icon_of(comp_full[c])} for c in range(1, 9)]
+    seen = {m["name"] for b in out["bases"] for m in b["makes"].values()}
+    out["uncraftable"] = sorted({i["name"] for i in items if (i.get("tags") or [""])[0] == "Emblem"
+                                 and i["name"].endswith(" Emblem") and i["name"] not in seen})
+    return out
+
+
 UNIT_IMG_DIR = Path(__file__).resolve().parent.parent / "public" / "img" / "units"
 
 
@@ -804,6 +831,7 @@ def main():
                       for u in calc["units"].values() if u.get("name")},
         "traitIcons": {t["name"]: t.get("icon") for t in calc["traits"].values() if t.get("name") and t.get("icon")},
         "componentIcons": {COMPONENTS[c]: icons.get(api) for c, api in COMPONENT_API.items()},
+        "emblems": emblem_recipes(calc),
         "utilityIcons": utility_icons(icons, names, items_by_name, calc, load_winrate_rows()),
         "unitPriority": build_unit_priority(calc, names, icons, openers["fullText"]),
         "augments": augments,
