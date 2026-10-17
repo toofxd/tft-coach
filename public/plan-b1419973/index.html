@@ -392,12 +392,16 @@ a { color: inherit; }
 .cd-tip .w { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); }
 @media (max-width: 900px) { .comp-detail { grid-template-columns: 1fr; } }
 
-/* Emblem recipe grid */
-.em-grid { display: grid; grid-template-columns: repeat(9, 24px); gap: 3px; margin-top: 6px; }
-.em-ic { width: 24px; height: 24px; border-radius: 4px; overflow: hidden; background: var(--navy-deep); border: 1px solid transparent; }
-.em-ic img { width: 100%; height: 100%; display: block; }
-.em-ic.base { border-color: rgba(174,145,66,0.5); }
+/* Emblem recipes (matches the Stat Calculator) */
+.em-section { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.em-base { width: 36px; height: 36px; flex-shrink: 0; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); opacity: 0.7; }
+.em-base img, .em-ic img { width: 100%; height: 100%; display: block; }
+.em-plus { font-size: 13px; font-weight: 600; color: var(--text-30); }
+.em-grid { display: grid; grid-template-columns: repeat(4, 36px); gap: 4px; }
+.em-ic { width: 36px; height: 36px; border-radius: 4px; overflow: hidden; background: var(--navy-deep); border: 1px solid var(--border); }
+.em-ic:hover { border-color: rgba(174,145,66,0.7); }
 .em-ic.fit { border-color: rgba(255,255,255,0.6); }
+.em-divider { border: none; border-top: 1px solid var(--border); margin: 8px 0 0; }
 .tip-recipe span img { vertical-align: middle; }
 .tip-recipe span { font-size: 12px; color: var(--text-70); }
 
@@ -684,7 +688,7 @@ function render() {
   nodes.push(nodeComp());
   nodes.push(nodeSpot(comp));
   document.getElementById("tree").innerHTML = nodes.join("");
-  document.getElementById("utilPanel").innerHTML = utilityPanelHtml(comp) + augPanelHtml() + emblemCardHtml(comp) + augRecsHtml(comp);
+  document.getElementById("utilPanel").innerHTML = utilityPanelHtml(comp) + augPanelHtml() + augRecsHtml(comp) + emblemCardHtml(comp);
   save();
 }
 
@@ -1330,21 +1334,21 @@ function emblemRecipeHtml(trait) {
     <span><img src="${esc(r.component.icon)}" alt="">${esc(r.component.name)}</span></div>`;
 }
 
-// Grid: components across, Spatula / Frying Pan down; emblems for traits your comp runs are outlined
+// Same layout as the Stat Calculator's Emblem Recipes: Spatula + its 8 emblems, then Frying Pan.
+// Emblems for traits your comp runs are outlined; hover any emblem for its recipe
 function emblemCardHtml(comp) {
   const E = DATA.emblems;
   if (!E) return "";
   const mine = new Set(comp?.traits || []);
-  const ic = (src, cls = "") => `<span class="em-ic${cls}">${src ? `<img src="${esc(src)}" alt="" loading="lazy">` : ""}</span>`;
+  const section = b => `<div class="em-section">
+      <span class="em-base" data-tipitem="${esc(b.name)}">${b.icon ? `<img src="${esc(b.icon)}" alt="">` : ""}</span>
+      <span class="em-plus">+</span>
+      <div class="em-grid">${E.components.map(c => b.makes[c.id]).filter(Boolean).map(m =>
+        `<span class="em-ic${mine.has(m.trait) ? " fit" : ""}" data-tipemb="${esc(m.trait)}"><img src="${esc(m.icon)}" alt=""></span>`).join("")}</div>
+    </div>`;
   return `<div class="card ah-box-card">
-    <div class="ah-head"><span class="ah-title">Emblems</span></div>
-    <div class="em-grid">
-      <span></span>${E.components.map(c => `<span class="em-ic comp" data-tipitem="${esc(c.name)}">${c.icon ? `<img src="${esc(c.icon)}" alt="">` : ""}</span>`).join("")}
-      ${E.bases.map(b => `<span class="em-ic base" data-tipitem="${esc(b.name)}">${b.icon ? `<img src="${esc(b.icon)}" alt="">` : ""}</span>
-        ${E.components.map(c => { const m = b.makes[c.id];
-          return m ? `<span class="em-ic${mine.has(m.trait) ? " fit" : ""}" data-tipemb="${esc(m.trait)}"><img src="${esc(m.icon)}" alt=""></span>` : ic(""); }).join("")}`).join("")}
-    </div>
-    ${E.uncraftable.length ? `<div class="ah-what" style="margin:6px 0 0">Not craftable: ${esc(E.uncraftable.map(n => n.replace(" Emblem", "")).join(", "))}</div>` : ""}
+    <div class="ah-head"><span class="ah-title">Emblem recipes</span></div>
+    ${E.bases.map(section).join('<hr class="em-divider">')}
   </div>`;
 }
 
@@ -1386,12 +1390,11 @@ function augRecsHtml(comp) {
     return `<div class="rec-group${gi === 0 ? " top" : ""}">
       <div class="rec-head"><span class="rec-type">${gi === 0 ? "Go " : ""}${g}</span>${gi === 0 && v.reasons[0] ? `<span class="rec-why">${esc(v.reasons[0])}</span>` : ""}</div>
       <div class="rec-icons">${list.map(({ a, rating, compPick }) => `<button class="aug-ic aug-pick rec-ic" data-act="aug-add" data-v="${esc(a.name)}" data-tipaug="${esc(a.name)}|${esc(stage)}" aria-label="${esc(a.name)}">
-        ${a.icon ? `<img src="${esc(a.icon)}" alt="">` : esc(a.name)}<span class="rk tier-${rating}">${rating}</span>${compPick ? '<span class="cp" title="TFT Academy pick for this comp"></span>' : ""}</button>`).join("")}</div>
+        ${a.icon ? `<img src="${esc(a.icon)}" alt="">` : esc(a.name)}${compPick ? '<span class="cp" title="TFT Academy pick for this comp"></span>' : ""}</button>`).join("")}</div>
     </div>`;
   }).join("");
   return `<div class="card ah-box-card">
     <div class="ah-head"><span class="ah-title">Next augment</span><span class="ah-skip">${esc(stage)}</span></div>
-    <div class="ah-what">Ranked S → C for this round. Click the one you took.</div>
     ${rows || '<div class="muted">No rated augments for this round.</div>'}</div>`;
 }
 
