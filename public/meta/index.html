@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TFT Set 18 — 18.4b Meta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:      #0c2340;
+  --navy-card: #0e2850;
+  --navy-deep: #071830;
+  --gold:      #ae9142;
+  --gold-light:#c9a84c;
+  --text:      #f0ebe0;
+  --text-70:   rgba(240,235,224,0.7);
+  --text-50:   rgba(240,235,224,0.5);
+  --text-30:   rgba(240,235,224,0.3);
+  --border:    rgba(255,255,255,0.09);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  padding: 80px 20px 20px; /* 80px top clears the fixed nav */
+  min-height: 100vh;
+}
+a { color: inherit; }
+
+/* ── Sticky nav ────────────────────────────────────────────── */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.site-nav.scrolled {
+  background: rgba(12, 35, 64, 0.92);
+  border-color: var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.nav-title {
+  font-family: 'Cinzel', serif;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-title-main { color: #c9a84c; -webkit-text-fill-color: #c9a84c; }
+.nav-title-by { font-size: 13px; font-weight: 400; color: var(--text-30); -webkit-text-fill-color: var(--text-30); }
+.nav-right { display: flex; align-items: center; gap: 2px; }
+.tab-btn {
+  padding: 8px 15px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-30);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+  transition: color 0.15s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  height: 62px;
+}
+.tab-btn:hover { color: var(--text-70); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+.nav-divider { width: 1px; height: 18px; background: rgba(255,255,255,0.18); margin: 0 8px; flex-shrink: 0; }
+.icon-btn {
+  width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  color: var(--text-50);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.icon-btn:hover { background: rgba(174,145,66,0.18); color: var(--gold-light); }
+.hamburger-btn {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  padding: 8px; color: var(--text-50);
+  flex-direction: column; gap: 5px; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hamburger-btn span { display: block; width: 22px; height: 2px; background: currentColor; border-radius: 2px; }
+.mobile-menu {
+  display: none;
+  background: rgba(7,24,48,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-direction: column;
+  padding: 6px 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 13px 24px;
+  color: var(--text-50); text-decoration: none;
+  font-size: 14px; font-weight: 600; font-family: inherit;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a.active { color: var(--gold); }
+@media (max-width: 640px) {
+  .nav-right { display: none; }
+  .hamburger-btn { display: flex; }
+}
+
+/* ── Page header (below sticky nav) ──────────────────────────── */
+.page-header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.page-title { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: 0.01em; }
+.page-sub { font-size: 12px; color: var(--text-30); }
+
+/* Jump links — same look as the Game Plan comp buttons */
+.jump { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.jump a {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none;
+  background: var(--navy-card); border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px 5px 5px;
+}
+.jump a:hover { border-color: rgba(174,145,66,0.7); }
+
+/* ── Comp card: header, then three columns — tips + level guide | priority | board + subs ── */
+.card { background: var(--navy-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+.comp { display: grid; gap: 14px; margin-bottom: 14px; scroll-margin-top: 76px; }
+.comp-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.comp-name { font-size: 16px; font-weight: 700; }
+.kind { font-size: 12px; color: var(--text-50); }
+.comp-detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) auto; grid-template-areas: "mid side board";
+  gap: 16px; align-items: start; }
+.cd-mid { grid-area: mid; } .cd-side { grid-area: side; } .cd-board { grid-area: board; }
+.cd-board, .cd-mid, .cd-side { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.cd-board { gap: 4px; }
+/* Narrower: tips beside the board, priority full width below; phones: one column */
+@media (max-width: 1000px) {
+  .comp-detail { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "mid board" "side side"; }
+}
+@media (max-width: 640px) {
+  .comp-detail { grid-template-columns: minmax(0, 1fr); grid-template-areas: "mid" "side" "board"; }
+}
+.lbl { font-size: 10px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.muted { color: var(--text-50); font-size: 12px; }
+
+/* Tip boxes and rows */
+.cd-tips { display: grid; gap: 6px; }
+.cd-tips.cols { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.cd-tip { font-size: 12.5px; line-height: 1.45; color: var(--text-70); background: var(--navy-deep); border-radius: 6px; padding: 6px 8px; }
+.cd-tip .w { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 3px; }
+.ln, .rule { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.ln + .ln { margin-top: 4px; }
+.rule { font-size: 12.5px; color: var(--text-70); padding: 2px 0; }
+/* Level badge runs the full height of its card's text, label centred */
+.lv-row { display: grid; grid-template-columns: 30px 1fr; gap: 8px; align-items: stretch; }
+.lv { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; line-height: 14px;
+  color: var(--navy); background: var(--gold); border-radius: 5px; }
+.lv-row .note { font-size: 12px; color: var(--text-50); }
+.op { color: var(--text-30); font-weight: 700; }
+
+/* ── Icons: every champion is 40px, every item/augment/trait 32px (board hexes aside) ── */
+.ui, .it-ic, .aug-ic, .tr-ic {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 32px; height: 32px; border-radius: 5px; overflow: hidden; vertical-align: middle; background: #111017;
+}
+.ui { width: 40px; height: 40px; border-radius: 6px; border: 2px solid #808080; }
+.ui img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.ui .un-txt { font-size: 9px; line-height: 1.1; padding: 2px; }
+.ui[data-tip]:hover { filter: brightness(1.15); }
+.stars { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font-size: 9px; line-height: 11px; color: #3a2a00; background: #e8b923; }
+.cost-1 { border-color: #9b9b9b; } .cost-2 { border-color: #11b288; } .cost-3 { border-color: #207ac7; }
+.cost-4 { border-color: #c440da; } .cost-5 { border-color: #ffb93b; }
+.it-ic, .aug-ic, .tr-ic { border: 1px solid var(--border); font-size: 9px; }
+.it-ic img, .aug-ic img { width: 100%; height: 100%; display: block; }
+.it-ic:hover, .aug-ic:hover { border-color: rgba(174,145,66,0.7); }
+.tr-ic { background: rgba(255,255,255,0.06); }
+.tr-ic img { width: 20px; height: 20px; display: block; }
+.it-ic.x img { opacity: 0.5; filter: grayscale(0.7); }
+.it-ic.x::after {
+  content: ""; position: absolute; inset: 1px; border: 2px solid #e53935; border-radius: 50%;
+  background: linear-gradient(45deg, transparent calc(50% - 1px), #e53935 calc(50% - 1px), #e53935 calc(50% + 1px), transparent calc(50% + 1px));
+}
+.coin-cell { display: inline-flex; align-items: center; gap: 2px; white-space: nowrap; color: var(--text); font-weight: 600; }
+.coin { width: 12px; height: 12px; }
+
+/* ── Hex board (copied from Game Plan) — 4 rows × 7, odd rows shifted half a hex ── */
+.hex-board { --hx: min(44px, calc((100vw - 90px) / 7.6)); --gap: 4px; position: relative;
+  width: calc(7.5 * (var(--hx) + var(--gap))); height: calc(3 * (var(--hx) * 1.1547 * 0.75 + var(--gap)) + var(--hx) * 1.1547 + 14px);
+  margin: 0 0 4px; }
+.hx { position: absolute; width: var(--hx); height: calc(var(--hx) * 1.1547);
+  left: calc((var(--c) + var(--odd) * 0.5) * (var(--hx) + var(--gap))); top: calc(var(--r) * (var(--hx) * 1.1547 * 0.75 + var(--gap)) + 10px); }
+.hx::before, .hx-in { content: ""; position: absolute; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+.hx::before { inset: 0; background: currentColor; }
+.hx.empty { color: rgba(255,255,255,0.05); }
+.hx-in { inset: 3px; background: #111017; overflow: hidden; }
+.hx-in img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.hx.cost-1 { color: #9b9b9b; } .hx.cost-2 { color: #11b288; } .hx.cost-3 { color: #207ac7; }
+.hx.cost-4 { color: #c440da; } .hx.cost-5 { color: #ffb93b; }
+.hx[data-tip]:hover::before { background: var(--gold-light); }
+.hx-stars { position: absolute; top: -9px; left: 50%; transform: translateX(-50%); z-index: 1; padding: 0 5px; border-radius: 4px;
+  background: #e8b923; color: #3a2a00; font-size: 9px; letter-spacing: 1px; line-height: 14px; }
+.hx-items { position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); z-index: 1; display: flex; gap: 1px; }
+.hx-it { display: inline-flex; width: calc(var(--hx) * 0.3); height: calc(var(--hx) * 0.3); border-radius: 3px; overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.6); background: #111017; }
+.hx-it img { width: 100%; height: 100%; display: block; }
+
+/* Subs under the board, one per line: "in → replaces" */
+.subs { display: grid; gap: 5px; justify-items: start; }
+.sub { display: inline-flex; align-items: center; gap: 4px; background: var(--navy-deep); border: 1px solid var(--border);
+  border-radius: 6px; padding: 3px 6px 3px 3px; font-size: 12px; color: var(--text-70); }
+.sub .pre { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); padding-left: 3px; }
+
+/* ── Item holders: champion on the left, one row per item slot to its right (+ between rows) ── */
+.holders { display: grid; gap: 6px; margin-top: 6px; }
+/* Champion centred vertically in its card; item rows and notes to its right */
+.holder { display: flex; align-items: center; gap: 8px; background: var(--navy-deep); border-radius: 6px; padding: 6px 8px; }
+.hbody { display: grid; gap: 3px; flex: 1; min-width: 0; }
+/* Alternate holders stack under the main champion */
+.who { display: flex; flex-direction: column; align-items: center; gap: 3px; flex-shrink: 0; }
+.who .or { font-size: 10px; line-height: 1; color: var(--text-50); }
+.rows { display: grid; gap: 3px; min-width: 0; }
+.srow { display: grid; grid-template-columns: 10px 72px minmax(0, 1fr); gap: 4px; align-items: center; min-height: 34px; }
+.srow .sl { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); }
+.srow .sl img { width: 12px; height: 12px; display: block; }
+.srow .chain { display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
+.plus { color: var(--text-30); font-weight: 700; text-align: center; }
+.hnote { font-size: 12px; color: var(--text-50); display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.avoid { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; }
+.avoid .lbl { color: #ef9a9a; margin: 0; }
+
+/* ── Hover card (Game Plan ut-tip) ── */
+.ut-tip { position: fixed; z-index: 200; width: max-content; max-width: 280px; padding: 6px 9px; border-radius: 8px; pointer-events: none; display: none;
+  background: rgba(7,24,48,0.97); border: 1px solid rgba(174,145,66,0.5); box-shadow: 0 8px 24px rgba(0,0,0,0.5); font-size: 12.5px; }
+.ut-tip.show { display: block; }
+.tip-traits { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 5px; font-size: 12px; color: var(--text-70); }
+.tip-traits span { display: inline-flex; align-items: center; gap: 4px; }
+.tip-traits img { width: 16px; height: 16px; }
+.tip-recipe { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-top: 4px; }
+.tip-recipe span { display: inline-flex; align-items: center; gap: 4px; }
+.tip-recipe img { width: 20px; height: 20px; border-radius: 3px; }
+.tip-recipe i { color: var(--text-30); font-style: normal; }
+.tip-note { margin-top: 4px; color: var(--text-50); font-size: 12px; }
+.t-gold { color: #e8c35a; }
+/* Name, cost and stars share one centred line */
+.tip-head { display: flex; align-items: center; gap: 6px; line-height: 1.3; }
+.tip-head .coin-cell { line-height: 1; }
+.tip-head .t-gold { font-size: 11px; letter-spacing: 1px; line-height: 1; }
+
+.disclaimer {
+  margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border);
+  text-align: center; font-size: 11px; color: var(--text-30); line-height: 1.7;
+}
+.disclaimer a { color: var(--text-50); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-inner">
+
+    <!-- Left: big glowing title -->
+    <a href="https://tiffanygaming.com" class="nav-title">
+      <span class="nav-title-main">Tactician's Fundamentals</span><span class="nav-title-by">by Tiffany</span>
+    </a>
+
+    <!-- Right: tabs + social icons -->
+    <nav class="nav-right">
+      <a href="/about.html" class="tab-btn">About</a>
+      <a href="/calculator.html#coach" class="tab-btn">TFT Coach</a>
+      <a href="/calculator.html#calculator" class="tab-btn">Stat Calculator</a>
+      <a href="/plan-b1419973/" class="tab-btn">Game Plan</a>
+      <a href="/meta/" class="tab-btn active">18.4b Meta</a>
+
+      <span class="nav-divider"></span>
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/tsangtiffany" target="_blank" rel="noopener noreferrer"
+         class="icon-btn" aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+
+      <!-- Email -->
+      <a href="mailto:ttsang@alumni.nd.edu" class="icon-btn" aria-label="Email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+      </a>
+    </nav>
+
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open navigation menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/about.html">About</a>
+    <a href="/calculator.html#coach">TFT Coach</a>
+    <a href="/calculator.html#calculator">Stat Calculator</a>
+    <a href="/plan-b1419973/">Game Plan</a>
+    <a href="/meta/" class="active">18.4b Meta</a>
+  </nav>
+</header>
+
+<div style="max-width:1060px;margin:0 auto;">
+  <div class="page-header">
+    <div class="page-title">18.4b Meta</div>
+    <div class="page-sub">Top 5 comps this patch: when to play, how to level, what to build</div>
+  </div>
+
+  <div class="jump" id="jump"></div>
+  <div id="comps"></div>
+
+  <div class="disclaimer">
+    <p style="margin-bottom:6px;"><strong style="color:#8a9aaa;">Source:</strong> summarized from the 18.4b meta playbook video (patch 18.4b). Icons from CommunityDragon and tactics.tools.</p>
+    <p style="font-size:11px;color:#556070;line-height:1.6;max-width:760px;margin:0 auto 8px;">This tool isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
+    <p>Created by <a href="https://tiffanygaming.com" target="_blank" rel="noopener">Tiffany Tsang</a></p>
+  </div>
+</div>
+
+<script>
+// Tokens inside comp text: [u:Unit] or [u:Unit|stars], [i:Item], [x:Item to avoid], [t:Trait], [a:Augment], [g:gold]
+// Card layout: header, then three columns: tips + level guide | priority | board + subs.
+// board.units: [name, row, col, stars?, emblem?] — row 0 = front line, odd rows shift right (same as Game Plan)
+// board.subs: [sub in, replaces] — shown on one line as "in → replaces"
+// Item holders are { holder, tag?, slots: [[stat label, item chain]], notes? }; their first-choice items also show on the board.
+const COMPS = [
+  {
+    id: "riftbeasts", name: "Tempo Rift Beasts", kind: "Tempo · spikes at level 7", carry: "Cinderling",
+    levels: { title: "Level guide", rows: [
+      ["5", "2-5"],
+      ["7", "3-2 or 3-5"],
+      ["8", "4-5 with [g:20]"],
+      ["9", "5-2"],
+    ]},
+    board: {
+      label: "Level 8 board",
+      units: [["Krug", 0, 3, 3], ["Cinderling", 3, 0, 3], ["Brambleback", 3, 1], ["Pebbles", 3, 2, 3], ["Sentinel", 3, 3],
+              ["Rakan", 3, 4], ["Murkwolf", 3, 5], ["Scuttlecrab", 3, 6, 3]],
+      subs: [["[u:Elder Dragon|1]", "[u:Brambleback] [u:Murkwolf]", "Lv 9"]],
+    },
+    priority: { items: [
+      "[u:Cinderling] > tank > [u:Pebbles] > 2nd tank",
+      "[u:Elder Dragon|1] > [t:Ravager] and [u:Cinderling|3]",
+      "[i:Blue Buff] > [i:Warmog's Armor] > [i:Gargoyle Stoneplate] > [i:Last Whisper]",
+      { holder: "Cinderling", slots: [
+        ["Mana", "[i:Blue Buff] > [i:Spear of Shojin]"],
+        ["Sunder", "[i:Last Whisper]"],
+        ["AMP", "[i:Infinity Edge] > [i:Giant Slayer]"],
+      ]},
+      { holder: "Krug", slots: [
+        ["Health", "[i:Warmog's Armor]"],
+        ["Resist", "[i:Gargoyle Stoneplate]"],
+        ["Health", "[i:Warmog's Armor] = [i:Protector's Vow] = [i:Steadfast Heart]"],
+      ]},
+    ]},
+    mark: [
+      ["Before 7", ["[u:Cinderling] > tank > [u:Pebbles]"]],
+      ["After 7", ["Tank: [u:Krug] > [u:Scuttlecrab] > carry"]],
+    ],
+    tips: [
+      "2★ [t:Riftbeast] + 2–3 different [t:Riftbeast] on board",
+      "Don't roll for copies",
+      ["Augment priority", ["Items to win streak", "Econ for level 7 push", "Combat augment / charms for stage 4"]],
+    ],
+  },
+  {
+    id: "kayle", name: "Inferno Kayle", kind: "Reroll · Solar at level 5", carry: "Kayle",
+    levels: { title: "Rolldown plan", rows: [
+      ["4–5", "[u:Varus] + [u:Leona]"],
+      ["6", "[u:Kayle|3] > [u:Sejuani|3] > [u:Shen|3]", ["Low HP with only [u:Kayle|3] → ok to push", "Otherwise roll down to [g:0]"]],
+      ["7+", "[u:Amumu] and look for 3 [t:Solar]"],
+      ["8", "[u:Alune] for 3 [t:Solar] + 3 [t:Lunar] = [t:Eclipse]"],
+    ]},
+    board: {
+      label: "Level 5 board",
+      units: [["Sejuani", 0, 3], ["Leona", 1, 2], ["Shen", 1, 3], ["Varus", 3, 0], ["Kayle", 3, 1]],
+      subs: [["[u:Ornn]", "[u:Shen]"], ["[u:Zyra]", "[u:Varus]"], ["[u:Rakan]", "", "if hit"]],
+    },
+    priority: { avoid: ["Evenshroud", "Ionic Spark"], items: [
+      "[i:Guinsoo's Rageblade] ([u:Varus] → [u:Kayle])",
+      { holder: "Kayle", slots: [
+        ["AS", "[i:Guinsoo's Rageblade]"],
+        ["AP", "[i:Rabadon's Deathcap]"],
+        ["AMP", "[i:Rabadon's Deathcap] > [i:Jeweled Gauntlet] = [i:Giant Slayer]"],
+      ]},
+      { holder: "Sejuani", slots: [
+        ["Resist", "[i:Gargoyle Stoneplate]"],
+        ["Health", "[i:Warmog's Armor]"],
+        ["EHP", "[i:Gargoyle Stoneplate] > [i:Protector's Vow] = [i:Crownguard] = [i:Steadfast Heart]"],
+      ]},
+      { holder: "Varus", tag: "Leftovers", slots: [
+        ["Mana", "[i:Spear of Shojin] > [i:Blue Buff]"],
+        ["AD", "[i:Infinity Edge] = [i:Deathblade]"],
+        ["AMP", "[i:Deathblade] = [i:Infinity Edge] > [i:Last Whisper] = [i:Guinsoo's Rageblade]"],
+      ], notes: ["Place on the opposite side of their carry"] },
+    ]},
+    tips: [
+      ["Augment priority", ["Econ > item"]],
+      "Portals with extra gold or items favor it",
+    ],
+  },
+  {
+    id: "aphelios", name: "Eclipse Aphelios", kind: "Emblem · fast 8", carry: "Aphelios",
+    levels: { title: "Level guide", rows: [
+      ["8", "Roll for the board; 2★ one or two [g:4] tanks"],
+      ["9", "After a 2★ [g:4] carry + tank → add [u:Alune|2]"],
+    ]},
+    board: {
+      label: "Level 8 board",
+      units: [["Amumu", 0, 1], ["Lillia", 0, 2, 0, "Lunar Emblem"], ["Sejuani", 0, 3], ["Sentinel", 0, 4], ["Diana", 0, 5], ["Leona", 0, 6],
+              ["Aphelios", 3, 0], ["Kayle", 3, 6]],
+      subs: [["[u:Alune|2]", "", "Lv 9 +"], ["[u:Vi] [u:Hecarim]", "[g:4] tank"]],
+    },
+    priority: { items: [
+      "Any [g:4] tank > [g:3] tanks ([u:Vi] [u:Hecarim] ok)",
+      { holder: "Aphelios", slots: [
+        ["AS", "[i:Guinsoo's Rageblade] = [i:Red Buff]"],
+        ["AD", "[i:Kraken's Fury] = [i:Deathblade]"],
+        ["Sunder", "[i:Last Whisper]"],
+      ], notes: ["No other shred / [u:Kog'Maw] in the comp"] },
+      { holder: "Lillia", alts: ["Amumu", "Sentinel"], slots: [
+        ["Mana", "[i:Protector's Vow]"],
+        ["Mana", "[i:Protector's Vow]"],
+        ["Flex", "[i:Protector's Vow] = [i:Adaptive Helm] = [i:Warmog's Armor] = [i:Crownguard]"],
+      ]},
+    ]},
+    tips: [
+      "Early [i:Lunar Emblem]: [a:U.R.F] > [a:Branching Out] / [a:Spreading Roots] / [a:The Trait Tree]",
+      "A strong frontline wins stages 4–5",
+      ["Augment priority", ["Econ by 4-2"]],
+    ],
+  },
+  {
+    id: "zyra", name: "Blackthorn Zyra", kind: "Emblem · level 8", carry: "Zyra",
+    levels: { title: "Level guide", rows: [
+      ["8", "Roll for the board (lots of [g:4] units, many need 2★)"],
+    ]},
+    board: {
+      label: "Level 8 board",
+      units: [["Malphite", 0, 3], ["Lillia", 1, 2], ["Fiddlesticks", 1, 3], ["Yorick", 2, 2], ["Soraka", 2, 3],
+              ["Zyra", 3, 0], ["Azir", 3, 1], ["Veigar", 3, 6]],
+      subs: [["[u:Kennen] [u:Ezreal]", "[u:Yorick]"], ["[u:Amumu]", "[u:Lillia]"]],
+    },
+    priority: { items: [
+      "[u:Soraka|2] (provides the combat buff for [u:Azir] / [u:Zyra])",
+      { holder: "Zyra", slots: [
+        ["Emblem", "[i:Blackthorn Emblem]"],
+        ["Shred", "[i:Void Staff]"],
+        ["Wound", "[i:Morellonomicon] = [i:Red Buff]"],
+      ]},
+      { holder: "Malphite", slots: [
+        ["Resist", "[i:Gargoyle Stoneplate]"],
+        ["Shield", "[i:Crownguard]"],
+        ["Tank", "[i:Gargoyle Stoneplate] = [i:Warmog's Armor] = [i:Spirit Visage]"],
+      ]},
+      { holder: "Azir", tag: "Leftovers, at least 1 AS + 1 AP", slots: [
+        ["AS", "[i:Guinsoo's Rageblade]"],
+        ["AP", "[i:Rabadon's Deathcap] > [i:Archangel's Staff]"],
+        ["Sustain", "[i:Hextech Gunblade]"],
+      ]},
+    ]},
+    tips: [
+      "[i:Blackthorn Emblem] ([a:Branching Out] / [a:Spreading Roots])",
+      ["Augment priority", ["Econ between 3-2 and 4-2 (very gold hungry)"]],
+      ["Sacrifice", ["A 2★ caster, usually [u:Soraka|2] → big buff to [u:Azir] + [u:Zyra]"]],
+    ],
+  },
+  {
+    id: "yunara", name: "Yunara reroll", kind: "Reroll · Solar at level 5", carry: "Yunara",
+    levels: { title: "Level guide", rows: [
+      ["4–5", "Roll for [g:1] units", "Roll for an econ wisp each turn above [g:50]; never dig below [g:50]"],
+      ["6", "After 3★ [g:1] units, roll for [u:Yunara] [u:Sejuani] [u:LeBlanc]", "Or [u:Leona] if [u:LeBlanc] is contested"],
+      ["8", "[t:Executioner]: [u:Ezreal|2] ideal, [u:Azir] for [t:Summoner] ok"],
+    ]},
+    board: {
+      label: "Level 5 board",
+      units: [["Sejuani", 0, 3], ["Karma", 3, 0], ["LeBlanc", 3, 1], ["Yunara", 3, 2], ["Yorick", 3, 3]],
+      subs: [["[u:Leona]", "[u:LeBlanc]"], ["[u:Ezreal|2] [u:Azir]", "", "Lv 8 +"]],
+    },
+    priority: { avoid: ["Void Staff"], items: [
+      "Tank items > damage items",
+      "Comp needs: [i:Red Buff] + [i:Last Whisper]",
+      { holder: "Sejuani", slots: [
+        ["Resist", "[i:Gargoyle Stoneplate]"],
+        ["Health", "[i:Warmog's Armor]"],
+        ["EHP", "[i:Gargoyle Stoneplate] > [i:Crownguard] = [i:Protector's Vow] = [i:Steadfast Heart]"],
+      ]},
+      { holder: "Yunara", slots: [
+        ["AD", "[i:Deathblade] > [i:Infinity Edge]"],
+        ["Mana", "[i:Spear of Shojin] > [i:Blue Buff]"],
+        ["Crit", "[i:Last Whisper] = [i:Striker's Flail]"],
+      ], notes: ["Move [i:Last Whisper] to [u:Ezreal|2] later"] },
+    ]},
+    tips: [
+      "[u:Karma|2] or [u:Yorick|2], and/or a gold or item portal",
+      "3★ every unit for the 5-stack [t:Solar] bonus",
+    ],
+  },
+];
+
+const STAT_ICONS = { as: ["as"], ap: ["ap"], ad: ["ad"], mana: ["mana"], health: ["hp"], resist: ["armor", "mr"] };
+// Craftable emblems: Spatula or Frying Pan + one component (the data only lists the component)
+const SPATULA_EMBLEMS = ["Fae", "Inferno", "Blossom", "Lunar", "Elderwood", "Sprykin", "Blackthorn", "Primal"];
+const BASES = {
+  Spatula: "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spatula.png",
+  "Frying Pan": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_fryingpan.png",
+};
+const COIN = n => `<span class="coin-cell"><img class="coin" src="/img/gold.webp" alt="gold">${esc(n)}</span>`;
+const ESC_MAP = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+const esc = s => String(s).replace(/[&<>"']/g, c => ESC_MAP[c]);
+
+let ICONS = { units: {}, items: {}, traits: {}, augs: {} };
+
+// Icon only; the name (and recipe / cost / traits) shows in the hover card
+function token(kind, raw, cls = "") {
+  if (kind === "g") return COIN(raw);
+  const [name, stars] = raw.split("|");
+  const tip = `data-tip="${kind === "x" ? "i" : kind}" data-n="${esc(name)}" role="img" aria-label="${esc(stars ? `${stars}-star ${name}` : name)}"`;
+  if (kind === "u") {
+    const u = ICONS.units[name] || {};
+    return `<span class="ui cost-${+u.cost || 0}${cls ? " " + cls : ""}" ${tip}>${u.icon ? `<img src="${esc(u.icon)}" alt="">` : `<span class="un-txt">${esc(name)}</span>`}${stars ? `<span class="stars">${"★".repeat(+stars)}</span>` : ""}</span>`;
+  }
+  if (kind === "t") {
+    const src = ICONS.traits[name];
+    return `<span class="tr-ic" ${tip}>${src ? `<img src="${esc(src)}" alt="">` : esc(name)}</span>`;
+  }
+  const src = kind === "a" ? ICONS.augs[name]?.icon : ICONS.items[name]?.icon;
+  const box = kind === "a" ? "aug-ic" : kind === "x" ? "it-ic x" : "it-ic";
+  return `<span class="${box}" ${tip}>${src ? `<img src="${esc(src)}" alt="">` : esc(name)}</span>`;
+}
+
+// Escape the plain text, swap tokens for icons, and soften the > / = / + / → separators
+function rich(text) {
+  return String(text).split(/(\[[uixtag]:[^\]]+\])/).map(part => {
+    const m = part.match(/^\[([uixtag]):([^\]]+)\]$/);
+    if (m) return token(m[1], m[2]);
+    if (!part.trim()) return esc(part);
+    // Text runs get their own span so rows can give them icon height (keeps wrapped rows aligned)
+    return `<span class="tx">${esc(part).replace(/(^| )(&gt;|=|\+|→)( |$)/g, '$1<span class="op">$2</span>$3')}</span>`;
+  }).join("");
+}
+
+function statLabel(lbl) {
+  const imgs = (STAT_ICONS[lbl.toLowerCase()] || []).map(k => `<img src="https://ap.tft.tools/img/general/${k}.png" alt="">`).join("");
+  return `<span class="sl">${imgs}${esc(lbl)}</span>`;
+}
+
+// ── Hex board: unit hexes with stars on top and first-choice items underneath ──
+const holderFor = (c, n) => c.priority.items.find(it => it.holder === n);
+const firstItem = chain => chain.match(/\[i:([^\]]+)\]/)?.[1];
+const boardItems = (c, name, emblem) =>
+  [emblem, ...(holderFor(c, name)?.slots.map(([, ch]) => firstItem(ch)) || [])].filter(Boolean).slice(0, 3);
+
+function hexBoardHtml(c) {
+  const at = new Map(c.board.units.map(u => [u[1] * 7 + u[2], u]));
+  const cells = [];
+  for (let i = 0; i < 28; i++) {
+    const r = Math.floor(i / 7), col = i % 7, u = at.get(i);
+    const pos = `style="--r:${r};--c:${col};--odd:${r % 2}"`;
+    if (!u) { cells.push(`<span class="hx empty" ${pos}></span>`); continue; }
+    const [name, , , stars, emblem] = u;
+    const U = ICONS.units[name] || {};
+    const items = boardItems(c, name, emblem);
+    cells.push(`<span class="hx cost-${+U.cost || 0}" ${pos} data-tip="u" data-n="${esc(name)}">
+      <span class="hx-in">${U.icon ? `<img src="${esc(U.icon)}" alt="">` : ""}</span>
+      ${stars > 1 ? `<span class="hx-stars">${"★".repeat(stars)}</span>` : ""}
+      ${items.length ? `<span class="hx-items">${items.map(n => `<span class="hx-it" data-tip="i" data-n="${esc(n)}">${ICONS.items[n]?.icon ? `<img src="${esc(ICONS.items[n].icon)}" alt="">` : ""}</span>`).join("")}</span>` : ""}</span>`);
+  }
+  // One sub per line: "in → replaces", with a small lead-in like "Lv 9" where it applies
+  const subs = (c.board.subs || []).map(([inn, out, pre]) =>
+    `<div class="sub">${pre ? `<span class="pre">${esc(pre)}</span>` : ""}${rich(inn)}${out ? `<span class="op">→</span>${rich(out)}` : ""}</div>`).join("");
+  return `<div class="cd-board">
+    <div class="lbl">${esc(c.board.label)}</div>
+    <div class="hex-board">${cells.join("")}</div>
+    ${subs ? `<div class="lbl" style="margin-top:4px">Subs</div><div class="subs">${subs}</div>` : ""}
+    ${c.mark ? `<div class="lbl" style="margin-top:8px">Alpha Mark</div><div class="cd-tips">${c.mark.map(tipBox).join("")}</div>` : ""}
+  </div>`;
+}
+
+// ── Sections ──
+// Champion (and any alternates stacked under it) on the left; one row per item slot to its right, rows after the first start with +
+function holderHtml(h) {
+  const rows = h.slots.map(([lbl, chain], i) =>
+    `<div class="srow"><span class="plus">${i ? "+" : ""}</span>${statLabel(lbl)}<span class="chain">${rich(chain)}</span></div>`).join("");
+  const notes = [h.tag, ...(h.notes || [])].filter(Boolean).map(n => `<div class="hnote">${rich(n)}</div>`).join("");
+  const alts = h.alts ? `<span class="or">or</span>${h.alts.map(n => token("u", n)).join("")}` : "";
+  return `<div class="holder"><div class="who">${token("u", h.holder)}${alts}</div><div class="hbody"><div class="rows">${rows}</div>${notes}</div></div>`;
+}
+
+// A tip box: plain line, or [heading, [lines]]
+function tipBox(it) {
+  return Array.isArray(it)
+    ? `<div class="cd-tip"><span class="w">${rich(it[0])}</span>${it[1].map(l => `<div class="ln">${rich(l)}</div>`).join("")}</div>`
+    : `<div class="cd-tip"><div class="ln">${rich(it)}</div></div>`;
+}
+
+function levelsHtml(L) {
+  return `<div><div class="lbl">${esc(L.title)}</div><div class="cd-tips">${L.rows.map(([lv, txt, note]) =>
+    `<div class="cd-tip lv-row"><span class="lv">${esc(lv)}</span><div><div class="ln">${rich(txt)}</div>${[].concat(note || []).map(n => `<div class="ln note">${rich(n)}</div>`).join("")}</div></div>`).join("")}</div></div>`;
+}
+
+function priorityHtml(c) {
+  const P = c.priority;
+  const lines = P.items.filter(it => !it.holder), holders = P.items.filter(it => it.holder);
+  // Avoid applies to the whole comp; it sits at the right end of the first priority line
+  const avoid = P.avoid ? `<span class="avoid"><span class="lbl">Avoid</span>${P.avoid.map(a => token("x", a)).join("")}</span>` : "";
+  return `<div class="cd-side">
+    <div><div class="lbl">Priority</div>
+      ${lines.map((l, i) => `<div class="rule">${rich(l)}${i ? "" : avoid}</div>`).join("")}
+      ${holders.length ? `<div class="holders">${holders.map(holderHtml).join("")}</div>` : ""}
+    </div>
+  </div>`;
+}
+
+function render() {
+  document.getElementById("jump").innerHTML = COMPS.map(c =>
+    `<a href="#${esc(c.id)}">${token("u", c.carry)}${esc(c.name)}</a>`).join("");
+
+  document.getElementById("comps").innerHTML = COMPS.map(c => `
+    <section class="card comp" id="${esc(c.id)}">
+      <div class="comp-head">${token("u", c.carry)}
+        <div><div class="comp-name">${esc(c.name)}</div><div class="kind">${esc(c.kind)}</div></div>
+      </div>
+      <div class="comp-detail">
+        <div class="cd-mid">
+          <div><div class="lbl">Tips</div><div class="cd-tips">${c.tips.map(tipBox).join("")}</div></div>
+          ${levelsHtml(c.levels)}
+        </div>
+        ${priorityHtml(c)}
+        ${hexBoardHtml(c)}
+      </div>
+    </section>`).join("");
+
+  // Re-apply a #comp hash after the cards exist
+  if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+}
+
+// ── Hover card (same box and contents as the Game Plan tab) ──
+const utTip = document.createElement("div");
+utTip.className = "ut-tip";
+document.body.appendChild(utTip);
+let tipFor = null;
+
+function recipeHtml(name) {
+  const parts = (ICONS.items[name]?.from || []).map(c => ({ name: c.name, icon: c.icon }));
+  if (/ Emblem$/.test(name) && parts.length === 1) {
+    const base = SPATULA_EMBLEMS.includes(name.replace(/ Emblem$/, "")) ? "Spatula" : "Frying Pan";
+    parts.unshift({ name: base, icon: BASES[base] });
+  }
+  return parts.length ? `<div class="tip-recipe">${parts.map(p => `<span><img src="${esc(p.icon)}" alt="${esc(p.name)}" title="${esc(p.name)}"></span>`).join("<i>+</i>")}</div>` : "";
+}
+
+function tipHtml(el) {
+  const k = el.dataset.tip, n = el.dataset.n;
+  if (k === "u") {
+    const U = ICONS.units[n] || {};
+    const stars = el.querySelector(".stars, .hx-stars")?.textContent || "";
+    return `<div class="tip-head"><b>${esc(n)}</b>${U.cost ? COIN(U.cost) : ""}${stars ? `<span class="t-gold">${esc(stars)}</span>` : ""}</div>
+      ${U.traits?.length ? `<div class="tip-traits">${U.traits.map(t => `<span>${ICONS.traits[t] ? `<img src="${esc(ICONS.traits[t])}" alt="">` : ""}${esc(t)}</span>`).join("")}</div>` : ""}`;
+  }
+  if (k === "i") return `<div class="tip-head"><b>${esc(n)}</b></div>${recipeHtml(n)}`;
+  if (k === "a") { const a = ICONS.augs[n] || {}; return `<div class="tip-head"><b>${esc(n)}</b></div>${a.desc ? `<div class="tip-note">${esc(a.desc)}</div>` : ""}`; }
+  return `<div class="tip-head"><b>${esc(n)}</b></div>`;
+}
+
+function showTip(t) {
+  tipFor = t;
+  utTip.innerHTML = tipHtml(t);
+  const r = t.getBoundingClientRect();
+  utTip.classList.add("show");
+  utTip.style.left = `${Math.max(8, Math.min(r.left, innerWidth - utTip.offsetWidth - 10))}px`;
+  // Below the icon, or above it when it would run off the bottom of the window
+  const below = r.bottom + 4, h = utTip.offsetHeight;
+  utTip.style.top = `${below + h > innerHeight - 8 ? Math.max(8, r.top - h - 4) : below}px`;
+}
+function hideTip() { tipFor = null; utTip.classList.remove("show"); }
+
+document.addEventListener("mouseover", e => {
+  // Innermost hover target wins (an item under a board hex shows the item)
+  const t = e.target.closest("[data-tip]");
+  if (!t) { if (tipFor) hideTip(); return; }
+  if (t !== tipFor) showTip(t);
+});
+// Touch screens have no hover: tap an icon to show its card, tap again (or elsewhere) to close
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-tip]");
+  if (t && matchMedia("(hover: hover)").matches) return;
+  if (t && t !== tipFor) showTip(t); else hideTip();
+});
+window.addEventListener("scroll", () => { if (tipFor) hideTip(); }, { passive: true });
+
+// Icons come from the Game Plan data; the page still renders names as text if it can't load
+fetch("/api/gameplan").then(r => { if (!r.ok) throw new Error(); return r.json(); }).then(d => {
+  ICONS = {
+    units: d.unitIcons || {},
+    items: d.itemIcons || {},
+    traits: d.traitIcons || {},
+    augs: Object.fromEntries((d.augments || []).map(a => [a.name, a])),
+  };
+}).catch(() => {}).finally(render);
+
+(function () {
+  const nav = document.getElementById("siteNav");
+  function onScroll() { nav.classList.toggle("scrolled", window.scrollY > 30); }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+function toggleMobileMenu() {
+  document.getElementById("mobileMenu").classList.toggle("open");
+}
+</script>
+</body>
+</html>
