@@ -320,7 +320,6 @@ a { color: inherit; }
 }
 .tier-tag.S { background: #FE454B; } .tier-tag.A { background: #FF9C00; }
 .tier-tag.B { background: #FEEA33; } .tier-tag.C { background: #A7F238; } .tier-tag.Special { background: #b39ddb; font-size: 10px; }
-.skip { margin-top: 10px; }
 .btn {
   font: 600 13px/1 inherit; font-family: inherit; color: var(--text); background: rgba(174,145,66,0.15);
   border: 1px solid rgba(174,145,66,0.5); border-radius: 7px; padding: 8px 12px; cursor: pointer;
@@ -671,7 +670,11 @@ const compById = id => DATA.comps.find(c => c.id === id);
 // Opener/rule comp names are BunnyMuffins names — map them to TFT Academy comps
 const compByName = name => compById(DATA.bmCompToTfta[name] || "") ||
   DATA.comps.find(c => norm(c.short) === norm(name) || norm(c.name) === norm(name));
-const uniqComps = names => [...new Map(names.map(compByName).filter(Boolean).map(c => [c.id, c])).values()];
+// Suggested openers and comps always list S → A → B → C → Special (stable, so each tier keeps its source order)
+const TIER_ORDER = ["S", "A", "B", "C", "Special"];
+const tierIdx = t => { const i = TIER_ORDER.indexOf(t); return i < 0 ? TIER_ORDER.length : i; };
+const byTier = list => [...list].sort((a, b) => tierIdx(a.tier) - tierIdx(b.tier));
+const uniqComps = names => byTier(new Map(names.map(compByName).filter(Boolean).map(c => [c.id, c])).values());
 const augByName = name => DATA.augments.find(a => a.name.toLowerCase() === String(name).toLowerCase());
 
 // Reset everything after a node when an earlier choice changes
@@ -712,13 +715,13 @@ function nodeOpener() {
   const rules = DATA.openerRules.map((r, i) => ruleTile(r, i)).join("");
   return node(1, { title: "Opener", sub: "What does your stage 1–2 board look like?", body: `
     <div class="offer-row" style="margin-bottom:10px">
+      <button class="btn ghost" data-act="skip-opener">Skip — I already know my comp</button>
       <input class="aug-in" id="unitSearch" type="search" list="unitList" autocomplete="off"
              placeholder="Search a unit in your opener (e.g. Gromp)" value="${esc(S.unitQuery || "")}">
       <datalist id="unitList">${units.map(u => `<option value="${esc(u)}">`).join("")}</datalist>
     </div>
     <div id="unitGrid">${unitPriorityHtml()}</div>
     <div id="opMatches">${openerMatchesHtml()}</div>
-    <div class="skip"><button class="btn ghost" data-act="skip-opener">Skip — I already know my comp</button></div>
     <div class="card rules"><div class="lbl">Got one of these? Play this</div><div class="rule-tiles">${rules}</div></div>` });
 }
 
@@ -821,7 +824,7 @@ function openerMatchesHtml() {
   // Name + champions only; hover the card for the opener's board picture; hover a champion for its details
   const cards = ops.map(o => `<button class="op" data-act="pick-opener" data-v="${esc(o.name)}" data-tipop="${esc(o.name)}">
       ${openerCardInner(o, n => q && hit(n))}</button>`).join("");
-  const comps = q ? DATA.comps.filter(c => c.earlyComp.some(u => hit(u.name))) : [];
+  const comps = q ? byTier(DATA.comps.filter(c => c.earlyComp.some(u => hit(u.name)))) : [];
   return `${ops.length ? `<div class="op-grid">${cards}</div>` : `<div class="muted">No opener board uses that unit.</div>`}
     ${comps.length ? `<div class="comp-group" style="margin-top:12px"><div class="lbl">TFT Academy comps that open with it</div>
       <div class="comp-list">${comps.map(c => compBtn(c, "pick-comp-direct")).join("")}</div></div>` : ""}`;
@@ -962,7 +965,7 @@ function compMatchesHtml() {
     const hay = c => clean([c.name, c.short, c.style, c.mainChampion, ...c.traits, ...c.finalComp.map(u => u.name), ...c.earlyComp.map(u => u.name)].join(" "));
     const nameHit = c => words.every(w => clean(`${c.name} ${c.short}`).includes(w));
     const hits = DATA.comps.filter(c => words.every(w => hay(c).includes(w)))
-      .sort((a, b) => nameHit(b) - nameHit(a));   // name matches first, then champion/trait matches
+      .sort((a, b) => nameHit(b) - nameHit(a) || tierIdx(a.tier) - tierIdx(b.tier));   // name matches first, then by tier
     return hits.length ? `<div class="comp-list">${hits.map(c => compBtn(c)).join("")}</div>` : `<div class="muted">No comp matches “${esc(q)}”.</div>`;
   }
   const op = S.opener && OPENERS.find(o => o.name === S.opener);
@@ -974,12 +977,12 @@ function compMatchesHtml() {
     if (other.length) body += `<div class="comp-group"><div class="lbl">Also playable</div><div class="comp-list">${other.map(c => compBtn(c)).join("")}</div></div>`;
     if (op.tip) body += `<p class="muted" style="margin-bottom:12px">${esc(op.tip)}</p>`;
   }
-  const favs = (S.favs || []).map(compById).filter(Boolean);
+  const favs = byTier((S.favs || []).map(compById).filter(Boolean));
   body += `<div class="comp-group"><div class="lbl">Your favorites</div>${favs.length
     ? `<div class="comp-list">${favs.map(c => compBtn(c)).join("")}</div>`
     : `<div class="muted">Tap ☆ on any comp to keep it here.</div>`}</div>`;
-  const tiers = ["S", "A", "B", "C", "Special"];
-  body += `<details ${op || favs.length ? "" : "open"}><summary class="muted" style="cursor:pointer;margin-bottom:8px">All comps by tier</summary>${tiers.map(t => {
+  const tiers = TIER_ORDER;
+  body +=`<details ${op || favs.length ? "" : "open"}><summary class="muted" style="cursor:pointer;margin-bottom:8px">All comps by tier</summary>${tiers.map(t => {
     const cs = DATA.comps.filter(c => c.tier === t);
     return cs.length ? `<div class="comp-group"><div class="comp-list">${cs.map(c => compBtn(c)).join("")}</div></div>` : "";
   }).join("")}</details>`;
@@ -1671,7 +1674,7 @@ Promise.all([
   fetch("/openers/openers.json").then(r => r.json()).catch(() => ({ openers: [] })),
 ]).then(([d, o]) => {
   DATA = d;
-  OPENERS = o.openers.map(x => ({ ...x, img: "/openers/" + x.img }));
+  OPENERS = byTier(o.openers.map(x => ({ ...x, img: "/openers/" + x.img })));
   if (d.patch) document.getElementById("patchNote").textContent = ` (patch ${d.patch})`;
   load();
   S.favs = (S.favs || []).filter(id => compById(id));
