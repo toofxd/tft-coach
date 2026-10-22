@@ -481,7 +481,7 @@ a { color: inherit; }
 .type-card .go b { color: var(--gold-light); font-weight: 800; }
 .aug-pick { cursor: pointer; font-family: inherit; }
 .aug-pick:hover { border-color: rgba(174,145,66,0.6); color: var(--text); }
-.ah-box-card { padding: 10px 12px; }
+.ah-box-card { padding: 10px; }
 .ah-box-card.met { border-color: rgba(174,145,66,0.55); }
 .ah-box-card.skip { opacity: 0.55; }
 .ah-head { display: flex; align-items: baseline; gap: 8px; }
@@ -507,7 +507,8 @@ a { color: inherit; }
 .ap-slot.filled { border: 2px solid rgba(174,145,66,0.6); cursor: pointer; background: var(--navy-deep); }
 .ap-slot.filled img { width: 100%; height: 100%; border-radius: 5px; display: block; }
 .ut-tiles { display: flex; flex-wrap: nowrap; gap: 4px; }   /* one row per box (max 7 icons) */
-.ut-tile { position: relative; width: 31px; height: 31px; flex-shrink: 0; padding: 0; border-radius: 7px; border: 2px solid var(--border);
+/* Up to 31px, shrinking evenly so 7 icons always fit the box (narrow windows, scrollbar gutter) */
+.ut-tile { position: relative; flex: 0 1 31px; min-width: 0; aspect-ratio: 1; padding: 0; border-radius: 7px; border: 2px solid var(--border);
   background: var(--navy-deep); cursor: pointer; overflow: visible; }
 .ut-tile img { width: 100%; height: 100%; border-radius: 5px; display: block; }
 .ut-tile:hover { border-color: rgba(174,145,66,0.7); }
