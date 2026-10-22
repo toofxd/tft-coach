@@ -189,7 +189,10 @@ a { color: inherit; }
 /* ── Game plan tree ────────────────────────────────────────────── */
 .wrap { max-width: 1180px; margin: 0 auto; }
 .layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 22px; align-items: start; }
-.util-panel { position: sticky; top: 76px; display: grid; gap: 10px; max-height: calc(100vh - 86px); overflow-y: auto; scrollbar-width: thin; }
+.util-panel { position: sticky; top: 76px; display: grid; gap: 10px; max-height: calc(100vh - 86px); overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: transparent transparent; transition: scrollbar-color 0.2s; }
+/* Scrollbar stays invisible until you hover the panel, then shows as a thin gold bar */
+.util-panel:hover { scrollbar-color: rgba(174,145,66,0.45) transparent; }
 .tree { list-style: none; position: relative; }
 .node { position: relative; padding: 0 0 22px 34px; }
 .node::before { /* connector line */
@@ -389,7 +392,9 @@ a { color: inherit; }
 .cd-tips { display: grid; gap: 6px; }
 .cd-tip { font-size: 12.5px; line-height: 1.45; color: var(--text-70); background: var(--navy-deep); border-radius: 6px; padding: 6px 8px; }
 .cd-tip .w { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); }
-@media (max-width: 900px) { .comp-detail { grid-template-columns: 1fr; } }
+/* Stack the side column under the board whenever the card is too narrow for both (half-width windows too) */
+.node-body { container-type: inline-size; }
+@container (max-width: 780px) { .comp-detail { grid-template-columns: 1fr; } }
 
 /* Emblem recipes (matches the Stat Calculator) */
 .em-section { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
