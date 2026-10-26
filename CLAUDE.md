@@ -165,13 +165,13 @@ So re-running the script at any time is always safe — it only fetches genuinel
 
 ### Current tiers collected
 The default in `collect()` is `tiers=("challenger", "grandmaster")` — both are already included.
-Current dataset — **Set 18** (as of 13 Oct 2026):
+Current dataset — **Set 18** (as of 26 Oct 2026, ~22k matches):
 
 | File | Rows | Used by |
 |------|------|---------|
-| `data/processed/match_features.csv` | 79,776 | local dev only (gitignored) |
-| `data/processed/match_features_slim.csv` | 79,776 | **production** (committed) |
-| `data/processed/item_winrates.csv` | 4,362 | both |
+| `data/processed/match_features.csv` | 176,328 | local dev only (gitignored) |
+| `data/processed/match_features_slim.csv` | 176,328 | **production** (committed) |
+| `data/processed/item_winrates.csv` | 5,673 | both |
 
 `features.py` keeps only `tft_set_number == 18`, so Set 17 rows dropped out.
 

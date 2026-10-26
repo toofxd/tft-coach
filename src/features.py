@@ -257,7 +257,9 @@ def build_my_features(save: bool = True) -> pd.DataFrame:
             rows.append(feats)
 
     df = pd.DataFrame(rows)
-    print(f"Personal feature table: {df.shape[0]} rows × {df.shape[1]} columns ({df['is_me'].sum()} are your games)")
+    # No current-set games → empty frame with no columns, so there's no is_me to sum
+    mine = df["is_me"].sum() if not df.empty else 0
+    print(f"Personal feature table: {df.shape[0]} rows × {df.shape[1]} columns ({mine} are your games)")
 
     if save and not df.empty:
         out = PROCESSED_DIR / "my_features.csv"
