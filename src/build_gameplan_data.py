@@ -655,7 +655,8 @@ def build_tfta_comps(guides, names, augments_by_api, icons):
 
 # Opener-guide comp names that word matching can't place (rules and opener boards use these)
 OPENER_COMP_ALIASES = {"Defender Cassiopeia Rengar": "set-18-defender-cassio",
-                       "5 Rapidfire Aphelios": "set-18-aphelios-rapidfire"}
+                       "5 Rapidfire Aphelios": "set-18-aphelios-rapidfire",
+                       "Invoker Ahri Morgana": "set-18-ahri-morgana"}
 
 
 def match_bm(tfta_comps, bm_comps):
