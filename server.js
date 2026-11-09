@@ -219,7 +219,7 @@ function resolveUnitId(id) {
 // ---------------------------------------------------------------------------
 const CURRENT_SET = 18;
 // Patch label for AI prompts — TFT patches are numbered by set (18.4), not the LoL client version
-const SET_PATCH = { 18: "patch 18.5c", 17: "the final Set 17 patch" };
+const SET_PATCH = { 18: "patch 18.6", 17: "the final Set 17 patch" };
 const archive = {};
 for (const s of [17]) {
   const dir = path.join(__dirname, "data", "archive", String(s));
